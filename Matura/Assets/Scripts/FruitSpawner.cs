@@ -7,8 +7,8 @@ public class FruitSpawner : MonoBehaviour
     private Collider spawnArea;
 
     public GameObject[] fruitPrefabs;
-    public float minSpawnDelay = 0.75f; 
-    public float maxSpawnDelay = 1.4f;
+    public float minSpawnDelay = 1f; 
+    public float maxSpawnDelay = 1.8f;
 
     public float minAngle = -15f;
     public float maxAngle = 15f;
@@ -16,7 +16,10 @@ public class FruitSpawner : MonoBehaviour
     public float minForce = 15f;
     public float maxForce = 22f;
 
-    public float maxLifetime = 5f; 
+    public float maxLifetime = 3.7f;
+
+    private int numberOfFruits = 5; //User will choose
+    private int fruitsSpawned = 0; 
     
     private void Awake()
     {
@@ -38,7 +41,7 @@ public class FruitSpawner : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
 
-        while (enabled)
+        while (fruitsSpawned != numberOfFruits)
         {
             GameObject prefab = fruitPrefabs[Random.Range(0, fruitPrefabs.Length)];
 
@@ -49,16 +52,22 @@ public class FruitSpawner : MonoBehaviour
 
 
             //Diagnoal spawning
-
             Quaternion rotation = Quaternion.Euler(0f, 0f, Random.Range(minAngle, maxAngle));
+            
 
             GameObject fruit = Instantiate(prefab, position, rotation);
-            Destroy(fruit, maxLifetime);
-
+            
             float force = Random.Range(minForce, maxForce);
             fruit.GetComponent<Rigidbody>().AddForce(fruit.transform.up * force, ForceMode.Impulse);
 
+            //Stop objects that have been cut
+            if (fruit.tag == "Sliced")
+            {   
+                Destroy(fruit, maxLifetime);
+            }
+            fruitsSpawned++;
             yield return new WaitForSeconds(Random.Range(minSpawnDelay, maxSpawnDelay));
+
         }
     }
 

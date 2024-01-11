@@ -4,32 +4,19 @@ using UnityEngine;
 
 public class Cleaver : MonoBehaviour
 {
-
-    private Collider cleaverCollider;
-
-    private void Awake()
-    {
-        cleaverCollider  = GetComponent<Collider>();
-    }
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            StartSlicing();
-        } else if (Input.GetMouseButtonUp(0))
-        {
-            StopSlicing(); 
-        }
+        
     }
 
-    private void StartSlicing()
+    private void StartSpinning()
     {
-        cleaverCollider.enabled = true;
+        transform.Rotate(300f * Time.deltaTime, 0f, 0f, Space.Self);
     }
 
-    private void StopSlicing()
+    private void StopSpinning()
     {
-        cleaverCollider.enabled &= false;
+        transform.rotation = Quaternion.identity;
     }
-    
+
 }
