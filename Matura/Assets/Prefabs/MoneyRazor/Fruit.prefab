@@ -77,6 +77,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0009f4a82aa3ab40b02f0d01d08d911, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fruit: {fileID: 1210058833815394131}
   whole: {fileID: 8546266886798906674}
   sliced: {fileID: 3354801604203340435}
   cleaverPrefab: {fileID: 349408198100847661, guid: 9bb49d0cb5205f34cb8d8eb06d14baf9,

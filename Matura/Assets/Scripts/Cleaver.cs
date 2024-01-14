@@ -4,10 +4,24 @@ using UnityEngine;
 
 public class Cleaver : MonoBehaviour
 {
-    private void Update()
+    void Start()
     {
-        
+        StartCoroutine(Spin());
     }
+    IEnumerator Spin()
+    {
+        while(true)
+        {
+            StartSpinning(); 
+            yield return null;
+        }
+    }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines(); 
+    }
+    
 
     private void StartSpinning()
     {
@@ -17,6 +31,14 @@ public class Cleaver : MonoBehaviour
     private void StopSpinning()
     {
         transform.rotation = Quaternion.identity;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Fruit"))
+        {
+            StopSpinning(); 
+        }
     }
 
 }

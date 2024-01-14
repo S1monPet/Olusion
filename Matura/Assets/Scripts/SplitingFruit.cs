@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SplitingFruit : MonoBehaviour
 {
+    public GameObject fruit;
     public GameObject whole;
     public GameObject sliced;
     public GameObject cleaverPrefab;
@@ -17,8 +18,8 @@ public class SplitingFruit : MonoBehaviour
         whole.SetActive(false);
         sliced.SetActive(true);
 
-        //Changed tag to sliced, so we can stop objects from despawning in FruitSpawner.cs
-        sliced.tag = "Sliced";
+        //Changed tag to sliced, so we can start another object in FruitSpawner.cs
+        fruit.tag = "Sliced";
 
         GameObject cleaver = Instantiate(cleaverPrefab);
 
@@ -44,7 +45,7 @@ public class SplitingFruit : MonoBehaviour
             slice.freezeRotation = true;
             slice.detectCollisions = false;
         }
-        
+
         //Destroy(cleaver); Don't forget
         StartCoroutine(ResetSlicingFlag());
     }
