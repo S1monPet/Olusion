@@ -22,6 +22,18 @@ public class SplitingFruit : MonoBehaviour
 
         GameObject cleaver = Instantiate(cleaverPrefab);
 
+        //Set cleaver position and rotation
+        if (cleaver != null)
+        {
+            Vector3 cleaverPosition = sliced.transform.position - sliced.transform.forward * 2;
+            cleaver.transform.position = cleaverPosition;
+
+            //Rotating cleaver to match fruit
+            float rotationIncrement = -5f; 
+            cleaver.transform.rotation = whole.transform.rotation;
+            cleaver.transform.Rotate(Vector3.up, rotationIncrement);
+        }
+
         Rigidbody[] slices = sliced.GetComponentsInChildren<Rigidbody>();
 
         foreach (Rigidbody slice in slices)
@@ -32,11 +44,7 @@ public class SplitingFruit : MonoBehaviour
             slice.freezeRotation = true;
             slice.detectCollisions = false;
         }
-        if (cleaver != null)
-        {
-            Vector3 cleaverPosition = sliced.transform.position - sliced.transform.forward * 2; 
-            cleaver.transform.position = cleaverPosition; 
-        }
+        
         //Destroy(cleaver); Don't forget
         StartCoroutine(ResetSlicingFlag());
     }

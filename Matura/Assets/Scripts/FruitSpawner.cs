@@ -10,8 +10,8 @@ public class FruitSpawner : MonoBehaviour
     public float minSpawnDelay = 1f; 
     public float maxSpawnDelay = 1.8f;
 
-    public float minAngle = -15f;
-    public float maxAngle = 15f;
+    public float minAngle = -10f;
+    public float maxAngle = 10f;
 
     public float minForce = 15f;
     public float maxForce = 22f;
