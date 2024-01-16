@@ -9,11 +9,19 @@ public class SplitingFruit : MonoBehaviour
     public GameObject sliced;
     public GameObject cleaverPrefab;
     private bool slicingInProgress = false;
+    private float cleaverSpeed = 20f;
+    private float cleaverOffset = 1f; //Distance from fruit to cleaver when cut
+    private float positionYOffset = 0.5f; //For setting knife cutting
 
     private void Slice()
     {
         if (slicingInProgress) //To prevent from making duplicates, because of Update().
             return;
+
+        //Makes the object stop moving
+        Rigidbody fruitRigidbody = fruit.GetComponent<Rigidbody>();
+        fruitRigidbody.velocity = Vector3.zero;
+        fruitRigidbody.isKinematic = true;
 
         whole.SetActive(false);
         sliced.SetActive(true);
@@ -21,29 +29,33 @@ public class SplitingFruit : MonoBehaviour
         //Changed tag to sliced, so we can start another object in FruitSpawner.cs
         fruit.tag = "Sliced";
 
-        GameObject cleaver = Instantiate(cleaverPrefab);
 
-        //Set cleaver position and rotation
-        if (cleaver != null)
-        {
-            Vector3 cleaverPosition = sliced.transform.position - sliced.transform.forward * 2;
-            cleaver.transform.position = cleaverPosition;
-
-            //Rotating cleaver to match fruit
-            float rotationIncrement = -5f; 
-            cleaver.transform.rotation = whole.transform.rotation;
-            cleaver.transform.Rotate(Vector3.up, rotationIncrement);
-        }
-
+        //Stops pieces that could fall down
         Rigidbody[] slices = sliced.GetComponentsInChildren<Rigidbody>();
 
         foreach (Rigidbody slice in slices)
         {
             slice.velocity = Vector3.zero;
             slice.angularVelocity = Vector3.zero;
-            slice.useGravity = false;
-            slice.freezeRotation = true;
-            slice.detectCollisions = false;
+            slice.isKinematic = true;
+            slice.detectCollisions = true;
+        } 
+        
+
+        //Put it behind camera
+        GameObject cleaver = Instantiate(cleaverPrefab, new Vector3(0f, 3f, -15f), Quaternion.Euler(-60f, 2f, 0f)); 
+
+        //Set cleaver position and rotation
+        if (cleaver != null)
+        {
+            /* 
+            Rotating cleaver to match fruit
+            float rotationIncrement = -5f; 
+            cleaver.transform.rotation = whole.transform.rotation;
+            cleaver.transform.Rotate(Vector3.up, rotationIncrement);
+            */
+            //Move cleaver to apple with slow animation
+            StartCoroutine(CleaverSpawningAnimation(cleaver, fruit));
         }
 
         //Destroy(cleaver); Don't forget
@@ -55,6 +67,28 @@ public class SplitingFruit : MonoBehaviour
         yield return new WaitForSeconds(1f);
         slicingInProgress = true; 
 
+    }
+    //Chat unsure, have to check for best optimizations
+    private IEnumerator CleaverSpawningAnimation(GameObject cleaver, GameObject fruit)
+    {
+        Vector3 cutIn = new Vector3(fruit.transform.position.x, fruit.transform.position.y - positionYOffset, fruit.transform.position.z - cleaverOffset);
+        float arrivalThreshold = 0.01f; // For the lowest deviation
+
+        while (Vector3.Distance(cleaver.transform.position, cutIn) > arrivalThreshold)
+        {
+            float step = cleaverSpeed * Time.deltaTime;
+            cleaver.transform.position = Vector3.MoveTowards(cleaver.transform.position, cutIn, step);
+
+            yield return null;
+        }
+
+
+        cleaver.transform.position = cutIn; //To ensure that it's there
+    }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
     }
 
     private void Update()

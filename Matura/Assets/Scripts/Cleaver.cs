@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Cleaver : MonoBehaviour
 {
+    public GameObject fruit;
+    public GameObject cleaver;
+    //public Rigidbody fruitRigidbody; Might be useful
+    public Rigidbody cleaverRigidbody;
+    public float rotationIncrement = - 5f;
+
     void Start()
     {
         StartCoroutine(Spin());
@@ -12,8 +18,20 @@ public class Cleaver : MonoBehaviour
     {
         while(true)
         {
-            StartSpinning(); 
+            StartSpinning();
             yield return null;
+        }
+    }
+
+    //Fruit hitting and going through
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Sliced"))
+        {
+            StopSpinning();
+            StopAllCoroutines();
+            SetCleaverRotation();
+            cleaverRigidbody.isKinematic = true; //For being able to go through fruit
         }
     }
 
@@ -21,11 +39,18 @@ public class Cleaver : MonoBehaviour
     {
         StopAllCoroutines(); 
     }
+
+    //Rotation cleaver to the roation of fruit
+    private void SetCleaverRotation()
+    {
+        cleaver.transform.rotation = fruit.transform.rotation;
+        cleaver.transform.Rotate(new Vector3(-60f, rotationIncrement, 0f));
+    }
     
 
     private void StartSpinning()
     {
-        transform.Rotate(300f * Time.deltaTime, 0f, 0f, Space.Self);
+        transform.Rotate(2000 * Time.deltaTime, 0f, 0f, Space.Self);
     }
 
     private void StopSpinning()
@@ -33,12 +58,5 @@ public class Cleaver : MonoBehaviour
         transform.rotation = Quaternion.identity;
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.CompareTag("Fruit"))
-        {
-            StopSpinning(); 
-        }
-    }
 
 }

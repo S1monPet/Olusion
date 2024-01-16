@@ -17,8 +17,6 @@ public class FruitSpawner : MonoBehaviour
     public float minForce = 15f;
     public float maxForce = 22f;
 
-    public float maxLifetime = 3.7f;
-
     private int numberOfFruits = 5; //User will choose
     private int fruitsSpawned = 1; 
     
@@ -96,7 +94,7 @@ public class FruitSpawner : MonoBehaviour
             }
         }
     }
-
+    
   
     //For stopping fruit
     private IEnumerator CheckFruitVelocity(Rigidbody fruitRigidbody) 
@@ -106,14 +104,15 @@ public class FruitSpawner : MonoBehaviour
 
         while (true)
         {
-            if (fruitRigidbody != null && fruitRigidbody.velocity.y < 0.01f)
+            if (fruitRigidbody != null && fruitRigidbody.velocity.y < 0.1f)
             {
                 fruitRigidbody.velocity = Vector3.zero;
-                fruitRigidbody.isKinematic = true;
-                yield break; 
+                fruitRigidbody.angularVelocity = Vector3.zero;
+                fruitRigidbody.isKinematic = true; 
+                yield break;
             }
             //Little delay so we don't run loop the whole time
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.1f);
         }
     }
 

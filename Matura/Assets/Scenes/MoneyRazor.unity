@@ -159,14 +159,12 @@ MonoBehaviour:
   - {fileID: 4834495504394856992, guid: 784dc21f580b03d4fbe67d2db4a6ee02, type: 3}
   - {fileID: 4834495504394856992, guid: 54736b15d52c30849a94e5071d387f70, type: 3}
   - {fileID: 4834495504394856992, guid: 183aa77bc2a314c43905f355202ff349, type: 3}
-  Cleaver: {fileID: 349408198100847661, guid: 9bb49d0cb5205f34cb8d8eb06d14baf9, type: 3}
   minSpawnDelay: 2
   maxSpawnDelay: 2.5
   minAngle: -5
   maxAngle: 5
   minForce: 18
   maxForce: 22
-  maxLifetime: 3.7
 --- !u!65 &117130631
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -176,7 +174,7 @@ BoxCollider:
   m_GameObject: {fileID: 117130629}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 3, y: 1, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
@@ -188,7 +186,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 117130629}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -7, z: 0}
+  m_LocalPosition: {x: 0, y: -7, z: 1.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
