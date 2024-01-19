@@ -155,10 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fruitPrefabs:
   - {fileID: 4834495504394856992, guid: 98f82c069fc42a848966e9ad5c10ed99, type: 3}
-  - {fileID: 4834495504394856992, guid: fd814c31056fe74499184148a17065c5, type: 3}
-  - {fileID: 4834495504394856992, guid: 784dc21f580b03d4fbe67d2db4a6ee02, type: 3}
-  - {fileID: 4834495504394856992, guid: 54736b15d52c30849a94e5071d387f70, type: 3}
-  - {fileID: 4834495504394856992, guid: 183aa77bc2a314c43905f355202ff349, type: 3}
+  - {fileID: 4830126128166078233, guid: aca5aba5569633c4ba6ea4a8fbdf1509, type: 3}
   minSpawnDelay: 2
   maxSpawnDelay: 2.5
   minAngle: -5
@@ -277,6 +274,137 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &581516465
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4830126128166078232, guid: aca5aba5569633c4ba6ea4a8fbdf1509,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4830126128166078232, guid: aca5aba5569633c4ba6ea4a8fbdf1509,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4830126128166078232, guid: aca5aba5569633c4ba6ea4a8fbdf1509,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4830126128166078232, guid: aca5aba5569633c4ba6ea4a8fbdf1509,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4830126128166078232, guid: aca5aba5569633c4ba6ea4a8fbdf1509,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4830126128166078232, guid: aca5aba5569633c4ba6ea4a8fbdf1509,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4830126128166078232, guid: aca5aba5569633c4ba6ea4a8fbdf1509,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4830126128166078232, guid: aca5aba5569633c4ba6ea4a8fbdf1509,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4830126128166078232, guid: aca5aba5569633c4ba6ea4a8fbdf1509,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4830126128166078232, guid: aca5aba5569633c4ba6ea4a8fbdf1509,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4830126128166078232, guid: aca5aba5569633c4ba6ea4a8fbdf1509,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4830126128166078233, guid: aca5aba5569633c4ba6ea4a8fbdf1509,
+        type: 3}
+      propertyPath: m_Name
+      value: Prefab_Watermelon
+      objectReference: {fileID: 0}
+    - target: {fileID: 4830126128539815608, guid: aca5aba5569633c4ba6ea4a8fbdf1509,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4830126128539815615, guid: aca5aba5569633c4ba6ea4a8fbdf1509,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4830126128539815615, guid: aca5aba5569633c4ba6ea4a8fbdf1509,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4830126128539815615, guid: aca5aba5569633c4ba6ea4a8fbdf1509,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4936709774478975124, guid: aca5aba5569633c4ba6ea4a8fbdf1509,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.682
+      objectReference: {fileID: 0}
+    - target: {fileID: 4936709774478975124, guid: aca5aba5569633c4ba6ea4a8fbdf1509,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.039
+      objectReference: {fileID: 0}
+    - target: {fileID: 5749240536440610342, guid: aca5aba5569633c4ba6ea4a8fbdf1509,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: aca5aba5569633c4ba6ea4a8fbdf1509, type: 3}
+--- !u!1 &581516466 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4830126128166078233, guid: aca5aba5569633c4ba6ea4a8fbdf1509,
+    type: 3}
+  m_PrefabInstance: {fileID: 581516465}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &581516467
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 581516466}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 100a3b9ed8e7fab459cbffb186f1fb02, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &717437297
 GameObject:
   m_ObjectHideFlags: 0

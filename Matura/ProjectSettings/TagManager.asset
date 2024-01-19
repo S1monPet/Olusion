@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Fruit
   - Sliced
+  - Watermelon
   layers:
   - Default
   - TransparentFX

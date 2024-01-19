@@ -8,7 +8,7 @@ public class Cleaver : MonoBehaviour
     public GameObject cleaver;
     //public Rigidbody fruitRigidbody; Might be useful
     public Rigidbody cleaverRigidbody;
-    public float rotationIncrement = - 5f;
+    public float rotationIncrement = 8f;
 
     void Start()
     {
@@ -44,7 +44,7 @@ public class Cleaver : MonoBehaviour
     private void SetCleaverRotation()
     {
         cleaver.transform.rotation = fruit.transform.rotation;
-        cleaver.transform.Rotate(new Vector3(-60f, rotationIncrement, 0f));
+        cleaver.transform.Rotate(new Vector3(-60f, rotationIncrement, 4f));
     }
     
 

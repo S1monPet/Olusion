@@ -58,10 +58,18 @@ public class FruitSpawner : MonoBehaviour
 
 
             //Diagnoal spawning
-            Quaternion rotation = Quaternion.Euler(0f, 0f, Random.Range(minAngle, maxAngle));
+            float spawningAngle = Random.Range(minAngle, maxAngle);
+            Quaternion rotation = Quaternion.Euler(0f, 0f, spawningAngle);
 
             //Create fruit
             GameObject fruit = Instantiate(prefab, position, rotation);
+
+            //Using tag here, because I am not going to search for the objects more times
+            if (fruit.tag == "Watermelon") 
+            {
+                Vector3 newRotation = new Vector3(0f, 90f, spawningAngle);
+                fruit.transform.GetChild(0).rotation = Quaternion.Euler(newRotation);
+            }
 
             float force = Random.Range(minForce, maxForce);
             fruitRigidbody = fruit.GetComponent<Rigidbody>();

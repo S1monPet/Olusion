@@ -62,10 +62,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fruit: {fileID: 1210058833815394131, guid: eb2a16a2395e10a4faded996e19757ff, type: 3}
   cleaver: {fileID: 349408198100847661}
-  fruitRigidbody: {fileID: 8768856176886822161, guid: eb2a16a2395e10a4faded996e19757ff,
-    type: 3}
   cleaverRigidbody: {fileID: 1807608328561875482}
-  rotationIncrement: -5
+  rotationIncrement: 8
 --- !u!54 &1807608328561875482
 Rigidbody:
   m_ObjectHideFlags: 0
