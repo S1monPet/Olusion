@@ -7,7 +7,7 @@ public class SplitingFruit : MonoBehaviour
     public GameObject fruit;
     public GameObject whole;
     public GameObject sliced;
-    public GameObject cleaverPrefab;
+    public GameObject cleaverPrefab; 
     private bool slicingInProgress = false;
     private float cleaverSpeed = 30f;
     private float cleaverOffset = 1f; //Distance from fruit to cleaver when cut
@@ -63,6 +63,7 @@ public class SplitingFruit : MonoBehaviour
     private IEnumerator ResetSlicingFlag()
     {
         yield return new WaitForSeconds(1f);
+        //animator.SetBool("IsSliced", false);
         slicingInProgress = true; 
 
     }
@@ -80,13 +81,14 @@ public class SplitingFruit : MonoBehaviour
             yield return null;
         }
 
-        whole.SetActive(false);
-        sliced.SetActive(true);
-
-
         cleaver.transform.position = cutIn; //To ensure that it's there
 
-        //animation for tunring out
+        //For no repeating
+        if (whole.activeSelf)
+        {
+            whole.SetActive(false);
+            sliced.SetActive(true);
+        }
     }
 
 

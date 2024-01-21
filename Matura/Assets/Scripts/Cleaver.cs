@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class Cleaver : MonoBehaviour
 {
-    public GameObject fruit;
     public GameObject cleaver;
     //public Rigidbody fruitRigidbody; Might be useful
     public Rigidbody cleaverRigidbody;
     public float rotationIncrement = 8f;
 
+    private Animator fruitAnimator;
+    private GameObject currentFruit; 
+
     void Start()
     {
         StartCoroutine(Spin());
     }
+
     IEnumerator Spin()
     {
         while(true)
@@ -28,9 +31,17 @@ public class Cleaver : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Sliced"))
         {
+            currentFruit = collision.gameObject;
+            fruitAnimator = currentFruit.GetComponent<Animator>();
+
+            if (fruitAnimator != null)
+                fruitAnimator.SetBool("IsSliced", true);
+
             StopSpinning();
             StopAllCoroutines();
-            SetCleaverRotation();
+            //Calling function after defining currentFruit
+            SetCleaverRotation(); 
+
             cleaverRigidbody.isKinematic = true; //For being able to go through fruit
         }
     }
@@ -42,9 +53,12 @@ public class Cleaver : MonoBehaviour
 
     //Rotation cleaver to the roation of fruit
     private void SetCleaverRotation()
-    {
-        cleaver.transform.rotation = fruit.transform.rotation;
-        cleaver.transform.Rotate(new Vector3(-60f, rotationIncrement, 4f));
+    {   
+        if (currentFruit != null)
+        {
+            cleaver.transform.rotation = currentFruit.transform.rotation;
+            cleaver.transform.Rotate(new Vector3(-60f, rotationIncrement, 4f));
+        }
     }
     
 

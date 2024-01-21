@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 349408198100847650}
   - component: {fileID: 349408198100847651}
   - component: {fileID: 1807608328561875482}
+  - component: {fileID: 921131384050475948}
   m_Layer: 0
   m_Name: Cleaver
   m_TagString: Player
@@ -60,8 +61,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82960ffc9f9e129408b2d97e87f49188, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fruit: {fileID: 1210058833815394131, guid: eb2a16a2395e10a4faded996e19757ff, type: 3}
+  fruit: {fileID: 4830126128166078233, guid: aca5aba5569633c4ba6ea4a8fbdf1509, type: 3}
   cleaver: {fileID: 349408198100847661}
+  animator: {fileID: 921131384050475948}
   cleaverRigidbody: {fileID: 1807608328561875482}
   rotationIncrement: 8
 --- !u!54 &1807608328561875482
@@ -80,6 +82,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!95 &921131384050475948
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 349408198100847661}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0fb388dba4428c047b83ee05ad87b1f3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &349408198744007020
 PrefabInstance:
   m_ObjectHideFlags: 0

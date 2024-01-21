@@ -108,7 +108,7 @@ public class FruitSpawner : MonoBehaviour
     private IEnumerator CheckFruitVelocity(Rigidbody fruitRigidbody) 
     {
         //Delay checking of velocity for better performance, fruit doesn't stop for good 2 seconds
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
 
         while (true)
         {
