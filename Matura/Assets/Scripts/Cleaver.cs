@@ -37,7 +37,7 @@ public class Cleaver : MonoBehaviour
             StopAllCoroutines();
             //Calling function after defining currentFruit
             SetCleaverRotation();
-            //cleaverRigidbody.isKinematic = true; //For being able to go through fruit
+            cleaverRigidbody.isKinematic = true; //For being able to go through fruit
         }
     }
 
