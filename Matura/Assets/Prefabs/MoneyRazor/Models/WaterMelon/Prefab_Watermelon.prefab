@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4830126128166078239}
   - component: {fileID: 4830126128166078238}
   - component: {fileID: 4830126128166078237}
-  - component: {fileID: 4620213379514612797}
   m_Layer: 0
   m_Name: Prefab_Watermelon
   m_TagString: Watermelon
@@ -83,27 +82,6 @@ MonoBehaviour:
   sliced: {fileID: 4830126128539815608}
   cleaverPrefab: {fileID: 349408198100847661, guid: 9bb49d0cb5205f34cb8d8eb06d14baf9,
     type: 3}
---- !u!95 &4620213379514612797
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4830126128166078233}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0fb388dba4428c047b83ee05ad87b1f3, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4830126128539815608
 GameObject:
   m_ObjectHideFlags: 0
