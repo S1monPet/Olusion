@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class SplitingFruit : MonoBehaviour
@@ -9,9 +10,9 @@ public class SplitingFruit : MonoBehaviour
     public GameObject sliced;
     public GameObject cleaverPrefab; 
     private bool slicingInProgress = false;
-    private float cleaverSpeed = 30f;
-    private float cleaverOffset = 1f; //Distance from fruit to cleaver when cut
-    private float positionYOffset = 0.5f; //For setting knife cutting
+    private float cleaverSpeed = 20f;
+    private float cleaverOffset = .5f; //Distance from fruit to cleaver when cut
+    private float positionYOffset = - .2f; //For setting knife cutting
 
     private void Slice()
     {
@@ -27,21 +28,8 @@ public class SplitingFruit : MonoBehaviour
         fruit.tag = "Sliced";
 
 
-        //Stops pieces that could fall down
-        Rigidbody[] slices = sliced.GetComponentsInChildren<Rigidbody>();
-
-        foreach (Rigidbody slice in slices)
-        {
-            slice.velocity = Vector3.zero;
-            slice.angularVelocity = Vector3.zero;
-            slice.isKinematic = true; 
-            slice.detectCollisions = false; 
-        }
-    
-
-
         //Put it behind camera
-        GameObject cleaver = Instantiate(cleaverPrefab, new Vector3(0f, 3f, -15f), Quaternion.Euler(-60f, 2f, 0f)); 
+        GameObject cleaver = Instantiate(cleaverPrefab, new Vector3(0f, 5f, -5f), Quaternion.Euler(70f, 0f, 10f)); 
 
         //Set cleaver position and rotation
         if (cleaver != null)
@@ -63,7 +51,6 @@ public class SplitingFruit : MonoBehaviour
     private IEnumerator ResetSlicingFlag()
     {
         yield return new WaitForSeconds(1f);
-        //animator.SetBool("IsSliced", false);
         slicingInProgress = true; 
 
     }
@@ -102,7 +89,11 @@ public class SplitingFruit : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            float maxRaycastDistance = 10f; //Hits close to 5
+            float maxRaycastDistance = 4f; //Hits at like 2
+
+
+            // Draw the ray in the scene view
+            UnityEngine.Debug.DrawLine(ray.origin, ray.origin + ray.direction * maxRaycastDistance, Color.green, 10);
 
             //Work in progress, works for all objects not only one. Chat made it maybe better solutions
             if (Physics.Raycast(ray, out RaycastHit hit, maxRaycastDistance) && (hit.collider.CompareTag("Fruit") || hit.collider.CompareTag("Watermelon"))) //If used multiple times better to store them

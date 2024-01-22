@@ -7,9 +7,8 @@ public class Cleaver : MonoBehaviour
     public GameObject cleaver;
     //public Rigidbody fruitRigidbody; Might be useful
     public Rigidbody cleaverRigidbody;
-    public float rotationIncrement = 8f;
 
-    private Animator fruitAnimator;
+    private float fruitYRotation;
     private GameObject currentFruit; 
 
     void Start()
@@ -32,17 +31,13 @@ public class Cleaver : MonoBehaviour
         if (collision.gameObject.CompareTag("Sliced"))
         {
             currentFruit = collision.gameObject;
-            fruitAnimator = currentFruit.GetComponent<Animator>();
-
-            if (fruitAnimator != null)
-                fruitAnimator.SetBool("IsSliced", true);
+            //fruitAnimator = currentFruit.GetComponent<Animator>(); Was used for animation
 
             StopSpinning();
             StopAllCoroutines();
             //Calling function after defining currentFruit
-            SetCleaverRotation(); 
-
-            cleaverRigidbody.isKinematic = true; //For being able to go through fruit
+            SetCleaverRotation();
+            //cleaverRigidbody.isKinematic = true; //For being able to go through fruit
         }
     }
 
@@ -56,8 +51,8 @@ public class Cleaver : MonoBehaviour
     {   
         if (currentFruit != null)
         {
-            cleaver.transform.rotation = currentFruit.transform.rotation;
-            cleaver.transform.Rotate(new Vector3(-60f, rotationIncrement, 4f));
+            fruitYRotation = currentFruit.transform.rotation.y;
+            cleaver.transform.Rotate(new Vector3(70f, fruitYRotation, 10f));
         }
     }
     

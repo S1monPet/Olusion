@@ -8,14 +8,16 @@ public class FruitSpawner : MonoBehaviour
 
     public GameObject[] fruitPrefabs;
     private Rigidbody fruitRigidbody;
+    private GameObject currentFruit; 
     public float minSpawnDelay = 1f; 
     public float maxSpawnDelay = 1.8f;
 
     public float minAngle = -5f;
     public float maxAngle = 5f;
 
-    public float minForce = 15f;
-    public float maxForce = 22f;
+    public float minForce = 4f;
+    public float maxForce = 5f;
+    private float decelerationRate = 1f;
 
     private int numberOfFruits = 5; //User will choose
     private int fruitsSpawned = 1; 
@@ -25,10 +27,22 @@ public class FruitSpawner : MonoBehaviour
         spawnArea = GetComponent<Collider>();
     }
 
+    //For decelerating speed of fruit
+    private void FixedUpdate()
+    {
+        if (fruitRigidbody?.velocity.magnitude > 0)
+        {
+            Vector3 decelerationForce = -fruitRigidbody.velocity.normalized * decelerationRate;
+            fruitRigidbody.AddForce(decelerationForce, ForceMode.Acceleration);
+        }
+    }
+
+
     private void OnEnable()
     {
         StartCoroutine(Spawn()); 
     }
+
 
     private void OnDisable()
     {
@@ -38,7 +52,7 @@ public class FruitSpawner : MonoBehaviour
     //Clear objects of table
     private void ClearTable(GameObject fruit)
     {
-
+        
     }
 
 
@@ -62,67 +76,34 @@ public class FruitSpawner : MonoBehaviour
             Quaternion rotation = Quaternion.Euler(0f, 0f, spawningAngle);
 
             //Create fruit
-            GameObject fruit = Instantiate(prefab, position, rotation);
+            currentFruit = Instantiate(prefab, position, rotation);
 
             //Using tag here, because I am not going to search for the objects more times
-            if (fruit.tag == "Watermelon") 
+            if (currentFruit.tag == "Watermelon") 
             {
                 Vector3 newRotation = new Vector3(0f, 90f, spawningAngle);
-                fruit.transform.GetChild(0).rotation = Quaternion.Euler(newRotation);
+                currentFruit.transform.GetChild(0).rotation = Quaternion.Euler(newRotation);
             }
 
             float force = Random.Range(minForce, maxForce);
-            fruitRigidbody = fruit.GetComponent<Rigidbody>();
-            fruitRigidbody.AddForce(fruit.transform.up * force, ForceMode.Impulse);
+            fruitRigidbody = currentFruit.GetComponent<Rigidbody>();
+            fruitRigidbody.AddForce(currentFruit.transform.forward * force, ForceMode.Impulse);
 
-            //Start routine for checking velocity to stop fruit
-            yield return StartCoroutine(CheckFruitVelocity(fruitRigidbody));
+            
 
-            if (fruit.tag == "Sliced" && fruitsSpawned > 1)
+            yield return new WaitUntil(() => currentFruit.tag == "Sliced");
+            yield return new WaitForSeconds(Random.Range(minSpawnDelay, maxSpawnDelay));
+            fruitsSpawned++; 
+            //Temporary solution 
+            Destroy(currentFruit);
+            currentFruit = null; 
+            Cleaver cleaver = FindObjectOfType<Cleaver>();
+            if (cleaver != null)
             {
-
-                fruitsSpawned++;
-                yield return new WaitForSeconds(Random.Range(minSpawnDelay, maxSpawnDelay));
-                //Temporary solution 
-                Destroy(fruit);
-                Cleaver cleaver = FindObjectOfType<Cleaver>();
-                if(cleaver != null)
-                    Destroy(cleaver.gameObject);
-            }
-            else
-            {
-                yield return new WaitUntil(() => fruit.tag == "Sliced");
-                yield return new WaitForSeconds(Random.Range(minSpawnDelay, maxSpawnDelay));
-                fruitsSpawned++; 
-                //Temporary solution 
-                Destroy(fruit);
-                Cleaver cleaver = FindObjectOfType<Cleaver>();
-                if (cleaver != null)
-                    Destroy(cleaver.gameObject);
+                Destroy(cleaver.gameObject);
+                cleaver = null;
             }
         }
     }
-    
-  
-    //For stopping fruit
-    private IEnumerator CheckFruitVelocity(Rigidbody fruitRigidbody) 
-    {
-        //Delay checking of velocity for better performance, fruit doesn't stop for good 2 seconds
-        yield return new WaitForSeconds(1f);
-
-        while (true)
-        {
-            if (fruitRigidbody != null && fruitRigidbody.velocity.y < 0.1f)
-            {
-                fruitRigidbody.velocity = Vector3.zero;
-                fruitRigidbody.angularVelocity = Vector3.zero;
-                fruitRigidbody.isKinematic = true; 
-                yield break;
-            }
-            //Little delay so we don't run loop the whole time
-            yield return new WaitForSeconds(0.1f);
-        }
-    }
-
-
+   
 }
