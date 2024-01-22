@@ -30,7 +30,7 @@ public class FruitSpawner : MonoBehaviour
     //For decelerating speed of fruit
     private void FixedUpdate()
     {
-        if (fruitRigidbody?.velocity.magnitude > 0)
+        if (fruitRigidbody != null && fruitRigidbody.velocity.magnitude > 0)
         {
             Vector3 decelerationForce = -fruitRigidbody.velocity.normalized * decelerationRate;
             fruitRigidbody.AddForce(decelerationForce, ForceMode.Acceleration);
@@ -88,8 +88,6 @@ public class FruitSpawner : MonoBehaviour
             float force = Random.Range(minForce, maxForce);
             fruitRigidbody = currentFruit.GetComponent<Rigidbody>();
             fruitRigidbody.AddForce(currentFruit.transform.forward * force, ForceMode.Impulse);
-
-            
 
             yield return new WaitUntil(() => currentFruit.tag == "Sliced");
             yield return new WaitForSeconds(Random.Range(minSpawnDelay, maxSpawnDelay));
