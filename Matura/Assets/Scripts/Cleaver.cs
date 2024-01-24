@@ -9,7 +9,8 @@ public class Cleaver : MonoBehaviour
     public Rigidbody cleaverRigidbody;
 
     private float fruitYRotation;
-    private GameObject currentFruit; 
+    private float maxCollisionVelocity = 1f;
+    private GameObject currentFruit = null; 
 
     void Start()
     {
@@ -25,19 +26,47 @@ public class Cleaver : MonoBehaviour
         }
     }
 
+    void FixedUpdate()
+    {
+        if(currentFruit != null)
+            LimitVelocityOfActiveChild(currentFruit, maxCollisionVelocity);
+    }
+
+
     //Fruit hitting and going through
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Sliced"))
         {
             currentFruit = collision.gameObject;
-            //fruitAnimator = currentFruit.GetComponent<Animator>(); Was used for animation
 
             StopSpinning();
             StopAllCoroutines();
             //Calling function after defining currentFruit
             SetCleaverRotation();
-            cleaverRigidbody.isKinematic = true; //For being able to go through fruit
+            cleaverRigidbody.isKinematic = true; //For being able to go through fruit 
+            
+        }
+    }
+
+    //For limiting velocity of fruit
+    private void LimitVelocityOfActiveChild(GameObject parent, float maxCollisionVelocity)
+    {
+        foreach (Transform child in parent.transform)
+        {
+            if (child.gameObject.activeInHierarchy)
+            {
+                foreach (Transform grandchild in child)
+                {
+                    Rigidbody grandchildRigidbody = grandchild.GetComponent<Rigidbody>();
+
+                    if (grandchildRigidbody != null && grandchildRigidbody.velocity.magnitude > maxCollisionVelocity)
+                    {
+                        grandchildRigidbody.velocity = grandchildRigidbody.velocity.normalized * maxCollisionVelocity;
+                    }
+                }
+                break; 
+            }
         }
     }
 

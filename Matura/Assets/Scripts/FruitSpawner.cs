@@ -92,6 +92,7 @@ public class FruitSpawner : MonoBehaviour
             yield return new WaitUntil(() => currentFruit.tag == "Sliced");
             yield return new WaitForSeconds(Random.Range(minSpawnDelay, maxSpawnDelay));
             fruitsSpawned++; 
+
             //Temporary solution 
             Destroy(currentFruit);
             currentFruit = null; 
