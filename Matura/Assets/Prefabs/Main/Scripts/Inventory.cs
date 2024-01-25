@@ -91,7 +91,7 @@ public class Inventory : MonoBehaviour
                 {
                     heldItem.currentQuantity += leftoverQuantity;
                     
-                    Destroy(itemToAdd);
+                    Destroy(itemToAdd.gameObject);
                     inventorySlots[i].UpdateInventoryAmount(); 
                     return; 
                 } 
