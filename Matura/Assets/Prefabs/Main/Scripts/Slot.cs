@@ -5,8 +5,10 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro; 
 
-public class Slot : MonoBehaviour
+public class Slot : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
+    public bool hovered;
+    public bool dragged; 
     private Item heldItem; 
 
     private Color opaque = new Color(1, 1 , 1);
@@ -48,6 +50,12 @@ public class Slot : MonoBehaviour
         return heldItem; 
     }
 
+
+    public bool HasItem()
+    {
+        return heldItem ? true : false; 
+    }
+
     //For updating amount of things in inventory
     public void UpdateInventoryAmount()
     {
@@ -60,4 +68,24 @@ public class Slot : MonoBehaviour
             thisSlotQuantityText.text = "";
         }
     }
+
+#if UNITY_STANDALONE
+    /* public void OnPointerClick(PointerEventData eventData)
+    {
+        hovered = true; 
+    } */
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        hovered = true;
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        hovered = false; 
+    }
+
+
+
+#endif
 }
