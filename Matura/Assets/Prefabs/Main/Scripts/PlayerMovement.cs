@@ -17,18 +17,21 @@ public class PlayerMovement : MonoBehaviour
     private float maxRaycastDistance = 30f;
     private string groundTag = "Ground";
 
+    private float lookRotationSpeed = 20f;
+
 
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
     }
 
 
     void Update()
     {
         //Checks if inventory is active
-        if (!inventory.activeSelf)
-        { 
+        if (!inventory.activeInHierarchy)
+        {
             if (Input.GetMouseButtonDown(0))
             {
                 Ray ray = camera.ScreenPointToRay(Input.mousePosition);
@@ -36,14 +39,20 @@ public class PlayerMovement : MonoBehaviour
 
                 if (Physics.Raycast(ray, out hit, maxRaycastDistance, layerMask))
                 {
-                    Debug.Log("Hit: " + hit.collider.name + ", Tag: " + hit.collider.tag); 
                     if (hit.collider.CompareTag(groundTag))
                     {
-                        agent.SetDestination(hit.point);
+                        agent.destination = hit.point;
                     }
                 }
             }
         }
+    }
+
+    private void SetAgentRotation()
+    {
+        Vector3 direction = (agent.destination - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * lookRotationSpeed);
     }
 
 
