@@ -21,12 +21,14 @@ public class Inventory : MonoBehaviour
     private float raycastDistance = 15f; 
     public LayerMask itemLayer;
     public Transform dropLocation; //Where we are dropping our element
-    public NavMeshAgent agent; 
+    public NavMeshAgent agent;
 
     [Header("Drag and drop")]
     public Image dragIconImage;
     private Item currentDraggedItem;
     private int currentDragSlotIndex = -1; 
+
+
 
     public void Start()
     {
@@ -46,9 +48,7 @@ public class Inventory : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             ItemRaycast(true);
-
         }
-
         if (inventory.activeInHierarchy && Input.GetMouseButtonDown(0)) 
         {
             DragInventoryIcon(); 
@@ -95,8 +95,10 @@ public class Inventory : MonoBehaviour
                     Item newItem = hit.collider.GetComponent<Item>();
                     if (newItem)
                     {
-                        agent.velocity = Vector3.zero; 
+                        //Agent logic to stop moving and look towards item
+                        agent.velocity = Vector3.zero;
                         agent.ResetPath();
+
                         AddItemToInventory(newItem);
                     }
                 }
@@ -112,6 +114,7 @@ public class Inventory : MonoBehaviour
             }
         }
     }
+
 
     private void AddItemToInventory(Item itemToAdd)
     {

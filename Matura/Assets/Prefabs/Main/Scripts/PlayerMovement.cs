@@ -1,5 +1,7 @@
+using Cinemachine.Utility;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -42,9 +44,12 @@ public class PlayerMovement : MonoBehaviour
                     if (hit.collider.CompareTag(groundTag))
                     {
                         agent.destination = hit.point;
-                    }
+                    } 
                 }
             }
+            //Has path because we are resseting path in the other file if object is not clicked
+            if (!agent.pathPending && agent.remainingDistance > agent.stoppingDistance && agent.hasPath)
+                SetAgentRotation();
         }
     }
 
@@ -52,11 +57,9 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector3 direction = (agent.destination - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * lookRotationSpeed);
+        if (Quaternion.Angle(transform.rotation, lookRotation) > 0.1f) //Small threshold to avoid constant micro-adjustments
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * lookRotationSpeed);
+        
     }
-
-
-
-
 }
 
