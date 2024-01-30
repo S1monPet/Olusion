@@ -38,6 +38,7 @@ public class Inventory : MonoBehaviour
         {
             uiSlots.InitialiseSlot();
         }
+
     }
 
     public void Update()
@@ -72,11 +73,6 @@ public class Inventory : MonoBehaviour
             dragIconImage.transform.position = Vector3.zero;
         }
 
-
-        //Make a sprite so he will be able to open inventory 
-        //if(Input.GetKeyDown(KeyCode.E))
-        //ToggleInventory(!inventory.activeInHierarchy);
-
     }
 
     private void ItemRaycast(bool hasClicked = false)
@@ -96,12 +92,16 @@ public class Inventory : MonoBehaviour
                     if (newItem)
                     {
                         //Agent logic to stop moving and look towards item
-                        agent.velocity = Vector3.zero;
-                        agent.ResetPath();
+                        if (!agent.isStopped)
+                        {
+                            agent.velocity = Vector3.zero;
+                            agent.isStopped = true;
+                        }
 
                         AddItemToInventory(newItem);
                     }
                 }
+                /*
                 else //Get the name
                 {
                     Item newItem = hit.collider.GetComponent<Item>();
@@ -111,6 +111,7 @@ public class Inventory : MonoBehaviour
                         itemHoverText.text = newItem.name;
                     }
                 }
+                */
             }
         }
     }
