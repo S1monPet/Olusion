@@ -8,7 +8,6 @@ using TMPro;
 public class Slot : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     public bool hovered;
-    public bool dragged; 
     private Item heldItem; 
 
     private Color opaque = new Color(1, 1 , 1);
