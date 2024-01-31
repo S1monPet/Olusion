@@ -20,7 +20,7 @@ public class Inventory : MonoBehaviour
     //Match the 
     private float raycastDistance = 15f; 
     public LayerMask itemLayer;
-    public Transform dropLocation; //Where we are dropping our element
+    private Transform dropLocation; //Where we are dropping our element
     public NavMeshAgent agent;
 
     [Header("Drag and drop")]

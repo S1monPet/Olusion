@@ -793,7 +793,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 2147483647
 --- !u!114 &233027927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8534,7 +8534,6 @@ MonoBehaviour:
   itemLayer:
     serializedVersion: 2
     m_Bits: 128
-  dropLocation: {fileID: 0}
   agent: {fileID: 2048660236}
   dragIconImage: {fileID: 628187677}
 --- !u!1 &2049228971
