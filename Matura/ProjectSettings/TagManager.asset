@@ -9,6 +9,8 @@ TagManager:
   - Watermelon
   - Ground
   - Item
+  - Inventory
+  - Hotbar
   layers:
   - Default
   - TransparentFX
