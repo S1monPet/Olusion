@@ -2,6 +2,7 @@ using Cinemachine.Utility;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -51,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
 
                     } 
                 }
-            }
+            } 
             //Has path because we are resseting path in the other file if object is not clicked
             if (!agent.pathPending && agent.remainingDistance > agent.stoppingDistance)
                 SetAgentRotation();

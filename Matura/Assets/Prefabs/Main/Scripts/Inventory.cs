@@ -7,6 +7,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEditor.UI;
 using Unity.VisualScripting;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
 
 public class Inventory : MonoBehaviour
 {
@@ -32,6 +33,7 @@ public class Inventory : MonoBehaviour
 
     [Header("Equaippable Items")]
     public List<GameObject> equaiappableItems = new List<GameObject>();
+    public bool disableRaycast = false; 
 
 
 
@@ -49,6 +51,27 @@ public class Inventory : MonoBehaviour
             uiSlots.InitialiseSlot();
         }
 
+        CreateEventTriggersForHotbar(); //Creates event triggers for carrying objects
+    }
+
+    private void CreateEventTriggersForHotbar()
+    {
+        for (int i = 0; i < hotbarSlots.Count; i++) 
+        {
+            EventTrigger trigger = hotbarSlots[i].GetComponent<EventTrigger>(); //?? hotbarSlots[i].gameObject.AddComponent<EventTrigger>(); Already set them up
+
+            EventTrigger.Entry entry = new EventTrigger.Entry
+            {
+                eventID = EventTriggerType.PointerClick // The type of event to listen for
+            };
+
+            int currentSlotIndex = i; 
+
+            entry.callback.AddListener((data) => { EnableHotBarItem(currentSlotIndex); });
+
+            trigger.triggers.Add(entry);
+
+        }
     }
 
     public void Update()
@@ -66,20 +89,23 @@ public class Inventory : MonoBehaviour
         //Hotbar(); 
     }
 
-    private void Hotbar()
+    private void Hotbar() //Will impove in future maybe?
     {
-        if (Input.touchCount > 0)
+        if (!inventory.activeInHierarchy)
         {
-            Touch touch = Input.GetTouch(0);
+            if (Input.touchCount > 0)
+            {
+                Touch touch = Input.GetTouch(0);
 
-            if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
-            {
-                //DragInventoryIcon(); //Get's item into sprite
-                dragIconImage.transform.position = touch.position;
-            }
-            else if (touch.phase == TouchPhase.Ended)
-            {
-                dragIconImage.transform.position = new Vector3(-500, 0, 0);
+                if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
+                {  
+                    DragInventoryIcon(); //Get's item into sprite
+                    dragIconImage.transform.position = touch.position;
+                }
+                else if (touch.phase == TouchPhase.Ended)
+                {
+                    dragIconImage.transform.position = new Vector3(-500, 0, 0);
+                }
             }
         }
     }
@@ -157,7 +183,8 @@ public class Inventory : MonoBehaviour
 
                         AddItemToInventory(newItem);
                     }
-                }
+                } 
+
                 /*
                 else //Get the name
                 {
@@ -306,14 +333,20 @@ public class Inventory : MonoBehaviour
     }
 
     //Hotbar
-
     private void EnableHotBarItem(int hotbarIndex)
     {
+
+        if (!agent.isStopped)
+        {
+            agent.velocity = Vector3.zero;
+            agent.isStopped = true;
+        }
+
         foreach (GameObject item in equaiappableItems)
         {
             item.SetActive(false);
         }
-
+        
         Slot hotbarSlot = hotbarSlots[hotbarIndex];
 
         if (hotbarSlot.HasItem())
