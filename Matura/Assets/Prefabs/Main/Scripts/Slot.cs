@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using TMPro; 
+using TMPro;
+using Unity.VisualScripting;
 
-public class Slot : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class Slot : MonoBehaviour, IPointerDownHandler
 {
     public bool hovered;
     private Item heldItem; 
@@ -69,21 +70,23 @@ public class Slot : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     }
 
 #if UNITY_STANDALONE
-    /* public void OnPointerClick(PointerEventData eventData)
-    {
-        hovered = true; 
-    } */
 
-    public void OnPointerDown(PointerEventData eventData)
+    public void OnTriggerEnter(Collider other)
     {
         hovered = true;
+        
     }
 
-    public void OnPointerUp(PointerEventData eventData)
+    public void OnTriggerExit(Collider other)
     {
         hovered = false; 
     }
 
+    //Triggers it once so it can start hovering
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        hovered = true; 
+    }
 
 
 #endif

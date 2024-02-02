@@ -12,7 +12,9 @@ public class Inventory : MonoBehaviour
 {
     [Header("IU")]
     public GameObject inventory; 
+    private List<Slot> allInventorySlots = new List<Slot>();
     public List<Slot> inventorySlots = new List<Slot>();
+    public List<Slot> hotbarSlots = new List<Slot>();
     public Image crosshair;
     public TMP_Text itemHoverText;
 
@@ -26,7 +28,12 @@ public class Inventory : MonoBehaviour
     [Header("Drag and drop")]
     public Image dragIconImage;
     private Item currentDraggedItem;
-    private int currentDragSlotIndex = -1; 
+    private int currentDragSlotIndex = -1;
+
+    [Header("Equaippable Items")]
+    public List<GameObject> equaiappableItems = new List<GameObject>();
+
+
 
 
 
@@ -34,7 +41,10 @@ public class Inventory : MonoBehaviour
     {
         ToggleInventory(false);
 
-        foreach(Slot uiSlots in  inventorySlots)
+        allInventorySlots.AddRange(hotbarSlots); //Put it in the first 
+        allInventorySlots.AddRange(inventorySlots);
+
+        foreach(Slot uiSlots in allInventorySlots)
         {
             uiSlots.InitialiseSlot();
         }
@@ -50,11 +60,37 @@ public class Inventory : MonoBehaviour
         {
             ItemRaycast(true);
         }
-        if (inventory.activeInHierarchy && Input.GetMouseButtonDown(0)) 
+
+        InventoryOpened(); 
+
+        //Hotbar(); 
+    }
+
+    private void Hotbar()
+    {
+        if (Input.touchCount > 0)
         {
-            DragInventoryIcon(); 
-        } 
-        else if(currentDragSlotIndex != -1 && Input.GetMouseButtonUp(0) || currentDragSlotIndex != -1 && !inventory.activeInHierarchy) 
+            Touch touch = Input.GetTouch(0);
+
+            if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
+            {
+                //DragInventoryIcon(); //Get's item into sprite
+                dragIconImage.transform.position = touch.position;
+            }
+            else if (touch.phase == TouchPhase.Ended)
+            {
+                dragIconImage.transform.position = new Vector3(-500, 0, 0);
+            }
+        }
+    }
+
+    private void InventoryOpened()
+    {
+        if (inventory.activeInHierarchy && Input.GetMouseButtonDown(0))
+        {
+            DragInventoryIcon();
+        }
+        else if (currentDragSlotIndex != -1 && Input.GetMouseButtonUp(0) || currentDragSlotIndex != -1 && !inventory.activeInHierarchy)
         {
             DropInventoryIcon();
         }
@@ -64,7 +100,28 @@ public class Inventory : MonoBehaviour
             if (!dragIconImage.gameObject.activeSelf)
                 dragIconImage.gameObject.SetActive(true);
 
-            dragIconImage.transform.position = Input.mousePosition; 
+            /*
+             * if (Input.GetMouseButtonUp(0))
+                dragIconImage.transform.position = Vector3.zero;
+            if (Input.GetMouseButtonDown(0))
+                dragIconImage.transform.position = Input.mousePosition;        
+            */
+
+            //Drag icon position gets reset everytime button is not pressed
+            if (Input.touchCount > 0)
+            {
+                Touch touch = Input.GetTouch(0);
+
+                if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
+                {
+                    dragIconImage.transform.position = touch.position;
+                }
+                else if (touch.phase == TouchPhase.Ended)
+                {
+
+                    dragIconImage.transform.position = new Vector3(-500, 0, 0);
+                }
+            }
         }
 
         if (!inventory.activeInHierarchy && dragIconImage.gameObject.activeSelf)
@@ -72,8 +129,8 @@ public class Inventory : MonoBehaviour
             dragIconImage.gameObject.SetActive(false);
             dragIconImage.transform.position = Vector3.zero;
         }
-
     }
+
 
     private void ItemRaycast(bool hasClicked = false)
     {
@@ -82,7 +139,7 @@ public class Inventory : MonoBehaviour
         RaycastHit hit;
 
         UnityEngine.Debug.DrawLine(ray.origin, ray.origin + ray.direction * raycastDistance, Color.red, 10);
-        if (Physics.Raycast(ray, out hit, raycastDistance, itemLayer) && !inventory.activeSelf)
+        if (Physics.Raycast(ray, out hit, raycastDistance, itemLayer) && !inventory.activeSelf) //Check if INVENTORY UI && HOTBAR are NOT HIT. 
         {
             if (hit.collider != null)
             {
@@ -122,9 +179,9 @@ public class Inventory : MonoBehaviour
         int leftoverQuantity = itemToAdd.currentQuantity;
         Slot openSlot = null; 
 
-        for (int i = 0; i < inventorySlots.Count; i++)
+        for (int i = 0; i < allInventorySlots.Count; i++)
         {
-            Item heldItem = inventorySlots[i].GetItem();
+            Item heldItem = allInventorySlots[i].GetItem();
 
             if (heldItem != null && itemToAdd.name == heldItem.name)
             {
@@ -134,7 +191,7 @@ public class Inventory : MonoBehaviour
                     heldItem.currentQuantity += leftoverQuantity;
                     
                     Destroy(itemToAdd.gameObject);
-                    inventorySlots[i].UpdateInventoryAmount(); 
+                    allInventorySlots[i].UpdateInventoryAmount(); 
                     return; 
                 } 
                 else
@@ -146,10 +203,10 @@ public class Inventory : MonoBehaviour
             else if (heldItem == null)
             {
                 if (!openSlot) 
-                    openSlot = inventorySlots[i];
+                    openSlot = allInventorySlots[i];
             }
 
-            inventorySlots[i].UpdateInventoryAmount();
+            allInventorySlots[i].UpdateInventoryAmount();
         }
 
         if (leftoverQuantity > 0 && openSlot)
@@ -175,9 +232,9 @@ public class Inventory : MonoBehaviour
 
     private void DragInventoryIcon()
     {
-        for (int i = 0; i < inventorySlots.Count; i++)
+        for (int i = 0; i < allInventorySlots.Count; i++)
         {
-            Slot currSlot = inventorySlots[i];
+            Slot currSlot = allInventorySlots[i];
 
             if (currSlot.hovered && currSlot.HasItem())
             {
@@ -197,9 +254,9 @@ public class Inventory : MonoBehaviour
         dragIconImage.sprite = null;
         dragIconImage.color = new Color(1, 1, 1, 0);
 
-        for (int i = 0; i < inventorySlots.Count; i++)
+        for (int i = 0; i < allInventorySlots.Count; i++)
         {
-            Slot currSlot = inventorySlots[i];
+            Slot currSlot = allInventorySlots[i];
             if (currSlot.hovered)
             {
                 if (currSlot.HasItem()) //Swap the items
@@ -208,7 +265,7 @@ public class Inventory : MonoBehaviour
 
                     currSlot.SetItem(currentDraggedItem);
 
-                    inventorySlots[currentDragSlotIndex].SetItem(itemToSwap);
+                    allInventorySlots[currentDragSlotIndex].SetItem(itemToSwap);
 
                     ResetDragVariables();
                     return; 
@@ -222,21 +279,21 @@ public class Inventory : MonoBehaviour
             }
         }
         // ITEM WAS DROPPED
-        inventorySlots[currentDragSlotIndex].SetItem(currentDraggedItem);
+        allInventorySlots[currentDragSlotIndex].SetItem(currentDraggedItem);
         ResetDragVariables(); 
     }
 
     private void ResetDragVariables()
     {
         currentDraggedItem = null;
-        currentDragSlotIndex = -1; 
+        currentDragSlotIndex = -1;
     }
 
     private void DropItem()
     {
-        for (int i = 0; i < inventorySlots.Count; i++)
+        for (int i = 0; i < allInventorySlots.Count; i++)
         {
-            Slot currSlot = inventorySlots[i];
+            Slot currSlot = allInventorySlots[i];
 
             if(currSlot.hovered && currSlot.HasItem())
             {
@@ -244,6 +301,26 @@ public class Inventory : MonoBehaviour
                 currSlot.GetItem().transform.position = dropLocation.position; 
                 currSlot.SetItem(null);
                 break; 
+            }
+        }
+    }
+
+    //Hotbar
+
+    private void EnableHotBarItem(int hotbarIndex)
+    {
+        foreach (GameObject item in equaiappableItems)
+        {
+            item.SetActive(false);
+        }
+
+        Slot hotbarSlot = hotbarSlots[hotbarIndex];
+
+        if (hotbarSlot.HasItem())
+        {
+            if (hotbarSlot.GetItem().equiappableItemIndex != - 1)
+            {
+                equaiappableItems[hotbarSlot.GetItem().equiappableItemIndex].SetActive(true);
             }
         }
     }
