@@ -16,10 +16,13 @@ public class Slot : MonoBehaviour, IPointerDownHandler
 
     private Image thisSlotImage;
 
-    public TMP_Text thisSlotQuantityText; 
+    public TMP_Text thisSlotQuantityText;
+
+    public Collider objectCollider; 
 
     public void InitialiseSlot()
     {
+        objectCollider = GetComponent<Collider>();
         thisSlotImage = gameObject.GetComponent<Image>();
         thisSlotQuantityText = transform.GetChild(0).GetComponent<TMP_Text>();
         thisSlotImage.sprite = null;
@@ -85,7 +88,8 @@ public class Slot : MonoBehaviour, IPointerDownHandler
     //Triggers it once so it can start hovering
     public void OnPointerDown(PointerEventData eventData)
     {
-        hovered = true; 
+        if (objectCollider.isTrigger)
+            hovered = true; 
     }
 
 
