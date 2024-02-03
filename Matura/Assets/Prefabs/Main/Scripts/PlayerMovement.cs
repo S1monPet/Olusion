@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
     private NavMeshAgent agent;
 
     //Distance of player movement
-    private float maxRaycastDistance = 30f;
+    private float maxRaycastDistance = 20f;
     private string groundTag = "Ground";
 
     private float lookRotationSpeed = 20f;
@@ -32,30 +32,47 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        Movement();
+    }
+
+    private void OnDisable()
+    {
+        
+    }
+
+    private void Movement()
+    {
         //Checks if inventory is active
         if (!inventory.activeInHierarchy)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.touchCount > 0)
             {
-                Ray ray = camera.ScreenPointToRay(Input.mousePosition);
-                UnityEngine.Debug.DrawLine(ray.origin, ray.origin + ray.direction * maxRaycastDistance, Color.green, 3);
+                Touch touch = Input.GetTouch(0);
 
-                if (Physics.Raycast(ray, out hit, maxRaycastDistance, layerMask))
+                if (touch.phase == TouchPhase.Began)
                 {
-                    if (hit.collider.CompareTag(groundTag))
+ 
+                    Ray ray = camera.ScreenPointToRay(touch.position);
+                    UnityEngine.Debug.DrawLine(ray.origin, ray.origin + ray.direction * maxRaycastDistance, Color.green, 3);
+
+                    if (Physics.Raycast(ray, out hit, maxRaycastDistance, layerMask))
                     {
-                        //If grounds is hit and item was not pressed, set hit.point and go towards location
-                        if (agent.isStopped)
-                            agent.isStopped = false;
+                        if (hit.collider.CompareTag(groundTag))
+                        {
+                            //If grounds is hit and item was not pressed, set hit.point and go towards location
+                            if (agent.isStopped)
+                                agent.isStopped = false;
 
-                        agent.destination = hit.point;
+                            agent.destination = hit.point;
 
-                    } 
+                        }
+                    }
                 }
-            } 
+            }
             //Has path because we are resseting path in the other file if object is not clicked
             if (!agent.pathPending && agent.remainingDistance > agent.stoppingDistance)
                 SetAgentRotation();
+
         }
     }
 
@@ -68,5 +85,6 @@ public class PlayerMovement : MonoBehaviour
         if (lookRotation != Quaternion.identity && Quaternion.Angle(transform.rotation, lookRotation) > 0.1f) 
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * lookRotationSpeed);
     }
+
 }
 

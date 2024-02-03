@@ -33,7 +33,6 @@ public class Inventory : MonoBehaviour
 
     [Header("Equaippable Items")]
     public List<GameObject> equaiappableItems = new List<GameObject>();
-    public bool disableRaycast = false; 
 
 
 
@@ -67,7 +66,9 @@ public class Inventory : MonoBehaviour
 
             int currentSlotIndex = i; 
 
-            entry.callback.AddListener((data) => { EnableHotBarItem(currentSlotIndex); });
+            entry.callback.AddListener((data) => {
+
+                EnableHotBarItem(currentSlotIndex); });
 
             trigger.triggers.Add(entry);
 
@@ -85,28 +86,22 @@ public class Inventory : MonoBehaviour
         }
 
         InventoryOpened(); 
-
-        //Hotbar(); 
     }
 
-    private void Hotbar() //Will impove in future maybe?
-    {
-        if (!inventory.activeInHierarchy)
-        {
-            if (Input.touchCount > 0)
-            {
-                Touch touch = Input.GetTouch(0);
 
-                if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
-                {  
-                    DragInventoryIcon(); //Get's item into sprite
-                    dragIconImage.transform.position = touch.position;
-                }
-                else if (touch.phase == TouchPhase.Ended)
-                {
-                    dragIconImage.transform.position = new Vector3(-500, 0, 0);
-                }
-            }
+    private void ActivateHotbarColliderTrigger()
+    {
+        foreach (Slot slot in hotbarSlots)
+        {
+            slot.gameObject.GetComponent<Collider>().isTrigger = true;
+        }
+    }
+
+    private void DeactivateHotbarColliderTrigger() 
+    {
+        foreach (Slot slot in hotbarSlots)
+        {
+            slot.gameObject.GetComponent<Collider>().isTrigger = false;
         }
     }
 
@@ -123,17 +118,11 @@ public class Inventory : MonoBehaviour
 
         if (inventory.activeInHierarchy)
         {
+            ActivateHotbarColliderTrigger();
+
             if (!dragIconImage.gameObject.activeSelf)
                 dragIconImage.gameObject.SetActive(true);
 
-            /*
-             * if (Input.GetMouseButtonUp(0))
-                dragIconImage.transform.position = Vector3.zero;
-            if (Input.GetMouseButtonDown(0))
-                dragIconImage.transform.position = Input.mousePosition;        
-            */
-
-            //Drag icon position gets reset everytime button is not pressed
             if (Input.touchCount > 0)
             {
                 Touch touch = Input.GetTouch(0);
@@ -154,6 +143,8 @@ public class Inventory : MonoBehaviour
         {
             dragIconImage.gameObject.SetActive(false);
             dragIconImage.transform.position = Vector3.zero;
+
+            DeactivateHotbarColliderTrigger(); 
         }
     }
 
@@ -184,18 +175,6 @@ public class Inventory : MonoBehaviour
                         AddItemToInventory(newItem);
                     }
                 } 
-
-                /*
-                else //Get the name
-                {
-                    Item newItem = hit.collider.GetComponent<Item>();
-                    if (newItem)
-                    {
-                        //Setting text for item
-                        itemHoverText.text = newItem.name;
-                    }
-                }
-                */
             }
         }
     }
@@ -335,7 +314,6 @@ public class Inventory : MonoBehaviour
     //Hotbar
     private void EnableHotBarItem(int hotbarIndex)
     {
-
         if (!agent.isStopped)
         {
             agent.velocity = Vector3.zero;
