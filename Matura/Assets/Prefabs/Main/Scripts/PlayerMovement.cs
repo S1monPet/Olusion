@@ -14,13 +14,14 @@ public class PlayerMovement : MonoBehaviour
     public GameObject inventory;
 
     private RaycastHit hit;
-    private NavMeshAgent agent;
+    public NavMeshAgent agent;
 
     //Distance of player movement
     private float maxRaycastDistance = 20f;
     private string groundTag = "Ground";
 
     private float lookRotationSpeed = 20f;
+
 
 
     void Awake()
@@ -35,10 +36,12 @@ public class PlayerMovement : MonoBehaviour
         Movement();
     }
 
-    private void OnDisable()
+    //To make sure agent is still.
+    private void OnEnable()
     {
-        
+        //agent.ResetPath(); if you want to stop the agent
     }
+
 
     private void Movement()
     {
@@ -51,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
 
                 if (touch.phase == TouchPhase.Began)
                 {
- 
+
                     Ray ray = camera.ScreenPointToRay(touch.position);
                     UnityEngine.Debug.DrawLine(ray.origin, ray.origin + ray.direction * maxRaycastDistance, Color.green, 3);
 
@@ -62,6 +65,7 @@ public class PlayerMovement : MonoBehaviour
                             //If grounds is hit and item was not pressed, set hit.point and go towards location
                             if (agent.isStopped)
                                 agent.isStopped = false;
+
 
                             agent.destination = hit.point;
 
@@ -85,6 +89,7 @@ public class PlayerMovement : MonoBehaviour
         if (lookRotation != Quaternion.identity && Quaternion.Angle(transform.rotation, lookRotation) > 0.1f) 
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * lookRotationSpeed);
     }
+
 
 }
 

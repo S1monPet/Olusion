@@ -12,7 +12,8 @@ using UnityEngine.EventSystems;
 public class Inventory : MonoBehaviour
 {
     [Header("IU")]
-    public GameObject inventory; 
+    public GameObject inventory;
+    public PlayerMovement playerMovementScript; 
     private List<Slot> allInventorySlots = new List<Slot>();
     public List<Slot> inventorySlots = new List<Slot>();
     public List<Slot> hotbarSlots = new List<Slot>();
@@ -33,7 +34,6 @@ public class Inventory : MonoBehaviour
 
     [Header("Equaippable Items")]
     public List<GameObject> equaiappableItems = new List<GameObject>();
-
 
 
 
@@ -61,13 +61,15 @@ public class Inventory : MonoBehaviour
 
             EventTrigger.Entry entry = new EventTrigger.Entry
             {
-                eventID = EventTriggerType.PointerClick // The type of event to listen for
+                eventID = EventTriggerType.PointerDown // The type of event to listen for
             };
 
             int currentSlotIndex = i; 
 
             entry.callback.AddListener((data) => {
 
+                //To stop moving and disable script
+                playerMovementScript.enabled = false;
                 EnableHotBarItem(currentSlotIndex); });
 
             trigger.triggers.Add(entry);
@@ -314,11 +316,6 @@ public class Inventory : MonoBehaviour
     //Hotbar
     private void EnableHotBarItem(int hotbarIndex)
     {
-        if (!agent.isStopped)
-        {
-            agent.velocity = Vector3.zero;
-            agent.isStopped = true;
-        }
 
         foreach (GameObject item in equaiappableItems)
         {
@@ -334,5 +331,8 @@ public class Inventory : MonoBehaviour
                 equaiappableItems[hotbarSlot.GetItem().equiappableItemIndex].SetActive(true);
             }
         }
+        //Re-enable the script
+        playerMovementScript.enabled = true; 
+
     }
 }
