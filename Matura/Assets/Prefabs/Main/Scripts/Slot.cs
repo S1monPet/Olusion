@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using TMPro;
 using Unity.VisualScripting;
 
-public class Slot : MonoBehaviour, IPointerDownHandler
+public class Slot : MonoBehaviour//, IPointerDownHandler
 {
     public bool hovered;
     private Item heldItem; 
