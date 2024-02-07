@@ -9,6 +9,8 @@ using Unity.VisualScripting;
 public class Slot : MonoBehaviour//, IPointerDownHandler
 {
     public bool hovered;
+    public bool _canDropThisItem; 
+
     private Item heldItem; 
 
     private Color opaque = new Color(1, 1 , 1);
@@ -19,6 +21,7 @@ public class Slot : MonoBehaviour//, IPointerDownHandler
     public TMP_Text thisSlotQuantityText;
 
     public Collider objectCollider; 
+
 
     public void InitialiseSlot()
     {
@@ -71,27 +74,75 @@ public class Slot : MonoBehaviour//, IPointerDownHandler
             thisSlotQuantityText.text = "";
         }
     }
-
-#if UNITY_STANDALONE
+    //For inventory
+    public void DropItem(Item item)
+    {
+        if (item.currentQuantity > 0 && item)
+        {
+            item.currentQuantity -= 1;
+            UpdateInventoryAmount();
+        } 
+    }
+    //For inventory
+    public void CheckIfItemIsLessThanZero(Item item, List<GameObject> equaiappableItems)
+    {
+        if (item.currentQuantity < 1)
+        {
+            SetItem(null);
+            equaiappableItems[item.equiappableItemIndex].SetActive(false);
+        }
+    }
 
     public void OnTriggerEnter(Collider other)
     {
         hovered = true;
-        
+
     }
 
     public void OnTriggerExit(Collider other)
     {
-        hovered = false; 
+        hovered = false;
     }
 
-    //Triggers it once so it can start hovering
-    public void OnPointerDown(PointerEventData eventData)
+    public void SetHoveredState()
     {
         if (objectCollider.isTrigger)
-            hovered = true; 
+            hovered = true;
+
     }
 
+    public bool SetItemToBeDropped
+    {
+        get { return _canDropThisItem; }
+        set
+        {
+            // Additional logic when setting the value
+            _canDropThisItem = value;
+        }
+    }
 
-#endif
+    /*
+    #if UNITY_STANDALONE
+
+        public void OnTriggerEnter(Collider other)
+        {
+            hovered = true;
+
+        }
+
+        public void OnTriggerExit(Collider other)
+        {
+            hovered = false; 
+        }
+
+        //Triggers it once so it can start hovering
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            if (objectCollider.isTrigger)
+                hovered = true; 
+        }
+
+
+    #endif
+    */
 }

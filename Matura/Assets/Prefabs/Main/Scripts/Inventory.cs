@@ -24,13 +24,16 @@ public class Inventory : MonoBehaviour
     //Match the 
     private float raycastDistance = 15f; 
     public LayerMask itemLayer;
-    private Transform dropLocation; //Where we are dropping our element
+    public Transform dropLocation; //Where we are dropping our element
     public NavMeshAgent agent;
 
     [Header("Drag and drop")]
     public Image dragIconImage;
     private Item currentDraggedItem;
     private int currentDragSlotIndex = -1;
+
+    private float lastTapTime = 0f;
+    private float normalTapSpeed = 0.3f; 
 
     [Header("Equaippable Items")]
     public List<GameObject> equaiappableItems = new List<GameObject>();
@@ -111,7 +114,9 @@ public class Inventory : MonoBehaviour
     {
         if (inventory.activeInHierarchy && Input.GetMouseButtonDown(0))
         {
+            //To drag icon
             DragInventoryIcon();
+
         }
         else if (currentDragSlotIndex != -1 && Input.GetMouseButtonUp(0) || currentDragSlotIndex != -1 && !inventory.activeInHierarchy)
         {
@@ -121,6 +126,8 @@ public class Inventory : MonoBehaviour
         if (inventory.activeInHierarchy)
         {
             ActivateHotbarColliderTrigger();
+
+            DoubleTapDrop(); 
 
             if (!dragIconImage.gameObject.activeSelf)
                 dragIconImage.gameObject.SetActive(true);
@@ -162,6 +169,7 @@ public class Inventory : MonoBehaviour
         {
             if (hit.collider != null)
             {
+                Debug.Log(hit.collider.ToString());
                 if (hasClicked) //Pick up
                 {
                     Item newItem = hit.collider.GetComponent<Item>();
@@ -190,14 +198,13 @@ public class Inventory : MonoBehaviour
         for (int i = 0; i < allInventorySlots.Count; i++)
         {
             Item heldItem = allInventorySlots[i].GetItem();
-
             if (heldItem != null && itemToAdd.name == heldItem.name)
             {
                 int freeSpaceInSlots = heldItem.maxQuantity - heldItem.currentQuantity;
                 if (freeSpaceInSlots >= leftoverQuantity)
                 {
                     heldItem.currentQuantity += leftoverQuantity;
-                    
+                    Debug.Log("hER");
                     Destroy(itemToAdd.gameObject);
                     allInventorySlots[i].UpdateInventoryAmount(); 
                     return; 
@@ -210,6 +217,7 @@ public class Inventory : MonoBehaviour
             }
             else if (heldItem == null)
             {
+                Debug.Log("no way");
                 if (!openSlot) 
                     openSlot = allInventorySlots[i];
             }
@@ -297,18 +305,84 @@ public class Inventory : MonoBehaviour
         currentDragSlotIndex = -1;
     }
 
+    private void DoubleTapDrop()
+    {
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0); 
+
+            if (touch.phase == TouchPhase.Began)
+            {
+                if ((Time.time - lastTapTime) <= normalTapSpeed)
+                {
+                    DropItem();
+                } else
+                {
+                    RemoveAbilityToDropItem(); 
+                }
+                lastTapTime = Time.time;
+            }
+        }
+    }
+
+
+    private void RemoveAbilityToDropItem()
+    {
+        for (int i = 0; i < allInventorySlots.Count; i++)
+        {
+            Slot currSlot = allInventorySlots[i];
+
+            if (currSlot._canDropThisItem && currSlot.HasItem())
+            {
+                Debug.Log("Removing ability.");
+
+                //Setting it back to false since Click event doesn't do that.
+                currSlot._canDropThisItem = false;
+                break;
+            }
+        }
+    }
+
     private void DropItem()
     {
         for (int i = 0; i < allInventorySlots.Count; i++)
         {
             Slot currSlot = allInventorySlots[i];
 
-            if(currSlot.hovered && currSlot.HasItem())
+            if(currSlot._canDropThisItem && currentDraggedItem != null)
             {
-                currSlot.GetItem().gameObject.SetActive(true);
-                currSlot.GetItem().transform.position = dropLocation.position; 
-                currSlot.SetItem(null);
-                break; 
+                Debug.Log("Dropping item");
+
+                //Get's item into currSlot && resets currentDragedItem
+                currSlot.SetItem(currentDraggedItem);
+                Item currentItem = currSlot.GetItem(); 
+                ResetDragVariables();
+
+
+                //For setting item's counter
+                currSlot.DropItem(currentItem); 
+
+
+                if (!currentItem.isActiveAndEnabled) 
+                {
+                    currentItem.gameObject.SetActive(true);
+                    currentItem.transform.position = dropLocation.position;
+                } else
+                {
+                    GameObject currentGameObject = currentItem.gameObject;
+                    GameObject newItem = Instantiate(currentGameObject, dropLocation.position, dropLocation.rotation);
+                }
+            
+
+
+                //For checking if item is less than zero
+                currSlot.CheckIfItemIsLessThanZero(currentItem, equaiappableItems);
+
+
+                //Setting it back to false since Click event doesn't do that.
+                currSlot._canDropThisItem = false;
+                break;
+                
             }
         }
     }

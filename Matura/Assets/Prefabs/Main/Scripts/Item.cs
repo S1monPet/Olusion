@@ -10,6 +10,7 @@ public class Item : MonoBehaviour
     public int currentQuantity = 1;
     public int maxQuantity = 16;
 
+
     [Header("Hotbar")]
     public int equiappableItemIndex = -1; 
 }
