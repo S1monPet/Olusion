@@ -334,8 +334,6 @@ public class Inventory : MonoBehaviour
 
             if (currSlot._canDropThisItem && currSlot.HasItem())
             {
-                Debug.Log("Removing ability.");
-
                 //Setting it back to false since Click event doesn't do that.
                 currSlot._canDropThisItem = false;
                 break;
@@ -351,8 +349,6 @@ public class Inventory : MonoBehaviour
 
             if(currSlot._canDropThisItem && currentDraggedItem != null)
             {
-                Debug.Log("Dropping item");
-
                 //Get's item into currSlot && resets currentDragedItem
                 currSlot.SetItem(currentDraggedItem);
                 Item currentItem = currSlot.GetItem(); 
