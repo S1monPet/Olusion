@@ -50,7 +50,7 @@ public abstract class EnemyBase : MonoBehaviour
 
     //public abstract void EnemyAttack();
 
-    protected virtual bool CanAttack(float percent)
+    protected virtual bool CanAttack()
     {
         return !_isOnCooldown; 
     }
