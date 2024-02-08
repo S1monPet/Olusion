@@ -31,7 +31,8 @@ public class Attack : MonoBehaviour
         {
             if (hit.collider.CompareTag("Enemy"))
             {
-                //enemy = hit.transform.GetComponent<Interactable>(); 
+                //enemy.GetEnemy(EnumTypeOfEnemy) --hp
+                //agent.isStopped = true;
                 if (hitEffect != null)
                     Instantiate(hitEffect, hit.point += new Vector3(0, 0.1f, 0), hitEffect.transform.rotation);
             } 

@@ -27,12 +27,31 @@ public abstract class EnemyBase : MonoBehaviour
     public abstract Enemies TypeOfEnemy();
     protected virtual void EnemyAttack(NavMeshAgent agent)
     {
-        if (Vector3.Distance(player.transform.position, agent.transform.position) <= EnemyStats.EnemyRange)
+        if (Vector3.Distance(player.transform.position, agent.transform.position) <= EnemyStats.EnemyPatrolingRange)
         {
             agent.SetDestination(player.transform.position);
             agent.speed = EnemyStats.EnemyAttackSpeed; 
         }
 
+        //Checking if enemy is close enough to hit player
+        if (Vector3.Distance(player.transform.position, agent.transform.position) <= EnemyStats.EnemyAttackingRange)
+        {
+            EnemyHit(); 
+        }
+
+    }
+
+    protected virtual void EnemyHit()
+    {
+        if (CanAttack()) 
+        {
+            //Implement attack logic
+            //player.SetHP();
+        } 
+        else
+        {
+            StartAttackCoolDown(EnemyStats.EnemyAttackCooldown);
+        }
     }
 
     //Setting base for patrolling
@@ -64,7 +83,7 @@ public abstract class EnemyBase : MonoBehaviour
     protected IEnumerator AttackCooldown(float cooldownDuration)
     {
         _isOnCooldown = true;
-        yield return new WaitForSeconds(cooldownDuration);
+        yield return EnemyStats.CoolDownWait; 
         _isOnCooldown = false;
     }
 

@@ -13,9 +13,11 @@ public class EnemySO : ScriptableObject
     [field: SerializeField] public float EnemyHP { get; private set; }
     [field: SerializeField] public float EnemyAttackDamage;
     [SerializeField] private float EnemyAttackCoolDown;
+    [field: SerializeField] public float EnemyAttackCooldown;
     [field: SerializeField] public float EnemyAttackSpeed;
     [field: SerializeField] public float EnemyMovingSpeed;
-    [field: SerializeField] public float EnemyRange;
+    [field: SerializeField] public float EnemyPatrolingRange;
+    [field: SerializeField] public float EnemyAttackingRange;
     [field: SerializeField] public float EnemyArmor;
 
     public WaitForSeconds CoolDownWait { get; private set; } 
