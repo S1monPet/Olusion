@@ -12,7 +12,8 @@ public class EnemySO : ScriptableObject
     [field: Header("Enemy constants")]
     [field: SerializeField] public float EnemyHP { get; private set; }
     [field: SerializeField] public float EnemyAttackDamage;
-    [SerializeField] private float EnemyAttackSpeed;
+    [SerializeField] private float EnemyAttackCoolDown;
+    [field: SerializeField] public float EnemyAttackSpeed;
     [field: SerializeField] public float EnemyMovingSpeed;
     [field: SerializeField] public float EnemyRange;
     [field: SerializeField] public float EnemyArmor;

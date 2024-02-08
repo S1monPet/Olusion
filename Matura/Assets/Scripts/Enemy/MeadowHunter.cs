@@ -8,10 +8,15 @@ public class MeadowHunter : EnemyBase
     [SerializeField] public NavMeshAgent agent;
 
     public Transform[] patrolPoints;
-    private int targetPoint = 0;
-    public override void EnemyAttack()
+
+    private void Awake()
     {
-        throw new System.NotImplementedException();
+        agent.speed = EnemyStats.EnemyMovingSpeed; 
+    }
+
+    public override Enemies TypeOfEnemy()
+    {
+        return Enemies.MeadowHunter; 
     }
 
     protected override void StartAttackCoolDown(float cooldownDuration)
@@ -21,8 +26,6 @@ public class MeadowHunter : EnemyBase
 
     private void Update()
     {
-        base.Patrol(patrolPoints);
-        
-        //agent.SetDestination(player.transform.position);
+        base.Patrol(patrolPoints, agent);
     }
 }
