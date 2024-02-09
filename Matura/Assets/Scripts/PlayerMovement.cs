@@ -9,7 +9,7 @@ using UnityEngine.AI;
 public class PlayerMovement : MonoBehaviour
 {
 
-    public Camera camera;
+    //public Camera camera;
     public LayerMask layerMask;
     public GameObject inventory;
 
@@ -26,7 +26,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Awake()
     {
-        agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
     }
 
@@ -55,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
                 if (touch.phase == TouchPhase.Began)
                 {
 
-                    Ray ray = camera.ScreenPointToRay(touch.position);
+                    Ray ray = Camera.main.ScreenPointToRay(touch.position);
                     UnityEngine.Debug.DrawLine(ray.origin, ray.origin + ray.direction * maxRaycastDistance, Color.green, 3);
 
                     if (Physics.Raycast(ray, out hit, maxRaycastDistance, layerMask))

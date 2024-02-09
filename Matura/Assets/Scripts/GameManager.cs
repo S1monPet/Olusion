@@ -19,4 +19,10 @@ public class GameManager : MonoBehaviour
     {
         InvokeRepeating("GetFPS", 1, 1);
     }
+
+    private void Update()
+    {
+        //Will be for keeping trees, when they despawn to respawn, enemies over time, etc.
+
+    }
 }

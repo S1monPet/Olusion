@@ -9,6 +9,8 @@ public class Item : MonoBehaviour
     public Sprite icon;
     public int currentQuantity = 1;
     public int maxQuantity = 16;
+    public int Damage;
+    public bool CanBeHeld; 
 
 
     [Header("Hotbar")]

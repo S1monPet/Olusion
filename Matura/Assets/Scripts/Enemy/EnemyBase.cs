@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -15,10 +16,11 @@ public enum Mobs { Crab }
 public abstract class EnemyBase : MonoBehaviour
 {
     [SerializeField] private EnemySO enemyStats;
-    protected EnemySO EnemyStats => enemyStats;
+    public EnemySO EnemyStats => enemyStats;
 
-    [SerializeField] private GameObject player; 
+    [SerializeField] private GameObject player;
     public GameObject Player => player;
+    public PlayerHealth playerHealthScript; //Maybe some class will need it so it's protected
 
     //For patrolling
     private int targetPoint = 0; 
@@ -32,7 +34,6 @@ public abstract class EnemyBase : MonoBehaviour
             agent.SetDestination(player.transform.position);
             agent.speed = EnemyStats.EnemyAttackSpeed; 
         }
-
         //Checking if enemy is close enough to hit player
         if (Vector3.Distance(player.transform.position, agent.transform.position) <= EnemyStats.EnemyAttackingRange)
         {
@@ -45,13 +46,25 @@ public abstract class EnemyBase : MonoBehaviour
     {
         if (CanAttack()) 
         {
-            //Implement attack logic
-            //player.SetHP();
+            if (playerHealthScript != null)
+            {
+                playerHealthScript.TakeDamage(EnemyStats.EnemyAttackDamage);
+                StartAttackCoolDown(EnemyStats.EnemyAttackCooldown);
+            }
         } 
-        else
-        {
-            StartAttackCoolDown(EnemyStats.EnemyAttackCooldown);
-        }
+    }
+
+    //For taking damage
+    public virtual void EnemyTakeDamage(int damage)
+    {
+        enemyStats.EnemyHP -= damage; 
+        Die();
+    }
+
+    protected virtual void Die()
+    {
+        if (enemyStats.EnemyHP <= 0) 
+            Destroy(this.gameObject);
     }
 
     //Setting base for patrolling

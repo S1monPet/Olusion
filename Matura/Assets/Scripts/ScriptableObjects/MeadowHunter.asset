@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <EnemyHP>k__BackingField: 100
   EnemyAttackDamage: 5
-  EnemyAttackCoolDown: 2
+  EnemyAttackCoolDown: 5
+  EnemyAttackCooldown: 5
   EnemyAttackSpeed: 3
   EnemyMovingSpeed: 1
-  EnemyRange: 3
+  EnemyPatrolingRange: 3
+  EnemyAttackingRange: 1
   EnemyArmor: 10

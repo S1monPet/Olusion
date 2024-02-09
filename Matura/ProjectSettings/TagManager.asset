@@ -12,6 +12,7 @@ TagManager:
   - Inventory
   - Hotbar
   - Enemy
+  - MeadowHunter
   layers:
   - Default
   - TransparentFX

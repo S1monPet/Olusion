@@ -19,7 +19,7 @@ public class Inventory : MonoBehaviour
     public List<Slot> hotbarSlots = new List<Slot>();
     public Image crosshair;
     public TMP_Text itemHoverText;
-
+    
     [Header("Raycast")]
     //Match the 
     private float raycastDistance = 15f; 

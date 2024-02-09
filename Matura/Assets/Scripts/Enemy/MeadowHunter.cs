@@ -11,12 +11,20 @@ public class MeadowHunter : EnemyBase
 
     private void Awake()
     {
-        agent.speed = EnemyStats.EnemyMovingSpeed; 
+        agent.speed = EnemyStats.EnemyMovingSpeed;
+        //For currently setting the HP back to 100
+        EnemyStats.EnemyHP = 100; 
     }
 
     public override Enemies TypeOfEnemy()
     {
         return Enemies.MeadowHunter; 
+    }
+
+    public override void EnemyTakeDamage(int damage)
+    {
+        base.EnemyTakeDamage(damage);
+
     }
 
     protected override void StartAttackCoolDown(float cooldownDuration)
