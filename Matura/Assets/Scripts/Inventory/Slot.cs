@@ -90,7 +90,10 @@ public class Slot : MonoBehaviour//, IPointerDownHandler
         {
             SetItem(null);
             equaiappableItems[item.equiappableItemIndex].SetActive(false);
+
+            item.currentQuantity = 1;
         }
+
     }
 
     public void OnTriggerEnter(Collider other)
