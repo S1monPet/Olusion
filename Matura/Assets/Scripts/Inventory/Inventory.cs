@@ -33,7 +33,9 @@ public class Inventory : MonoBehaviour
     private int currentDragSlotIndex = -1;
 
     private float lastTapTime = 0f;
-    private float normalTapSpeed = 0.3f; 
+    private float normalTapSpeed = 0.3f;
+
+    private Item previousHeldItem; 
 
     [Header("Equaippable Items")]
     public List<GameObject> equaiappableItems = new List<GameObject>();
@@ -204,7 +206,6 @@ public class Inventory : MonoBehaviour
                 if (freeSpaceInSlots >= leftoverQuantity)
                 {
                     heldItem.currentQuantity += leftoverQuantity;
-                    Debug.Log("hER");
                     Destroy(itemToAdd.gameObject);
                     allInventorySlots[i].UpdateInventoryAmount(); 
                     return; 
@@ -217,7 +218,6 @@ public class Inventory : MonoBehaviour
             }
             else if (heldItem == null)
             {
-                Debug.Log("no way");
                 if (!openSlot) 
                     openSlot = allInventorySlots[i];
             }
@@ -230,10 +230,13 @@ public class Inventory : MonoBehaviour
             openSlot.SetItem(itemToAdd);
             itemToAdd.currentQuantity = leftoverQuantity;
             itemToAdd.gameObject.SetActive(false);
-        } else
+        } 
+        /*
+        else
         {
             itemToAdd.currentQuantity = leftoverQuantity; 
         }
+        */
     }
 
     private void ToggleInventory(bool enable)
@@ -383,6 +386,21 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    //Set new or the same item's HeldItem variable
+    private void SetCurrentHeldItem(Item item)
+    {
+        if (previousHeldItem != null && item != previousHeldItem)
+        {
+            previousHeldItem.IsHeld = false; 
+        } 
+        
+        if (previousHeldItem != item)
+        {
+            previousHeldItem = item; 
+            item.IsHeld = true;
+        }
+    }
+
     //Hotbar
     private void EnableHotBarItem(int hotbarIndex)
     {
@@ -399,6 +417,7 @@ public class Inventory : MonoBehaviour
             if (hotbarSlot.GetItem().equiappableItemIndex != - 1)
             {
                 equaiappableItems[hotbarSlot.GetItem().equiappableItemIndex].SetActive(true);
+                SetCurrentHeldItem(hotbarSlot.GetItem()); //Set new or the same item's HeldItem variable
             }
         }
         //Re-enable the script

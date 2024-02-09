@@ -10,7 +10,7 @@ public class Item : MonoBehaviour
     public int currentQuantity = 1;
     public int maxQuantity = 16;
     public int Damage;
-    public bool CanBeHeld; 
+    public bool IsHeld = false; 
 
 
     [Header("Hotbar")]

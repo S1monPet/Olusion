@@ -1401,6 +1401,7 @@ MonoBehaviour:
   maxQuantity: 16
   Damage: 0
   CanBeHeld: 0
+  IsHeld: 0
   equiappableItemIndex: 4
 --- !u!33 &97286723
 MeshFilter:
@@ -2018,6 +2019,7 @@ MonoBehaviour:
   maxQuantity: 16
   Damage: 0
   CanBeHeld: 0
+  IsHeld: 0
   equiappableItemIndex: 2
 --- !u!33 &155941243
 MeshFilter:
@@ -2363,6 +2365,7 @@ MonoBehaviour:
   maxQuantity: 16
   Damage: 0
   CanBeHeld: 0
+  IsHeld: 0
   equiappableItemIndex: 5
 --- !u!65 &178146447
 BoxCollider:
@@ -2622,6 +2625,7 @@ MonoBehaviour:
   maxQuantity: 16
   Damage: 0
   CanBeHeld: 0
+  IsHeld: 0
   equiappableItemIndex: 4
 --- !u!208 &179373281
 NavMeshObstacle:
@@ -3344,6 +3348,7 @@ MonoBehaviour:
   maxQuantity: 16
   Damage: 0
   CanBeHeld: 0
+  IsHeld: 0
   equiappableItemIndex: 1
 --- !u!33 &228429485
 MeshFilter:
@@ -4378,6 +4383,7 @@ MonoBehaviour:
   maxQuantity: 16
   Damage: 0
   CanBeHeld: 0
+  IsHeld: 0
   equiappableItemIndex: 3
 --- !u!33 &289486189
 MeshFilter:
@@ -4970,6 +4976,7 @@ MonoBehaviour:
   maxQuantity: 16
   Damage: 0
   CanBeHeld: 0
+  IsHeld: 0
   equiappableItemIndex: 1
 --- !u!33 &334034712
 MeshFilter:
@@ -5629,6 +5636,7 @@ MonoBehaviour:
   maxQuantity: 16
   Damage: 0
   CanBeHeld: 0
+  IsHeld: 0
   equiappableItemIndex: 2
 --- !u!33 &382297337
 MeshFilter:
@@ -6774,6 +6782,7 @@ MonoBehaviour:
   maxQuantity: 16
   Damage: 0
   CanBeHeld: 0
+  IsHeld: 0
   equiappableItemIndex: 2
 --- !u!1 &471569812
 GameObject:
@@ -14501,6 +14510,7 @@ MonoBehaviour:
   maxQuantity: 16
   Damage: 0
   CanBeHeld: 0
+  IsHeld: 0
   equiappableItemIndex: 0
 --- !u!1 &636270053
 GameObject:
@@ -14985,6 +14995,7 @@ MonoBehaviour:
   maxQuantity: 16
   Damage: 0
   CanBeHeld: 0
+  IsHeld: 0
   equiappableItemIndex: 6
 --- !u!65 &670259655
 BoxCollider:
@@ -16288,6 +16299,7 @@ MonoBehaviour:
   maxQuantity: 16
   Damage: 0
   CanBeHeld: 0
+  IsHeld: 0
   equiappableItemIndex: 3
 --- !u!33 &734600462
 MeshFilter:
@@ -16512,6 +16524,7 @@ MonoBehaviour:
   maxQuantity: 16
   Damage: 0
   CanBeHeld: 0
+  IsHeld: 0
   equiappableItemIndex: 4
 --- !u!208 &749456958
 NavMeshObstacle:
@@ -18030,6 +18043,7 @@ MonoBehaviour:
   maxQuantity: 16
   Damage: 0
   CanBeHeld: 0
+  IsHeld: 0
   equiappableItemIndex: 5
 --- !u!65 &862378189
 BoxCollider:
@@ -18444,6 +18458,7 @@ MonoBehaviour:
   maxQuantity: 16
   Damage: 0
   CanBeHeld: 0
+  IsHeld: 0
   equiappableItemIndex: 6
 --- !u!65 &872908801
 BoxCollider:
@@ -19298,6 +19313,7 @@ MonoBehaviour:
   maxQuantity: 16
   Damage: 0
   CanBeHeld: 0
+  IsHeld: 0
   equiappableItemIndex: 4
 --- !u!208 &915597858
 NavMeshObstacle:
@@ -20918,6 +20934,7 @@ MonoBehaviour:
   maxQuantity: 16
   Damage: 0
   CanBeHeld: 0
+  IsHeld: 0
   equiappableItemIndex: 5
 --- !u!65 &1040375848
 BoxCollider:
@@ -21360,6 +21377,7 @@ MonoBehaviour:
   maxQuantity: 16
   Damage: 0
   CanBeHeld: 0
+  IsHeld: 0
   equiappableItemIndex: 4
 --- !u!33 &1118099084
 MeshFilter:
@@ -21773,6 +21791,7 @@ MonoBehaviour:
   maxQuantity: 16
   Damage: 0
   CanBeHeld: 0
+  IsHeld: 0
   equiappableItemIndex: 5
 --- !u!65 &1137237393
 BoxCollider:
@@ -29569,6 +29588,7 @@ MonoBehaviour:
   maxQuantity: 16
   Damage: 0
   CanBeHeld: 0
+  IsHeld: 0
   equiappableItemIndex: 7
 --- !u!65 &1264857150
 BoxCollider:
@@ -29693,6 +29713,7 @@ MonoBehaviour:
   maxQuantity: 16
   Damage: 0
   CanBeHeld: 0
+  IsHeld: 0
   equiappableItemIndex: 4
 --- !u!65 &1268132044
 BoxCollider:
@@ -29880,6 +29901,7 @@ MonoBehaviour:
   maxQuantity: 16
   Damage: 0
   CanBeHeld: 0
+  IsHeld: 0
   equiappableItemIndex: 1
 --- !u!33 &1283341329
 MeshFilter:
@@ -32832,6 +32854,7 @@ MonoBehaviour:
   maxQuantity: 16
   Damage: 0
   CanBeHeld: 0
+  IsHeld: 0
   equiappableItemIndex: 0
 --- !u!33 &1480979245
 MeshFilter:
@@ -33221,9 +33244,10 @@ MonoBehaviour:
   description: Gather resources or use it as a weapon
   icon: {fileID: 21300000, guid: f4e52e0a295f5924997971836b021959, type: 3}
   currentQuantity: 1
-  maxQuantity: 16
-  Damage: 0
+  maxQuantity: 1
+  Damage: 20
   CanBeHeld: 0
+  IsHeld: 0
   equiappableItemIndex: 6
 --- !u!65 &1512470849
 BoxCollider:
@@ -35552,6 +35576,7 @@ MonoBehaviour:
   maxQuantity: 16
   Damage: 0
   CanBeHeld: 0
+  IsHeld: 0
   equiappableItemIndex: 3
 --- !u!33 &1647819670
 MeshFilter:
@@ -41267,6 +41292,7 @@ MonoBehaviour:
   maxQuantity: 16
   Damage: 0
   CanBeHeld: 0
+  IsHeld: 0
   equiappableItemIndex: 2
 --- !u!33 &1737656213
 MeshFilter:
@@ -41410,6 +41436,7 @@ MonoBehaviour:
   maxQuantity: 16
   Damage: 0
   CanBeHeld: 0
+  IsHeld: 0
   equiappableItemIndex: 3
 --- !u!1 &1749297710
 GameObject:
@@ -44526,8 +44553,9 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: f4e52e0a295f5924997971836b021959, type: 3}
   currentQuantity: 1
   maxQuantity: 16
-  Damage: 0
+  Damage: 30
   CanBeHeld: 0
+  IsHeld: 0
   equiappableItemIndex: 6
 --- !u!65 &1952347935
 BoxCollider:
@@ -44789,6 +44817,7 @@ MonoBehaviour:
   maxQuantity: 16
   Damage: 0
   CanBeHeld: 0
+  IsHeld: 0
   equiappableItemIndex: 1
 --- !u!1 &1992573091
 GameObject:
@@ -46034,6 +46063,7 @@ MonoBehaviour:
   maxQuantity: 16
   Damage: 0
   CanBeHeld: 0
+  IsHeld: 0
   equiappableItemIndex: 7
 --- !u!65 &2068109178
 BoxCollider:

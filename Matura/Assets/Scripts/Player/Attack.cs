@@ -13,7 +13,8 @@ public class Attack : MonoBehaviour
     [SerializeField] int attackDamage = 100;
     [SerializeField] ParticleSystem hitEffect;
 
-    private EnemyBase enemyBase; 
+    private EnemyBase enemyBase;
+    private List<Slot> HotbarSlots = new List<Slot>();
 
     public bool playerBusy = false;
     public LayerMask enemyMask; 
@@ -23,9 +24,14 @@ public class Attack : MonoBehaviour
     private RaycastHit hit;
     private float raycastDistance = 13f;
 
-    private int tempDamage = 10;
+    private int handDamage = 10;
     private bool wasTouchedAlready = false;
 
+
+    private void Awake()
+    {
+        HotbarSlots = GetComponent<Inventory>().hotbarSlots;
+    }
 
     private void Update()
     {
@@ -50,6 +56,20 @@ public class Attack : MonoBehaviour
         }
     }
 
+    private int HoldingItemDamage()
+    {
+        for (int i = 0; i < HotbarSlots.Count; i++)
+        {
+            //Get current Item and check if IsHeld
+            if (HotbarSlots[i].GetItem() != null && HotbarSlots[i].GetItem().IsHeld)
+            {
+                //Return current item damage
+                return HotbarSlots[i].GetItem().Damage;
+            }
+        }
+        return handDamage; 
+    }
+
     private void CheckIfTouchedWasEnemy(Touch touch)
     {
         if (Physics.Raycast(Camera.main.ScreenPointToRay(touch.position), out hit, raycastDistance, enemyMask))
@@ -58,7 +78,7 @@ public class Attack : MonoBehaviour
             enemyBase = hit.collider.gameObject.GetComponent<EnemyBase>();
             if (enemyBase != null)
             {
-                enemyBase.EnemyTakeDamage(tempDamage);
+                enemyBase.EnemyTakeDamage(HoldingItemDamage());
 
                 if (hitEffect != null)
                     hitEffect.Emit(100); //Only once
