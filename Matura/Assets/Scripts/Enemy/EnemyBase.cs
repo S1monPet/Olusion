@@ -21,6 +21,9 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField] private GameObject player;
     public GameObject Player => player;
     public PlayerHealth playerHealthScript; //Maybe some class will need it so it's protected
+    public HealthBar healthBar;
+    public EnemyHealthBar enemyHealthBar; 
+
 
     //For patrolling
     private int targetPoint = 0; 
@@ -48,16 +51,25 @@ public abstract class EnemyBase : MonoBehaviour
         {
             if (playerHealthScript != null)
             {
-                playerHealthScript.TakeDamage(EnemyStats.EnemyAttackDamage);
+                playerHealthScript.TakeDamage(EnemyStats.EnemyAttackDamage); //Change HP on player
+                ChangeSliderHealth(); //Change HP in HealthBar
+
                 StartAttackCoolDown(EnemyStats.EnemyAttackCooldown);
             }
         } 
     }
 
+    //Change Player Health Bar
+    protected virtual void ChangeSliderHealth()
+    {
+        healthBar.SetPlayerHealthSlider(EnemyStats.EnemyAttackDamage);
+    }
+
     //For taking damage
     public virtual void EnemyTakeDamage(int damage)
     {
-        enemyStats.EnemyHP -= damage; 
+        enemyStats.EnemyHP -= damage;
+        enemyHealthBar.SetEnemyHealthSlider(damage);
         Die();
     }
 
