@@ -15,6 +15,10 @@ public class MeadowHunter : EnemyBase
         //For currently setting the HP back to 100
         EnemyStats.EnemyHP = 100;
         EnemyStats.EnemyArmor = 10;
+
+        //For changing slider's to right value
+        base.ChangeEnemySliderHealth(EnemyStats.EnemyHP);
+        base.ChangeEnemySliderHealth(EnemyStats.EnemyArmor);
     }
 
     public override Enemies TypeOfEnemy()
@@ -25,7 +29,6 @@ public class MeadowHunter : EnemyBase
     public override void EnemyTakeDamage(int damage)
     {
         base.EnemyTakeDamage(damage);
-
     }
 
     protected override void StartAttackCoolDown(float cooldownDuration)
