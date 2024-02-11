@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -21,8 +22,11 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField] private GameObject player;
     public GameObject Player => player;
     public PlayerHealth playerHealthScript; //Maybe some class will need it so it's protected
+
+    [Header("Bars")]
     public HealthBar healthBar;
     public EnemyHealthBar enemyHealthBar; 
+    public EnemyArmorBar enemyArmorBar;
 
 
     //For patrolling
@@ -52,7 +56,7 @@ public abstract class EnemyBase : MonoBehaviour
             if (playerHealthScript != null)
             {
                 playerHealthScript.TakeDamage(EnemyStats.EnemyAttackDamage); //Change HP on player
-                ChangeSliderHealth(); //Change HP in HealthBar
+                ChangePlayerSliderHealth(); //Change HP in HealthBar
 
                 StartAttackCoolDown(EnemyStats.EnemyAttackCooldown);
             }
@@ -60,7 +64,7 @@ public abstract class EnemyBase : MonoBehaviour
     }
 
     //Change Player Health Bar
-    protected virtual void ChangeSliderHealth()
+    protected virtual void ChangePlayerSliderHealth()
     {
         healthBar.SetPlayerHealthSlider(EnemyStats.EnemyAttackDamage);
     }
@@ -68,9 +72,47 @@ public abstract class EnemyBase : MonoBehaviour
     //For taking damage
     public virtual void EnemyTakeDamage(int damage)
     {
+        TakeHealthDamage(damage);
+        TakeArmorDamage(damage);
+    }
+
+    protected virtual void TakeHealthDamage(int damage)
+    {
+        //If there is no more enemy armor we take health damage
+        if (enemyStats.EnemyArmor > 0) return; 
+
         enemyStats.EnemyHP -= damage;
-        enemyHealthBar.SetEnemyHealthSlider(damage);
+        ChangeEnemySliderHealth(enemyStats.EnemyHP); 
+
         Die();
+    }
+
+    //Changing enemy slider health
+    protected virtual void ChangeEnemySliderHealth(int enemyHealth)
+    {
+        enemyHealthBar.SetEnemyHealthSlider(enemyHealth);
+    }
+    //Changing enemy slider Armor
+    protected virtual void ChangeEnemySliderArmor(int enemyArmor)
+    {
+        enemyArmorBar.SetEnemyArmorSlider(enemyArmor);
+    }
+
+    protected virtual void TakeArmorDamage(int damage)
+    {
+        if (enemyStats.EnemyArmor > 0)
+        {
+            enemyStats.EnemyArmor -= damage;
+            enemyArmorBar.SetEnemyArmorSlider(enemyStats.EnemyArmor);
+
+            if (enemyStats.EnemyArmor <= 0)
+            {
+                enemyStats.EnemyHP += enemyStats.EnemyArmor; //+ Because enemyArmor is - Math++
+                ChangeEnemySliderHealth(enemyStats.EnemyHP);
+
+                enemyStats.EnemyArmor = 0; //Set Armor to -1 because there is noone left or 0
+            }
+        }
     }
 
     protected virtual void Die()

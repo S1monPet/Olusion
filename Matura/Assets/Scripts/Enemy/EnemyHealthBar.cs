@@ -5,14 +5,14 @@ using UnityEngine.UI;
 
 public class EnemyHealthBar : MonoBehaviour
 {
-    public Slider playerHealthSlider;
+    public Slider enemyHealthSlider;
     public Gradient gradient;
     public Image fill;
 
     //Setting Player's Health On Slider in EnemyBase.cs
-    public void SetEnemyHealthSlider(int damageTaken)
+    public void SetEnemyHealthSlider(int enemyHealth)
     {
-        playerHealthSlider.value -= damageTaken;
+        enemyHealthSlider.value = enemyHealth;
 
         SetEnemyHealthSliderColor();
     }
@@ -20,6 +20,6 @@ public class EnemyHealthBar : MonoBehaviour
     //For Health Bar Gradient
     private void SetEnemyHealthSliderColor()
     {
-        fill.color = gradient.Evaluate(playerHealthSlider.normalizedValue);
+        fill.color = gradient.Evaluate(enemyHealthSlider.normalizedValue);
     }
 }

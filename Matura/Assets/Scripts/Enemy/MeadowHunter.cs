@@ -13,7 +13,8 @@ public class MeadowHunter : EnemyBase
     {
         agent.speed = EnemyStats.EnemyMovingSpeed;
         //For currently setting the HP back to 100
-        EnemyStats.EnemyHP = 100; 
+        EnemyStats.EnemyHP = 100;
+        EnemyStats.EnemyArmor = 10;
     }
 
     public override Enemies TypeOfEnemy()

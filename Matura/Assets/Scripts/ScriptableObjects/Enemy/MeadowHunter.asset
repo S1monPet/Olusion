@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 431440f9a30085a4d94012801d1f77b1, type: 3}
   m_Name: MeadowHunter
   m_EditorClassIdentifier: 
-  <EnemyHP>k__BackingField: 100
+  <EnemyHP>k__BackingField: 50
   EnemyAttackDamage: 5
   EnemyAttackCoolDown: 5
   EnemyAttackCooldown: 5
@@ -20,4 +20,4 @@ MonoBehaviour:
   EnemyMovingSpeed: 1
   EnemyPatrolingRange: 3
   EnemyAttackingRange: 1
-  EnemyArmor: 10
+  EnemyArmor: 0
