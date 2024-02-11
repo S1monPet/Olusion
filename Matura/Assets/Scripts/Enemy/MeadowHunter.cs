@@ -18,7 +18,7 @@ public class MeadowHunter : EnemyBase
 
         //For changing slider's to right value
         base.ChangeEnemySliderHealth(EnemyStats.EnemyHP);
-        base.ChangeEnemySliderHealth(EnemyStats.EnemyArmor);
+        base.ChangeEnemySliderArmor(EnemyStats.EnemyArmor);
     }
 
     public override Enemies TypeOfEnemy()
