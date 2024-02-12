@@ -99,6 +99,7 @@ public class Slot : MonoBehaviour//, IPointerDownHandler
     public void DropAllItems(Item item)
     {
         SetItem(null);
+        item.IsHeld = false; 
     }
 
     public void OnTriggerEnter(Collider other)

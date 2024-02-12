@@ -424,6 +424,10 @@ public class Inventory : MonoBehaviour
                 currSlot.DropAllItems(currentItem);
                 currentItem.gameObject.SetActive(true);
                 currentItem.transform.position = dropLocation.position;
+
+                //Sets item off the hand
+                equaiappableItems[currentItem.equiappableItemIndex].SetActive(false);
+
                 break;
             }
         }
