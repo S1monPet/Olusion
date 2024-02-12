@@ -285,14 +285,17 @@ public class Inventory : MonoBehaviour
                     currSlot.SetItem(currentDraggedItem);
 
                     allInventorySlots[currentDragSlotIndex].SetItem(itemToSwap);
-
                     ResetDragVariables();
+
+                    ToggleItemStateOnSwap(itemToSwap, i);
                     return; 
                 } 
                 else //Place with no swap
                 {
                     currSlot.SetItem(currentDraggedItem);
                     ResetDragVariables();
+
+                    ToggleItemStateOnSwap(currSlot.GetItem(), i);
                     return; 
                 }
             }
@@ -306,6 +309,25 @@ public class Inventory : MonoBehaviour
     {
         currentDraggedItem = null;
         currentDragSlotIndex = -1;
+    }
+
+    //Check if item is not in hotbar than swap it out of hand and put IsHeld to false so our attack script will not see it, and put damage on it
+    private void ToggleItemStateOnSwap(Item currentItem, int inventoryIndex)
+    {
+        //There is 6 HotBar slots
+        if (inventoryIndex > 6)
+        { 
+            currentItem.IsHeld = false;
+            equaiappableItems[currentItem.equiappableItemIndex].SetActive(false);
+        }
+        /* Subject to change get item instantly in hand, probably not the best
+        else if (inventoryIndex <= 6)
+        {
+            //Is in Hotbar enable it
+            equaiappableItems[currentItem.equiappableItemIndex].SetActive(true);
+            currentItem.IsHeld = true;
+        }
+        */
     }
 
     private void DoubleTapDrop()
@@ -389,16 +411,24 @@ public class Inventory : MonoBehaviour
     //Set new or the same item's HeldItem variable
     private void SetCurrentHeldItem(Item item)
     {
-        if (previousHeldItem != null && item != previousHeldItem)
+        // If the new item is the same as the previously held item, just ensure it's marked as held.
+        if (previousHeldItem == item)
         {
-            previousHeldItem.IsHeld = false; 
-        } 
-        
-        if (previousHeldItem != item)
-        {
-            previousHeldItem = item; 
-            item.IsHeld = true;
+            if (item != null && !item.IsHeld)
+            {
+                item.IsHeld = true;
+            }
+            return; //For quick execution
         }
+
+        if (previousHeldItem != null) 
+        {
+            previousHeldItem.IsHeld = false; //Throws exception if no if statement, because it is null
+        }
+
+        previousHeldItem = item;
+        item.IsHeld = true;
+
     }
 
     //Hotbar
@@ -418,6 +448,7 @@ public class Inventory : MonoBehaviour
             {
                 equaiappableItems[hotbarSlot.GetItem().equiappableItemIndex].SetActive(true);
                 SetCurrentHeldItem(hotbarSlot.GetItem()); //Set new or the same item's HeldItem variable
+                Debug.Log("Kurba");
             }
         }
         //Re-enable the script
