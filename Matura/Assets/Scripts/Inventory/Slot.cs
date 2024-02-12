@@ -96,6 +96,11 @@ public class Slot : MonoBehaviour//, IPointerDownHandler
 
     }
 
+    public void DropAllItems(Item item)
+    {
+        SetItem(null);
+    }
+
     public void OnTriggerEnter(Collider other)
     {
         hovered = true;

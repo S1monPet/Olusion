@@ -7,6 +7,15 @@ public class BaseItem : MonoBehaviour
 {
     [SerializeField] private ItemOS itemStats; // Reference to the ScriptableObject
     public ItemOS ItemStats => itemStats; // Public accessor for other scripts
+
+    private int currentQuantity { get; set; }
+
+
+    private void Awake()
+    {
+        currentQuantity = 1; 
+    }
+
     public string GetItemName()
     {
         return itemStats.name;
@@ -24,27 +33,27 @@ public class BaseItem : MonoBehaviour
 
     public int GetCurrentQuantity()
     {
-        return itemStats.currentQuantity;
+        return currentQuantity;
     }
 
     public void DecreaseQuantity(int amount)
     {
-        itemStats.currentQuantity -= amount;
+        currentQuantity -= amount;
     }
 
     public void IncreaseCurrentQuanitity(int currentQuantity)
     {
-        itemStats.currentQuantity += currentQuantity;
+        currentQuantity += currentQuantity;
     }
 
     public void SetCurrentQuantity(int quantity)
     {
-        itemStats.currentQuantity = quantity;
+        currentQuantity = quantity;
     }
 
     public void ResetCurrentQuantity()
     {
-        itemStats.currentQuantity = 0;
+        currentQuantity = 0;
     }
 
     public int GetMaxQuantity()
@@ -57,9 +66,14 @@ public class BaseItem : MonoBehaviour
         return itemStats.Damage;
     }
 
-    public bool CanItemBeHeld()
+    public bool IsItemHeld()
     {
-        return itemStats.CanBeHeld;
+        return itemStats.IsHeld;
+    }
+
+    public void UpdateItemHeldBool(bool IsHeld)
+    {
+        itemStats.IsHeld = IsHeld;
     }
 
     public int GetEquipableItemIndex()

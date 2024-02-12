@@ -340,7 +340,8 @@ public class Inventory : MonoBehaviour
             {
                 if ((Time.time - lastTapTime) <= normalTapSpeed)
                 {
-                    DropItem();
+                    //DropItem(); 
+                    DropAllItems();
                 } else
                 {
                     RemoveAbilityToDropItem(); 
@@ -379,7 +380,6 @@ public class Inventory : MonoBehaviour
                 Item currentItem = currSlot.GetItem(); 
                 ResetDragVariables();
 
-
                 //For setting item's counter
                 currSlot.DropItem(currentItem); 
 
@@ -403,7 +403,28 @@ public class Inventory : MonoBehaviour
                 //Setting it back to false since Click event doesn't do that.
                 currSlot._canDropThisItem = false;
                 break;
-                
+
+            }
+        }
+    }
+
+    private void DropAllItems()
+    {
+        for (int i = 0; i < allInventorySlots.Count; i++)
+        {
+            Slot currSlot = allInventorySlots[i];
+
+            if (currSlot._canDropThisItem && currentDraggedItem != null)
+            {
+                //Get's item into currSlot && resets currentDragedItem
+                currSlot.SetItem(currentDraggedItem);
+                Item currentItem = currSlot.GetItem();
+                ResetDragVariables();
+
+                currSlot.DropAllItems(currentItem);
+                currentItem.gameObject.SetActive(true);
+                currentItem.transform.position = dropLocation.position;
+                break;
             }
         }
     }
