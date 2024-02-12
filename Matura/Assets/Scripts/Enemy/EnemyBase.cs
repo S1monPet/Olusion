@@ -28,6 +28,9 @@ public abstract class EnemyBase : MonoBehaviour
     public EnemyHealthBar enemyHealthBar; 
     public EnemyArmorBar enemyArmorBar;
 
+    [Header("Game Manager")]
+    public GameManager gameManager; 
+
 
     //For patrolling
     private int targetPoint = 0; 
@@ -117,17 +120,21 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected virtual void Die()
     {
-        if (enemyStats.EnemyHP <= 0) 
-            Destroy(this.gameObject);
+        if (enemyStats.EnemyHP <= 0)
+        {
+            //gameManager.RespawnEnemy(EnemyStats.RespawnTimer, gameObject);
+            Destroy(gameObject);
+        }
     }
 
     //Setting base for patrolling
     protected virtual void Patrol(Transform[] patrolPoints, NavMeshAgent agent)
     {
+
         EnemyAttack(agent);
 
         if(!agent.pathPending && agent.remainingDistance < 0.1f)
-    {
+        {
             targetPoint = (targetPoint + 1) % patrolPoints.Length; //For effective looping through array 4 % 4 = 0; 
             agent.SetDestination(patrolPoints[targetPoint].position);
             agent.speed = EnemyStats.EnemyMovingSpeed; 

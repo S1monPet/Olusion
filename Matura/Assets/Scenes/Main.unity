@@ -3961,6 +3961,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FPSText: {fileID: 1645096152}
+  pooledObjects: []
+  objectToPool: {fileID: 961610416}
+  amountToPool: 1
 --- !u!1 &350659772
 GameObject:
   m_ObjectHideFlags: 0
@@ -18308,6 +18311,7 @@ MonoBehaviour:
   healthBar: {fileID: 1417755241}
   enemyHealthBar: {fileID: 1638303934}
   enemyArmorBar: {fileID: 847900848}
+  gameManager: {fileID: 343564389}
   agent: {fileID: 961610424}
   patrolPoints:
   - {fileID: 47398664}
