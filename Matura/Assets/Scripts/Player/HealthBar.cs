@@ -7,8 +7,7 @@ public class HealthBar : MonoBehaviour
 {
     public Slider playerHealthSlider;
     public Gradient gradient;
-    public Image fill; 
-
+    public Image fill;
     //Setting Player's Health On Slider in EnemyBase.cs
     public void SetPlayerHealthSlider(int damageTaken)
     {

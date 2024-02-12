@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
-{
+{ 
+    [SerializeField]
+    Logger logger;
+
     [Header("Player Health")]
     private static int Health = 100;
 
@@ -14,9 +17,9 @@ public class PlayerHealth : MonoBehaviour
         if (Health <= 0)
         {
             //Play animation of dying, game over
-            Debug.Log("Bravo");
+            logger.Log("Bravo", this);
             Destroy(gameObject);
         }
-        Debug.Log(Health.ToString());
+        logger.Log(Health.ToString(), this);
     }
 }

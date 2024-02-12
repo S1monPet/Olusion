@@ -448,7 +448,6 @@ public class Inventory : MonoBehaviour
             {
                 equaiappableItems[hotbarSlot.GetItem().equiappableItemIndex].SetActive(true);
                 SetCurrentHeldItem(hotbarSlot.GetItem()); //Set new or the same item's HeldItem variable
-                Debug.Log("Kurba");
             }
         }
         //Re-enable the script
