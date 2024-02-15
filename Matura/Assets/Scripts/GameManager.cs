@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         InvokeRepeating(nameof(GetFPS), 1, 1);
+        Application.targetFrameRate = 300; //CAP
     }
 
 

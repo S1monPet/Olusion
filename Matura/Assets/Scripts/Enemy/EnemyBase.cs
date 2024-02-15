@@ -27,7 +27,7 @@ public abstract class EnemyBase : MonoBehaviour
     public HealthBar healthBar;
     public EnemyHealthBar enemyHealthBar; 
     public EnemyArmorBar enemyArmorBar;
-    public NavMeshAgent currentNavMeshAgent; 
+    protected NavMeshAgent currentNavMeshAgent; 
 
     [Header("Game Manager")]
     public GameManager gameManager; 
@@ -152,9 +152,12 @@ public abstract class EnemyBase : MonoBehaviour
         {
             targetPoint = (targetPoint + 1) % patrolPoints.Length; //For effective looping through array 4 % 4 = 0; 
             agent.SetDestination(patrolPoints[targetPoint].position);
-            agent.speed = EnemyStats.EnemyMovingSpeed; 
+            agent.speed = EnemyStats.EnemyMovingSpeed;
+            //FaceTarget(agent);
         }
     }
+
+
 
     //public abstract void EnemyAttack();
 
