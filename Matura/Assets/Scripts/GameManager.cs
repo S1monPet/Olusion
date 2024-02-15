@@ -3,23 +3,17 @@ using System.Collections.Generic;
 using System.Net.NetworkInformation;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI; 
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    [Header("Dying And Respawing")]
-    private EnemyBase enemyBase; 
-
     [Header("FPS")]
     private float fps;
     public TextMeshProUGUI FPSText;
 
-    public static ObjectPool SharedInstance;
-    public List<GameObject> pooledObjects;
-    public GameObject objectToPool;
-    public int amountToPool; 
+    //[Header("Object Pooling")]
 
-    private void GetFPS()
+    private void GetFPS() //InvokeRepeating requires
     {
         fps = (int)(1f / Time.unscaledDeltaTime);
         FPSText.text = fps.ToString();
@@ -27,18 +21,10 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        InvokeRepeating("GetFPS", 1, 1);
-
-        //Object pooling
-        pooledObjects = new List<GameObject>();
-        GameObject enemy; 
-        for (int i = 0; i < amountToPool; i++)
-        {
-            enemy = Instantiate(objectToPool);
-            enemy.SetActive(false);
-            pooledObjects.Add(enemy);
-        }
+        InvokeRepeating(nameof(GetFPS), 1, 1);
     }
+
+
 
     private void Update()
     {
@@ -48,12 +34,19 @@ public class GameManager : MonoBehaviour
     //Is started when Enemy dies. 
     public void RespawnEnemy(WaitForSeconds timer, GameObject enemy)
     {
-        StartCoroutine(EnemyRespawnTimer(timer));
-        Instantiate(enemy);
+        StartCoroutine(EnemyRespawnTimer(timer, enemy));
     }
 
-    private IEnumerator EnemyRespawnTimer(WaitForSeconds timer)
+    private IEnumerator EnemyRespawnTimer(WaitForSeconds timer, GameObject currentEnemy)
     {
-        yield return timer; 
+        yield return timer;
+        /*GameObject enemy = ObjectPool.SharedInstance.GetPooledObject();
+        if (enemy != null)
+        {
+            enemy.transform.position = currentEnemy.transform.position;
+            enemy.transform.rotation = currentEnemy.transform.rotation;
+            enemy.SetActive(true);
+        }*/
+        currentEnemy.SetActive(true);
     }
 }

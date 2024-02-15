@@ -4158,6 +4158,7 @@ GameObject:
   m_Component:
   - component: {fileID: 343564388}
   - component: {fileID: 343564389}
+  - component: {fileID: 343564390}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -4194,9 +4195,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FPSText: {fileID: 1645096152}
+--- !u!114 &343564390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 343564387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9d44be42bcabde42abb8178a134934d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   pooledObjects: []
   objectToPool: {fileID: 961610416}
-  amountToPool: 1
+  amountToPool: 2
 --- !u!1 &350659772
 GameObject:
   m_ObjectHideFlags: 0
@@ -18672,7 +18685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ab2aa031e9ce3b488644175757236f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  logger: {fileID: 0}
+  logger: {fileID: 1733751748}
 --- !u!114 &961610427
 MonoBehaviour:
   m_ObjectHideFlags: 0

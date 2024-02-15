@@ -11,14 +11,13 @@ public class MeadowHunter : EnemyBase
 
     private void Awake()
     {
-        agent.speed = EnemyStats.EnemyMovingSpeed;
-        //For currently setting the HP back to 100
-        EnemyStats.EnemyHP = 100;
-        EnemyStats.EnemyArmor = 10;
+        Initialise(); //If I add some logic in my override Init
+    }
 
-        //For changing slider's to right value
-        base.ChangeEnemySliderHealth(EnemyStats.EnemyHP);
-        base.ChangeEnemySliderArmor(EnemyStats.EnemyArmor);
+    private void Initialise()
+    {
+        base.Init(agent); 
+        //Can add more logic here
     }
 
     public override Enemies TypeOfEnemy()
@@ -26,10 +25,10 @@ public class MeadowHunter : EnemyBase
         return Enemies.MeadowHunter; 
     }
 
-    public override void EnemyTakeDamage(int damage)
+    /*public override void EnemyTakeDamage(int damage)
     {
         base.EnemyTakeDamage(damage);
-    }
+    }*/
 
     protected override void StartAttackCoolDown(float cooldownDuration)
     {

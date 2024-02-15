@@ -12,12 +12,14 @@ public class EnemySO : ScriptableObject
     //HP, ATTACK DAMAGE, MOVE SPEED, RANGE, ARMOR, ATTACK SPEED
     [field: Header("Enemy constants")]
     [field: SerializeField] public int EnemyHP { get; set; }
+    [field: SerializeField] public int EnemyArmor;
+    [field: SerializeField] public int StartingHP;
+    [field: SerializeField] public int StartingEnemyArmor;
     [field: SerializeField] public int EnemyAttackDamage;
     [field: SerializeField] public float EnemyAttackSpeed;
     [field: SerializeField] public float EnemyMovingSpeed;
     [field: SerializeField] public float EnemyPatrolingRange;
     [field: SerializeField] public float EnemyAttackingRange;
-    [field: SerializeField] public int EnemyArmor;
     [field: SerializeField] public float EnemyRespawnTimer;
     [field: SerializeField] public float EnemyAttackCooldown;
 

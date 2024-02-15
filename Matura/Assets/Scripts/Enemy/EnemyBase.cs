@@ -27,6 +27,7 @@ public abstract class EnemyBase : MonoBehaviour
     public HealthBar healthBar;
     public EnemyHealthBar enemyHealthBar; 
     public EnemyArmorBar enemyArmorBar;
+    public NavMeshAgent currentNavMeshAgent; 
 
     [Header("Game Manager")]
     public GameManager gameManager; 
@@ -35,6 +36,19 @@ public abstract class EnemyBase : MonoBehaviour
     //For patrolling
     private int targetPoint = 0; 
     private bool _isOnCooldown;
+
+    protected void Init(NavMeshAgent agent) //Don't think this will ever be overriden
+    {
+        currentNavMeshAgent = agent; //This is all set on Awake
+        agent.speed = EnemyStats.EnemyMovingSpeed;
+
+        EnemyStats.EnemyHP = EnemyStats.StartingHP;
+        EnemyStats.EnemyArmor = EnemyStats.StartingEnemyArmor;
+
+        //For changing slider's to right value
+        ChangeEnemySliderHealth(EnemyStats.EnemyHP);
+        ChangeEnemySliderArmor(EnemyStats.EnemyArmor);
+    }
 
     public abstract Enemies TypeOfEnemy();
     protected virtual void EnemyAttack(NavMeshAgent agent)
@@ -86,8 +100,6 @@ public abstract class EnemyBase : MonoBehaviour
 
         enemyStats.EnemyHP -= damage;
         ChangeEnemySliderHealth(enemyStats.EnemyHP); 
-
-        Die();
     }
 
     //Changing enemy slider health
@@ -116,14 +128,17 @@ public abstract class EnemyBase : MonoBehaviour
                 enemyStats.EnemyArmor = 0; //Set Armor to -1 because there is noone left or 0
             }
         }
+        Die();
     }
 
     protected virtual void Die()
     {
         if (enemyStats.EnemyHP <= 0)
         {
-            //gameManager.RespawnEnemy(EnemyStats.RespawnTimer, gameObject);
-            Destroy(gameObject);
+            gameObject.SetActive(false);
+
+            Init(currentNavMeshAgent);
+            gameManager.RespawnEnemy(EnemyStats.RespawnTimer, gameObject);
         }
     }
 
