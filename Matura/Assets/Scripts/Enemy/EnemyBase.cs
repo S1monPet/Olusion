@@ -28,6 +28,7 @@ public abstract class EnemyBase : MonoBehaviour
     public EnemyHealthBar enemyHealthBar; 
     public EnemyArmorBar enemyArmorBar;
     protected NavMeshAgent currentNavMeshAgent; 
+    protected float lookRotationSpeed = 20f;
 
     [Header("Game Manager")]
     public GameManager gameManager; 
@@ -56,7 +57,9 @@ public abstract class EnemyBase : MonoBehaviour
         if (Vector3.Distance(player.transform.position, agent.transform.position) <= EnemyStats.EnemyPatrolingRange)
         {
             agent.SetDestination(player.transform.position);
-            agent.speed = EnemyStats.EnemyAttackSpeed; 
+            agent.speed = EnemyStats.EnemyAttackSpeed;
+
+            SetEnemyRotation(agent); 
         }
         //Checking if enemy is close enough to hit player
         if (Vector3.Distance(player.transform.position, agent.transform.position) <= EnemyStats.EnemyAttackingRange)
@@ -64,6 +67,16 @@ public abstract class EnemyBase : MonoBehaviour
             EnemyHit(); 
         }
 
+    }
+
+    protected void SetEnemyRotation(NavMeshAgent agent)
+    {
+        Vector3 direction = (agent.destination - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+
+        //Small threshold to avoid constant micro-adjustments && check if rotation is deafault
+        if (lookRotation != Quaternion.identity && Quaternion.Angle(transform.rotation, lookRotation) > 0.1f)
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * lookRotationSpeed);
     }
 
     protected virtual void EnemyHit()
@@ -153,10 +166,24 @@ public abstract class EnemyBase : MonoBehaviour
             targetPoint = (targetPoint + 1) % patrolPoints.Length; //For effective looping through array 4 % 4 = 0; 
             agent.SetDestination(patrolPoints[targetPoint].position);
             agent.speed = EnemyStats.EnemyMovingSpeed;
-            //FaceTarget(agent);
+
+            StartCoroutine(SetEnemyRotationCoroutine(agent));
         }
     }
 
+    protected IEnumerator SetEnemyRotationCoroutine(NavMeshAgent agent)
+    {
+        Vector3 direction = (agent.destination - transform.position).normalized;
+        Quaternion targetRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+
+        //Continue rotation 
+        while (Quaternion.Angle(transform.rotation, targetRotation) > 0.1f)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * lookRotationSpeed);
+            yield return null; //Wait for the next frame
+        }
+
+    }
 
 
     //public abstract void EnemyAttack();
@@ -166,7 +193,7 @@ public abstract class EnemyBase : MonoBehaviour
         return !_isOnCooldown; 
     }
 
-    //For inheratance in other classes to change cooldown duration
+    //For inheritance in other classes to change cooldown duration
     protected virtual void StartAttackCoolDown(float cooldownDuration)
     {
         StartCoroutine(AttackCooldown(cooldownDuration)); 
