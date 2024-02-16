@@ -15,12 +15,14 @@ public class PlayerMovement : MonoBehaviour
 
     private RaycastHit hit;
     public NavMeshAgent agent;
+    public Animator animator;
 
     //Distance of player movement
     private float maxRaycastDistance = 20f;
     private string groundTag = "Ground";
 
     private float lookRotationSpeed = 20f;
+    private bool _rotationOnly = false; 
 
 
 
@@ -53,7 +55,6 @@ public class PlayerMovement : MonoBehaviour
 
                 if (touch.phase == TouchPhase.Began)
                 {
-
                     Ray ray = Camera.main.ScreenPointToRay(touch.position);
                     UnityEngine.Debug.DrawLine(ray.origin, ray.origin + ray.direction * maxRaycastDistance, Color.green, 3);
 
@@ -65,7 +66,6 @@ public class PlayerMovement : MonoBehaviour
                             if (agent.isStopped)
                                 agent.isStopped = false;
 
-
                             agent.destination = hit.point;
 
                         }
@@ -74,8 +74,14 @@ public class PlayerMovement : MonoBehaviour
             }
             //Has path because we are resseting path in the other file if object is not clicked
             if (!agent.pathPending && agent.remainingDistance > agent.stoppingDistance)
-                SetAgentRotation();
-
+            {
+                SetAgentRotation(); 
+                animator.SetBool("isRunning", true); //Setting animation
+            } 
+            else if (!agent.hasPath && agent.remainingDistance <= agent.stoppingDistance)
+            {
+                animator.SetBool("isRunning", false); //Setting animation off
+            }
         }
     }
 
@@ -87,6 +93,17 @@ public class PlayerMovement : MonoBehaviour
         //Small threshold to avoid constant micro-adjustments && check if rotation is deafault
         if (lookRotation != Quaternion.identity && Quaternion.Angle(transform.rotation, lookRotation) > 0.1f) 
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * lookRotationSpeed);
+    }
+
+    //Agent logic to stop moving and look towards item
+    public void StopPlayerNotRotation()
+    {
+        if (!agent.isStopped)
+        {
+            agent.velocity = Vector3.zero;
+            agent.isStopped = true;
+            animator.SetBool("isRunning", false);
+        }
     }
 
 

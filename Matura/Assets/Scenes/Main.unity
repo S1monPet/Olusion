@@ -3585,6 +3585,7 @@ MonoBehaviour:
     m_Bits: 64
   inventory: {fileID: 1416109625}
   agent: {fileID: 275844204}
+  animator: {fileID: 1003882415}
 --- !u!195 &275844204
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -18723,7 +18724,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyStats: {fileID: 11400000, guid: 5b594119e8f2ebf44b2835f40b36081f, type: 2}
   player: {fileID: 275844202}
-  playerHealthScript: {fileID: 0}
+  playerHealthScript: {fileID: 275844211}
   healthBar: {fileID: 1417755241}
   enemyHealthBar: {fileID: 1638303934}
   enemyArmorBar: {fileID: 847900848}
@@ -28319,7 +28320,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1571181936}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.000007984282}
   m_LocalScale: {x: 0.0009999999, y: 0.0009999999, z: 0.0009999999}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -28331,7 +28332,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1.35}
+  m_AnchoredPosition: {x: 0, y: 1.3500012}
   m_SizeDelta: {x: 2300, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1571181938
@@ -37488,8 +37489,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.0010042273, y: 0.0010042273, z: 0.0030694893}
-  m_Center: {x: -6.1387874e-11, y: 1.7363096e-10, z: 0.0014565226}
+  m_Size: {x: 0.004, y: 0.004, z: 0.004}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &1988464088
 Rigidbody:
   m_ObjectHideFlags: 0

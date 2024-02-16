@@ -178,11 +178,8 @@ public class Inventory : MonoBehaviour
                     if (newItem)
                     {
                         //Agent logic to stop moving and look towards item
-                        if (!agent.isStopped)
-                        {
-                            agent.velocity = Vector3.zero;
-                            agent.isStopped = true;
-                        }
+                        playerMovementScript.StopPlayerNotRotation(); 
+
 
                         AddItemToInventory(newItem);
                     }
