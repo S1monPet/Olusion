@@ -29,7 +29,7 @@ public class ToggleChest : MonoBehaviour
         foreach (GameObject chest in chestList)
         {
             _distance = Vector3.Distance(PlayerTransform.position, chest.transform.position);
-            if (_distance < _playerRange)
+            if (_distance < _playerRange && chest.activeSelf) //Check if chest is still there and if distance is smaller than players range
             {
                 _nearestChest = chest;
                 chestImage.SetActive(true);

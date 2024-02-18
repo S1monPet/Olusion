@@ -133,7 +133,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 9965037e329408c43bdf7f929db53644,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9965037e329408c43bdf7f929db53644,
         type: 3}
@@ -1924,7 +1924,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42e56ba6eb885a04c82a2bd042553a92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Chest
+  name: Chest yes
   description: Place it and store items in it
   icon: {fileID: 21300000, guid: a42d6c14efcffee4785ee9cacd064ad1, type: 3}
   currentQuantity: 1
@@ -2134,7 +2134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42e56ba6eb885a04c82a2bd042553a92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Chest
+  name: Pirate Chest
   description: Chest
   icon: {fileID: 21300000, guid: a42d6c14efcffee4785ee9cacd064ad1, type: 3}
   currentQuantity: 1
@@ -2711,7 +2711,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 5b0499a8f8e55114e9776cf279b811d4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5b0499a8f8e55114e9776cf279b811d4,
         type: 3}
@@ -2954,7 +2954,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42e56ba6eb885a04c82a2bd042553a92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Chest
+  name: Chest Cube
   description: Place it and store items in it
   icon: {fileID: 21300000, guid: a42d6c14efcffee4785ee9cacd064ad1, type: 3}
   currentQuantity: 1
@@ -17814,7 +17814,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 108858dce9d552b42a59c38b343c0217,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 108858dce9d552b42a59c38b343c0217,
         type: 3}
@@ -18078,7 +18078,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 6bceef03d6f6aea4eb22fb7eff406078,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6bceef03d6f6aea4eb22fb7eff406078,
         type: 3}
@@ -20059,7 +20059,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 275844203}
           m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
           m_MethodName: set_enabled
           m_Mode: 6
@@ -25372,7 +25372,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ad13159a5b5029e4fbc79fda991c2c59,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ad13159a5b5029e4fbc79fda991c2c59,
         type: 3}
@@ -28296,7 +28296,7 @@ Transform:
   m_GameObject: {fileID: 1561529447}
   m_LocalRotation: {x: -0, y: 0.000000089406974, z: -0, w: 1}
   m_LocalPosition: {x: 0.25107837, y: 0.6720001, z: 0.2500441}
-  m_LocalScale: {x: 1.0000001, y: 0.99999994, z: 0.99999976}
+  m_LocalScale: {x: 1.0000002, y: 0.9999999, z: 0.99999976}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1283341325}
@@ -35056,7 +35056,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42e56ba6eb885a04c82a2bd042553a92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Chest
+  name: Wooden Chest
   description: Store items in it
   icon: {fileID: 21300000, guid: b6b7788fb5c5e5f4789a8b845c2f1a09, type: 3}
   currentQuantity: 1
@@ -38072,7 +38072,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 275844203}
           m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
           m_MethodName: set_enabled
           m_Mode: 6

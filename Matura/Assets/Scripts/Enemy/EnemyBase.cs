@@ -177,7 +177,7 @@ public abstract class EnemyBase : MonoBehaviour
         Quaternion targetRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
 
         //Continue rotation 
-        while (Quaternion.Angle(transform.rotation, targetRotation) > 0.1f)
+        while (targetRotation != Quaternion.identity && Quaternion.Angle(transform.rotation, targetRotation) > 0.1f)
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * lookRotationSpeed);
             yield return null; //Wait for the next frame

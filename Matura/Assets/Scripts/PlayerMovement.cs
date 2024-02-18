@@ -22,7 +22,8 @@ public class PlayerMovement : MonoBehaviour
     private string groundTag = "Ground";
 
     private float lookRotationSpeed = 20f;
-    private bool _rotationOnly = false; 
+    private bool _rotationOnly = false;
+    private Vector3 _agentDestination; 
 
 
 
@@ -75,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
             //Has path because we are resseting path in the other file if object is not clicked
             if (!agent.pathPending && agent.remainingDistance > agent.stoppingDistance)
             {
-                SetAgentRotation(); 
+                SetAgentRotation();
                 animator.SetBool("isRunning", true); //Setting animation
             } 
             else if (!agent.hasPath && agent.remainingDistance <= agent.stoppingDistance)
@@ -98,13 +99,37 @@ public class PlayerMovement : MonoBehaviour
     //Agent logic to stop moving and look towards item
     public void StopPlayerNotRotation()
     {
+        _rotationOnly = true;
+        if (agent.hasPath)
+        {
+            _agentDestination = agent.destination;
+            agent.ResetPath();
+        }
+
         if (!agent.isStopped)
         {
             agent.velocity = Vector3.zero;
             agent.isStopped = true;
-            animator.SetBool("isRunning", false);
         }
+        animator.SetBool("isRunning", false);
+        StartCoroutine(PlayerRotationCoroutine(_agentDestination));
     }
+
+    private IEnumerator PlayerRotationCoroutine(Vector3 agentDestinaton)
+    {
+        Vector3 direction = (agentDestinaton - transform.position).normalized;
+        Quaternion targetRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+
+        //Continue rotation 
+        while (targetRotation != Quaternion.identity && Quaternion.Angle(transform.rotation, targetRotation) > 0.1f)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * lookRotationSpeed);
+            yield return null; //Wait for the next frame
+        }
+        _rotationOnly = false;
+    }
+
+
 
 
 }

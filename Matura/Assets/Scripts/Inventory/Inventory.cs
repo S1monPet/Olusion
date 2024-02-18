@@ -175,6 +175,7 @@ public class Inventory : MonoBehaviour
                 if (hasClicked) //Pick up
                 {
                     Item newItem = hit.collider.GetComponent<Item>();
+
                     if (newItem)
                     {
                         //Agent logic to stop moving and look towards item
@@ -449,7 +450,9 @@ public class Inventory : MonoBehaviour
         }
 
         previousHeldItem = item;
-        item.IsHeld = true;
+
+        if (item != null)
+            item.IsHeld = true;
 
     }
 
@@ -466,11 +469,15 @@ public class Inventory : MonoBehaviour
 
         if (hotbarSlot.HasItem())
         {
-            if (hotbarSlot.GetItem().equiappableItemIndex != - 1)
+            if (hotbarSlot.GetItem().equiappableItemIndex != -1)
             {
                 equaiappableItems[hotbarSlot.GetItem().equiappableItemIndex].SetActive(true);
                 SetCurrentHeldItem(hotbarSlot.GetItem()); //Set new or the same item's HeldItem variable
-            }
+            } 
+        } 
+        else
+        {
+            SetCurrentHeldItem(null); //For attacking set it to null so, previous item is not held anymore
         }
         //Re-enable the script
         playerMovementScript.enabled = true; 
