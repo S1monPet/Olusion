@@ -178,8 +178,8 @@ public class Inventory : MonoBehaviour
 
                     if (newItem)
                     {
-                        //Agent logic to stop moving and look towards item
-                        playerMovementScript.StopPlayerNotRotation(); 
+                        //Agent logic to stop moving and look towards item, could be added in future
+                        //playerMovementScript.StopPlayerNotRotation(); 
 
 
                         AddItemToInventory(newItem);
