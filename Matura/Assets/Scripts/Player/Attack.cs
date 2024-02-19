@@ -61,7 +61,7 @@ public class Attack : MonoBehaviour
         for (int i = 0; i < HotbarSlots.Count; i++)
         {
             //Get current Item and check if IsHeld
-            if (HotbarSlots[i].HasItem() && HotbarSlots[i].GetItem().IsHeld) //Was GetItem() != null
+            if (HotbarSlots[i].GetItem() != null && HotbarSlots[i].GetItem().IsHeld) //HasItem() Is only TRUE or FALSE null == TRUE
             {
                 //Return current item damage
                 return HotbarSlots[i].GetItem().Damage;

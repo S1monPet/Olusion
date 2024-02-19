@@ -495,11 +495,17 @@ public class Inventory : MonoBehaviour
 
     public void ConsumeIfHeldAndConsumable()
     {
-        if (_currentHeldItemIndex != -1 && hotbarSlots[_currentHeldItemIndex].GetItem().Consumable && !_disableAnotherEventCall)
+        if (!inventory.activeInHierarchy)
         {
-            Item currentItem = hotbarSlots[_currentHeldItemIndex].GetItem();
-            _disableAnotherEventCall = true;
-            StartCoroutine(ConsumingCoroutine(currentItem.TimeToConsume, currentItem));
+            if (_currentHeldItemIndex != -1 && 
+                hotbarSlots[_currentHeldItemIndex].GetItem() != null && 
+                hotbarSlots[_currentHeldItemIndex].GetItem().Consumable && 
+                !_disableAnotherEventCall)
+            {
+                Item currentItem = hotbarSlots[_currentHeldItemIndex].GetItem();
+                _disableAnotherEventCall = true;
+                StartCoroutine(ConsumingCoroutine(currentItem.TimeToConsume, currentItem));
+            }
         }
     }
 
