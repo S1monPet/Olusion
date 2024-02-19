@@ -495,7 +495,7 @@ public class Inventory : MonoBehaviour
 
     public void ConsumeIfHeldAndConsumable()
     {
-        if (_currentHeldItemIndex != -1 && hotbarSlots[_currentHeldItemIndex].GetItem() && !_disableAnotherEventCall)
+        if (_currentHeldItemIndex != -1 && hotbarSlots[_currentHeldItemIndex].GetItem().Consumable && !_disableAnotherEventCall)
         {
             Item currentItem = hotbarSlots[_currentHeldItemIndex].GetItem();
             _disableAnotherEventCall = true;
