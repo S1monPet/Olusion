@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ConsumableType
+{
+    Food, Water
+};
+
 public class Item : MonoBehaviour
 {
     public new string name = "New item"; //Name of item; 
@@ -14,5 +19,11 @@ public class Item : MonoBehaviour
 
 
     [Header("Hotbar")]
-    public int equiappableItemIndex = -1; 
+    public int equiappableItemIndex = -1;
+
+    [Header("Consumable")]
+    public bool Consumable = false;
+    public float TimeToConsume = 1;
+    public ConsumableType type;
+    public int Amount;
 }
