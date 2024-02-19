@@ -42,7 +42,7 @@ public class Inventory : MonoBehaviour
     private int _currentHeldItemIndex = -1;
 
     [Header("Edibles")] 
-    //public PlayerFood FoodScript;
+    public PlayerFood FoodScript;
     public PlayerWater WaterScript;
     private bool _disableAnotherEventCall = false; 
 
@@ -524,7 +524,7 @@ public class Inventory : MonoBehaviour
         } 
         else if (itemType == ConsumableType.Food) 
         { 
-            //FoodScript.AddFood(currentItem.Amount);
+            FoodScript.AddFood(currentItem.Amount);
         }
 
         _disableAnotherEventCall = false; 
