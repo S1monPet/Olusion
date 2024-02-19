@@ -8,11 +8,13 @@ public class PlayerHealth : MonoBehaviour
     Logger logger;
 
     [Header("Player Health")]
-    private static int Health = 100;
+    public static int Health = 100;
+    public HealthBar healthBar;
 
     public void TakeDamage(int damage)
     {
         Health -= damage;
+        ChangePlayerSliderHealth();
 
         if (Health <= 0)
         {
@@ -21,5 +23,10 @@ public class PlayerHealth : MonoBehaviour
             Destroy(gameObject);
         }
         logger.Log(Health.ToString(), this);
+    }
+
+    public void ChangePlayerSliderHealth()
+    {
+        healthBar.SetPlayerHealthSlider(Health);
     }
 }

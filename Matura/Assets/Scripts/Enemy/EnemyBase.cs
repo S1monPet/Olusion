@@ -24,7 +24,6 @@ public abstract class EnemyBase : MonoBehaviour
     public PlayerHealth playerHealthScript; //Maybe some class will need it so it's protected
 
     [Header("Bars")]
-    public HealthBar healthBar;
     public EnemyHealthBar enemyHealthBar; 
     public EnemyArmorBar enemyArmorBar;
     protected NavMeshAgent currentNavMeshAgent; 
@@ -86,18 +85,13 @@ public abstract class EnemyBase : MonoBehaviour
             if (playerHealthScript != null)
             {
                 playerHealthScript.TakeDamage(EnemyStats.EnemyAttackDamage); //Change HP on player
-                ChangePlayerSliderHealth(); //Change HP in HealthBar
+                playerHealthScript.ChangePlayerSliderHealth(); //Change HP in HealthBar
 
                 StartAttackCoolDown(EnemyStats.EnemyAttackCooldown);
             }
         } 
     }
 
-    //Change Player Health Bar
-    protected virtual void ChangePlayerSliderHealth()
-    {
-        healthBar.SetPlayerHealthSlider(EnemyStats.EnemyAttackDamage);
-    }
 
     //For taking damage
     public virtual void EnemyTakeDamage(int damage)

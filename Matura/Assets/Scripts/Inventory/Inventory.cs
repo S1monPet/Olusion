@@ -39,6 +39,12 @@ public class Inventory : MonoBehaviour
 
     [Header("Equaippable Items")]
     public List<GameObject> equaiappableItems = new List<GameObject>();
+    private int _currentHeldItemIndex = -1;
+
+    [Header("Edibles")] 
+    //public PlayerFood FoodScript;
+    public PlayerWater WaterScript;
+    private bool _disableAnotherEventCall = false; 
 
 
 
@@ -345,7 +351,7 @@ public class Inventory : MonoBehaviour
                     RemoveAbilityToDropItem(); 
                 }
                 lastTapTime = Time.time;
-            }
+            } 
         }
     }
 
@@ -471,8 +477,11 @@ public class Inventory : MonoBehaviour
         {
             if (hotbarSlot.GetItem().equiappableItemIndex != -1)
             {
-                equaiappableItems[hotbarSlot.GetItem().equiappableItemIndex].SetActive(true);
-                SetCurrentHeldItem(hotbarSlot.GetItem()); //Set new or the same item's HeldItem variable
+                Item currentItem = hotbarSlot.GetItem(); 
+                equaiappableItems[currentItem.equiappableItemIndex].SetActive(true);
+                SetCurrentHeldItem(currentItem); //Set new or the same item's HeldItem variable
+                _currentHeldItemIndex = hotbarIndex; 
+                //Debug.Log(_currentHeldItem.ToString() + "mama");
             } 
         } 
         else
@@ -483,4 +492,42 @@ public class Inventory : MonoBehaviour
         playerMovementScript.enabled = true; 
 
     }
+
+    public void ConsumeIfHeldAndConsumable()
+    {
+        if (_currentHeldItemIndex != -1 && hotbarSlots[_currentHeldItemIndex].GetItem() && !_disableAnotherEventCall)
+        {
+            Item currentItem = hotbarSlots[_currentHeldItemIndex].GetItem();
+            _disableAnotherEventCall = true;
+            StartCoroutine(ConsumingCoroutine(currentItem.TimeToConsume, currentItem));
+        }
+    }
+
+    public void StopConsuming()
+    {
+        StopCoroutine(ConsumingCoroutine(0, null));
+    }
+
+    private IEnumerator ConsumingCoroutine(float timeToWait, Item currentItem)
+    {
+        
+        yield return new WaitForSeconds(timeToWait);
+
+        currentItem.currentQuantity--;
+        hotbarSlots[_currentHeldItemIndex].CheckIfItemIsLessThanZero(currentItem, equaiappableItems);
+
+        ConsumableType itemType = currentItem.type; 
+
+        if (itemType == ConsumableType.Water)
+        {
+            WaterScript.AddWater(currentItem.Amount); 
+        } 
+        else if (itemType == ConsumableType.Food) 
+        { 
+            //FoodScript.AddFood(currentItem.Amount);
+        }
+
+        _disableAnotherEventCall = false; 
+    }
+
 }

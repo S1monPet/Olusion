@@ -909,6 +909,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 275844207}
+          m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
+          m_MethodName: ConsumeIfHeldAndConsumable
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 4
     callback:
       m_PersistentCalls:
@@ -917,6 +929,22 @@ MonoBehaviour:
           m_TargetAssemblyTypeName: Slot, Assembly-CSharp
           m_MethodName: set_SetItemToBeDropped
           m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 275844207}
+          m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
+          m_MethodName: StopConsuming
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1313,6 +1341,10 @@ MonoBehaviour:
   Damage: 0
   IsHeld: 0
   equiappableItemIndex: 4
+  Consumable: 0
+  TimeToConsume: 1
+  type: 0
+  Amount: 0
 --- !u!33 &97286723
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1932,6 +1964,10 @@ MonoBehaviour:
   Damage: 0
   IsHeld: 0
   equiappableItemIndex: 2
+  Consumable: 0
+  TimeToConsume: 1
+  type: 0
+  Amount: 0
 --- !u!33 &155941243
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2142,6 +2178,10 @@ MonoBehaviour:
   Damage: 0
   IsHeld: 0
   equiappableItemIndex: 5
+  Consumable: 0
+  TimeToConsume: 1
+  type: 0
+  Amount: 0
 --- !u!65 &178146447
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2401,6 +2441,10 @@ MonoBehaviour:
   Damage: 0
   IsHeld: 0
   equiappableItemIndex: 4
+  Consumable: 0
+  TimeToConsume: 1
+  type: 0
+  Amount: 0
 --- !u!208 &179373281
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -2835,6 +2879,10 @@ MonoBehaviour:
   Damage: 5
   IsHeld: 0
   equiappableItemIndex: 8
+  Consumable: 0
+  TimeToConsume: 1
+  type: 0
+  Amount: 0
 --- !u!1 &228429479
 GameObject:
   m_ObjectHideFlags: 0
@@ -2962,6 +3010,10 @@ MonoBehaviour:
   Damage: 0
   IsHeld: 0
   equiappableItemIndex: 1
+  Consumable: 0
+  TimeToConsume: 1
+  type: 0
+  Amount: 0
 --- !u!33 &228429485
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3132,7 +3184,8 @@ GameObject:
   m_Component:
   - component: {fileID: 268129699}
   - component: {fileID: 268129701}
-  - component: {fileID: 268129700}
+  - component: {fileID: 268129703}
+  - component: {fileID: 268129702}
   m_Layer: 5
   m_Name: ThirstBar
   m_TagString: Untagged
@@ -3163,49 +3216,6 @@ RectTransform:
   m_AnchoredPosition: {x: -72, y: 34}
   m_SizeDelta: {x: 128, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &268129700
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 268129698}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d949aa26c3893e743947e7a8379d6b1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerHealthSlider: {fileID: 268129701}
-  gradient:
-    serializedVersion: 2
-    key0: {r: 0.5471698, g: 0.2088519, b: 0.04903879, a: 1}
-    key1: {r: 0.6509434, g: 0.49802914, b: 0.20572266, a: 1}
-    key2: {r: 0.34901962, g: 0.7490196, b: 0.21960783, a: 0}
-    key3: {r: 0.34901962, g: 0.7490196, b: 0.21960783, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 9830
-    ctime1: 32768
-    ctime2: 65535
-    ctime3: 65535
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 0
-    m_NumColorKeys: 3
-    m_NumAlphaKeys: 2
-  fill: {fileID: 1237582547}
 --- !u!114 &268129701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3253,10 +3263,38 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 100
   m_WholeNumbers: 1
-  m_Value: 70
+  m_Value: 10
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &268129702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 268129698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e63d2453b0352241b0df8ef65b060e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playersAmountOfWater: {fileID: 268129701}
+--- !u!114 &268129703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 268129698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 670e8560e0a6d314fa06df0336d0118b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Water: 10
+  waterBar: {fileID: 268129702}
+  playerHealth: {fileID: 275844211}
 --- !u!1 &269861954
 GameObject:
   m_ObjectHideFlags: 0
@@ -3684,6 +3722,7 @@ MonoBehaviour:
   - {fileID: 1264857147}
   - {fileID: 1516160107}
   - {fileID: 222169205}
+  WaterScript: {fileID: 268129703}
 --- !u!114 &275844208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3738,6 +3777,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   logger: {fileID: 1733751748}
+  healthBar: {fileID: 1417755241}
 --- !u!114 &275844212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3942,6 +3982,10 @@ MonoBehaviour:
   Damage: 0
   IsHeld: 0
   equiappableItemIndex: 3
+  Consumable: 0
+  TimeToConsume: 1
+  type: 0
+  Amount: 0
 --- !u!33 &289486189
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -17920,6 +17964,10 @@ MonoBehaviour:
   Damage: 0
   IsHeld: 0
   equiappableItemIndex: 5
+  Consumable: 0
+  TimeToConsume: 1
+  type: 0
+  Amount: 0
 --- !u!65 &862378189
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18199,6 +18247,10 @@ MonoBehaviour:
   Damage: 0
   IsHeld: 0
   equiappableItemIndex: 6
+  Consumable: 0
+  TimeToConsume: 1
+  type: 0
+  Amount: 0
 --- !u!65 &872908801
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18475,6 +18527,10 @@ MonoBehaviour:
   Damage: 0
   IsHeld: 0
   equiappableItemIndex: 4
+  Consumable: 0
+  TimeToConsume: 1
+  type: 0
+  Amount: 0
 --- !u!208 &915597858
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -18531,6 +18587,8 @@ GameObject:
   - component: {fileID: 931622436}
   - component: {fileID: 931622438}
   - component: {fileID: 931622437}
+  - component: {fileID: 931622440}
+  - component: {fileID: 931622439}
   m_Layer: 5
   m_Name: HungerBar
   m_TagString: Untagged
@@ -18655,6 +18713,34 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &931622439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931622435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16200aba8cc134744ba038f14bb74fef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playersAmountOfFood: {fileID: 931622438}
+--- !u!114 &931622440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931622435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ab7427d6e0c60442ba46994ba316a9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Food: 60
+  playerFoodBar: {fileID: 931622439}
+  playerHealth: {fileID: 275844211}
 --- !u!1 &961610416
 GameObject:
   m_ObjectHideFlags: 0
@@ -18744,7 +18830,6 @@ MonoBehaviour:
   enemyStats: {fileID: 11400000, guid: 5b594119e8f2ebf44b2835f40b36081f, type: 2}
   player: {fileID: 275844202}
   playerHealthScript: {fileID: 275844211}
-  healthBar: {fileID: 1417755241}
   enemyHealthBar: {fileID: 1638303934}
   enemyArmorBar: {fileID: 847900848}
   gameManager: {fileID: 343564389}
@@ -18768,6 +18853,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   logger: {fileID: 1733751748}
+  healthBar: {fileID: 0}
 --- !u!114 &961610427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25503,6 +25589,10 @@ MonoBehaviour:
   Damage: 0
   IsHeld: 0
   equiappableItemIndex: 7
+  Consumable: 0
+  TimeToConsume: 1
+  type: 0
+  Amount: 0
 --- !u!65 &1264857150
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25658,6 +25748,10 @@ MonoBehaviour:
   Damage: 0
   IsHeld: 0
   equiappableItemIndex: 1
+  Consumable: 0
+  TimeToConsume: 1
+  type: 0
+  Amount: 0
 --- !u!33 &1283341329
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -25737,6 +25831,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 275844207}
+          m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
+          m_MethodName: ConsumeIfHeldAndConsumable
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 4
     callback:
       m_PersistentCalls:
@@ -25745,6 +25851,22 @@ MonoBehaviour:
           m_TargetAssemblyTypeName: Slot, Assembly-CSharp
           m_MethodName: set_SetItemToBeDropped
           m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 275844207}
+          m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
+          m_MethodName: StopConsuming
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -25891,6 +26013,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 275844207}
+          m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
+          m_MethodName: ConsumeIfHeldAndConsumable
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 4
     callback:
       m_PersistentCalls:
@@ -25899,6 +26033,22 @@ MonoBehaviour:
           m_TargetAssemblyTypeName: Slot, Assembly-CSharp
           m_MethodName: set_SetItemToBeDropped
           m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 275844207}
+          m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
+          m_MethodName: StopConsuming
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -26351,6 +26501,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 275844207}
+          m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
+          m_MethodName: ConsumeIfHeldAndConsumable
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 4
     callback:
       m_PersistentCalls:
@@ -26359,6 +26521,22 @@ MonoBehaviour:
           m_TargetAssemblyTypeName: Slot, Assembly-CSharp
           m_MethodName: set_SetItemToBeDropped
           m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 275844207}
+          m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
+          m_MethodName: StopConsuming
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -27265,6 +27443,10 @@ MonoBehaviour:
   Damage: 0
   IsHeld: 0
   equiappableItemIndex: 0
+  Consumable: 0
+  TimeToConsume: 1
+  type: 0
+  Amount: 0
 --- !u!33 &1480979245
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -27626,6 +27808,10 @@ MonoBehaviour:
   Damage: 0
   IsHeld: 0
   equiappableItemIndex: 5
+  Consumable: 0
+  TimeToConsume: 1
+  type: 0
+  Amount: 0
 --- !u!1 &1517644084
 GameObject:
   m_ObjectHideFlags: 0
@@ -28196,6 +28382,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 275844207}
+          m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
+          m_MethodName: ConsumeIfHeldAndConsumable
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 4
     callback:
       m_PersistentCalls:
@@ -28204,6 +28402,22 @@ MonoBehaviour:
           m_TargetAssemblyTypeName: Slot, Assembly-CSharp
           m_MethodName: set_SetItemToBeDropped
           m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 275844207}
+          m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
+          m_MethodName: StopConsuming
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -29462,6 +29676,10 @@ MonoBehaviour:
   Damage: 0
   IsHeld: 0
   equiappableItemIndex: 3
+  Consumable: 0
+  TimeToConsume: 1
+  type: 0
+  Amount: 0
 --- !u!33 &1647819670
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -35064,6 +35282,10 @@ MonoBehaviour:
   Damage: 5
   IsHeld: 0
   equiappableItemIndex: 8
+  Consumable: 0
+  TimeToConsume: 1
+  type: 0
+  Amount: 0
 --- !u!65 &1737429439
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -35236,6 +35458,10 @@ MonoBehaviour:
   Damage: 0
   IsHeld: 0
   equiappableItemIndex: 2
+  Consumable: 0
+  TimeToConsume: 1
+  type: 0
+  Amount: 0
 --- !u!33 &1737656213
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -36600,6 +36826,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 275844207}
+          m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
+          m_MethodName: ConsumeIfHeldAndConsumable
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 4
     callback:
       m_PersistentCalls:
@@ -36608,6 +36846,22 @@ MonoBehaviour:
           m_TargetAssemblyTypeName: Slot, Assembly-CSharp
           m_MethodName: set_SetItemToBeDropped
           m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 275844207}
+          m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
+          m_MethodName: StopConsuming
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -36754,6 +37008,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 275844207}
+          m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
+          m_MethodName: ConsumeIfHeldAndConsumable
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 4
     callback:
       m_PersistentCalls:
@@ -36762,6 +37028,22 @@ MonoBehaviour:
           m_TargetAssemblyTypeName: Slot, Assembly-CSharp
           m_MethodName: set_SetItemToBeDropped
           m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 275844207}
+          m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
+          m_MethodName: StopConsuming
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -37289,6 +37571,10 @@ MonoBehaviour:
   Damage: 30
   IsHeld: 0
   equiappableItemIndex: 6
+  Consumable: 0
+  TimeToConsume: 1
+  type: 0
+  Amount: 0
 --- !u!65 &1952347935
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -37481,6 +37767,10 @@ MonoBehaviour:
   Damage: 5
   IsHeld: 0
   equiappableItemIndex: 7
+  Consumable: 1
+  TimeToConsume: 2
+  type: 1
+  Amount: 20
 --- !u!208 &1988464084
 NavMeshObstacle:
   m_ObjectHideFlags: 0
