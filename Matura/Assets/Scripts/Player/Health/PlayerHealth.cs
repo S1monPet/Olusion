@@ -11,6 +11,7 @@ public class PlayerHealth : MonoBehaviour
     public static int Health = 100;
     public HealthBar healthBar;
 
+
     public void TakeDamage(int damage)
     {
         Health -= damage;
@@ -25,8 +26,22 @@ public class PlayerHealth : MonoBehaviour
         logger.Log(Health.ToString(), this);
     }
 
+    public void AddHealth(int amountOfHealth)
+    {
+        Debug.Log(amountOfHealth);
+        if (Health + amountOfHealth >= 100)
+        {
+            Health = 100;
+            ChangePlayerSliderHealth();
+            return;
+        }
+        Health += amountOfHealth;
+        ChangePlayerSliderHealth();
+    }
+
     public void ChangePlayerSliderHealth()
     {
         healthBar.SetPlayerHealthSlider(Health);
+
     }
 }

@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerFood : MonoBehaviour
 {
     [Header("Player Food")]
-    public int Food = 60;
+    public int Food;
     public PlayerFoodBar playerFoodBar;
 
     public PlayerHealth playerHealth;
@@ -60,7 +60,11 @@ public class PlayerFood : MonoBehaviour
 
     public void AddFood(int amountOfFood)
     {
-        if (Food + amountOfFood > 100) return;
+        if (Food + amountOfFood > 100)
+        {
+            Food = 100;
+            return;
+        }
 
         Food += amountOfFood;
         playerFoodBar.SetPlayersFoodSlider(Food);

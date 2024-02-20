@@ -8,7 +8,7 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 public class PlayerWater : MonoBehaviour
 {
     [Header("Player Water")]
-    public int Water = 70;
+    public int Water;
     public WaterBar waterBar;
    
     public PlayerHealth playerHealth;
@@ -61,7 +61,11 @@ public class PlayerWater : MonoBehaviour
 
     public void AddWater(int amountOfWater)
     {
-        if (Water + amountOfWater > 100) return; 
+        if (Water + amountOfWater > 100)
+        {
+            Water = 100;
+            return;
+        }
 
         Water += amountOfWater;
         waterBar.SetPlayersWaterSlider(Water);

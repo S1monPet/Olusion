@@ -7,6 +7,16 @@ public enum ConsumableType
     Food, Water
 };
 
+public enum HealingType
+{
+    MedKit, Bandage
+};
+
+public enum ClothingType
+{
+    Armor, Shirt, Pants, FaceMask
+};
+
 public class Item : MonoBehaviour
 {
     public new string name = "New item"; //Name of item; 
@@ -26,4 +36,14 @@ public class Item : MonoBehaviour
     public float TimeToConsume = 1;
     public ConsumableType type;
     public int Amount;
+
+    [Header("Healing")]
+    public bool Healing = false;
+    public int HealthGain = 10;
+    public float TimeToGainHealth = 2f;
+    public HealingType healingType; 
+
+    [Header("Gear & Clotches")]
+    public bool Wearable = false;
+    public ClothingType clothingType; 
 }

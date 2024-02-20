@@ -388,6 +388,12 @@ MonoBehaviour:
   _canDropThisItem: 0
   thisSlotQuantityText: {fileID: 0}
   objectCollider: {fileID: 26101578}
+--- !u!1 &33350786 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 4727aee272e7ea446abf9a90f702f82e,
+    type: 3}
+  m_PrefabInstance: {fileID: 2032629289}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &40799322
 GameObject:
   m_ObjectHideFlags: 0
@@ -927,6 +933,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 275844207}
+          m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
+          m_MethodName: RegenerateHealthIfHealing
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 4
     callback:
       m_PersistentCalls:
@@ -935,22 +953,6 @@ MonoBehaviour:
           m_TargetAssemblyTypeName: Slot, Assembly-CSharp
           m_MethodName: set_SetItemToBeDropped
           m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-  - eventID: 3
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 275844207}
-          m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
-          m_MethodName: StopConsuming
-          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1351,6 +1353,12 @@ MonoBehaviour:
   TimeToConsume: 1
   type: 0
   Amount: 0
+  Healing: 0
+  HealthGain: 0
+  TimeToGainHealth: 2
+  healingType: 0
+  Wearable: 0
+  clothingType: 0
 --- !u!33 &97286723
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1552,6 +1560,9 @@ Transform:
   - {fileID: 1737429437}
   - {fileID: 1988464081}
   - {fileID: 1564566753}
+  - {fileID: 1655489725}
+  - {fileID: 1659734537}
+  - {fileID: 745675266}
   m_Father: {fileID: 1641438000}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1975,6 +1986,12 @@ MonoBehaviour:
   TimeToConsume: 1
   type: 0
   Amount: 0
+  Healing: 0
+  HealthGain: 0
+  TimeToGainHealth: 2
+  healingType: 0
+  Wearable: 0
+  clothingType: 0
 --- !u!33 &155941243
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2189,6 +2206,12 @@ MonoBehaviour:
   TimeToConsume: 1
   type: 0
   Amount: 0
+  Healing: 0
+  HealthGain: 0
+  TimeToGainHealth: 2
+  healingType: 0
+  Wearable: 0
+  clothingType: 0
 --- !u!65 &178146447
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2452,6 +2475,12 @@ MonoBehaviour:
   TimeToConsume: 1
   type: 0
   Amount: 0
+  Healing: 0
+  HealthGain: 0
+  TimeToGainHealth: 2
+  healingType: 0
+  Wearable: 0
+  clothingType: 0
 --- !u!208 &179373281
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -2497,6 +2526,12 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!4 &183816890 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8786601893355691716, guid: b4733b9f4b8ab86498e1d96e69fc7d5a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1003882413}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &186843739
 GameObject:
   m_ObjectHideFlags: 0
@@ -2890,6 +2925,12 @@ MonoBehaviour:
   TimeToConsume: 1
   type: 0
   Amount: 0
+  Healing: 0
+  HealthGain: 0
+  TimeToGainHealth: 2
+  healingType: 0
+  Wearable: 0
+  clothingType: 0
 --- !u!1 &228429479
 GameObject:
   m_ObjectHideFlags: 0
@@ -3021,6 +3062,12 @@ MonoBehaviour:
   TimeToConsume: 1
   type: 0
   Amount: 0
+  Healing: 0
+  HealthGain: 0
+  TimeToGainHealth: 2
+  healingType: 0
+  Wearable: 0
+  clothingType: 0
 --- !u!33 &228429485
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3730,8 +3777,12 @@ MonoBehaviour:
   - {fileID: 1516160107}
   - {fileID: 222169205}
   - {fileID: 620244271}
+  - {fileID: 33350786}
+  - {fileID: 826408077}
+  - {fileID: 1265168212}
   FoodScript: {fileID: 931622440}
   WaterScript: {fileID: 268129703}
+  HealthScript: {fileID: 0}
 --- !u!114 &275844208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3994,6 +4045,12 @@ MonoBehaviour:
   TimeToConsume: 1
   type: 0
   Amount: 0
+  Healing: 0
+  HealthGain: 0
+  TimeToGainHealth: 2
+  healingType: 0
+  Wearable: 0
+  clothingType: 0
 --- !u!33 &289486189
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -11481,6 +11538,12 @@ MonoBehaviour:
   TimeToConsume: 2
   type: 0
   Amount: 10
+  Healing: 0
+  HealthGain: 0
+  TimeToGainHealth: 2
+  healingType: 0
+  Wearable: 0
+  clothingType: 0
 --- !u!65 &620244273
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12356,6 +12419,218 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 738281295}
   m_CullTransparentMesh: 1
+--- !u!1001 &745675265
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 124856453}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 660bd455523a0874a8e6b4c1645270e8,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 660bd455523a0874a8e6b4c1645270e8,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 660bd455523a0874a8e6b4c1645270e8,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 660bd455523a0874a8e6b4c1645270e8,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 660bd455523a0874a8e6b4c1645270e8,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.42
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 660bd455523a0874a8e6b4c1645270e8,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.76
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 660bd455523a0874a8e6b4c1645270e8,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.34
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 660bd455523a0874a8e6b4c1645270e8,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 660bd455523a0874a8e6b4c1645270e8,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 660bd455523a0874a8e6b4c1645270e8,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 660bd455523a0874a8e6b4c1645270e8,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 660bd455523a0874a8e6b4c1645270e8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 660bd455523a0874a8e6b4c1645270e8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 660bd455523a0874a8e6b4c1645270e8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 660bd455523a0874a8e6b4c1645270e8,
+        type: 3}
+      propertyPath: m_Name
+      value: Bandage
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 660bd455523a0874a8e6b4c1645270e8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 660bd455523a0874a8e6b4c1645270e8,
+        type: 3}
+      propertyPath: m_TagString
+      value: Item
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 660bd455523a0874a8e6b4c1645270e8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 660bd455523a0874a8e6b4c1645270e8, type: 3}
+--- !u!4 &745675266 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 660bd455523a0874a8e6b4c1645270e8,
+    type: 3}
+  m_PrefabInstance: {fileID: 745675265}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &745675267 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 660bd455523a0874a8e6b4c1645270e8,
+    type: 3}
+  m_PrefabInstance: {fileID: 745675265}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &745675268
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745675267}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &745675269
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745675267}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!23 &745675270
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745675267}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 90c73177ddd748d46b9685f8624ea851, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &745675271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745675267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42e56ba6eb885a04c82a2bd042553a92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Bandage
+  description: Healing
+  icon: {fileID: 0}
+  currentQuantity: 1
+  maxQuantity: 4
+  Damage: 0
+  IsHeld: 0
+  equiappableItemIndex: 12
+  Consumable: 0
+  TimeToConsume: 1
+  type: 0
+  Amount: 0
+  Healing: 1
+  HealthGain: 20
+  TimeToGainHealth: 2
+  healingType: 1
+  Wearable: 0
+  clothingType: 0
 --- !u!1 &747846115
 GameObject:
   m_ObjectHideFlags: 0
@@ -17169,6 +17444,39 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!1 &756972380
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 756972381}
+  m_Layer: 0
+  m_Name: Armor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &756972381
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756972380}
+  m_LocalRotation: {x: -0.06658993, y: -0.0022322088, z: 0.0010711515, w: 0.99777734}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.0066666664, y: 0.008333334, z: 0.0071428586}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2032629290}
+  - {fileID: 1048003144}
+  m_Father: {fileID: 183816890}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &767569424
 GameObject:
   m_ObjectHideFlags: 0
@@ -17534,6 +17842,12 @@ MonoBehaviour:
   _canDropThisItem: 0
   thisSlotQuantityText: {fileID: 0}
   objectCollider: {fileID: 800875197}
+--- !u!1 &826408077 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 08ef8d0e77b40f747af85726a60a7e3a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1048003143}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &833368624
 GameObject:
   m_ObjectHideFlags: 0
@@ -18134,6 +18448,12 @@ MonoBehaviour:
   TimeToConsume: 1
   type: 0
   Amount: 0
+  Healing: 0
+  HealthGain: 0
+  TimeToGainHealth: 2
+  healingType: 0
+  Wearable: 0
+  clothingType: 0
 --- !u!65 &862378189
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18417,6 +18737,12 @@ MonoBehaviour:
   TimeToConsume: 1
   type: 0
   Amount: 0
+  Healing: 0
+  HealthGain: 0
+  TimeToGainHealth: 2
+  healingType: 0
+  Wearable: 0
+  clothingType: 0
 --- !u!65 &872908801
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18697,6 +19023,12 @@ MonoBehaviour:
   TimeToConsume: 1
   type: 0
   Amount: 0
+  Healing: 0
+  HealthGain: 0
+  TimeToGainHealth: 2
+  healingType: 0
+  Wearable: 0
+  clothingType: 0
 --- !u!208 &915597858
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -19348,7 +19680,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: b4733b9f4b8ab86498e1d96e69fc7d5a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b4733b9f4b8ab86498e1d96e69fc7d5a,
         type: 3}
@@ -19664,6 +19996,106 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1036959241}
   m_CullTransparentMesh: 1
+--- !u!1001 &1048003143
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 756972381}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 08ef8d0e77b40f747af85726a60a7e3a,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 08ef8d0e77b40f747af85726a60a7e3a,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 08ef8d0e77b40f747af85726a60a7e3a,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 08ef8d0e77b40f747af85726a60a7e3a,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 08ef8d0e77b40f747af85726a60a7e3a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 08ef8d0e77b40f747af85726a60a7e3a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.22
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 08ef8d0e77b40f747af85726a60a7e3a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 08ef8d0e77b40f747af85726a60a7e3a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 08ef8d0e77b40f747af85726a60a7e3a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 08ef8d0e77b40f747af85726a60a7e3a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 08ef8d0e77b40f747af85726a60a7e3a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 08ef8d0e77b40f747af85726a60a7e3a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 08ef8d0e77b40f747af85726a60a7e3a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 08ef8d0e77b40f747af85726a60a7e3a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 08ef8d0e77b40f747af85726a60a7e3a,
+        type: 3}
+      propertyPath: m_Name
+      value: Armor_Leather
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 08ef8d0e77b40f747af85726a60a7e3a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 08ef8d0e77b40f747af85726a60a7e3a,
+        type: 3}
+      propertyPath: m_TagString
+      value: Item
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 08ef8d0e77b40f747af85726a60a7e3a, type: 3}
+--- !u!4 &1048003144 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 08ef8d0e77b40f747af85726a60a7e3a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1048003143}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1069769300
 GameObject:
   m_ObjectHideFlags: 0
@@ -25759,6 +26191,12 @@ MonoBehaviour:
   TimeToConsume: 1
   type: 0
   Amount: 0
+  Healing: 0
+  HealthGain: 0
+  TimeToGainHealth: 2
+  healingType: 0
+  Wearable: 0
+  clothingType: 0
 --- !u!65 &1264857150
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25772,6 +26210,207 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1001 &1265168210
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1561529448}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 660bd455523a0874a8e6b4c1645270e8,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 660bd455523a0874a8e6b4c1645270e8,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.49999994
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 660bd455523a0874a8e6b4c1645270e8,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.49999982
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 660bd455523a0874a8e6b4c1645270e8,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5000002
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 660bd455523a0874a8e6b4c1645270e8,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 660bd455523a0874a8e6b4c1645270e8,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.56
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 660bd455523a0874a8e6b4c1645270e8,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 660bd455523a0874a8e6b4c1645270e8,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.8191521
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 660bd455523a0874a8e6b4c1645270e8,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 660bd455523a0874a8e6b4c1645270e8,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.5735764
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 660bd455523a0874a8e6b4c1645270e8,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 660bd455523a0874a8e6b4c1645270e8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 660bd455523a0874a8e6b4c1645270e8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 660bd455523a0874a8e6b4c1645270e8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 660bd455523a0874a8e6b4c1645270e8,
+        type: 3}
+      propertyPath: m_Name
+      value: Bandage (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 660bd455523a0874a8e6b4c1645270e8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 660bd455523a0874a8e6b4c1645270e8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 660bd455523a0874a8e6b4c1645270e8,
+        type: 3}
+      propertyPath: m_TagString
+      value: Item
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 660bd455523a0874a8e6b4c1645270e8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 660bd455523a0874a8e6b4c1645270e8, type: 3}
+--- !u!4 &1265168211 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 660bd455523a0874a8e6b4c1645270e8,
+    type: 3}
+  m_PrefabInstance: {fileID: 1265168210}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1265168212 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 660bd455523a0874a8e6b4c1645270e8,
+    type: 3}
+  m_PrefabInstance: {fileID: 1265168210}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &1265168214
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1265168212}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 90c73177ddd748d46b9685f8624ea851, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1265168215
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1265168212}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &1265168216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1265168212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42e56ba6eb885a04c82a2bd042553a92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Bandage
+  description: Healing
+  icon: {fileID: 0}
+  currentQuantity: 1
+  maxQuantity: 4
+  Damage: 0
+  IsHeld: 0
+  equiappableItemIndex: 12
+  Consumable: 0
+  TimeToConsume: 1
+  type: 0
+  Amount: 0
+  Healing: 1
+  HealthGain: 20
+  TimeToGainHealth: 2
+  healingType: 1
+  Wearable: 0
+  clothingType: 0
 --- !u!1 &1277892875
 GameObject:
   m_ObjectHideFlags: 0
@@ -25918,6 +26557,12 @@ MonoBehaviour:
   TimeToConsume: 1
   type: 0
   Amount: 0
+  Healing: 0
+  HealthGain: 0
+  TimeToGainHealth: 2
+  healingType: 0
+  Wearable: 0
+  clothingType: 0
 --- !u!33 &1283341329
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -26009,6 +26654,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 275844207}
+          m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
+          m_MethodName: RegenerateHealthIfHealing
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 4
     callback:
       m_PersistentCalls:
@@ -26017,22 +26674,6 @@ MonoBehaviour:
           m_TargetAssemblyTypeName: Slot, Assembly-CSharp
           m_MethodName: set_SetItemToBeDropped
           m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-  - eventID: 3
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 275844207}
-          m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
-          m_MethodName: StopConsuming
-          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -26191,6 +26832,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 275844207}
+          m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
+          m_MethodName: RegenerateHealthIfHealing
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 4
     callback:
       m_PersistentCalls:
@@ -26210,19 +26863,7 @@ MonoBehaviour:
   - eventID: 3
     callback:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 275844207}
-          m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
-          m_MethodName: StopConsuming
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
+        m_Calls: []
 --- !u!65 &1317553978
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26511,7 +27152,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 4c87da59131b8994585eacd0f9e28ad4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4c87da59131b8994585eacd0f9e28ad4,
         type: 3}
@@ -26679,6 +27320,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 275844207}
+          m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
+          m_MethodName: RegenerateHealthIfHealing
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 4
     callback:
       m_PersistentCalls:
@@ -26687,22 +27340,6 @@ MonoBehaviour:
           m_TargetAssemblyTypeName: Slot, Assembly-CSharp
           m_MethodName: set_SetItemToBeDropped
           m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-  - eventID: 3
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 275844207}
-          m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
-          m_MethodName: StopConsuming
-          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -27613,6 +28250,12 @@ MonoBehaviour:
   TimeToConsume: 1
   type: 0
   Amount: 0
+  Healing: 0
+  HealthGain: 0
+  TimeToGainHealth: 2
+  healingType: 0
+  Wearable: 0
+  clothingType: 0
 --- !u!33 &1480979245
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -27978,6 +28621,12 @@ MonoBehaviour:
   TimeToConsume: 1
   type: 0
   Amount: 0
+  Healing: 0
+  HealthGain: 0
+  TimeToGainHealth: 2
+  healingType: 0
+  Wearable: 0
+  clothingType: 0
 --- !u!1 &1517644084
 GameObject:
   m_ObjectHideFlags: 0
@@ -28560,6 +29209,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 275844207}
+          m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
+          m_MethodName: RegenerateHealthIfHealing
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 4
     callback:
       m_PersistentCalls:
@@ -28568,22 +29229,6 @@ MonoBehaviour:
           m_TargetAssemblyTypeName: Slot, Assembly-CSharp
           m_MethodName: set_SetItemToBeDropped
           m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-  - eventID: 3
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 275844207}
-          m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
-          m_MethodName: StopConsuming
-          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -28689,6 +29334,7 @@ Transform:
   - {fileID: 2599370}
   - {fileID: 222169204}
   - {fileID: 620244270}
+  - {fileID: 1265168211}
   m_Father: {fileID: 23912431}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -28832,6 +29478,12 @@ MonoBehaviour:
   TimeToConsume: 2
   type: 0
   Amount: 10
+  Healing: 0
+  HealthGain: 0
+  TimeToGainHealth: 2
+  healingType: 0
+  Wearable: 0
+  clothingType: 0
 --- !u!65 &1564566756
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -30016,6 +30668,12 @@ MonoBehaviour:
   TimeToConsume: 1
   type: 0
   Amount: 0
+  Healing: 0
+  HealthGain: 0
+  TimeToGainHealth: 2
+  healingType: 0
+  Wearable: 0
+  clothingType: 0
 --- !u!33 &1647819670
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -30024,6 +30682,346 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1647819664}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1655489724
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 124856453}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 4727aee272e7ea446abf9a90f702f82e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4727aee272e7ea446abf9a90f702f82e,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 59.999992
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4727aee272e7ea446abf9a90f702f82e,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 70.00001
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4727aee272e7ea446abf9a90f702f82e,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4727aee272e7ea446abf9a90f702f82e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -9.70698
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4727aee272e7ea446abf9a90f702f82e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.12200074
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4727aee272e7ea446abf9a90f702f82e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 8.160819
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4727aee272e7ea446abf9a90f702f82e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.6943285
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4727aee272e7ea446abf9a90f702f82e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.6943285
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4727aee272e7ea446abf9a90f702f82e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.1338206
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4727aee272e7ea446abf9a90f702f82e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.1338206
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4727aee272e7ea446abf9a90f702f82e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4727aee272e7ea446abf9a90f702f82e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4727aee272e7ea446abf9a90f702f82e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4727aee272e7ea446abf9a90f702f82e,
+        type: 3}
+      propertyPath: m_Name
+      value: Armor_Metal2 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4727aee272e7ea446abf9a90f702f82e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4727aee272e7ea446abf9a90f702f82e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4727aee272e7ea446abf9a90f702f82e,
+        type: 3}
+      propertyPath: m_TagString
+      value: Item
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4727aee272e7ea446abf9a90f702f82e, type: 3}
+--- !u!4 &1655489725 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4727aee272e7ea446abf9a90f702f82e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1655489724}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1655489726 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 4727aee272e7ea446abf9a90f702f82e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1655489724}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1655489727
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655489726}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.015398933, y: 0.0075953496, z: 0.010999915}
+  m_Center: {x: 0.0000009537014, y: -0.00044651382, z: 0.00038473864}
+--- !u!54 &1655489728
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655489726}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &1655489731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655489726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42e56ba6eb885a04c82a2bd042553a92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Metal Armor
+  description: Gives you medium protection
+  icon: {fileID: 0}
+  currentQuantity: 1
+  maxQuantity: 1
+  Damage: 0
+  IsHeld: 0
+  equiappableItemIndex: 10
+  Consumable: 0
+  TimeToConsume: 1
+  type: 0
+  Amount: 0
+  Healing: 0
+  HealthGain: 0
+  TimeToGainHealth: 2
+  healingType: 0
+  Wearable: 1
+  clothingType: 0
+--- !u!1001 &1659734536
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 124856453}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 08ef8d0e77b40f747af85726a60a7e3a,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 08ef8d0e77b40f747af85726a60a7e3a,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 08ef8d0e77b40f747af85726a60a7e3a,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 08ef8d0e77b40f747af85726a60a7e3a,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 08ef8d0e77b40f747af85726a60a7e3a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.656
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 08ef8d0e77b40f747af85726a60a7e3a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.166
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 08ef8d0e77b40f747af85726a60a7e3a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 8.22
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 08ef8d0e77b40f747af85726a60a7e3a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 08ef8d0e77b40f747af85726a60a7e3a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 08ef8d0e77b40f747af85726a60a7e3a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 08ef8d0e77b40f747af85726a60a7e3a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 08ef8d0e77b40f747af85726a60a7e3a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 08ef8d0e77b40f747af85726a60a7e3a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 08ef8d0e77b40f747af85726a60a7e3a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 08ef8d0e77b40f747af85726a60a7e3a,
+        type: 3}
+      propertyPath: m_Name
+      value: Armor_Leather (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 08ef8d0e77b40f747af85726a60a7e3a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 08ef8d0e77b40f747af85726a60a7e3a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 08ef8d0e77b40f747af85726a60a7e3a,
+        type: 3}
+      propertyPath: m_TagString
+      value: Item
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 08ef8d0e77b40f747af85726a60a7e3a, type: 3}
+--- !u!4 &1659734537 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 08ef8d0e77b40f747af85726a60a7e3a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1659734536}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1659734538 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 08ef8d0e77b40f747af85726a60a7e3a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1659734536}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1659734539
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659734538}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.009754212, y: 0.0067042303, z: 0.008216288}
+  m_Center: {x: 1.3111667e-18, y: 0, z: -0.00017308937}
+--- !u!54 &1659734540
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659734538}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &1659734543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659734538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42e56ba6eb885a04c82a2bd042553a92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Leather Armor
+  description: Gives your protection
+  icon: {fileID: 0}
+  currentQuantity: 1
+  maxQuantity: 1
+  Damage: 0
+  IsHeld: 0
+  equiappableItemIndex: 11
+  Consumable: 0
+  TimeToConsume: 1
+  type: 0
+  Amount: 0
+  Healing: 0
+  HealthGain: 0
+  TimeToGainHealth: 2
+  healingType: 0
+  Wearable: 1
+  clothingType: 0
 --- !u!1 &1660749168
 GameObject:
   m_ObjectHideFlags: 0
@@ -35622,6 +36620,12 @@ MonoBehaviour:
   TimeToConsume: 1
   type: 0
   Amount: 0
+  Healing: 0
+  HealthGain: 0
+  TimeToGainHealth: 2
+  healingType: 0
+  Wearable: 0
+  clothingType: 0
 --- !u!65 &1737429439
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -35798,6 +36802,12 @@ MonoBehaviour:
   TimeToConsume: 1
   type: 0
   Amount: 0
+  Healing: 0
+  HealthGain: 0
+  TimeToGainHealth: 2
+  healingType: 0
+  Wearable: 0
+  clothingType: 0
 --- !u!33 &1737656213
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -37174,6 +38184,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 275844207}
+          m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
+          m_MethodName: RegenerateHealthIfHealing
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 4
     callback:
       m_PersistentCalls:
@@ -37182,22 +38204,6 @@ MonoBehaviour:
           m_TargetAssemblyTypeName: Slot, Assembly-CSharp
           m_MethodName: set_SetItemToBeDropped
           m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-  - eventID: 3
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 275844207}
-          m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
-          m_MethodName: StopConsuming
-          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -37356,6 +38362,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 275844207}
+          m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
+          m_MethodName: RegenerateHealthIfHealing
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 4
     callback:
       m_PersistentCalls:
@@ -37364,22 +38382,6 @@ MonoBehaviour:
           m_TargetAssemblyTypeName: Slot, Assembly-CSharp
           m_MethodName: set_SetItemToBeDropped
           m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-  - eventID: 3
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 275844207}
-          m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
-          m_MethodName: StopConsuming
-          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -37911,6 +38913,12 @@ MonoBehaviour:
   TimeToConsume: 1
   type: 0
   Amount: 0
+  Healing: 0
+  HealthGain: 0
+  TimeToGainHealth: 2
+  healingType: 0
+  Wearable: 0
+  clothingType: 0
 --- !u!65 &1952347935
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -38107,6 +39115,12 @@ MonoBehaviour:
   TimeToConsume: 2
   type: 1
   Amount: 20
+  Healing: 0
+  HealthGain: 0
+  TimeToGainHealth: 2
+  healingType: 0
+  Wearable: 0
+  clothingType: 0
 --- !u!208 &1988464084
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -38325,6 +39339,106 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2021966220}
   m_CullTransparentMesh: 1
+--- !u!1001 &2032629289
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 756972381}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 4727aee272e7ea446abf9a90f702f82e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4727aee272e7ea446abf9a90f702f82e,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4727aee272e7ea446abf9a90f702f82e,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4727aee272e7ea446abf9a90f702f82e,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4727aee272e7ea446abf9a90f702f82e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4727aee272e7ea446abf9a90f702f82e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.22
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4727aee272e7ea446abf9a90f702f82e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4727aee272e7ea446abf9a90f702f82e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4727aee272e7ea446abf9a90f702f82e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4727aee272e7ea446abf9a90f702f82e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4727aee272e7ea446abf9a90f702f82e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4727aee272e7ea446abf9a90f702f82e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4727aee272e7ea446abf9a90f702f82e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4727aee272e7ea446abf9a90f702f82e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4727aee272e7ea446abf9a90f702f82e,
+        type: 3}
+      propertyPath: m_Name
+      value: Armor_Metal2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4727aee272e7ea446abf9a90f702f82e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4727aee272e7ea446abf9a90f702f82e,
+        type: 3}
+      propertyPath: m_TagString
+      value: Item
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4727aee272e7ea446abf9a90f702f82e, type: 3}
+--- !u!4 &2032629290 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4727aee272e7ea446abf9a90f702f82e,
+    type: 3}
+  m_PrefabInstance: {fileID: 2032629289}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2036417209
 GameObject:
   m_ObjectHideFlags: 0

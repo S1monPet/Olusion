@@ -44,7 +44,13 @@ public class Inventory : MonoBehaviour
     [Header("Edibles")] 
     public PlayerFood FoodScript;
     public PlayerWater WaterScript;
-    private bool _disableAnotherEventCall = false; 
+    private bool _disableAnotherEventCall = false;
+
+    [Header("Healing")]
+    public PlayerHealth HealthScript; 
+
+    //[Header("Clothing")]
+   
 
 
 
@@ -488,12 +494,13 @@ public class Inventory : MonoBehaviour
         {
             SetCurrentHeldItem(null); //For attacking set it to null so, previous item is not held anymore
         }
+
         //Re-enable the script
         playerMovementScript.enabled = true; 
 
     }
 
-    public void ConsumeIfHeldAndConsumable()
+    public void ConsumeIfHeldAndConsumable() //Event
     {
         if (!inventory.activeInHierarchy)
         {
@@ -509,11 +516,11 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void StopConsuming()
+    /*public void StopConsuming() //Event
     {
         StopCoroutine(ConsumingCoroutine(0, null));
     }
-
+    */
     private IEnumerator ConsumingCoroutine(float timeToWait, Item currentItem)
     {
         
@@ -531,9 +538,73 @@ public class Inventory : MonoBehaviour
         else if (itemType == ConsumableType.Food) 
         { 
             FoodScript.AddFood(currentItem.Amount);
-        }
+        } 
 
         _disableAnotherEventCall = false; 
     }
 
+    public void RegenerateHealthIfHealing()
+    {
+        if (!inventory.activeInHierarchy)
+        {
+            if (_currentHeldItemIndex != -1 &&
+                    hotbarSlots[_currentHeldItemIndex].GetItem() != null &&
+                    hotbarSlots[_currentHeldItemIndex].GetItem().Healing &&
+                    !_disableAnotherEventCall)
+            {
+                Item currentItem = hotbarSlots[_currentHeldItemIndex].GetItem();
+                _disableAnotherEventCall = true;
+                StartCoroutine(HealingCoroutine(currentItem.TimeToGainHealth, currentItem));
+            }
+        }
+    }
+
+    private IEnumerator HealingCoroutine(float timeToWait, Item currentItem)
+    {
+
+        yield return new WaitForSeconds(timeToWait);
+
+        currentItem.currentQuantity--;
+        hotbarSlots[_currentHeldItemIndex].CheckIfItemIsLessThanZero(currentItem, equaiappableItems);
+
+        HealingType itemType = currentItem.healingType;
+
+        if (itemType == HealingType.MedKit)
+        {
+            HealthScript.AddHealth(currentItem.HealthGain);
+        }
+        else if (itemType == HealingType.Bandage)
+        {
+            Debug.Log(currentItem.HealthGain);
+            HealthScript.AddHealth(currentItem.HealthGain);
+        }
+
+        _disableAnotherEventCall = false;
+    }
+
+    /*
+    public void EquipIfWearable() //Event
+    {
+        if (!inventory.activeInHierarchy)
+        {
+            if (_currentHeldItemIndex != -1 &&
+                hotbarSlots[_currentHeldItemIndex].GetItem() != null &&
+                hotbarSlots[_currentHeldItemIndex].GetItem().Wearable)
+            {
+                Item currentItem = hotbarSlots[_currentHeldItemIndex].GetItem();
+
+
+                ClothingType clothingType = currentItem.clothingType;
+
+                if (clothingType == ClothingType.Armor)
+                {
+                    //equaiappableClothes[currentItem.equiappableItemIndex].SetActive(true);
+                }
+
+                currentItem.currentQuantity--;
+                hotbarSlots[_currentHeldItemIndex].CheckIfItemIsLessThanZero(currentItem, equaiappableItems);
+            }
+        }
+    }
+    */
 }
