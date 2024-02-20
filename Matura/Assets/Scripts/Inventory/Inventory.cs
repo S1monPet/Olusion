@@ -49,8 +49,9 @@ public class Inventory : MonoBehaviour
     [Header("Healing")]
     public PlayerHealth HealthScript; 
 
-    //[Header("Clothing")]
-   
+    [Header("Clothing")]
+    public List<GameObject> equaiappableClothes = new List<GameObject>();
+
 
 
 
