@@ -8,9 +8,13 @@ public class PlayerHealth : MonoBehaviour
     Logger logger;
 
     [Header("Player Health")]
-    public static int Health = 100;
+    public static int Health;
     public HealthBar healthBar;
 
+    private void Start()
+    {
+        Health = 100;
+    }
 
     public void TakeDamage(int damage)
     {
@@ -28,7 +32,6 @@ public class PlayerHealth : MonoBehaviour
 
     public void AddHealth(int amountOfHealth)
     {
-        Debug.Log(amountOfHealth);
         if (Health + amountOfHealth >= 100)
         {
             Health = 100;

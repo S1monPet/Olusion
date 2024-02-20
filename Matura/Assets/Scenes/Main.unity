@@ -3782,7 +3782,7 @@ MonoBehaviour:
   - {fileID: 1265168212}
   FoodScript: {fileID: 931622440}
   WaterScript: {fileID: 268129703}
-  HealthScript: {fileID: 0}
+  HealthScript: {fileID: 275844211}
 --- !u!114 &275844208
 MonoBehaviour:
   m_ObjectHideFlags: 0
