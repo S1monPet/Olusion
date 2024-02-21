@@ -17,15 +17,18 @@ MonoBehaviour:
       type: 3}
     MinSpawn: 1
     MaxSpawn: 1
+    Name: Axe
     SpawnChance: 37.385693
   - ItemPrefab: {fileID: 4176705889951604994, guid: 9f80e5eee82a1fd48a513da3bd290f30,
       type: 3}
     MinSpawn: 2
     MaxSpawn: 4
+    Name: Bandage
     SpawnChance: 15.976333
   - ItemPrefab: {fileID: 5511085432170092512, guid: 6186e37add19e9241bca57f6919c021d,
       type: 3}
     MinSpawn: 2
     MaxSpawn: 4
+    Name: Apple
     SpawnChance: 46.637978
   SpawnChancePerSlot: 20

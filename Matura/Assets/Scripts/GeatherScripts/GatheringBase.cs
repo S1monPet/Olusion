@@ -4,30 +4,24 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI; 
 
-public abstract class TreeGather : MonoBehaviour
+public abstract class GatheringBase : MonoBehaviour
 {
+    [SerializeField] private TreeSO tree;
+    public TreeSO Tree => tree;
+
     public LayerMask layerMask;
     public Animator animator;
 
     public GameObject inventory;
     public PlayerMovement playerMovementScript;
     public Item currentItem;
-    public float _timeOfGather;
 
     private RaycastHit _hit;
-    private float _maxRaycastDistance = 20f;
-    private string _treeTag = "Tree";
+    private float _maxRaycastDistance = 11f;
     private bool _gathering = false; 
 
-    
 
-    private void Update()
-    {
-        DetectIfObjectIsGatherable();
-        FastExitIfPlayerGathering(); 
-    }
-
-    private void DetectIfObjectIsGatherable()
+    protected void DetectIfObjectIsGatherable()
     {
         if (!inventory.activeInHierarchy)
         {
@@ -44,7 +38,7 @@ public abstract class TreeGather : MonoBehaviour
                     if (Physics.Raycast(ray, out _hit, _maxRaycastDistance, layerMask))
                     {
                         Debug.Log(_hit.collider.gameObject.name);
-                        if (_hit.collider.CompareTag(_treeTag))
+                        if (_hit.collider.CompareTag(Tree.Tag))
                         {
                             StopPlayer(); 
                             Gather();
@@ -55,7 +49,7 @@ public abstract class TreeGather : MonoBehaviour
             }
         }
     }
-    private void FastExitIfPlayerGathering()
+    protected void FastExitIfPlayerGathering()
     {
         if (_gathering)
         {
@@ -92,11 +86,12 @@ public abstract class TreeGather : MonoBehaviour
         //Give logs in inventory empty slot
     }
 
-    private IEnumerator GatheringCourotine()
+    protected IEnumerator GatheringCourotine()
     {
-        yield return new WaitForSeconds(_timeOfGather);
+        yield return Tree.GatheringRateTimer;
         //Stop animation
         //Slowly put 1 by on object in slot
+        _gathering = false; 
         playerMovementScript.enabled = true; 
     }
 
