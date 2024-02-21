@@ -40,6 +40,7 @@ public class Inventory : MonoBehaviour
     [Header("Equaippable Items")]
     public List<GameObject> equaiappableItems = new List<GameObject>();
     private int _currentHeldItemIndex = -1;
+    private int _previousHeldItemIndex = -1; 
 
     [Header("Edibles")] 
     public PlayerFood FoodScript;
@@ -470,7 +471,7 @@ public class Inventory : MonoBehaviour
     }
 
     //Hotbar
-    private void EnableHotBarItem(int hotbarIndex)
+    public void EnableHotBarItem(int hotbarIndex) //Previously called in the script now in inspector
     {
 
         foreach (GameObject item in equaiappableItems)
@@ -487,8 +488,14 @@ public class Inventory : MonoBehaviour
                 Item currentItem = hotbarSlot.GetItem(); 
                 equaiappableItems[currentItem.equiappableItemIndex].SetActive(true);
                 SetCurrentHeldItem(currentItem); //Set new or the same item's HeldItem variable
-                _currentHeldItemIndex = hotbarIndex; 
-                //Debug.Log(_currentHeldItem.ToString() + "mama");
+
+                _currentHeldItemIndex = hotbarIndex;
+                if (_previousHeldItemIndex == _currentHeldItemIndex) //If item is the same consume/heal
+                {
+                    ConsumeIfHeldAndConsumable();
+                    RegenerateHealthIfHealing();
+                }
+                _previousHeldItemIndex = hotbarIndex;
             } 
         } 
         else
@@ -506,10 +513,12 @@ public class Inventory : MonoBehaviour
         if (!inventory.activeInHierarchy)
         {
             if (_currentHeldItemIndex != -1 && 
-                hotbarSlots[_currentHeldItemIndex].GetItem() != null && 
-                hotbarSlots[_currentHeldItemIndex].GetItem().Consumable && 
+                hotbarSlots[_currentHeldItemIndex].GetItem() != null &&
+                hotbarSlots[_currentHeldItemIndex].GetItem().IsHeld &&
+                hotbarSlots[_currentHeldItemIndex].GetItem().Consumable &&
                 !_disableAnotherEventCall)
             {
+
                 Item currentItem = hotbarSlots[_currentHeldItemIndex].GetItem();
                 _disableAnotherEventCall = true;
                 StartCoroutine(ConsumingCoroutine(currentItem.TimeToConsume, currentItem));
@@ -523,9 +532,9 @@ public class Inventory : MonoBehaviour
     }
     */
     private IEnumerator ConsumingCoroutine(float timeToWait, Item currentItem)
-    {
-        
+    { 
         yield return new WaitForSeconds(timeToWait);
+
 
         currentItem.currentQuantity--;
         hotbarSlots[_currentHeldItemIndex].CheckIfItemIsLessThanZero(currentItem, equaiappableItems);
@@ -539,9 +548,9 @@ public class Inventory : MonoBehaviour
         else if (itemType == ConsumableType.Food) 
         { 
             FoodScript.AddFood(currentItem.Amount);
-        } 
+        }
 
-        _disableAnotherEventCall = false; 
+        _disableAnotherEventCall = false;
     }
 
     public void RegenerateHealthIfHealing()
@@ -550,13 +559,14 @@ public class Inventory : MonoBehaviour
         {
             if (_currentHeldItemIndex != -1 &&
                     hotbarSlots[_currentHeldItemIndex].GetItem() != null &&
+                    hotbarSlots[_currentHeldItemIndex].GetItem().IsHeld &&
                     hotbarSlots[_currentHeldItemIndex].GetItem().Healing &&
                     !_disableAnotherEventCall)
             {
                 Item currentItem = hotbarSlots[_currentHeldItemIndex].GetItem();
                 _disableAnotherEventCall = true;
                 StartCoroutine(HealingCoroutine(currentItem.TimeToGainHealth, currentItem));
-            }
+            } 
         }
     }
 

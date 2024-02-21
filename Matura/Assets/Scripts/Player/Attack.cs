@@ -7,10 +7,6 @@ using UnityEngine.AI;
 
 public class Attack : MonoBehaviour
 {
-    [SerializeField] float attackSpeed = 1.5f;
-    [SerializeField] float attackDelay = 0.3f;
-    [SerializeField] float attackDistance = 1.5f;
-    [SerializeField] int attackDamage = 100;
     [SerializeField] ParticleSystem hitEffect;
 
     private EnemyBase enemyBase;
