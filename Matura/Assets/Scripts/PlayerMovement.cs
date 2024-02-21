@@ -21,8 +21,7 @@ public class PlayerMovement : MonoBehaviour
     private float maxRaycastDistance = 20f;
     private string groundTag = "Ground";
 
-    private float lookRotationSpeed = 20f;
-
+    public float lookRotationSpeed = 20f;
 
 
     void Awake()
@@ -84,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void SetAgentRotation()
+    private void SetAgentRotation() 
     {
         Vector3 direction = (agent.destination - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
