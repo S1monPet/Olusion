@@ -53,9 +53,9 @@ public class Inventory : MonoBehaviour
     [Header("Clothing")]
     public List<GameObject> equaiappableClothes = new List<GameObject>();
 
-
-
-
+    [Header("Chest")] 
+    private List<Slot> _chestSlots = new List<Slot>();
+    private GameObject _chestSlotParent; 
 
     public void Start()
     {
@@ -251,8 +251,29 @@ public class Inventory : MonoBehaviour
         */
     }
 
-    private void ToggleInventory(bool enable)
+    public void ToggleInventory(bool enable) //Public because I am accessing it in chest to close it
     {
+        if (!enable)
+        {
+            foreach (Slot currentSlot in  allInventorySlots)
+            {
+                currentSlot.hovered = false; 
+            }
+        }
+
+        if (!enable && _chestSlotParent != null)
+        {
+            foreach (Slot chestSlot in _chestSlots)
+            {
+                allInventorySlots.Remove(chestSlot);
+            }
+
+            _chestSlotParent.SetActive(false);
+
+            _chestSlotParent = null;
+            _chestSlots = null; 
+        }
+
         inventory.SetActive(enable);
         Cursor.lockState = enable ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = enable;
@@ -537,6 +558,7 @@ public class Inventory : MonoBehaviour
 
 
         currentItem.currentQuantity--;
+        hotbarSlots[_currentHeldItemIndex].UpdateInventoryAmount(); 
         hotbarSlots[_currentHeldItemIndex].CheckIfItemIsLessThanZero(currentItem, equaiappableItems);
 
         ConsumableType itemType = currentItem.type; 
@@ -576,6 +598,7 @@ public class Inventory : MonoBehaviour
         yield return new WaitForSeconds(timeToWait);
 
         currentItem.currentQuantity--;
+        hotbarSlots[_currentHeldItemIndex].UpdateInventoryAmount();
         hotbarSlots[_currentHeldItemIndex].CheckIfItemIsLessThanZero(currentItem, equaiappableItems);
 
         HealingType itemType = currentItem.healingType;
@@ -618,4 +641,27 @@ public class Inventory : MonoBehaviour
         }
     }
     */
+    private void StopAgent()
+    {
+        playerMovementScript.animator.SetBool("isRunning", false);
+        agent.isStopped = false;
+        agent.velocity = Vector3.zero;
+        agent.ResetPath();
+
+        playerMovementScript.enabled = false;
+    }
+
+    public void OpenChest(Chest chest) //Getting it in ToggleChest
+    {
+        StopAgent(); 
+
+        ToggleInventory(true);
+
+        chest.chestInstantiatedParent.SetActive(true);
+        _chestSlotParent = chest.chestInstantiatedParent;
+
+        allInventorySlots.AddRange(chest.allChestSlots);
+        _chestSlots = chest.allChestSlots;
+    }
+
 }
