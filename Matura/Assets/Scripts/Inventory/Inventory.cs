@@ -692,7 +692,7 @@ public class Inventory : MonoBehaviour
                     craftedItem.GetComponent<Item>().currentQuantity = recipe.quantityProduced;
 
                     //We don't want this to be put in the inventory
-                    //AddItemToInventory(craftedItem.GetComponent<Item>()); 
+                    AddItemToInventory(craftedItem.GetComponent<Item>()); 
                 }
                 break; 
             }
@@ -704,7 +704,7 @@ public class Inventory : MonoBehaviour
         int foundQuantity = 0; 
         foreach (Slot currSlot in allInventorySlots)
         {
-            if (currSlot.HasItem() && currSlot.GetItem().name == itemName)
+            if (currSlot.HasItem() && currSlot.GetItem().name == itemName && currSlot.GetItem() != null)
             {
                 foundQuantity += currSlot.GetItem().currentQuantity; 
 
@@ -745,7 +745,7 @@ public class Inventory : MonoBehaviour
             }
             else
             {
-                //remainingQuantity -= item.currentQuantity; 
+                remainingQuantity -= item.currentQuantity; 
                 currSlot.SetItem(null);
             }
         }

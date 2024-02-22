@@ -126,7 +126,7 @@ MonoBehaviour:
   maxQuantity: 4
   Damage: 0
   IsHeld: 0
-  equiappableItemIndex: 12
+  equiappableItemIndex: 8
   Consumable: 0
   TimeToConsume: 1
   type: 0
