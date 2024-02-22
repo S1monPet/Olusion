@@ -16,7 +16,7 @@ MonoBehaviour:
     type: 3}
   quantityProduced: 1
   requiredIngredients:
-  - itemName: Rock
-    requiredQuantity: 2
+  - itemName: Stone
+    requiredQuantity: 1
   - itemName: Stick
     requiredQuantity: 1

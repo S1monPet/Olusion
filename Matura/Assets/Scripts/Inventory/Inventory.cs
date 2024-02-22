@@ -745,7 +745,7 @@ public class Inventory : MonoBehaviour
             }
             else
             {
-                remainingQuantity -= item.currentQuantity; 
+                //remainingQuantity -= item.currentQuantity; 
                 currSlot.SetItem(null);
             }
         }
