@@ -55,7 +55,10 @@ public class Inventory : MonoBehaviour
 
     [Header("Chest")] 
     private List<Slot> _chestSlots = new List<Slot>();
-    private GameObject _chestSlotParent; 
+    private GameObject _chestSlotParent;
+
+    [Header("Crafting")]
+    public List<Recipe> itemRecipes = new List<Recipe>();
 
     public void Start()
     {
@@ -506,10 +509,9 @@ public class Inventory : MonoBehaviour
         {
             if (hotbarSlot.GetItem().equiappableItemIndex != -1)
             {
-                Item currentItem = hotbarSlot.GetItem(); 
+                Item currentItem = hotbarSlot.GetItem();
                 equaiappableItems[currentItem.equiappableItemIndex].SetActive(true);
                 SetCurrentHeldItem(currentItem); //Set new or the same item's HeldItem variable
-
                 _currentHeldItemIndex = hotbarIndex;
                 if (_previousHeldItemIndex == _currentHeldItemIndex) //If item is the same consume/heal
                 {
@@ -664,4 +666,87 @@ public class Inventory : MonoBehaviour
         _chestSlots = chest.allChestSlots;
     }
 
+    public void CraftItem(string itemName)
+    {
+        foreach (Recipe recipe in itemRecipes)
+        {
+            if (recipe.createdItemPrefab.GetComponent<Item>().name == itemName) //Could be optimised
+            {
+                bool haveAllIngredients = true; 
+                for (int i = 0; i != recipe.requiredIngredients.Count; i++)
+                {
+                    if (haveAllIngredients)
+                    {
+                        haveAllIngredients = HaveAllIngredients(recipe.requiredIngredients[i].itemName, recipe.requiredIngredients[i].requiredQuantity);
+                    }
+                }
+
+                if (haveAllIngredients)
+                {
+                    for (int i = 0; i != recipe.requiredIngredients.Count; i++)
+                    {
+                        RemoveIngredients(recipe.requiredIngredients[i].itemName, recipe.requiredIngredients[i].requiredQuantity);
+                    }
+                    //Using dropLocation because if inventory is full or not full it's gonna be the same and it's better
+                    GameObject craftedItem = Instantiate(recipe.createdItemPrefab, dropLocation.position, Quaternion.identity); 
+                    craftedItem.GetComponent<Item>().currentQuantity = recipe.quantityProduced;
+
+                    //AddItemToInventory(craftedItem.GetComponent<Item>()); 
+                }
+                break; 
+            }
+        }
+    }
+
+    private bool HaveAllIngredients(string itemName, int requiredQuantity)
+    {
+        int foundQuantity = 0; 
+        foreach (Slot currSlot in allInventorySlots)
+        {
+            if (currSlot.HasItem() && currSlot.GetItem().name == itemName)
+            {
+                foundQuantity += currSlot.GetItem().currentQuantity; 
+
+                if (foundQuantity >= requiredQuantity)
+                {
+                    return true; 
+                }
+            }
+        }
+
+        return false; 
+    }
+
+    private void RemoveIngredients(string itemName, int quantity)
+    {
+        if (!HaveAllIngredients(itemName, quantity))
+            return;
+
+        int remainingQuantity = quantity; 
+
+        foreach (Slot currSlot in allInventorySlots)
+        {
+            Item item = currSlot.GetItem();
+
+            if (item != null && item.name == itemName)
+            {
+                if (item.currentQuantity >= remainingQuantity)
+                {
+                    item.currentQuantity -= remainingQuantity; 
+
+                    if (item.currentQuantity == 0)
+                    {
+                        currSlot.SetItem(null);
+                        currSlot.UpdateInventoryAmount();
+                    }
+                    return; 
+                }
+            }
+            else
+            {
+                remainingQuantity -= item.currentQuantity; 
+                currSlot.SetItem(null);
+            }
+        }
+    }
 }

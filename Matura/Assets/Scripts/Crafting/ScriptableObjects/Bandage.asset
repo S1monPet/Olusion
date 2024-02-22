@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c706659ee9a89a841b8f9b3eb60a4bce, type: 3}
-  m_Name: BasicTree
+  m_Script: {fileID: 11500000, guid: 2b4dff9fc7ff1e34b9735438ece1d389, type: 3}
+  m_Name: Bandage
   m_EditorClassIdentifier: 
-  Tag: Tree
-  TreeHP: 50
-  GatheringRate: 3
-  TotalAmountOfLogs: 3
+  createdItemPrefab: {fileID: 2282980360195922613, guid: eced1e70879573b4ba7b3abaaa2e5d33,
+    type: 3}
+  quantityProduced: 1
+  requiredIngredients:
+  - itemName: Hemp
+    requiredQuantity: 4
