@@ -2,11 +2,13 @@ fileFormatVersion: 2
 guid: 49dd2c3b09364a946a2354b11e806f03
 ModelImporter:
   serializedVersion: 21300
-  internalIDToNameTable:
-  - first:
-      74: -5000891181146830901
-    second: TreeForest|TreeForestAction
+  internalIDToNameTable: []
   externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BarkMat
+    second: {fileID: 2100000, guid: d107a4a21a959634da301bbb02a29754, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
