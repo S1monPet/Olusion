@@ -10,11 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b4dff9fc7ff1e34b9735438ece1d389, type: 3}
-  m_Name: Bandage
+  m_Name: Axe
   m_EditorClassIdentifier: 
-  createdItemPrefab: {fileID: 4176705889951604994, guid: 9f80e5eee82a1fd48a513da3bd290f30,
+  createdItemPrefab: {fileID: 7620727668973377199, guid: 833ae818f4621e643bde375dcad190d0,
     type: 3}
   quantityProduced: 1
   requiredIngredients:
-  - itemName: Cloth
-    requiredQuantity: 2
+  - itemName: Stone
+    requiredQuantity: 1
+  - itemName: Stick
+    requiredQuantity: 1

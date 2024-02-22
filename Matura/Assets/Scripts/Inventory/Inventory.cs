@@ -691,6 +691,7 @@ public class Inventory : MonoBehaviour
                     GameObject craftedItem = Instantiate(recipe.createdItemPrefab, dropLocation.position, Quaternion.identity); 
                     craftedItem.GetComponent<Item>().currentQuantity = recipe.quantityProduced;
 
+                    //We don't want this to be put in the inventory
                     //AddItemToInventory(craftedItem.GetComponent<Item>()); 
                 }
                 break; 
@@ -744,7 +745,7 @@ public class Inventory : MonoBehaviour
             }
             else
             {
-                remainingQuantity -= item.currentQuantity; 
+                //remainingQuantity -= item.currentQuantity; 
                 currSlot.SetItem(null);
             }
         }
