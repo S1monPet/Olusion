@@ -55,7 +55,8 @@ public class Inventory : MonoBehaviour
     public PlayerHealth HealthScript; 
 
     [Header("Clothing")]
-    public List<GameObject> equaiappableClothes = new List<GameObject>();
+    public List<GameObject> equaiappableArmor = new List<GameObject>();
+    private Item _currentEquiappedArmor; 
 
     [Header("Chest")] 
     private List<Slot> _chestSlots = new List<Slot>();
@@ -367,6 +368,7 @@ public class Inventory : MonoBehaviour
             currentItem.IsHeld = false;
             equaiappableItems[currentItem.equiappableItemIndex].SetActive(false);
         }
+
         /* Subject to change get item instantly in hand, probably not the best
         else if (inventoryIndex <= 6)
         {
@@ -396,6 +398,24 @@ public class Inventory : MonoBehaviour
                 lastTapTime = Time.time;
             } 
         }
+    }
+
+    private bool DoubleTapEquipArmor()
+    {
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+
+            if (touch.phase == TouchPhase.Began)
+            {
+                if ((Time.time - lastTapTime) <= normalTapSpeed)
+                {
+                    return true;
+                }
+                lastTapTime = Time.time;
+            }
+        }
+        return false; 
     }
 
 
@@ -460,8 +480,7 @@ public class Inventory : MonoBehaviour
         for (int i = 0; i < allInventorySlots.Count; i++)
         {
             Slot currSlot = allInventorySlots[i];
-
-            if (currSlot._canDropThisItem && currentDraggedItem != null)
+            if (currSlot._canDropThisItem && currentDraggedItem != null && currentDraggedItem.equiappableItemIndex != -1)  
             {
                 //Get's item into currSlot && resets currentDragedItem
                 currSlot.SetItem(currentDraggedItem);
@@ -474,9 +493,27 @@ public class Inventory : MonoBehaviour
 
                 //Sets item off the hand
                 equaiappableItems[currentItem.equiappableItemIndex].SetActive(false);
+                Debug.Log("Debil");
 
                 break;
             }
+            else if (currSlot._canDropThisItem && currentDraggedItem != null && currentDraggedItem.equiappableArmorIndex != -1)
+            {
+                //Get's item into currSlot && resets currentDragedItem
+                currSlot.SetItem(currentDraggedItem);
+                Item currentItem = currSlot.GetItem();
+                ResetDragVariables();
+
+                currSlot.DropAllItems(currentItem);
+                currentItem.gameObject.SetActive(true);
+                currentItem.transform.position = dropLocation.position;
+
+                //Sets item off the hand
+                equaiappableArmor[currentItem.equiappableArmorIndex].SetActive(false);
+
+                break;
+            }
+
         }
     }
 
@@ -531,6 +568,30 @@ public class Inventory : MonoBehaviour
                 }
                 _previousHeldItemIndex = hotbarIndex;
             } 
+            else if (hotbarSlot.GetItem().equiappableArmorIndex != -1)
+            {
+                bool doubleTap = DoubleTapEquipArmor();
+                if (doubleTap)
+                {
+                    Item currentArmor = hotbarSlot.GetItem();
+                    equaiappableArmor[currentArmor.equiappableArmorIndex].SetActive(true);
+
+                    if (currentArmor != _currentEquiappedArmor && _currentEquiappedArmor != null)
+                    {
+                        equaiappableArmor[_currentEquiappedArmor.equiappableArmorIndex].SetActive(false);
+                        hotbarSlot.SetItem(_currentEquiappedArmor);
+                        equaiappableArmor[currentArmor.equiappableArmorIndex].SetActive(true);
+                        _currentEquiappedArmor = currentArmor;
+                        ResetDragVariables(); 
+                    }
+                    else
+                    {
+                        _currentEquiappedArmor = currentArmor;
+                        hotbarSlot.SetItem(null);
+                        ResetDragVariables(); 
+                    }
+                }
+            }
         } 
         else
         {

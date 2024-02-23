@@ -25,11 +25,15 @@ public class Item : MonoBehaviour
     public int currentQuantity = 1;
     public int maxQuantity = 16;
     public int Damage;
-    public bool IsHeld = false; 
+    public bool IsHeld = false;
 
 
     [Header("Hotbar")]
     public int equiappableItemIndex = -1;
+
+    [Header("Armor")]
+    public int equiappableArmorIndex = -1;
+    public int damageReduction;
 
     [Header("Consumable")]
     public bool Consumable = false;

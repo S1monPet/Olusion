@@ -2482,7 +2482,7 @@ PrefabInstance:
     - target: {fileID: 7636575830027342739, guid: 6903931c095dd634c8dfc7194830fcaf,
         type: 3}
       propertyPath: equiappableItemIndex
-      value: 11
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7957904782673343613, guid: 6903931c095dd634c8dfc7194830fcaf,
         type: 3}
@@ -2723,7 +2723,7 @@ PrefabInstance:
     - target: {fileID: 7636575830027342739, guid: 6903931c095dd634c8dfc7194830fcaf,
         type: 3}
       propertyPath: equiappableItemIndex
-      value: 11
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7957904782673343613, guid: 6903931c095dd634c8dfc7194830fcaf,
         type: 3}
@@ -3460,6 +3460,8 @@ MonoBehaviour:
   Damage: 0
   IsHeld: 0
   equiappableItemIndex: 1
+  equiappableArmorIndex: -1
+  damageReduction: 0
   Consumable: 0
   TimeToConsume: 1
   type: 0
@@ -3748,6 +3750,8 @@ MonoBehaviour:
   Damage: 0
   IsHeld: 0
   equiappableItemIndex: 0
+  equiappableArmorIndex: -1
+  damageReduction: 0
   Consumable: 0
   TimeToConsume: 1
   type: 0
@@ -4553,6 +4557,8 @@ MonoBehaviour:
   Damage: 5
   IsHeld: 0
   equiappableItemIndex: 4
+  equiappableArmorIndex: -1
+  damageReduction: 0
   Consumable: 0
   TimeToConsume: 1
   type: 0
@@ -4689,6 +4695,8 @@ MonoBehaviour:
   Damage: 0
   IsHeld: 0
   equiappableItemIndex: 10
+  equiappableArmorIndex: -1
+  damageReduction: 0
   Consumable: 0
   TimeToConsume: 1
   type: 0
@@ -5288,6 +5296,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6737508691537531652, guid: aec87550a2e03954eaecdd994278f2a5,
+        type: 3}
+      propertyPath: equiappableItemIndex
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aec87550a2e03954eaecdd994278f2a5, type: 3}
@@ -6148,8 +6161,6 @@ MonoBehaviour:
   - {fileID: 1516160107}
   - {fileID: 222169205}
   - {fileID: 620244271}
-  - {fileID: 33350786}
-  - {fileID: 826408077}
   - {fileID: 1265168212}
   - {fileID: 1736428855}
   - {fileID: 224269721}
@@ -6160,7 +6171,9 @@ MonoBehaviour:
   FoodScript: {fileID: 931622440}
   WaterScript: {fileID: 268129703}
   HealthScript: {fileID: 275844211}
-  equaiappableClothes: []
+  equaiappableArmor:
+  - {fileID: 826408077}
+  - {fileID: 33350786}
   itemRecipes:
   - {fileID: 11400000, guid: f6b1a6046e669e14681317298d1f16aa, type: 2}
   - {fileID: 11400000, guid: c66ae5dcf0d89704da395e6bf53d5dc7, type: 2}
@@ -6215,6 +6228,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   logger: {fileID: 1733751748}
   healthBar: {fileID: 1417755241}
+  armorObjects:
+  - {fileID: 826408077}
+  - {fileID: 33350786}
 --- !u!114 &275844212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8502,7 +8518,9 @@ MonoBehaviour:
   maxQuantity: 5
   Damage: 0
   IsHeld: 0
-  equiappableItemIndex: 10
+  equiappableItemIndex: 8
+  equiappableArmorIndex: -1
+  damageReduction: 0
   Consumable: 0
   TimeToConsume: 1
   type: 0
@@ -17127,6 +17145,8 @@ MonoBehaviour:
   Damage: 0
   IsHeld: 0
   equiappableItemIndex: 5
+  equiappableArmorIndex: -1
+  damageReduction: 0
   Consumable: 1
   TimeToConsume: 2
   type: 0
@@ -17617,6 +17637,8 @@ MonoBehaviour:
   Damage: 0
   IsHeld: 0
   equiappableItemIndex: 14
+  equiappableArmorIndex: -1
+  damageReduction: 0
   Consumable: 0
   TimeToConsume: 1
   type: 0
@@ -19160,6 +19182,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   logger: {fileID: 1733751748}
   healthBar: {fileID: 1417755241}
+  armorObjects: []
 --- !u!114 &707541190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25262,6 +25285,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StonePrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 2957899643977017527, guid: 00d8d276411985b4e9484b05b5040e90,
+        type: 3}
+      propertyPath: equiappableItemIndex
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 3352414734912343873, guid: 00d8d276411985b4e9484b05b5040e90,
         type: 3}
       propertyPath: m_RootOrder
@@ -26338,6 +26366,8 @@ MonoBehaviour:
   Damage: 0
   IsHeld: 0
   equiappableItemIndex: 0
+  equiappableArmorIndex: -1
+  damageReduction: 0
   Consumable: 0
   TimeToConsume: 1
   type: 0
@@ -26733,6 +26763,8 @@ MonoBehaviour:
   Damage: 0
   IsHeld: 0
   equiappableItemIndex: 1
+  equiappableArmorIndex: -1
+  damageReduction: 0
   Consumable: 0
   TimeToConsume: 1
   type: 0
@@ -26923,7 +26955,7 @@ PrefabInstance:
     - target: {fileID: 7636575830027342739, guid: 6903931c095dd634c8dfc7194830fcaf,
         type: 3}
       propertyPath: equiappableItemIndex
-      value: 11
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7957904782673343613, guid: 6903931c095dd634c8dfc7194830fcaf,
         type: 3}
@@ -27295,6 +27327,8 @@ MonoBehaviour:
   Damage: 0
   IsHeld: 0
   equiappableItemIndex: 0
+  equiappableArmorIndex: -1
+  damageReduction: 0
   Consumable: 0
   TimeToConsume: 1
   type: 0
@@ -27729,6 +27763,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HempPrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 7636575830027342739, guid: 6903931c095dd634c8dfc7194830fcaf,
+        type: 3}
+      propertyPath: equiappableItemIndex
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 7957904782673343613, guid: 6903931c095dd634c8dfc7194830fcaf,
         type: 3}
       propertyPath: m_RootOrder
@@ -28108,6 +28147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   logger: {fileID: 1733751748}
   healthBar: {fileID: 0}
+  armorObjects: []
 --- !u!114 &961610427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29508,6 +29548,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3834755920904445013, guid: 9f80e5eee82a1fd48a513da3bd290f30,
+        type: 3}
+      propertyPath: equiappableItemIndex
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4176705889951604994, guid: 9f80e5eee82a1fd48a513da3bd290f30,
         type: 3}
       propertyPath: m_Name
@@ -29696,7 +29741,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 08ef8d0e77b40f747af85726a60a7e3a,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 08ef8d0e77b40f747af85726a60a7e3a,
         type: 3}
@@ -29711,6 +29756,38 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1048003143}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1048003147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 826408077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42e56ba6eb885a04c82a2bd042553a92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Leather Armor
+  description: Gives your protection
+  icon: {fileID: 21300000, guid: 7480ebc9755d442439e2b1b1843625bb, type: 3}
+  currentQuantity: 1
+  maxQuantity: 1
+  Damage: 0
+  IsHeld: 0
+  equiappableItemIndex: -1
+  equiappableArmorIndex: 0
+  damageReduction: 10
+  Consumable: 0
+  TimeToConsume: 1
+  type: 0
+  Amount: 0
+  Healing: 0
+  HealthGain: 0
+  TimeToGainHealth: 2
+  healingType: 0
+  Wearable: 1
+  clothingType: 0
 --- !u!1001 &1051112644
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30896,6 +30973,8 @@ MonoBehaviour:
   Damage: 0
   IsHeld: 0
   equiappableItemIndex: 12
+  equiappableArmorIndex: -1
+  damageReduction: 0
   Consumable: 0
   TimeToConsume: 1
   type: 0
@@ -43566,6 +43645,8 @@ MonoBehaviour:
   Damage: 0
   IsHeld: 0
   equiappableItemIndex: 2
+  equiappableArmorIndex: -1
+  damageReduction: 0
   Consumable: 0
   TimeToConsume: 1
   type: 0
@@ -43780,6 +43861,8 @@ MonoBehaviour:
   Damage: 0
   IsHeld: 0
   equiappableItemIndex: 8
+  equiappableArmorIndex: -1
+  damageReduction: 0
   Consumable: 0
   TimeToConsume: 1
   type: 0
@@ -47883,6 +47966,8 @@ MonoBehaviour:
   Damage: 0
   IsHeld: 0
   equiappableItemIndex: 3
+  equiappableArmorIndex: -1
+  damageReduction: 0
   Consumable: 0
   TimeToConsume: 1
   type: 0
@@ -50988,7 +51073,9 @@ MonoBehaviour:
   maxQuantity: 1
   Damage: 0
   IsHeld: 0
-  equiappableItemIndex: 6
+  equiappableItemIndex: -1
+  equiappableArmorIndex: 1
+  damageReduction: 20
   Consumable: 0
   TimeToConsume: 1
   type: 0
@@ -51158,7 +51245,9 @@ MonoBehaviour:
   maxQuantity: 1
   Damage: 0
   IsHeld: 0
-  equiappableItemIndex: 7
+  equiappableItemIndex: -1
+  equiappableArmorIndex: 0
+  damageReduction: 10
   Consumable: 0
   TimeToConsume: 1
   type: 0
@@ -57851,6 +57940,8 @@ MonoBehaviour:
   Damage: 0
   IsHeld: 0
   equiappableItemIndex: 9
+  equiappableArmorIndex: -1
+  damageReduction: 0
   Consumable: 0
   TimeToConsume: 1
   type: 0
@@ -57989,6 +58080,8 @@ MonoBehaviour:
   Damage: 5
   IsHeld: 0
   equiappableItemIndex: 4
+  equiappableArmorIndex: -1
+  damageReduction: 0
   Consumable: 0
   TimeToConsume: 1
   type: 0
@@ -63408,6 +63501,8 @@ MonoBehaviour:
   Damage: 5
   IsHeld: 0
   equiappableItemIndex: 3
+  equiappableArmorIndex: -1
+  damageReduction: 0
   Consumable: 1
   TimeToConsume: 2
   type: 1
@@ -64433,6 +64528,38 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2032629289}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2032629293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 33350786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42e56ba6eb885a04c82a2bd042553a92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Metal Armor
+  description: Gives you medium protection
+  icon: {fileID: 21300000, guid: 3d2484bff1e05b645904da4c4c73385a, type: 3}
+  currentQuantity: 1
+  maxQuantity: 1
+  Damage: 0
+  IsHeld: 0
+  equiappableItemIndex: -1
+  equiappableArmorIndex: 1
+  damageReduction: 20
+  Consumable: 0
+  TimeToConsume: 1
+  type: 0
+  Amount: 0
+  Healing: 0
+  HealthGain: 0
+  TimeToGainHealth: 2
+  healingType: 0
+  Wearable: 1
+  clothingType: 0
 --- !u!1001 &2034082600
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -65481,6 +65608,8 @@ MonoBehaviour:
   Damage: 0
   IsHeld: 0
   equiappableItemIndex: 13
+  equiappableArmorIndex: -1
+  damageReduction: 0
   Consumable: 0
   TimeToConsume: 1
   type: 0
@@ -68254,7 +68383,7 @@ PrefabInstance:
     - target: {fileID: 1400530815899068393, guid: eced1e70879573b4ba7b3abaaa2e5d33,
         type: 3}
       propertyPath: equiappableItemIndex
-      value: 9
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1505634003629867023, guid: eced1e70879573b4ba7b3abaaa2e5d33,
         type: 3}
@@ -68665,6 +68794,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8497497957124599859, guid: 91443dc4544e2794d913ae28bca3e3e7,
+        type: 3}
+      propertyPath: equiappableItemIndex
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8731429159240846695, guid: 91443dc4544e2794d913ae28bca3e3e7,
         type: 3}
