@@ -336,6 +336,7 @@ public class Inventory : MonoBehaviour
                     ResetDragVariables();
 
                     ToggleItemStateOnSwap(itemToSwap, i);
+                    currSlot._canDropThisItem = false; //Deactivate it for dropping item otherwise there is a conflict, item being dropped
                     return; 
                 } 
                 else //Place with no swap
@@ -344,6 +345,7 @@ public class Inventory : MonoBehaviour
                     ResetDragVariables();
 
                     ToggleItemStateOnSwap(currSlot.GetItem(), i);
+                    currSlot._canDropThisItem = false; //Deactivate it for dropping item otherwise there is a conflict, item being dropped
                     return; 
                 }
             }
@@ -363,10 +365,15 @@ public class Inventory : MonoBehaviour
     private void ToggleItemStateOnSwap(Item currentItem, int inventoryIndex)
     {
         //There is 6 HotBar slots
-        if (inventoryIndex > 6)
+        if (inventoryIndex > 6 && currentItem.equiappableItemIndex != -1)
         { 
             currentItem.IsHeld = false;
             equaiappableItems[currentItem.equiappableItemIndex].SetActive(false);
+        }
+        else if (inventoryIndex > 6 && currentItem.equiappableArmorIndex != -1)
+        {
+            currentItem.IsHeld = false;
+            equaiappableArmor[currentItem.equiappableArmorIndex].SetActive(false);
         }
 
         /* Subject to change get item instantly in hand, probably not the best
@@ -484,6 +491,7 @@ public class Inventory : MonoBehaviour
             {
                 //Get's item into currSlot && resets currentDragedItem
                 currSlot.SetItem(currentDraggedItem);
+
                 Item currentItem = currSlot.GetItem();
                 ResetDragVariables();
 
@@ -501,6 +509,7 @@ public class Inventory : MonoBehaviour
             {
                 //Get's item into currSlot && resets currentDragedItem
                 currSlot.SetItem(currentDraggedItem);
+
                 Item currentItem = currSlot.GetItem();
                 ResetDragVariables();
 
@@ -542,6 +551,7 @@ public class Inventory : MonoBehaviour
 
     }
 
+
     //Hotbar
     public void EnableHotBarItem(int hotbarIndex) //Previously called in the script now in inspector
     {
@@ -568,7 +578,8 @@ public class Inventory : MonoBehaviour
                 }
                 _previousHeldItemIndex = hotbarIndex;
             } 
-            else if (hotbarSlot.GetItem().equiappableArmorIndex != -1)
+            //We are also checking inventory here, because we equip item in hotbar not with inventory open, with inventory open we drop it
+            else if (hotbarSlot.GetItem().equiappableArmorIndex != -1 && !inventory.activeInHierarchy) 
             {
                 bool doubleTap = DoubleTapEquipArmor();
                 if (doubleTap)
@@ -582,12 +593,14 @@ public class Inventory : MonoBehaviour
                         hotbarSlot.SetItem(_currentEquiappedArmor);
                         equaiappableArmor[currentArmor.equiappableArmorIndex].SetActive(true);
                         _currentEquiappedArmor = currentArmor;
+
                         ResetDragVariables(); 
                     }
                     else
                     {
                         _currentEquiappedArmor = currentArmor;
                         hotbarSlot.SetItem(null);
+
                         ResetDragVariables(); 
                     }
                 }
