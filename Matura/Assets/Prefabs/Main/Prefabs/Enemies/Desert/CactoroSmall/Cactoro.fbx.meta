@@ -1,8 +1,35 @@
 fileFormatVersion: 2
-guid: cbb7596a594552c47b27215fa6b436d8
+guid: 5415594696c7af04c852b8aba27dcb19
 ModelImporter:
   serializedVersion: 21300
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: -7834884072323577149
+    second: CharacterArmature|Bite_Front
+  - first:
+      74: 2784886819497288330
+    second: CharacterArmature|Dance
+  - first:
+      74: 4447012609936615250
+    second: CharacterArmature|Death
+  - first:
+      74: -7655272897581899170
+    second: CharacterArmature|HitRecieve
+  - first:
+      74: 9061338213343248790
+    second: CharacterArmature|Idle
+  - first:
+      74: 140615187318258251
+    second: CharacterArmature|Jump
+  - first:
+      74: 380537578229758779
+    second: CharacterArmature|No
+  - first:
+      74: -5599002979973759676
+    second: CharacterArmature|Walk
+  - first:
+      74: -8174297497461417188
+    second: CharacterArmature|Yes
   externalObjects: {}
   materials:
     materialImportMode: 2
