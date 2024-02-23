@@ -7,18 +7,17 @@ using UnityEngine.AI;
 
 public class Attack : MonoBehaviour
 {
-    [SerializeField] ParticleSystem hitEffect;
-
     private EnemyBase enemyBase;
     private List<Slot> HotbarSlots = new List<Slot>();
 
     public bool playerBusy = false;
     public LayerMask enemyMask; 
     //public Interactable enemy;
-    public NavMeshAgent agent; 
+    public NavMeshAgent agent;
+    public PlayerMovement playerMovement; 
 
     private RaycastHit hit;
-    private float raycastDistance = 13f;
+    private float raycastDistance = 10f;
 
     private int handDamage = 10;
     private bool wasTouchedAlready = false;
@@ -74,10 +73,9 @@ public class Attack : MonoBehaviour
             enemyBase = hit.collider.gameObject.GetComponent<EnemyBase>();
             if (enemyBase != null)
             {
+                playerMovement.SetAgentRotation(); 
                 enemyBase.EnemyTakeDamage(HoldingItemDamage());
 
-                if (hitEffect != null)
-                    hitEffect.Emit(100); //Only once
             }
         }
             

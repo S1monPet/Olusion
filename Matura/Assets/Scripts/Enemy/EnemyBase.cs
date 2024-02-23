@@ -30,7 +30,12 @@ public abstract class EnemyBase : MonoBehaviour
     protected float lookRotationSpeed = 20f;
 
     [Header("Game Manager")]
-    public GameManager gameManager; 
+    public GameManager gameManager;
+
+    [Header("Animations")]
+    public Animator enemyAnimator;
+    public Animator playerAnimator;
+    public NavMeshAgent playerAgent; 
 
 
     //For patrolling
@@ -53,17 +58,24 @@ public abstract class EnemyBase : MonoBehaviour
     public abstract Enemies TypeOfEnemy();
     protected virtual void EnemyAttack(NavMeshAgent agent)
     {
-        if (Vector3.Distance(player.transform.position, agent.transform.position) <= EnemyStats.EnemyPatrolingRange)
+        //Checking if enemy is close enough to hit player
+        if (Vector3.Distance(player.transform.position, agent.transform.position) <= EnemyStats.EnemyAttackingRange)
+        {
+            EnemyHit();
+
+        }
+        else if (Vector3.Distance(player.transform.position, agent.transform.position) <= EnemyStats.EnemyPatrolingRange)
         {
             agent.SetDestination(player.transform.position);
             agent.speed = EnemyStats.EnemyAttackSpeed;
 
-            SetEnemyRotation(agent); 
+            SetEnemyRotation(agent);
+            enemyAnimator.SetBool("IsPlayerClose", true); //Start running after
         }
-        //Checking if enemy is close enough to hit player
-        if (Vector3.Distance(player.transform.position, agent.transform.position) <= EnemyStats.EnemyAttackingRange)
+        else
         {
-            EnemyHit(); 
+            if (!enemyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Walking")) //Check if is already walking
+                enemyAnimator.SetBool("IsPlayerClose", false);
         }
 
     }
@@ -84,12 +96,20 @@ public abstract class EnemyBase : MonoBehaviour
         {
             if (playerHealthScript != null)
             {
+                enemyAnimator.Play("Attack");
                 playerHealthScript.TakeDamage(EnemyStats.EnemyAttackDamage); //Change HP on player
                 playerHealthScript.ChangePlayerSliderHealth(); //Change HP in HealthBar
 
-                StartAttackCoolDown(EnemyStats.EnemyAttackCooldown);
+                ResetAttack(); 
             }
         } 
+    }
+
+
+    protected void ResetAttack()
+    {
+        enemyAnimator.SetBool("Attack", false);
+        StartAttackCoolDown(EnemyStats.EnemyAttackCooldown);
     }
 
 
@@ -145,14 +165,13 @@ public abstract class EnemyBase : MonoBehaviour
             gameObject.SetActive(false);
 
             Init(currentNavMeshAgent);
-            gameManager.RespawnEnemy(EnemyStats.RespawnTimer, gameObject);
+            gameManager.RespawnEnemy(EnemyStats.RespawnTimer, gameObject, enemyAnimator);
         }
     }
 
     //Setting base for patrolling
     protected virtual void Patrol(Transform[] patrolPoints, NavMeshAgent agent)
     {
-
         EnemyAttack(agent);
 
         if(!agent.pathPending && agent.remainingDistance < 0.1f)
@@ -196,8 +215,30 @@ public abstract class EnemyBase : MonoBehaviour
     protected IEnumerator AttackCooldown(float cooldownDuration)
     {
         _isOnCooldown = true;
-        yield return EnemyStats.CoolDownWait; 
+        StopEnemyAgentAndAnimations(); 
+
+        yield return EnemyStats.CoolDownWait;
+
+        currentNavMeshAgent.ResetPath();
+
+        ReleaseEnemyAgentAndAnimations(); 
         _isOnCooldown = false;
+
+    }
+
+    private void StopEnemyAgentAndAnimations()
+    {
+        currentNavMeshAgent.isStopped = true;
+        currentNavMeshAgent.velocity = Vector3.zero;
+        enemyAnimator.SetBool("CoolDown", true);
+
+    }
+
+    private void ReleaseEnemyAgentAndAnimations()
+    {
+        currentNavMeshAgent.isStopped = false;
+        enemyAnimator.Play("Walking");
+        enemyAnimator.SetBool("CoolDown", false);
     }
 
 }

@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     private float fps;
     public TextMeshProUGUI FPSText;
 
+    [Header("Enemy")]
+    private int _animationToStartWith; //Will start with "Walking"
+
     //[Header("Object Pooling")]
 
     private void GetFPS() //InvokeRepeating requires
@@ -23,6 +26,8 @@ public class GameManager : MonoBehaviour
     {
         InvokeRepeating(nameof(GetFPS), 1, 1);
         Application.targetFrameRate = 300; //CAP
+
+        _animationToStartWith = Animator.StringToHash("Walking");
     }
 
 
@@ -33,12 +38,12 @@ public class GameManager : MonoBehaviour
 
     }
     //Is started when Enemy dies. 
-    public void RespawnEnemy(WaitForSeconds timer, GameObject enemy)
+    public void RespawnEnemy(WaitForSeconds timer, GameObject enemy, Animator animator)
     {
-        StartCoroutine(EnemyRespawnTimer(timer, enemy));
+        StartCoroutine(EnemyRespawnTimer(timer, enemy, animator));
     }
 
-    private IEnumerator EnemyRespawnTimer(WaitForSeconds timer, GameObject currentEnemy)
+    private IEnumerator EnemyRespawnTimer(WaitForSeconds timer, GameObject currentEnemy, Animator animator)
     {
         yield return timer;
         /*GameObject enemy = ObjectPool.SharedInstance.GetPooledObject();
@@ -48,6 +53,7 @@ public class GameManager : MonoBehaviour
             enemy.transform.rotation = currentEnemy.transform.rotation;
             enemy.SetActive(true);
         }*/
+        animator.Play(_animationToStartWith); 
         currentEnemy.SetActive(true);
     }
 }

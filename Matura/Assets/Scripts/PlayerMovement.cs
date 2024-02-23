@@ -83,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void SetAgentRotation() 
+    public void SetAgentRotation() 
     {
         Vector3 direction = (agent.destination - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));

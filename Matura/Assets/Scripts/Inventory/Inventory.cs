@@ -664,7 +664,7 @@ public class Inventory : MonoBehaviour
         playerMovementScript.enabled = false;
     }
 
-    public async void OpenChest(Chest chest) //Getting it in ToggleChest
+    public void OpenChest(Chest chest) //Getting it in ToggleChest
     {   
         StopAgent(); 
 
