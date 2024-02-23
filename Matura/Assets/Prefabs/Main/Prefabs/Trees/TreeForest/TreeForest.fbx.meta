@@ -1,9 +1,17 @@
 fileFormatVersion: 2
-guid: cbb7596a594552c47b27215fa6b436d8
+guid: 49dd2c3b09364a946a2354b11e806f03
 ModelImporter:
   serializedVersion: 21300
-  internalIDToNameTable: []
-  externalObjects: {}
+  internalIDToNameTable:
+  - first:
+      74: -5000891181146830901
+    second: TreeForest|TreeForestAction
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TreeBranch
+    second: {fileID: 2100000, guid: bb907f78f666fc543b6a34d129c11a9e, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -1,8 +1,32 @@
 fileFormatVersion: 2
-guid: cbb7596a594552c47b27215fa6b436d8
+guid: 2062369be79297b45b24951d304b2ffc
 ModelImporter:
   serializedVersion: 21300
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: 4447012609936615250
+    second: CharacterArmature|Death
+  - first:
+      74: -7710415605997073860
+    second: CharacterArmature|Fast_Flying
+  - first:
+      74: -2735293274216970117
+    second: CharacterArmature|Flying_Idle
+  - first:
+      74: 8879800592296100609
+    second: CharacterArmature|Headbutt
+  - first:
+      74: -3663672522963054737
+    second: CharacterArmature|HitReact
+  - first:
+      74: 380537578229758779
+    second: CharacterArmature|No
+  - first:
+      74: -4592842328519117816
+    second: CharacterArmature|Punch
+  - first:
+      74: -8174297497461417188
+    second: CharacterArmature|Yes
   externalObjects: {}
   materials:
     materialImportMode: 2
