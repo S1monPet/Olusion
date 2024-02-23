@@ -118,7 +118,9 @@ MonoBehaviour:
   maxQuantity: 8
   Damage: 0
   IsHeld: 0
-  equiappableItemIndex: 12
+  equiappableItemIndex: 10
+  equiappableArmorIndex: -1
+  damageReduction: 0
   Consumable: 0
   TimeToConsume: 1
   type: 0

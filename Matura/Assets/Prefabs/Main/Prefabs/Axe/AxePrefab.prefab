@@ -251,6 +251,8 @@ MonoBehaviour:
   Damage: 30
   IsHeld: 0
   equiappableItemIndex: 2
+  equiappableArmorIndex: -1
+  damageReduction: 0
   Consumable: 0
   TimeToConsume: 1
   type: 0

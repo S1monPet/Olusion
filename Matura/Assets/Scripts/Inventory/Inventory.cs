@@ -4,9 +4,6 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEditor.Experimental.GraphView;
-using UnityEditor.UI;
-using Unity.VisualScripting;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
 using System.Threading;
@@ -829,11 +826,6 @@ public class Inventory : MonoBehaviour
                     }
                     return; 
                 }
-            }
-            else
-            {
-                remainingQuantity -= item.currentQuantity; 
-                currSlot.SetItem(null);
             }
         }
     }
