@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -8,9 +9,12 @@ using UnityEditor.UI;
 using Unity.VisualScripting;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
+using System.Threading;
 
 public class Inventory : MonoBehaviour
 {
+    private CancellationTokenSource _tokenSource;
+
     [Header("IU")]
     public GameObject inventory;
     public PlayerMovement playerMovementScript; 
@@ -60,8 +64,15 @@ public class Inventory : MonoBehaviour
     [Header("Crafting")]
     public List<Recipe> itemRecipes = new List<Recipe>();
 
+    private void OnDisable()
+    {
+        _tokenSource.Cancel();
+    }
+
     public void Start()
     {
+        _tokenSource = new CancellationTokenSource(); 
+
         ToggleInventory(false);
 
         allInventorySlots.AddRange(hotbarSlots); //Put it in the first 
@@ -643,7 +654,7 @@ public class Inventory : MonoBehaviour
         }
     }
     */
-    private void StopAgent()
+    private void StopAgent() //Fix for better
     {
         playerMovementScript.animator.SetBool("isRunning", false);
         agent.isStopped = false;
@@ -653,8 +664,8 @@ public class Inventory : MonoBehaviour
         playerMovementScript.enabled = false;
     }
 
-    public void OpenChest(Chest chest) //Getting it in ToggleChest
-    {
+    public async void OpenChest(Chest chest) //Getting it in ToggleChest
+    {   
         StopAgent(); 
 
         ToggleInventory(true);
@@ -670,9 +681,10 @@ public class Inventory : MonoBehaviour
     {
         foreach (Recipe recipe in itemRecipes)
         {
+
             if (recipe.createdItemPrefab.GetComponent<Item>().name == itemName) //Could be optimised
             {
-                bool haveAllIngredients = true; 
+                bool haveAllIngredients = true;
                 for (int i = 0; i != recipe.requiredIngredients.Count; i++)
                 {
                     if (haveAllIngredients)
@@ -688,34 +700,35 @@ public class Inventory : MonoBehaviour
                         RemoveIngredients(recipe.requiredIngredients[i].itemName, recipe.requiredIngredients[i].requiredQuantity);
                     }
                     //Using dropLocation because if inventory is full or not full it's gonna be the same and it's better
-                    GameObject craftedItem = Instantiate(recipe.createdItemPrefab, dropLocation.position, Quaternion.identity); 
+                    GameObject craftedItem = Instantiate(recipe.createdItemPrefab, dropLocation.position, Quaternion.identity);
                     craftedItem.GetComponent<Item>().currentQuantity = recipe.quantityProduced;
 
                     //We don't want this to be put in the inventory
-                    AddItemToInventory(craftedItem.GetComponent<Item>()); 
+                    AddItemToInventory(craftedItem.GetComponent<Item>());
                 }
-                break; 
+                break;
             }
         }
+
     }
 
     private bool HaveAllIngredients(string itemName, int requiredQuantity)
     {
-        int foundQuantity = 0; 
+        int foundQuantity = 0;
         foreach (Slot currSlot in allInventorySlots)
         {
             if (currSlot.HasItem() && currSlot.GetItem().name == itemName && currSlot.GetItem() != null)
             {
-                foundQuantity += currSlot.GetItem().currentQuantity; 
+                foundQuantity += currSlot.GetItem().currentQuantity;
 
                 if (foundQuantity >= requiredQuantity)
                 {
-                    return true; 
+                    return true;
                 }
             }
         }
 
-        return false; 
+        return false;
     }
 
     private void RemoveIngredients(string itemName, int quantity)
