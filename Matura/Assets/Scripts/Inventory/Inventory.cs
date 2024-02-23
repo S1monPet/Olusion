@@ -66,7 +66,7 @@ public class Inventory : MonoBehaviour
 
     private void OnDisable()
     {
-        _tokenSource.Cancel()
+        _tokenSource.Cancel();
     }
 
     public void Start()
