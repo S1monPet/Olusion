@@ -59,4 +59,9 @@ public class MenuMainScript : MonoBehaviour
     {
 
     }
+
+    public void OnClickExit()
+    {
+        Application.Quit();
+    }
 }
