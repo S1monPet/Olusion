@@ -39,4 +39,24 @@ public class MenuMainScript : MonoBehaviour
         Menu.SetActive(true);
         
     }
+
+    public void OnClickCogOpen()
+    {
+
+    }
+
+    public void OnClickCogClose()
+    {
+
+    }
+
+    public void OnClickSoundOpen()
+    {
+
+    }
+
+    public void OnClickSoundClose()
+    {
+
+    }
 }
