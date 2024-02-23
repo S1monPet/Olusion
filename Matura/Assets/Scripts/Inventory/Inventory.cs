@@ -34,7 +34,7 @@ public class Inventory : MonoBehaviour
     private int currentDragSlotIndex = -1;
 
     private float lastTapTime = 0f;
-    private float normalTapSpeed = 0.3f;
+    private float normalTapSpeed = 0.2f;
 
     private Item previousHeldItem; 
 
@@ -333,7 +333,7 @@ public class Inventory : MonoBehaviour
                     ResetDragVariables();
 
                     ToggleItemStateOnSwap(itemToSwap, i);
-                    currSlot._canDropThisItem = false; //Deactivate it for dropping item otherwise there is a conflict, item being dropped
+                    
                     return; 
                 } 
                 else //Place with no swap
@@ -342,7 +342,7 @@ public class Inventory : MonoBehaviour
                     ResetDragVariables();
 
                     ToggleItemStateOnSwap(currSlot.GetItem(), i);
-                    currSlot._canDropThisItem = false; //Deactivate it for dropping item otherwise there is a conflict, item being dropped
+                    
                     return; 
                 }
             }
