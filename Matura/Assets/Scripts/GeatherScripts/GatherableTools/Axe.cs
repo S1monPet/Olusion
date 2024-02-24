@@ -9,12 +9,20 @@ public class Axe : MonoBehaviour
     [SerializeField] private int _axeDamage = 5;
 
     public LayerMask layerMask;
+    public bool CanGather; 
 
     private RaycastHit _hit;
     private float _maxRaycastDistance = 11f;
 
     public string TreeTag;
     public string GatheringTool;
+    public float GatheringRate;
+    public WaitForSeconds GatheringRateTimer;
+
+    private void OnEnable()
+    {
+        GatheringRateTimer = new WaitForSeconds(GatheringRate);
+    }
 
     private void Awake()
     {
@@ -23,7 +31,8 @@ public class Axe : MonoBehaviour
 
     private void Update()
     {
-        DetectIfObjectIsGatherable();
+        if (CanGather)
+            DetectIfObjectIsGatherable();
     }
 
     private void DetectIfObjectIsGatherable()
@@ -43,7 +52,7 @@ public class Axe : MonoBehaviour
                     Debug.Log(_hit.collider.gameObject.name);
                     if (_hit.collider.CompareTag(TreeTag))
                     {
-                        _hit.collider.GetComponent<TreeGathering>().Gather(_axeDamage, transform.root.gameObject, GatheringTool);
+                        _hit.collider.GetComponent<TreeGathering>().Gather(_axeDamage, transform.root.gameObject, GatheringTool, GatheringRateTimer);
                     }
                 }
             }

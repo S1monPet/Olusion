@@ -13,12 +13,10 @@ public class TreeSO : ScriptableObject
     [field: SerializeField] public float RespawnTime;
 
     public List<ItemDrop> ItemDrops = new List<ItemDrop>();    
-    public WaitForSeconds GatheringRateTimer { get; private set; }
     public WaitForSeconds RespawnTimer { get; private set; }
 
     private void OnEnable()
     {
-        GatheringRateTimer = new WaitForSeconds(GatheringRate);
         RespawnTimer = new WaitForSeconds(RespawnTime);
     }
 }

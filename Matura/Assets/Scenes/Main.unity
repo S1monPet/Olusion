@@ -46025,6 +46025,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1366030001}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1367367139 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8693991407406457616, guid: 833ae818f4621e643bde375dcad190d0,
+    type: 3}
+  m_PrefabInstance: {fileID: 422636967}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3e332e7724dabb4881d71d53760f6fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1370155794
 GameObject:
   m_ObjectHideFlags: 0
@@ -68266,6 +68278,7 @@ MonoBehaviour:
   inventoryScript: {fileID: 275844207}
   playerMovementScript: {fileID: 275844203}
   gameManager: {fileID: 343564389}
+  axeScript: {fileID: 1367367139}
 --- !u!208 &543450652070627095
 NavMeshObstacle:
   m_ObjectHideFlags: 0

@@ -280,5 +280,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 512
+  CanGather: 1
   TreeTag: Tree
   GatheringTool: Axe
+  GatheringRate: 3

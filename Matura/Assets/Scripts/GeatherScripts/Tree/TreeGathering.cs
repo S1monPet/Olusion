@@ -4,11 +4,19 @@ using UnityEngine;
 
 public class TreeGathering : GatheringBase
 {
-    public void Gather(int damage, GameObject player, string gatheringTool)
+    public Axe axeScript;
+
+    private void OnEnable()
+    {
+        axeScript.CanGather = true; 
+    }
+
+    public void Gather(int damage, GameObject player, string gatheringTool, WaitForSeconds gatheringRate)
     {
         if (IsToolEquiped(gatheringTool))
         {
-            base.Gather(damage, player, Tree.TreeHealth, Tree.ItemDrops, Tree.GatheringRateTimer, Tree.RespawnTimer); 
+            axeScript.CanGather = false; 
+            base.Gather(damage, player, Tree.TreeHealth, Tree.ItemDrops, gatheringRate, Tree.RespawnTimer);
         }
 
     }
