@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -821935333434572714, guid: 6ad6353409020fc4ca29b36c8573e22f, type: 3}
+  - {fileID: 2100000, guid: aa3501b270fe5cc4f921f593296a7457, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -135,6 +135,8 @@ MonoBehaviour:
   Damage: 0
   IsHeld: 0
   equiappableItemIndex: 14
+  equiappableArmorIndex: -1
+  damageReduction: 0
   Consumable: 0
   TimeToConsume: 1
   type: 0

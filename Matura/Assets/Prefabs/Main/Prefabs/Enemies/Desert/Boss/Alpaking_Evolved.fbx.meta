@@ -27,7 +27,32 @@ ModelImporter:
   - first:
       74: -8174297497461417188
     second: CharacterArmature|Yes
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Alpaking_Main
+    second: {fileID: 2100000, guid: 47b3765d8fb06cb4d90efb1e5c49e42a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Alpaking_Secondary
+    second: {fileID: 2100000, guid: 24b3d7241dfa9b3499c084b3c573471e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Eye_Black
+    second: {fileID: 2100000, guid: 793e3b5e81d37bd429cd82e62e771e02, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Eye_White
+    second: {fileID: 2100000, guid: 37c2790bcaa5c6440841a230473a530c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wings
+    second: {fileID: 2100000, guid: 4b51b8348fb0e4445b1360b90882c27a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

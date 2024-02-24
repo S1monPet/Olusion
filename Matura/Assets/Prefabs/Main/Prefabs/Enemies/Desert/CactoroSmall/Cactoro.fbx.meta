@@ -30,7 +30,32 @@ ModelImporter:
   - first:
       74: -8174297497461417188
     second: CharacterArmature|Yes
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cactoro_Main
+    second: {fileID: 2100000, guid: e60b2de230e706148820d460869412e3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cactoro_Red
+    second: {fileID: 2100000, guid: 9fa6f04801740b045974b364dc3e2c9b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cactoro_Secondary
+    second: {fileID: 2100000, guid: 3134a74bade2b3e498ba1ae0ec7dd74f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Eye_Black
+    second: {fileID: 2100000, guid: f01c77f341b4fb54890de472ce318f8e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Eye_White
+    second: {fileID: 2100000, guid: 79707976ef48ca44ca0c51f17eb787e3, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

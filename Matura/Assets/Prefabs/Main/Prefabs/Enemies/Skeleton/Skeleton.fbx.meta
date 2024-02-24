@@ -18,7 +18,12 @@ ModelImporter:
   - first:
       74: -1372735270039135212
     second: SkeletonArmature|Skeleton_Spawn
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Skeleton
+    second: {fileID: 2100000, guid: 875228e61214b7a45b52cdc0cd956951, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -103,7 +108,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.0025
+    globalScale: 0.25
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

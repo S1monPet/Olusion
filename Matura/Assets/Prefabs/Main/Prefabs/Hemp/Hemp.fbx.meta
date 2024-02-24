@@ -3,7 +3,12 @@ guid: 1ec263c261bb4bf4589b65da8bb97e38
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HempMat
+    second: {fileID: 2100000, guid: c901253cf46300b45b01efd0de5c3104, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
