@@ -3,19 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "TreeGathering", menuName = "Gathering/TreeGathering", order = 1)]
+[CreateAssetMenu(fileName = "Gathering", menuName = "Gathering/TreeGathering", order = 1)]
 
 public class TreeSO : ScriptableObject
 {
     [field: SerializeField] public string Tag; //Name of item; 
-    [field: SerializeField] public int TreeHP; 
+    [field: SerializeField] public int TreeHealth;
     [field: SerializeField] public float GatheringRate;
-    [field: SerializeField] public int TotalAmountOfLogs;
+    [field: SerializeField] public float RespawnTime;
 
+    public List<ItemDrop> ItemDrops = new List<ItemDrop>();    
     public WaitForSeconds GatheringRateTimer { get; private set; }
+    public WaitForSeconds RespawnTimer { get; private set; }
 
     private void OnEnable()
     {
         GatheringRateTimer = new WaitForSeconds(GatheringRate);
+        RespawnTimer = new WaitForSeconds(RespawnTime);
     }
+}
+
+[System.Serializable]
+public class ItemDrop
+{
+    public GameObject ItemToDrop; 
+    public int TotalAmountOfLogs;
 }

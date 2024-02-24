@@ -178,6 +178,7 @@ GameObject:
   - component: {fileID: 7278708296476470213}
   - component: {fileID: 7278708296476470266}
   - component: {fileID: 7278708296476470267}
+  - component: {fileID: 8693991407406457616}
   m_Layer: 7
   m_Name: AxePrefab
   m_TagString: Item
@@ -263,3 +264,21 @@ MonoBehaviour:
   healingType: 0
   Wearable: 0
   clothingType: 0
+--- !u!114 &8693991407406457616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7620727668973377199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3e332e7724dabb4881d71d53760f6fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _axeDamage: 5
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 512
+  TreeTag: Tree
+  GatheringTool: Axe

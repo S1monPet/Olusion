@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: BasicTree
   m_EditorClassIdentifier: 
   Tag: Tree
-  TreeHP: 50
+  TreeHealth: 20
   GatheringRate: 3
-  TotalAmountOfLogs: 3
+  RespawnTime: 10
+  ItemDrops:
+  - ItemToDrop: {fileID: 4262352214783111517, guid: 2da581bd6d8cec64298f90bb4c9dde34,
+      type: 3}
+    TotalAmountOfLogs: 3

@@ -56,4 +56,16 @@ public class GameManager : MonoBehaviour
         animator.Play(_animationToStartWith); 
         currentEnemy.SetActive(true);
     }
+
+    public void RespawnGatherableItem(GameObject gatherableItem, WaitForSeconds timer)
+    {
+        StartCoroutine(GatherableItemRespawnTimer(gatherableItem, timer));
+    }
+
+    private IEnumerator GatherableItemRespawnTimer(GameObject gatherableItem, WaitForSeconds timer)
+    {
+        yield return timer; 
+
+        gatherableItem.SetActive(true);
+    }
 }

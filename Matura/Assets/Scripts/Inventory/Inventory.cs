@@ -216,7 +216,7 @@ public class Inventory : MonoBehaviour
     }
 
 
-    private void AddItemToInventory(Item itemToAdd)
+    public void AddItemToInventory(Item itemToAdd)
     {
         int leftoverQuantity = itemToAdd.currentQuantity;
         Slot openSlot = null; 

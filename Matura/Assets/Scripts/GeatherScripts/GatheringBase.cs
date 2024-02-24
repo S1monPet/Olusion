@@ -9,90 +9,59 @@ public abstract class GatheringBase : MonoBehaviour
     [SerializeField] private TreeSO tree;
     public TreeSO Tree => tree;
 
-    public LayerMask layerMask;
-    public Animator animator;
-
-    public GameObject inventory;
+    public Inventory inventoryScript; 
     public PlayerMovement playerMovementScript;
-    public Item currentItem;
+    public GameManager gameManager;
 
-    private RaycastHit _hit;
-    private float _maxRaycastDistance = 11f;
-    private bool _gathering = false; 
+    private Coroutine _gatheringCoroutine; //For stopping coroutine
 
-
-    protected void DetectIfObjectIsGatherable()
+    private void OnDisable()
     {
-        if (!inventory.activeInHierarchy)
-        {
-            if (Input.touchCount > 0)
-            {
-                Touch touch = Input.GetTouch(0);
-
-                if (touch.phase == TouchPhase.Began)
-                {
-
-                    Ray ray = Camera.main.ScreenPointToRay(touch.position);
-                    UnityEngine.Debug.DrawLine(ray.origin, ray.origin + ray.direction * _maxRaycastDistance, Color.blue, 15);
-
-                    if (Physics.Raycast(ray, out _hit, _maxRaycastDistance, layerMask))
-                    {
-                        Debug.Log(_hit.collider.gameObject.name);
-                        if (_hit.collider.CompareTag(Tree.Tag))
-                        {
-                            StopPlayer(); 
-                            Gather();
-                            Debug.Log("Gathering");
-                        }
-                    }
-                }
-            }
-        }
+        StopAllCoroutines(); //Stopping all
     }
-    protected void FastExitIfPlayerGathering()
-    {
-        if (_gathering)
-        {
-            if (!inventory.activeInHierarchy)
-            {
-                if (Input.touchCount > 0)
-                {
-                    Touch touch = Input.GetTouch(0);
 
-                    if (touch.phase == TouchPhase.Began)
-                    {
-                        playerMovementScript.enabled = true;
-                        StopCoroutine(GatheringCourotine());
-                    }
-                }
-            }
+    protected virtual void Gather(int damage, GameObject player, int objectHealth, List<ItemDrop> itemDrops, WaitForSeconds gatheringRate, WaitForSeconds respawnTimer)
+    {
+
+        foreach (ItemDrop itemToDrop in itemDrops)
+        {
+            if (itemToDrop.TotalAmountOfLogs == 0)
+                return;
+            
+            _gatheringCoroutine = StartCoroutine(GatheringCourotine(gatheringRate, itemToDrop.TotalAmountOfLogs, itemToDrop, respawnTimer));
         }
     }
 
-    private void StopPlayer()
-    { 
-        playerMovementScript.agent.isStopped = false;
-        playerMovementScript.agent.velocity = Vector3.zero;
-        playerMovementScript.agent.ResetPath();
-
-        playerMovementScript.enabled = false;
-    }
-
-    private void Gather()
+    protected IEnumerator GatheringCourotine(WaitForSeconds timeToGather, int amountOfItems, ItemDrop itemToDrop, WaitForSeconds respawnTimer)
     {
-        //Start animation
-        _gathering = true;
-        StartCoroutine(GatheringCourotine());
-        //Give logs in inventory empty slot
+        for (int i = 0; i != amountOfItems; i++)
+        {
+            yield return timeToGather;
+
+            //Expensive
+            Item droppedItem = Instantiate(itemToDrop.ItemToDrop, transform.position, Quaternion.identity).GetComponent<Item>();
+            droppedItem.currentQuantity = 1;
+
+            inventoryScript.AddItemToInventory(droppedItem);
+            Debug.Log(droppedItem.currentQuantity);
+        }
+        RespawnGatherableItem(respawnTimer); //Was destroyed before
     }
 
-    protected IEnumerator GatheringCourotine()
+    protected void RespawnGatherableItem(WaitForSeconds itemRespawnTimer)
     {
-        yield return Tree.GatheringRateTimer;
-        //Stop animation
-        //Slowly put 1 by on object in slot
-        _gathering = false; 
-        playerMovementScript.enabled = true; 
+        gameObject.SetActive(false);
+        gameManager.RespawnGatherableItem(gameObject, itemRespawnTimer);
     }
+
+    protected void StopGatheringCourotine()
+    {
+        if (_gatheringCoroutine != null)
+        {
+            StopCoroutine(_gatheringCoroutine);
+            _gatheringCoroutine = null; //Reset the reference 
+        }
+    }
+
 
 }
