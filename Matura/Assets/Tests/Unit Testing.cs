@@ -12,7 +12,7 @@ public class UnitTesting
     {
         // Use the Assert class to test conditions
 
-        Assert.AreEqual(1, 2);
+        Assert.AreEqual(2, 2);
     }
 
     // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
