@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
     public Animator animator;
 
     //Distance of player movement
-    private float maxRaycastDistance = 20f;
+    public static float MaxRaycastDistance = 20f; //Only one max
     private string groundTag = "Ground";
 
     public float lookRotationSpeed = 20f;
@@ -53,9 +53,9 @@ public class PlayerMovement : MonoBehaviour
                 if (touch.phase == TouchPhase.Began)
                 {
                     Ray ray = Camera.main.ScreenPointToRay(touch.position);
-                    UnityEngine.Debug.DrawLine(ray.origin, ray.origin + ray.direction * maxRaycastDistance, Color.green, 3);
+                    UnityEngine.Debug.DrawLine(ray.origin, ray.origin + ray.direction * MaxRaycastDistance, Color.green, 3);
 
-                    if (Physics.Raycast(ray, out hit, maxRaycastDistance, layerMask))
+                    if (Physics.Raycast(ray, out hit, MaxRaycastDistance, layerMask))
                     {
                         if (hit.collider.CompareTag(groundTag))
                         {

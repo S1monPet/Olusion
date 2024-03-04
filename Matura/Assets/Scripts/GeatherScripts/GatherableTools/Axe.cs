@@ -19,6 +19,8 @@ public class Axe : MonoBehaviour
     public float GatheringRate;
     public WaitForSeconds GatheringRateTimer;
 
+    private TreeGathering _currentGatheringScript;
+
     private void OnEnable()
     {
         GatheringRateTimer = new WaitForSeconds(GatheringRate);
@@ -31,8 +33,7 @@ public class Axe : MonoBehaviour
 
     private void Update()
     {
-        if (CanGather)
-            DetectIfObjectIsGatherable();
+        DetectIfObjectIsGatherable();
     }
 
     private void DetectIfObjectIsGatherable()
@@ -49,11 +50,21 @@ public class Axe : MonoBehaviour
 
                 if (Physics.Raycast(ray, out _hit, _maxRaycastDistance, layerMask))
                 {
-                    Debug.Log(_hit.collider.gameObject.name);
-                    if (_hit.collider.CompareTag(TreeTag))
+                    if (_hit.collider.CompareTag(TreeTag) && CanGather)
                     {
-                        _hit.collider.GetComponent<TreeGathering>().Gather(_axeDamage, transform.root.gameObject, GatheringTool, GatheringRateTimer);
-                    }
+                        _currentGatheringScript = _hit.collider.GetComponent<TreeGathering>();
+                        if (_currentGatheringScript != null)
+                        {
+                            _currentGatheringScript.Gather(_axeDamage, transform.root.gameObject, GatheringTool, GatheringRateTimer);
+                            return; 
+                        }
+                    } 
+                }
+
+                if (_currentGatheringScript != null) 
+                {
+                    _currentGatheringScript.StopGathering();
+                    _currentGatheringScript = null; //Reset the reference
                 }
             }
         }

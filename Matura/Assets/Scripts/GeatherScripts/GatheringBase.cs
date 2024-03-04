@@ -6,47 +6,42 @@ using UnityEngine.UI;
 
 public abstract class GatheringBase : MonoBehaviour
 {
-    [SerializeField] private TreeSO tree;
-    public TreeSO Tree => tree;
-
     public Inventory inventoryScript; 
     public PlayerMovement playerMovementScript;
+    public Animator playerAnimator; 
     public GameManager gameManager;
 
     private Coroutine _gatheringCoroutine; //For stopping coroutine
 
     private void OnDisable()
     {
-        StopAllCoroutines(); //Stopping all
+        StopGatheringCoroutine(); //Stopping all
     }
 
-    protected virtual void Gather(int damage, GameObject player, int objectHealth, List<ItemDrop> itemDrops, WaitForSeconds gatheringRate, WaitForSeconds respawnTimer)
+    protected void Gather(int damage, GameObject player, int objectHealth, List<ItemDrop> itemDrops, WaitForSeconds gatheringRate, WaitForSeconds respawnTimer)
     {
+        //Gathering animation
+
 
         foreach (ItemDrop itemToDrop in itemDrops)
         {
             if (itemToDrop.TotalAmountOfLogs == 0)
                 return;
             
-            _gatheringCoroutine = StartCoroutine(GatheringCourotine(gatheringRate, itemToDrop.TotalAmountOfLogs, itemToDrop, respawnTimer));
+            _gatheringCoroutine = StartCoroutine(GatheringCourotine(damage, gatheringRate, itemToDrop.TotalAmountOfLogs, itemToDrop, respawnTimer));
         }
     }
 
-    protected IEnumerator GatheringCourotine(WaitForSeconds timeToGather, int amountOfItems, ItemDrop itemToDrop, WaitForSeconds respawnTimer)
+    public virtual void StopGathering()
     {
-        for (int i = 0; i != amountOfItems; i++)
-        {
-            yield return timeToGather;
+        StopGatheringCoroutine();
+        //Stop animation, set it to idle 
 
-            //Expensive
-            Item droppedItem = Instantiate(itemToDrop.ItemToDrop, transform.position, Quaternion.identity).GetComponent<Item>();
-            droppedItem.currentQuantity = 1;
+        //Override 
 
-            inventoryScript.AddItemToInventory(droppedItem);
-            Debug.Log(droppedItem.currentQuantity);
-        }
-        RespawnGatherableItem(respawnTimer); //Was destroyed before
     }
+
+    protected abstract IEnumerator GatheringCourotine(int damage, WaitForSeconds timeToGather, int amountOfItems, ItemDrop itemToDrop, WaitForSeconds respawnTimer);
 
     protected void RespawnGatherableItem(WaitForSeconds itemRespawnTimer)
     {
@@ -54,7 +49,7 @@ public abstract class GatheringBase : MonoBehaviour
         gameManager.RespawnGatherableItem(gameObject, itemRespawnTimer);
     }
 
-    protected void StopGatheringCourotine()
+    protected void StopGatheringCoroutine()
     {
         if (_gatheringCoroutine != null)
         {

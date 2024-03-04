@@ -9,7 +9,7 @@ public class TreeSO : ScriptableObject
 {
     [field: SerializeField] public string Tag; //Name of item; 
     [field: SerializeField] public int TreeHealth;
-    [field: SerializeField] public float GatheringRate;
+    [field: SerializeField] public int SpawningTreeHealth;
     [field: SerializeField] public float RespawnTime;
 
     public List<ItemDrop> ItemDrops = new List<ItemDrop>();    
