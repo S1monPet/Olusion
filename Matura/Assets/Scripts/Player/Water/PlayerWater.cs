@@ -51,7 +51,7 @@ public class PlayerWater : MonoBehaviour
                         break; 
                     }
 
-                    playerHealth.TakeDamage(_damageToTakeIfOutOfWater);
+                    playerHealth.TakeDamage(_damageToTakeIfOutOfWater, null);
                 }
             }
         }

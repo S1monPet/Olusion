@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-
-    
-
      public static void PlaySound()
     {
         

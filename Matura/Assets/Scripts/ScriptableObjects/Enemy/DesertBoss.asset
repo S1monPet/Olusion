@@ -16,7 +16,7 @@ MonoBehaviour:
   EnemyArmor: 100
   StartingHP: 100
   StartingEnemyArmor: 100
-  EnemyAttackDamage: 1
+  EnemyAttackDamage: 70
   EnemyAttackSpeed: 8
   EnemyMovingSpeed: 5
   EnemyPatrolingRange: 8

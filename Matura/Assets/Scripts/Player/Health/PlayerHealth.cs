@@ -11,6 +11,15 @@ public class PlayerHealth : MonoBehaviour
     public static int Health;
     public HealthBar healthBar;
 
+    [Header("Animations")]
+    public Animator playerAnimator;
+
+    [Header("UI")]
+    public GameObject deathCanvas;
+    public PlayerDeathUI playerDeathUIScript;
+    private Sprite _enemySprite;
+    private string _enemyName; 
+
     [Header("Armor")]
     public List<GameObject> armorObjects = new List<GameObject>();
 
@@ -29,7 +38,7 @@ public class PlayerHealth : MonoBehaviour
         return 0; 
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, GameObject enemy)
     {
         int armorReduction = CheckForArmorReduction();
         if (armorReduction <= 0)
@@ -41,7 +50,19 @@ public class PlayerHealth : MonoBehaviour
             {
                 //Play animation of dying, game over
                 logger.Log("Bravo", this);
-                Destroy(gameObject);
+
+                if (enemy != null)
+                {
+                    EnemyBase enemyBase = enemy.GetComponent<EnemyBase>();
+                    _enemySprite = enemyBase.enemySprite;
+
+                    _enemyName = enemyBase.currentEnemy.ToString(); 
+                }
+
+                ActivateDeathScreen();
+
+                playerAnimator.Play("Death");
+                DisableAllScripts(gameObject); 
             }
             logger.Log(Health.ToString(), this);
         } 
@@ -54,9 +75,16 @@ public class PlayerHealth : MonoBehaviour
 
             if (Health <= 0)
             {
-                //Play animation of dying, game over
-                logger.Log("Bravo", this);
-                Destroy(gameObject);
+                if (enemy != null)
+                {
+                    EnemyBase enemyBase = enemy.GetComponent<EnemyBase>();
+                    _enemySprite = enemyBase.enemySprite;
+                }
+
+                ActivateDeathScreen();
+
+                playerAnimator.Play("Death");
+                DisableAllScripts(gameObject);
             }
             logger.Log(Health.ToString(), this);
         }
@@ -79,4 +107,26 @@ public class PlayerHealth : MonoBehaviour
         healthBar.SetPlayerHealthSlider(Health);
 
     }
+
+    private void DisableAllScripts(GameObject player)
+    {
+        foreach (var script in player.GetComponents<MonoBehaviour>())
+        {
+            script.enabled = false; 
+        }
+    }
+
+    public bool CheckIfPlayerIsAlive()
+    {
+        if (Health <= 0) return false;
+
+        return true; 
+    }
+
+    private void ActivateDeathScreen()
+    {
+        deathCanvas.SetActive(true);
+        playerDeathUIScript.ChangeScreen(_enemySprite, _enemyName);
+    }
+
 }

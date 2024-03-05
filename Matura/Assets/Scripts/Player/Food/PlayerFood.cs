@@ -51,7 +51,7 @@ public class PlayerFood : MonoBehaviour
                         break;
                     }
 
-                    playerHealth.TakeDamage(_damageToTakeIfOutOfFood);
+                    playerHealth.TakeDamage(_damageToTakeIfOutOfFood, null);
                 }
             }
         }

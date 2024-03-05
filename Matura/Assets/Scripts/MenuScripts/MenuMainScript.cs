@@ -5,24 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class MenuMainScript : MonoBehaviour
 {
-    /*// Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }*/
 
     public GameObject Settings;
     public GameObject Menu;
 
     public void OnClickPlay()
     {
-        SceneManager.LoadScene(sceneBuildIndex:1);
+        //SceneManager.LoadScene(sceneBuildIndex: 1);
         
     }
 

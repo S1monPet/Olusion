@@ -11,6 +11,10 @@ public class GameManager : MonoBehaviour
     private float fps;
     public TextMeshProUGUI FPSText;
 
+    [Header("Timer")]
+    private float _survivedTime; 
+    public TextMeshProUGUI survivalTimeText; 
+
     [Header("Enemy")]
     private int _animationToStartWith; //Will start with "Walking"
 
@@ -22,9 +26,21 @@ public class GameManager : MonoBehaviour
         FPSText.text = fps.ToString();
     }
 
+    private void SurvivalTimer() //On death automatically stops counting
+    {
+        _survivedTime++;
+    }
+
+    public void UpdateSurvivedTimer() //Is from PlayerHealth script; 
+    {
+        survivalTimeText.text = _survivedTime.ToString() + "s";
+    }
+    
+
     private void Start()
     {
         InvokeRepeating(nameof(GetFPS), 1, 1);
+        InvokeRepeating(nameof(SurvivalTimer), 1f, 1f);
         Application.targetFrameRate = 300; //CAP
 
         _animationToStartWith = Animator.StringToHash("Walking");

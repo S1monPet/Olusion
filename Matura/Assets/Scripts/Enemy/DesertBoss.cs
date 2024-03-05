@@ -16,13 +16,13 @@ public class DesertBoss : EnemyBase
 
     private void Initialise()
     {
-        base.Init(agent);
+        base.Init(agent, TypeOfEnemy());
         //Can add more logic here
     }
 
     public override Enemies TypeOfEnemy()
     {
-        return Enemies.DesertHunter;
+        return Enemies.DesertKing;
     }
 
     /*public override void EnemyTakeDamage(int damage)

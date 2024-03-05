@@ -16,7 +16,7 @@ public class MeadowHunter : EnemyBase
 
     private void Initialise()
     {
-        base.Init(agent); 
+        base.Init(agent, TypeOfEnemy()); 
         //Can add more logic here
     }
 

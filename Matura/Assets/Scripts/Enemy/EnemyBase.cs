@@ -9,7 +9,7 @@ using UnityEngine.AI;
 public enum Enemies { MeadowHunter, 
                       ForestRunner,
                       DarkForestHunter, DarkForestSoldiers, DarkForestKing, 
-                      DesertHunter, DesertSoldiers, DesertQueen, 
+                      DesertHunter, DesertSoldiers, DesertKing, 
                       SnowHunter, SnowSoldiers, SnowGuards, SnowHeavyGuards, SnowKing }
 
 public enum Mobs { Crab }
@@ -21,6 +21,8 @@ public abstract class EnemyBase : MonoBehaviour
 
     [SerializeField] private GameObject player;
     public GameObject Player => player;
+    public Sprite enemySprite;
+    public Enemies currentEnemy; //Setting current enemy for getting out his name
     public PlayerHealth playerHealthScript; //Maybe some class will need it so it's protected
 
     [Header("Bars")]
@@ -35,20 +37,21 @@ public abstract class EnemyBase : MonoBehaviour
     [Header("Animations")]
     public Animator enemyAnimator;
     public Animator playerAnimator;
-    public NavMeshAgent playerAgent; 
-
+    public NavMeshAgent playerAgent;
 
     //For patrolling
     private int targetPoint = 0; 
     private bool _isOnCooldown;
 
-    protected void Init(NavMeshAgent agent) //Don't think this will ever be overriden
+    protected void Init(NavMeshAgent agent, Enemies enemyType) //Don't think this will ever be overriden
     {
         currentNavMeshAgent = agent; //This is all set on Awake
         agent.speed = EnemyStats.EnemyMovingSpeed;
 
         EnemyStats.EnemyHP = EnemyStats.StartingHP;
         EnemyStats.EnemyArmor = EnemyStats.StartingEnemyArmor;
+
+        currentEnemy = enemyType; 
 
         //For changing slider's to right value
         ChangeEnemySliderHealth(EnemyStats.EnemyHP);
@@ -97,8 +100,7 @@ public abstract class EnemyBase : MonoBehaviour
             if (playerHealthScript != null)
             {
                 enemyAnimator.Play("Attack");
-                playerHealthScript.TakeDamage(EnemyStats.EnemyAttackDamage); //Change HP on player
-                playerHealthScript.ChangePlayerSliderHealth(); //Change HP in HealthBar
+                playerHealthScript.TakeDamage(EnemyStats.EnemyAttackDamage, gameObject); //Change HP on player
 
                 ResetAttack(); 
             }
@@ -164,7 +166,7 @@ public abstract class EnemyBase : MonoBehaviour
         {
             gameObject.SetActive(false);
 
-            Init(currentNavMeshAgent);
+            Init(currentNavMeshAgent, currentEnemy);
             gameManager.RespawnEnemy(EnemyStats.RespawnTimer, gameObject, enemyAnimator);
         }
     }
@@ -172,6 +174,7 @@ public abstract class EnemyBase : MonoBehaviour
     //Setting base for patrolling
     protected virtual void Patrol(Transform[] patrolPoints, NavMeshAgent agent)
     {
+        if (playerHealthScript.CheckIfPlayerIsAlive()) //Checks player's HP so we don't start another hit, and pursue
         EnemyAttack(agent);
 
         if(!agent.pathPending && agent.remainingDistance < 0.1f)
