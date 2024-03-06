@@ -3915,7 +3915,6 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: a42d6c14efcffee4785ee9cacd064ad1, type: 3}
   currentQuantity: 1
   maxQuantity: 1
-  Damage: 0
   IsHeld: 0
   equiappableItemIndex: 1
   equiappableArmorIndex: -1
@@ -3930,6 +3929,8 @@ MonoBehaviour:
   healingType: 0
   Wearable: 0
   clothingType: 0
+  Damage: 0
+  attackCooldown: 0
 --- !u!65 &178146447
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4205,7 +4206,6 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 3b0b9a0d76fb3fa46bccc76fcc108f7f, type: 3}
   currentQuantity: 1
   maxQuantity: 1
-  Damage: 0
   IsHeld: 0
   equiappableItemIndex: 0
   equiappableArmorIndex: -1
@@ -4220,6 +4220,8 @@ MonoBehaviour:
   healingType: 0
   Wearable: 0
   clothingType: 0
+  Damage: 0
+  attackCooldown: 0
 --- !u!208 &179373281
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -5105,7 +5107,6 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: b6b7788fb5c5e5f4789a8b845c2f1a09, type: 3}
   currentQuantity: 1
   maxQuantity: 1
-  Damage: 5
   IsHeld: 0
   equiappableItemIndex: 4
   equiappableArmorIndex: -1
@@ -5120,6 +5121,8 @@ MonoBehaviour:
   healingType: 0
   Wearable: 0
   clothingType: 0
+  Damage: 5
+  attackCooldown: 0
 --- !u!1001 &224269719
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5243,7 +5246,6 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: e3bdddbceae9d89489e1110449830584, type: 3}
   currentQuantity: 1
   maxQuantity: 5
-  Damage: 0
   IsHeld: 0
   equiappableItemIndex: 10
   equiappableArmorIndex: -1
@@ -5258,6 +5260,8 @@ MonoBehaviour:
   healingType: 0
   Wearable: 0
   clothingType: 0
+  Damage: 0
+  attackCooldown: 0
 --- !u!65 &224269724
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6822,6 +6826,8 @@ MonoBehaviour:
     m_Bits: 256
   agent: {fileID: 275844204}
   playerMovement: {fileID: 275844203}
+  playerAnimator: {fileID: 1003882415}
+  punchCooldown: 2
 --- !u!4 &275844210
 Transform:
   m_ObjectHideFlags: 0
@@ -14124,7 +14130,6 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: a62627fbbc53c2842ab7d3cd097327f9, type: 3}
   currentQuantity: 1
   maxQuantity: 16
-  Damage: 0
   IsHeld: 0
   equiappableItemIndex: 5
   equiappableArmorIndex: -1
@@ -14139,6 +14144,8 @@ MonoBehaviour:
   healingType: 0
   Wearable: 0
   clothingType: 0
+  Damage: 0
+  attackCooldown: 0
 --- !u!65 &620244273
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14647,7 +14654,6 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: d251fe99cbcb8e14e896d9ce000be3ad, type: 3}
   currentQuantity: 1
   maxQuantity: 8
-  Damage: 0
   IsHeld: 0
   equiappableItemIndex: 14
   equiappableArmorIndex: -1
@@ -14662,6 +14668,8 @@ MonoBehaviour:
   healingType: 0
   Wearable: 0
   clothingType: 0
+  Damage: 0
+  attackCooldown: 0
 --- !u!65 &645057414
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24676,7 +24684,6 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 3b0b9a0d76fb3fa46bccc76fcc108f7f, type: 3}
   currentQuantity: 1
   maxQuantity: 16
-  Damage: 0
   IsHeld: 0
   equiappableItemIndex: 0
   equiappableArmorIndex: -1
@@ -24691,6 +24698,8 @@ MonoBehaviour:
   healingType: 0
   Wearable: 0
   clothingType: 0
+  Damage: 0
+  attackCooldown: 0
 --- !u!65 &862378189
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25104,7 +25113,6 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: a42d6c14efcffee4785ee9cacd064ad1, type: 3}
   currentQuantity: 1
   maxQuantity: 16
-  Damage: 0
   IsHeld: 0
   equiappableItemIndex: 1
   equiappableArmorIndex: -1
@@ -25119,6 +25127,8 @@ MonoBehaviour:
   healingType: 0
   Wearable: 0
   clothingType: 0
+  Damage: 0
+  attackCooldown: 0
 --- !u!65 &872908801
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25808,7 +25818,6 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 3b0b9a0d76fb3fa46bccc76fcc108f7f, type: 3}
   currentQuantity: 1
   maxQuantity: 16
-  Damage: 0
   IsHeld: 0
   equiappableItemIndex: 0
   equiappableArmorIndex: -1
@@ -25823,6 +25832,8 @@ MonoBehaviour:
   healingType: 0
   Wearable: 0
   clothingType: 0
+  Damage: 0
+  attackCooldown: 0
 --- !u!208 &915597858
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -28517,7 +28528,6 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 7480ebc9755d442439e2b1b1843625bb, type: 3}
   currentQuantity: 1
   maxQuantity: 1
-  Damage: 0
   IsHeld: 0
   equiappableItemIndex: -1
   equiappableArmorIndex: 0
@@ -28532,6 +28542,8 @@ MonoBehaviour:
   healingType: 0
   Wearable: 1
   clothingType: 0
+  Damage: 0
+  attackCooldown: 0
 --- !u!1001 &1051112644
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30041,7 +30053,6 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 4dd019b55191e7c4ab8a51841b56a0b2, type: 3}
   currentQuantity: 1
   maxQuantity: 8
-  Damage: 0
   IsHeld: 0
   equiappableItemIndex: 12
   equiappableArmorIndex: -1
@@ -30056,6 +30067,8 @@ MonoBehaviour:
   healingType: 0
   Wearable: 0
   clothingType: 0
+  Damage: 0
+  attackCooldown: 0
 --- !u!65 &1112289725
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -38447,7 +38460,6 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: f4e52e0a295f5924997971836b021959, type: 3}
   currentQuantity: 1
   maxQuantity: 16
-  Damage: 0
   IsHeld: 0
   equiappableItemIndex: 2
   equiappableArmorIndex: -1
@@ -38462,6 +38474,8 @@ MonoBehaviour:
   healingType: 0
   Wearable: 0
   clothingType: 0
+  Damage: 0
+  attackCooldown: 0
 --- !u!65 &1264857150
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -38663,7 +38677,6 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 11b8b1382cfb3b54495988757f58fe90, type: 3}
   currentQuantity: 1
   maxQuantity: 4
-  Damage: 0
   IsHeld: 0
   equiappableItemIndex: 8
   equiappableArmorIndex: -1
@@ -38678,6 +38691,8 @@ MonoBehaviour:
   healingType: 1
   Wearable: 0
   clothingType: 0
+  Damage: 0
+  attackCooldown: 0
 --- !u!1001 &1265702647
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -43692,7 +43707,6 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 4e2c9d8a03ad1294eb97a29f8d6f07f0, type: 3}
   currentQuantity: 1
   maxQuantity: 1
-  Damage: 0
   IsHeld: 0
   equiappableItemIndex: 3
   equiappableArmorIndex: -1
@@ -43707,6 +43721,8 @@ MonoBehaviour:
   healingType: 0
   Wearable: 0
   clothingType: 0
+  Damage: 0
+  attackCooldown: 0
 --- !u!1 &1517644084
 GameObject:
   m_ObjectHideFlags: 0
@@ -47627,7 +47643,6 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 3d2484bff1e05b645904da4c4c73385a, type: 3}
   currentQuantity: 1
   maxQuantity: 1
-  Damage: 0
   IsHeld: 0
   equiappableItemIndex: -1
   equiappableArmorIndex: 1
@@ -47642,6 +47657,8 @@ MonoBehaviour:
   healingType: 0
   Wearable: 1
   clothingType: 0
+  Damage: 0
+  attackCooldown: 0
 --- !u!1001 &1659734536
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -47799,7 +47816,6 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 7480ebc9755d442439e2b1b1843625bb, type: 3}
   currentQuantity: 1
   maxQuantity: 1
-  Damage: 0
   IsHeld: 0
   equiappableItemIndex: -1
   equiappableArmorIndex: 0
@@ -47814,6 +47830,8 @@ MonoBehaviour:
   healingType: 0
   Wearable: 1
   clothingType: 0
+  Damage: 0
+  attackCooldown: 0
 --- !u!1001 &1660429325
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -54803,7 +54821,6 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 23a3b49243f60874baa2dd5933826338, type: 3}
   currentQuantity: 1
   maxQuantity: 8
-  Damage: 0
   IsHeld: 0
   equiappableItemIndex: 9
   equiappableArmorIndex: -1
@@ -54818,6 +54835,8 @@ MonoBehaviour:
   healingType: 0
   Wearable: 0
   clothingType: 0
+  Damage: 0
+  attackCooldown: 0
 --- !u!65 &1736428857
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -54943,7 +54962,6 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: b6b7788fb5c5e5f4789a8b845c2f1a09, type: 3}
   currentQuantity: 1
   maxQuantity: 1
-  Damage: 5
   IsHeld: 0
   equiappableItemIndex: 4
   equiappableArmorIndex: -1
@@ -54958,6 +54976,8 @@ MonoBehaviour:
   healingType: 0
   Wearable: 0
   clothingType: 0
+  Damage: 5
+  attackCooldown: 0
 --- !u!65 &1737429439
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -61566,7 +61586,6 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 4e2c9d8a03ad1294eb97a29f8d6f07f0, type: 3}
   currentQuantity: 1
   maxQuantity: 1
-  Damage: 5
   IsHeld: 0
   equiappableItemIndex: 3
   equiappableArmorIndex: -1
@@ -61581,6 +61600,8 @@ MonoBehaviour:
   healingType: 0
   Wearable: 0
   clothingType: 0
+  Damage: 5
+  attackCooldown: 0
 --- !u!208 &1988464084
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -62693,7 +62714,6 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 3d2484bff1e05b645904da4c4c73385a, type: 3}
   currentQuantity: 1
   maxQuantity: 1
-  Damage: 0
   IsHeld: 0
   equiappableItemIndex: -1
   equiappableArmorIndex: 1
@@ -62708,6 +62728,8 @@ MonoBehaviour:
   healingType: 0
   Wearable: 1
   clothingType: 0
+  Damage: 0
+  attackCooldown: 0
 --- !u!1001 &2034082600
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -64123,7 +64145,6 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: febd4088ab0bce842ae662d045377ff1, type: 3}
   currentQuantity: 1
   maxQuantity: 8
-  Damage: 0
   IsHeld: 0
   equiappableItemIndex: 13
   equiappableArmorIndex: -1
@@ -64138,6 +64159,8 @@ MonoBehaviour:
   healingType: 0
   Wearable: 0
   clothingType: 0
+  Damage: 0
+  attackCooldown: 0
 --- !u!65 &2079816278
 BoxCollider:
   m_ObjectHideFlags: 0

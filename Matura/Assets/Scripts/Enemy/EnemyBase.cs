@@ -70,6 +70,7 @@ public abstract class EnemyBase : MonoBehaviour
         if (Vector3.Distance(player.transform.position, agent.transform.position) <= EnemyStats.EnemyAttackingRange)
         {
             EnemyHit();
+            SetEnemyRotation(agent);
 
         }
         else if (Vector3.Distance(player.transform.position, agent.transform.position) <= EnemyStats.EnemyPatrolingRange)

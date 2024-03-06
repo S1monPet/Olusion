@@ -11,7 +11,9 @@ public class TreeGathering : GatheringBase
     private void OnEnable()
     {
         axeScript.CanGather = true;
+        InitialiseTree(); 
     }
+
 
     private void InitialiseTree()
     {
@@ -32,6 +34,8 @@ public class TreeGathering : GatheringBase
     {
         for (int i = 0; i != amountOfItems; i++)
         {
+            playerAnimator.Play("Attack");
+
             yield return timeToGather;
 
             Tree.TreeHealth -= damage; //Set tree health
@@ -46,7 +50,9 @@ public class TreeGathering : GatheringBase
             inventoryScript.AddItemToInventory(droppedItem);
         }
         base.RespawnGatherableItem(respawnTimer); //Was destroyed before
-        InitialiseTree(); 
+        InitialiseTree();
+
+        playerAnimator.Play("Attack");
     }
 
 

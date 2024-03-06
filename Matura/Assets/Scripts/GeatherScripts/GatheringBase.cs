@@ -20,14 +20,12 @@ public abstract class GatheringBase : MonoBehaviour
 
     protected void Gather(int damage, GameObject player, int objectHealth, List<ItemDrop> itemDrops, WaitForSeconds gatheringRate, WaitForSeconds respawnTimer)
     {
-        //Gathering animation
-
-
         foreach (ItemDrop itemToDrop in itemDrops)
         {
             if (itemToDrop.TotalAmountOfLogs == 0)
                 return;
-            
+
+            playerMovementScript.StopMoving();
             _gatheringCoroutine = StartCoroutine(GatheringCourotine(damage, gatheringRate, itemToDrop.TotalAmountOfLogs, itemToDrop, respawnTimer));
         }
     }
@@ -35,10 +33,7 @@ public abstract class GatheringBase : MonoBehaviour
     public virtual void StopGathering()
     {
         StopGatheringCoroutine();
-        //Stop animation, set it to idle 
-
-        //Override 
-
+        //Animation is stopped by other script
     }
 
     protected abstract IEnumerator GatheringCourotine(int damage, WaitForSeconds timeToGather, int amountOfItems, ItemDrop itemToDrop, WaitForSeconds respawnTimer);

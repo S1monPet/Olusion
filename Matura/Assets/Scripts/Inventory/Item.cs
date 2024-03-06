@@ -24,7 +24,6 @@ public class Item : MonoBehaviour
     public Sprite icon;
     public int currentQuantity = 1;
     public int maxQuantity = 16;
-    public int Damage;
     public bool IsHeld = false;
 
 
@@ -49,5 +48,17 @@ public class Item : MonoBehaviour
 
     [Header("Gear & Clotches")]
     public bool Wearable = false;
-    public ClothingType clothingType; 
+    public ClothingType clothingType;
+
+    [Header("Attack")]
+    public int Damage;
+    public int attackCooldown;
+
+    [HideInInspector]
+    public WaitForSeconds _attackCooldown;
+
+    private void OnEnable()
+    {
+        _attackCooldown = new WaitForSeconds(attackCooldown);
+    }
 }

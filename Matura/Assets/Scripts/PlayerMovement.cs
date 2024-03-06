@@ -97,7 +97,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!agent.isStopped)
         {
-            agent.isStopped = true; 
+            agent.isStopped = true;
             agent.velocity = Vector3.zero;
         }
 
