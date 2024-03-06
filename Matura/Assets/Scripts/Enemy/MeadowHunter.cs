@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,6 +9,8 @@ public class MeadowHunter : EnemyBase
     [SerializeField] public NavMeshAgent agent;
 
     public Transform[] patrolPoints;
+    public float MaxX, MinX; 
+    public float MaxZ, MinZ;    
 
     private void Awake()
     {
@@ -38,5 +41,11 @@ public class MeadowHunter : EnemyBase
     private void Update()
     {
         base.Patrol(patrolPoints, agent);
+    }
+
+    public override Vector3 SpawnPosition()
+    {
+        Vector3 spawnPosition = new Vector3(Random.Range(MaxX, MinX), 0, Random.Range(MaxZ, MinZ));
+        return spawnPosition; 
     }
 }
