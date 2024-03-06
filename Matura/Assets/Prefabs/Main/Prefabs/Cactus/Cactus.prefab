@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 3527017167069438328}
   - component: {fileID: 8057667249801647483}
   - component: {fileID: 1375023730669449783}
-  m_Layer: 0
+  - component: {fileID: 4614449030838090060}
+  m_Layer: 10
   m_Name: Cactus
-  m_TagString: Untagged
+  m_TagString: Cactus
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3166742047043305645}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -8.353, y: -0.56, z: 2.049}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 16.259626, y: 16.259626, z: 16.259626}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -96,11 +97,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 0.01, y: 0.01, z: 0.1}
+  m_Extents: {x: 0.02411089, y: 0.0237599, z: 0.09919495}
   m_MoveThreshold: 0.1
   m_Carve: 0
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: -0.007886147, y: -0.0137599, z: 0.08946192}
   m_TimeToStationary: 0.5
 --- !u!65 &1375023730669449783
 BoxCollider:
@@ -113,8 +114,26 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.02, y: 0.02, z: 0.2}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.048221778, y: 0.0475198, z: 0.19838987}
+  m_Center: {x: -0.007886147, y: -0.013759904, z: 0.08946192}
+--- !u!114 &4614449030838090060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3166742047043305645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de19fc97b87db244fa92b8ec67491722, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryScript: {fileID: 0}
+  playerMovementScript: {fileID: 0}
+  playerAnimator: {fileID: 0}
+  gameManager: {fileID: 0}
+  cactus: {fileID: 0}
+  axeScript: {fileID: 0}
 --- !u!1001 &4701429960298088196
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -196,6 +215,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Cactus
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: cbb7596a594552c47b27215fa6b436d8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbb7596a594552c47b27215fa6b436d8, type: 3}

@@ -19,6 +19,7 @@ public class TreeSO : ScriptableObject
     {
         RespawnTimer = new WaitForSeconds(RespawnTime);
     }
+
 }
 
 [System.Serializable]

@@ -93,6 +93,16 @@ public class PlayerMovement : MonoBehaviour
     }
 
     //Agent logic to stop moving and look towards item
+    public void StopMoving()
+    {
+        if (!agent.isStopped)
+        {
+            agent.isStopped = true; 
+            agent.velocity = Vector3.zero;
+        }
 
+        agent.ResetPath();
+        animator.SetBool("isRunning", false);
+    }
 }
 

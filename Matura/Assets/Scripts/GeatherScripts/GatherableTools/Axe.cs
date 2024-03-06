@@ -15,11 +15,14 @@ public class Axe : MonoBehaviour
     private float _maxRaycastDistance = 11f;
 
     public string TreeTag;
+    public string CactusTag; 
+
     public string GatheringTool;
     public float GatheringRate;
     public WaitForSeconds GatheringRateTimer;
 
-    private TreeGathering _currentGatheringScript;
+    private TreeGathering _currentTreeGatheringScript;
+    private CactusGathering _currentCactusGatheringScript;
 
     private void OnEnable()
     {
@@ -50,21 +53,35 @@ public class Axe : MonoBehaviour
 
                 if (Physics.Raycast(ray, out _hit, _maxRaycastDistance, layerMask))
                 {
+                    //For Tree's
                     if (_hit.collider.CompareTag(TreeTag) && CanGather)
                     {
-                        _currentGatheringScript = _hit.collider.GetComponent<TreeGathering>();
-                        if (_currentGatheringScript != null)
+                        _currentTreeGatheringScript = _hit.collider.GetComponent<TreeGathering>();
+                        if (_currentTreeGatheringScript != null)
                         {
-                            _currentGatheringScript.Gather(_axeDamage, transform.root.gameObject, GatheringTool, GatheringRateTimer);
+                            _currentTreeGatheringScript.Gather(_axeDamage, transform.root.gameObject, GatheringTool, GatheringRateTimer);
                             return; 
                         }
                     } 
+                    //For Cactuse's
+                    else if (_hit.collider.CompareTag(CactusTag) && CanGather)
+                    {
+                        _currentCactusGatheringScript = _hit.collider.GetComponent<CactusGathering>();
+                        if (_currentCactusGatheringScript != null)
+                        {
+                            _currentCactusGatheringScript.Gather(_axeDamage, transform.root.gameObject, GatheringTool, GatheringRateTimer);
+                            return;
+                        } 
+                    }
                 }
 
-                if (_currentGatheringScript != null) 
+                if (_currentTreeGatheringScript != null && _currentCactusGatheringScript != null) 
                 {
-                    _currentGatheringScript.StopGathering();
-                    _currentGatheringScript = null; //Reset the reference
+                    _currentTreeGatheringScript.StopGathering();
+                    _currentTreeGatheringScript = null; //Reset the reference
+
+                    _currentCactusGatheringScript.StopGathering();
+                    _currentCactusGatheringScript = null; 
                 }
             }
         }
