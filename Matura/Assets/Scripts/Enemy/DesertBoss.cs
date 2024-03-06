@@ -39,5 +39,10 @@ public class DesertBoss : EnemyBase
     {
         base.Patrol(patrolPoints, agent);
     }
+
+    public override Vector3 SpawnPosition()
+    {
+        return Vector3.zero; 
+    }
 }
 

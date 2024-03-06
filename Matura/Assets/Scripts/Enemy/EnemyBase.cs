@@ -43,6 +43,11 @@ public abstract class EnemyBase : MonoBehaviour
     private int targetPoint = 0; 
     private bool _isOnCooldown;
 
+    private void OnDisable()
+    {
+        _isOnCooldown = false; //Because courotines don't continue when you disable object
+    }
+
     protected void Init(NavMeshAgent agent, Enemies enemyType) //Don't think this will ever be overriden
     {
         currentNavMeshAgent = agent; //This is all set on Awake
@@ -57,7 +62,7 @@ public abstract class EnemyBase : MonoBehaviour
         ChangeEnemySliderHealth(EnemyStats.EnemyHP);
         ChangeEnemySliderArmor(EnemyStats.EnemyArmor);
     }
-
+    public abstract Vector3 SpawnPosition();
     public abstract Enemies TypeOfEnemy();
     protected virtual void EnemyAttack(NavMeshAgent agent)
     {
@@ -73,12 +78,12 @@ public abstract class EnemyBase : MonoBehaviour
             agent.speed = EnemyStats.EnemyAttackSpeed;
 
             SetEnemyRotation(agent);
-            enemyAnimator.SetBool("IsPlayerClose", true); //Start running after
+            //enemyAnimator.SetBool("IsPlayerClose", true); //Start running after
         }
         else
         {
-            if (!enemyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Walking")) //Check if is already walking
-                enemyAnimator.SetBool("IsPlayerClose", false);
+            //if (!enemyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Walking")) //Check if is already walking
+                //enemyAnimator.SetBool("IsPlayerClose", false);
         }
 
     }
@@ -97,7 +102,7 @@ public abstract class EnemyBase : MonoBehaviour
     {
         if (CanAttack()) 
         {
-            if (playerHealthScript != null)
+            if (playerHealthScript != null) 
             {
                 enemyAnimator.Play("Attack");
                 playerHealthScript.TakeDamage(EnemyStats.EnemyAttackDamage, gameObject); //Change HP on player
@@ -175,7 +180,7 @@ public abstract class EnemyBase : MonoBehaviour
     protected virtual void Patrol(Transform[] patrolPoints, NavMeshAgent agent)
     {
         if (playerHealthScript.CheckIfPlayerIsAlive()) //Checks player's HP so we don't start another hit, and pursue
-        EnemyAttack(agent);
+            EnemyAttack(agent);
 
         if(!agent.pathPending && agent.remainingDistance < 0.1f)
         {

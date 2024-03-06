@@ -18,13 +18,33 @@ public class ObjectPool : MonoBehaviour
     { 
         //Object pooling
         pooledObjects = new List<GameObject>();
-        GameObject enemy;
+        GameObject currentObject;
         for (int i = 0; i < amountToPool; i++)
         {
-            enemy = Instantiate(objectToPool);
-            enemy.SetActive(false);
-            pooledObjects.Add(enemy);
+            currentObject = Instantiate(objectToPool);
+            SpawnEnemies(currentObject);
         }
+    }
+
+    private void SpawnEnemies(GameObject parentEnemy)
+    {
+        if (parentEnemy.transform.childCount > 0)
+        {
+            GameObject enemy = parentEnemy.transform.GetChild(0).gameObject;
+            EnemyBase enemyBase = enemy.GetComponent<EnemyBase>();
+            if (enemyBase != null)
+            {
+                Vector3 spawnPosition = enemyBase.SpawnPosition();
+
+                parentEnemy.transform.position = spawnPosition; 
+                parentEnemy.transform.rotation = Quaternion.identity;
+
+                parentEnemy.SetActive(false); //Disabling enemy 
+                pooledObjects.Add(enemy);
+
+            }
+        }
+
     }
 
     public GameObject GetPooledObject()
