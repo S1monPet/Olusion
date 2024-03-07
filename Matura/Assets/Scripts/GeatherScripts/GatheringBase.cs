@@ -9,7 +9,7 @@ public abstract class GatheringBase : MonoBehaviour
     public Inventory inventoryScript; 
     public PlayerMovement playerMovementScript;
     public Animator playerAnimator; 
-    public GameManager gameManager;
+    public SurvivalSceneManager survivalSceneManager;
 
     private Coroutine _gatheringCoroutine; //For stopping coroutine
 
@@ -41,7 +41,7 @@ public abstract class GatheringBase : MonoBehaviour
     protected void RespawnGatherableItem(WaitForSeconds itemRespawnTimer)
     {
         gameObject.SetActive(false);
-        gameManager.RespawnGatherableItem(gameObject, itemRespawnTimer);
+        survivalSceneManager.RespawnGatherableItem(gameObject, itemRespawnTimer);
     }
 
     protected void StopGatheringCoroutine()

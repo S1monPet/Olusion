@@ -32,7 +32,7 @@ public abstract class EnemyBase : MonoBehaviour
     protected float lookRotationSpeed = 20f;
 
     [Header("Game Manager")]
-    public GameManager gameManager;
+    public SurvivalSceneManager survivalSceneManager;
 
     [Header("Animations")]
     public Animator enemyAnimator;
@@ -173,7 +173,7 @@ public abstract class EnemyBase : MonoBehaviour
             gameObject.SetActive(false);
 
             Init(currentNavMeshAgent, currentEnemy);
-            gameManager.RespawnEnemy(EnemyStats.RespawnTimer, gameObject, enemyAnimator);
+            survivalSceneManager.RespawnEnemy(EnemyStats.RespawnTimer, gameObject, enemyAnimator);
         }
     }
 

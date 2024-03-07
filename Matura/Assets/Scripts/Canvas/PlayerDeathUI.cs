@@ -9,7 +9,7 @@ public class PlayerDeathUI : MonoBehaviour
     public GameObject canvas; //For disabling canvas
     public CanvasGroup deathScreenUIGroup;
 
-    public GameManager gameManager;
+    public SurvivalSceneManager survivalSceneManager;
     public float fadeDuration = 3f;
 
     public Image enemyImage;
@@ -19,7 +19,7 @@ public class PlayerDeathUI : MonoBehaviour
     {
         canvas.SetActive(false); //Hide playing UI
 
-        gameManager.UpdateSurvivedTimer();
+        survivalSceneManager.UpdateSurvivedTimer();
         SetEnemySprite(enemySprite);
         SetEnemyNameText(enemyName);
 

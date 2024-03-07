@@ -1,87 +1,61 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Net.NetworkInformation;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance;
+    public GameState State; 
+
     [Header("FPS")]
     private float fps;
     public TextMeshProUGUI FPSText;
 
-    [Header("Timer")]
-    private float _survivedTime; 
-    public TextMeshProUGUI survivalTimeText; 
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject); // Keep the GameManager across scenes
+        }
+        else
+        {
+            Destroy(gameObject); // Ensures that there are no duplicate GameManagers
+        }
+    }
 
-    [Header("Enemy")]
-    private int _animationToStartWith; //Will start with "Walking"
+    private void Start()
+    {
+        InvokeRepeating(nameof(UpdateFPSDisplay), 1, 1);
+        Application.targetFrameRate = 300;
+    }
 
-    //[Header("Object Pooling")]
+    public void UpdateGameState(GameState newState)
+    {
+        State = newState;
 
-    private void GetFPS() //InvokeRepeating requires
+        switch (newState)
+        {
+            case GameState.Menu:
+                break;
+            case GameState.Main:
+                break;
+            default:
+                throw new System.ArgumentOutOfRangeException(nameof(newState), newState, null); 
+        }
+    }
+
+    public enum GameState {
+        Menu, 
+        Main
+    }
+    
+
+    private void UpdateFPSDisplay() //InvokeRepeating requires
     {
         fps = (int)(1f / Time.unscaledDeltaTime);
         FPSText.text = fps.ToString();
     }
 
-    private void SurvivalTimer() //On death automatically stops counting
-    {
-        _survivedTime++;
-    }
-
-    public void UpdateSurvivedTimer() //Is from PlayerHealth script; 
-    {
-        survivalTimeText.text = _survivedTime.ToString() + "s";
-    }
-    
-
-    private void Start()
-    {
-        InvokeRepeating(nameof(GetFPS), 1, 1);
-        InvokeRepeating(nameof(SurvivalTimer), 1f, 1f);
-        Application.targetFrameRate = 300; //CAP
-
-        _animationToStartWith = Animator.StringToHash("Walking");
-    }
-
-
-
-    private void Update()
-    {
-        //Will be for keeping trees, when they despawn to respawn, enemies over time, etc.
-
-    }
-    //Is started when Enemy dies. 
-    public void RespawnEnemy(WaitForSeconds timer, GameObject enemy, Animator animator)
-    {
-        StartCoroutine(EnemyRespawnTimer(timer, enemy, animator));
-    }
-
-    private IEnumerator EnemyRespawnTimer(WaitForSeconds timer, GameObject currentEnemy, Animator animator)
-    {
-        yield return timer;
-        /*GameObject enemy = ObjectPool.SharedInstance.GetPooledObject();
-        if (enemy != null)
-        {
-            enemy.transform.position = currentEnemy.transform.position;
-            enemy.transform.rotation = currentEnemy.transform.rotation;
-            enemy.SetActive(true);
-        }*/
-        animator.Play(_animationToStartWith); 
-        currentEnemy.SetActive(true);
-    }
-
-    public void RespawnGatherableItem(GameObject gatherableItem, WaitForSeconds timer)
-    {
-        StartCoroutine(GatherableItemRespawnTimer(gatherableItem, timer));
-    }
-
-    private IEnumerator GatherableItemRespawnTimer(GameObject gatherableItem, WaitForSeconds timer)
-    {
-        yield return timer; 
-
-        gatherableItem.SetActive(true);
-    }
 }
