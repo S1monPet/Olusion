@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth : MonoBehaviour, IDataPersistance
 { 
     [SerializeField]
     Logger logger;
 
     [Header("Player Health")]
-    public static int Health;
+    public int Health; //Had it as static before
     public HealthBar healthBar;
 
     [Header("Animations")]
@@ -23,9 +23,21 @@ public class PlayerHealth : MonoBehaviour
     [Header("Armor")]
     public List<GameObject> armorObjects = new List<GameObject>();
 
+    //Save and load
+    public void LoadData(GameData data)
+    {
+        Health = data.Health;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.Health = Health;
+    }
+
+
     private void Start()
     {
-        Health = 100;
+        ChangePlayerSliderHealth();
     }
 
     private int CheckForArmorReduction() //Get armor reduction

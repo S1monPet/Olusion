@@ -5,8 +5,10 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, IDataPersistance
 {
+    [Header("Player Position")]
+    public Transform playerTransform;
 
     //public Camera camera;
     public LayerMask layerMask;
@@ -22,6 +24,18 @@ public class PlayerMovement : MonoBehaviour
 
     public float lookRotationSpeed = 20f;
 
+    public void LoadData(GameData data)
+    {
+        // On the first run, or if no save data exists, we skip setting the player's position to maintain the default start position.
+        if (data.playerPosition == Vector3.zero) return; 
+
+        playerTransform.position = data.playerPosition; 
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.playerPosition = playerTransform.position; 
+    }
 
     void Awake()
     {

@@ -42,7 +42,7 @@ public class PlayerFood : MonoBehaviour
             }
             if (Food <= 0)
             {
-                while (PlayerHealth.Health > 0)
+                while (playerHealth.Health > 0)
                 {
                     yield return new WaitForSeconds(20);
 
