@@ -9,9 +9,61 @@ public class GameData
     public int Health;
     public Vector3 playerPosition; 
 
+    public InventoryData inventoryData;
+    public ChestData chestData;
+
+
     public GameData()
     {
         this.Health = 100;
         this.playerPosition = Vector3.zero; 
+        this.inventoryData = new InventoryData();
+        this.chestData = new ChestData(); 
     }
+}
+
+//Inventory 
+[System.Serializable]
+public class ItemData
+{
+    public string itemName;
+    public int quantity;
+    public int slotIndex;
+
+    public ItemData(string itemName, int quantity, int slotIndex)
+    {
+        this.itemName = itemName;
+        this.quantity = quantity;
+        this.slotIndex = slotIndex;
+    }
+}
+
+[System.Serializable]
+
+public class InventoryData
+{
+    public List<ItemData> slotData = new List<ItemData>(); 
+}
+
+
+//Chest
+[System.Serializable]
+public class ChestItemData
+{
+    public string itemName;
+    public int quantity;    
+    public int slotIndex;
+
+    public ChestItemData(string itemName, int quantity, int slotIndex)
+    {
+        this.itemName = itemName;
+        this.quantity = quantity;
+        this.slotIndex = slotIndex;
+    }
+}
+
+[System.Serializable]
+public class ChestData
+{
+    public List<ChestItemData> slotData = new List<ChestItemData>();
 }

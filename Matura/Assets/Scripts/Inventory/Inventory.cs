@@ -63,14 +63,67 @@ public class Inventory : MonoBehaviour, IDataPersistance
     [Header("Crafting")]
     public List<Recipe> itemRecipes = new List<Recipe>();
 
+    [Header("Save/Load")]
+    public List<GameObject> allItemPrefabs = new List<GameObject>();
+
     public void LoadData(GameData data)
     {
-        
+        LoadInventoryData(data.inventoryData);
     }
 
     public void SaveData(ref GameData data)
     {
-        
+        data.inventoryData = SaveInventoryData(); 
+    }
+
+    private InventoryData SaveInventoryData()
+    {
+        InventoryData data = new InventoryData(); 
+
+        foreach (Slot slot in allInventorySlots)
+        {
+            Item item = slot.GetItem(); 
+            if (item != null)
+            {
+                ItemData itemData = new ItemData(item.name, item.currentQuantity, allInventorySlots.IndexOf(slot)); 
+                data.slotData.Add(itemData);    
+            }
+        }
+        return data; 
+    }
+
+    private void LoadInventoryData(InventoryData inventoryData)
+    {
+        ClearInventory(); //Make sure nothing is taking our space
+
+        foreach (ItemData itemData in inventoryData.slotData)
+        {
+            //Getting item by name 
+            GameObject itemPrefab = allItemPrefabs.Find(prefab => prefab.GetComponent<Item>().name == itemData.itemName); 
+
+            if (itemPrefab != null)
+            {
+                GameObject createdItem = Instantiate(itemPrefab, dropLocation.position, Quaternion.identity);
+                Item item = createdItem.GetComponent<Item>();
+
+                item.currentQuantity = itemData.quantity; 
+
+                AddItemToInventory(item, itemData.slotIndex);
+            }
+        }
+
+        foreach (Slot slot in allInventorySlots)
+        {
+            slot.UpdateInventoryAmount(); 
+        }
+    }
+
+    public void ClearInventory()
+    {
+        foreach (Slot slot in allInventorySlots)
+        {
+            slot.SetItem(null); 
+        }
     }
 
     private void OnDisable()
@@ -227,8 +280,16 @@ public class Inventory : MonoBehaviour, IDataPersistance
     }
 
 
-    public void AddItemToInventory(Item itemToAdd)
+    public void AddItemToInventory(Item itemToAdd, int overrideIndex = -1)
     {
+        if (overrideIndex != - 1)
+        {
+            allInventorySlots[overrideIndex].SetItem(itemToAdd);
+            itemToAdd.gameObject.SetActive(false);
+            allInventorySlots[overrideIndex].UpdateInventoryAmount();
+            return; 
+        }
+
         int leftoverQuantity = itemToAdd.currentQuantity;
         Slot openSlot = null; 
 
@@ -883,3 +944,5 @@ public class Inventory : MonoBehaviour, IDataPersistance
         }
     }
 }
+
+
