@@ -7,8 +7,9 @@ using TMPro;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
 using System.Threading;
+using JetBrains.Annotations;
 
-public class Inventory : MonoBehaviour
+public class Inventory : MonoBehaviour, IDataPersistance
 {
     private CancellationTokenSource _tokenSource;
 
@@ -61,6 +62,16 @@ public class Inventory : MonoBehaviour
 
     [Header("Crafting")]
     public List<Recipe> itemRecipes = new List<Recipe>();
+
+    public void LoadData(GameData data)
+    {
+        
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        
+    }
 
     private void OnDisable()
     {
@@ -327,6 +338,38 @@ public class Inventory : MonoBehaviour
                 {
                     Item itemToSwap = currSlot.GetItem();
 
+                    //Check if current item is the same as dragged item
+                    if (itemToSwap.name == currentDraggedItem.name && itemToSwap.currentQuantity < itemToSwap.maxQuantity)
+                    {
+                        int combinedQuantity = currentDraggedItem.currentQuantity + itemToSwap.currentQuantity;
+                        if (combinedQuantity < itemToSwap.maxQuantity)
+                        {
+                            SetItemQuantity(itemToSwap, combinedQuantity);
+                            currSlot.UpdateInventoryAmount();
+
+                            ResetDragVariables();
+                        } 
+                        //Otherwise we check for how much more it is, and leave it in a slot. 
+                        else
+                        {
+                            int maxQuantityToAdd = combinedQuantity - itemToSwap.maxQuantity;
+
+                            //Setting quantity for item
+                            SetItemQuantity(itemToSwap, itemToSwap.maxQuantity);
+                            currSlot.UpdateInventoryAmount();
+
+                            //Setting quantity for dragged item
+                            allInventorySlots[currentDragSlotIndex].SetItem(currentDraggedItem);
+
+                            SetItemQuantity(currentDraggedItem, maxQuantityToAdd);
+                            allInventorySlots[currentDragSlotIndex].UpdateInventoryAmount();
+
+                            ResetDragVariables();
+                        }
+
+                        return; 
+                    } 
+
                     currSlot.SetItem(currentDraggedItem);
 
                     allInventorySlots[currentDragSlotIndex].SetItem(itemToSwap);
@@ -350,6 +393,16 @@ public class Inventory : MonoBehaviour
         // ITEM WAS DROPPED
         allInventorySlots[currentDragSlotIndex].SetItem(currentDraggedItem);
         ResetDragVariables(); 
+    }
+
+    private void AddItemQuantity(Item currentItem, int quantityToAdd)
+    {
+        currentItem.currentQuantity += quantityToAdd;
+    }
+
+    private void SetItemQuantity(Item currentItem, int newQuantity)
+    {
+        currentItem.currentQuantity = newQuantity;
     }
 
     private void ResetDragVariables()

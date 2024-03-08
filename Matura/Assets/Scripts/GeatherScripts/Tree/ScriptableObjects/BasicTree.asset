@@ -17,6 +17,6 @@ MonoBehaviour:
   SpawningTreeHealth: 15
   RespawnTime: 10
   ItemDrops:
-  - ItemToDrop: {fileID: 4262352214783111517, guid: 2da581bd6d8cec64298f90bb4c9dde34,
+  - ItemToDrop: {fileID: 8731429159240846695, guid: 91443dc4544e2794d913ae28bca3e3e7,
       type: 3}
     TotalAmountOfLogs: 3
