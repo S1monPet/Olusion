@@ -163,7 +163,7 @@ MonoBehaviour:
   name: Apple
   description: Consume it, to gain food
   icon: {fileID: 21300000, guid: a62627fbbc53c2842ab7d3cd097327f9, type: 3}
-  currentQuantity: 14
+  currentQuantity: 1
   maxQuantity: 16
   IsHeld: 0
   equiappableItemIndex: 5
