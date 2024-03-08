@@ -6494,7 +6494,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 670e8560e0a6d314fa06df0336d0118b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Water: 10
+  Water: 40
   waterBar: {fileID: 268129702}
   playerHealth: {fileID: 275844211}
 --- !u!1 &269861954

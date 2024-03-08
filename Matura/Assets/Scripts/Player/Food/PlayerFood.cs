@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerFood : MonoBehaviour
+public class PlayerFood : MonoBehaviour, IDataPersistance
 {
     [Header("Player Food")]
     public int Food;
@@ -12,9 +12,15 @@ public class PlayerFood : MonoBehaviour
     public PlayerHealth playerHealth;
     private int _damageToTakeIfOutOfFood = 5;
 
-    private void Awake()
+    public void LoadData(GameData data)
     {
+        Food = data.Food;
         playerFoodBar.SetPlayersFoodSlider(Food);
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.Food = Food;
     }
 
     private void Start()

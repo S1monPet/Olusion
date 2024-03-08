@@ -7,6 +7,8 @@ using UnityEngine;
 public class GameData
 {
     public int Health;
+    public int Food;
+    public int Water; 
     public Vector3 playerPosition; 
 
     public InventoryData inventoryData;
@@ -16,7 +18,10 @@ public class GameData
     public GameData()
     {
         this.Health = 100;
+        this.Food = 60;
+        this.Water = 40; 
         this.playerPosition = Vector3.zero; 
+
         this.inventoryData = new InventoryData();
         this.chestData = new ChestData(); 
     }

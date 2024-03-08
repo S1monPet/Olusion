@@ -42,6 +42,7 @@ public class Inventory : MonoBehaviour, IDataPersistance
     [Header("Equaippable Items")]
     public List<GameObject> equaiappableItems = new List<GameObject>();
     private int _currentHeldItemIndex = -1;
+    private int _fixedHeldItemIndexForCoroutine = -1; 
     private int _previousHeldItemIndex = -1; 
 
     [Header("Edibles")] 
@@ -740,6 +741,7 @@ public class Inventory : MonoBehaviour, IDataPersistance
 
                 Item currentItem = hotbarSlots[_currentHeldItemIndex].GetItem();
                 _disableAnotherEventCall = true;
+                _fixedHeldItemIndexForCoroutine = _currentHeldItemIndex;
                 StartCoroutine(ConsumingCoroutine(currentItem.TimeToConsume, currentItem));
             }
         }
@@ -756,8 +758,8 @@ public class Inventory : MonoBehaviour, IDataPersistance
 
 
         currentItem.currentQuantity--;
-        hotbarSlots[_currentHeldItemIndex].UpdateInventoryAmount(); 
-        hotbarSlots[_currentHeldItemIndex].CheckIfItemIsLessThanZero(currentItem, equaiappableItems);
+        hotbarSlots[_fixedHeldItemIndexForCoroutine].UpdateInventoryAmount(); 
+        hotbarSlots[_fixedHeldItemIndexForCoroutine].CheckIfItemIsLessThanZero(currentItem, equaiappableItems);
 
         ConsumableType itemType = currentItem.type; 
 
@@ -785,6 +787,7 @@ public class Inventory : MonoBehaviour, IDataPersistance
             {
                 Item currentItem = hotbarSlots[_currentHeldItemIndex].GetItem();
                 _disableAnotherEventCall = true;
+                _fixedHeldItemIndexForCoroutine = _currentHeldItemIndex; 
                 StartCoroutine(HealingCoroutine(currentItem.TimeToGainHealth, currentItem));
             } 
         }
@@ -796,8 +799,8 @@ public class Inventory : MonoBehaviour, IDataPersistance
         yield return new WaitForSeconds(timeToWait);
 
         currentItem.currentQuantity--;
-        hotbarSlots[_currentHeldItemIndex].UpdateInventoryAmount();
-        hotbarSlots[_currentHeldItemIndex].CheckIfItemIsLessThanZero(currentItem, equaiappableItems);
+        hotbarSlots[_fixedHeldItemIndexForCoroutine].UpdateInventoryAmount();
+        hotbarSlots[_fixedHeldItemIndexForCoroutine].CheckIfItemIsLessThanZero(currentItem, equaiappableItems);
 
         HealingType itemType = currentItem.healingType;
 

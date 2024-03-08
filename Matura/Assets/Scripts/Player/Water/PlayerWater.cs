@@ -1,9 +1,10 @@
 using NUnit.Framework.Internal;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerWater : MonoBehaviour
+public class PlayerWater : MonoBehaviour, IDataPersistance
 {
     [Header("Player Water")]
     public int Water;
@@ -12,9 +13,15 @@ public class PlayerWater : MonoBehaviour
     public PlayerHealth playerHealth;
     private int _damageToTakeIfOutOfWater = 10;
 
-    private void Awake()
+    public void LoadData(GameData data)
     {
+        Water = data.Water;
         waterBar.SetPlayersWaterSlider(Water);
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.Water = Water;
     }
 
     private void Start()
