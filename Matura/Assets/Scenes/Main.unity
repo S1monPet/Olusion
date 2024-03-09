@@ -10171,6 +10171,7 @@ MonoBehaviour:
   TimeToConsume: 1
   type: 0
   Amount: 0
+  Respawnable: 0
   Healing: 0
   HealthGain: 0
   TimeToGainHealth: 2
@@ -10308,7 +10309,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 179343973}
   m_LocalRotation: {x: 0.38268346, y: -0.000000059604645, z: 0.000000029802322, w: 0.92387956}
-  m_LocalPosition: {x: 783.08093, y: 7.7710695, z: 547.84436}
+  m_LocalPosition: {x: 783.1409, y: 7.17106, z: 547.84436}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10465,6 +10466,7 @@ MonoBehaviour:
   TimeToConsume: 1
   type: 0
   Amount: 0
+  Respawnable: 0
   Healing: 0
   HealthGain: 0
   TimeToGainHealth: 2
@@ -12401,6 +12403,7 @@ MonoBehaviour:
   TimeToConsume: 1
   type: 0
   Amount: 0
+  Respawnable: 0
   Healing: 0
   HealthGain: 0
   TimeToGainHealth: 2
@@ -12540,6 +12543,7 @@ MonoBehaviour:
   TimeToConsume: 1
   type: 0
   Amount: 0
+  Respawnable: 0
   Healing: 0
   HealthGain: 10
   TimeToGainHealth: 2
@@ -15152,6 +15156,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: da9f6740e43c7ac4097137314b6a85fd, type: 2}
   allItemPrefabs:
   - {fileID: 8731429159240846695, guid: 91443dc4544e2794d913ae28bca3e3e7, type: 3}
+  itemRespawningScript: {fileID: 1364106184}
 --- !u!114 &275844208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19135,7 +19140,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 363149710}
   m_LocalRotation: {x: 0.3463366, y: -0.39298758, z: 0.16278079, w: 0.8361305}
-  m_LocalPosition: {x: 7.54422, y: 6.7710724, z: -3.4122925}
+  m_LocalPosition: {x: 7.54422, y: 6.771057, z: -3.4122925}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -19524,12 +19529,12 @@ PrefabInstance:
     - target: {fileID: 2841300152343883813, guid: e21cdc05ce52a7c40bb215f45e5ae2ce,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -46.26
+      value: -46.2
       objectReference: {fileID: 0}
     - target: {fileID: 2841300152343883813, guid: e21cdc05ce52a7c40bb215f45e5ae2ce,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -100
+      value: -100.6
       objectReference: {fileID: 0}
     - target: {fileID: 2841300152343883813, guid: e21cdc05ce52a7c40bb215f45e5ae2ce,
         type: 3}
@@ -33541,6 +33546,7 @@ MonoBehaviour:
   TimeToConsume: 2
   type: 0
   Amount: 10
+  Respawnable: 0
   Healing: 0
   HealthGain: 0
   TimeToGainHealth: 2
@@ -34075,6 +34081,7 @@ MonoBehaviour:
   TimeToConsume: 1
   type: 0
   Amount: 0
+  Respawnable: 0
   Healing: 0
   HealthGain: 10
   TimeToGainHealth: 2
@@ -50154,6 +50161,7 @@ MonoBehaviour:
   TimeToConsume: 1
   type: 0
   Amount: 0
+  Respawnable: 0
   Healing: 0
   HealthGain: 0
   TimeToGainHealth: 2
@@ -50593,6 +50601,7 @@ MonoBehaviour:
   TimeToConsume: 1
   type: 0
   Amount: 0
+  Respawnable: 0
   Healing: 0
   HealthGain: 0
   TimeToGainHealth: 2
@@ -51318,6 +51327,7 @@ MonoBehaviour:
   TimeToConsume: 1
   type: 0
   Amount: 0
+  Respawnable: 0
   Healing: 0
   HealthGain: 0
   TimeToGainHealth: 2
@@ -56624,6 +56634,7 @@ MonoBehaviour:
   TimeToConsume: 1
   type: 0
   Amount: 0
+  Respawnable: 0
   Healing: 0
   HealthGain: 0
   TimeToGainHealth: 2
@@ -59852,7 +59863,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   survivalTimeText: {fileID: 1122946713}
-  itemRespawnTimer: 0
 --- !u!4 &1097008661
 Transform:
   m_ObjectHideFlags: 0
@@ -59866,6 +59876,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1905328234}
+  - {fileID: 1364106183}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -61282,6 +61293,7 @@ MonoBehaviour:
   TimeToConsume: 1
   type: 0
   Amount: 0
+  Respawnable: 0
   Healing: 0
   HealthGain: 10
   TimeToGainHealth: 2
@@ -80032,6 +80044,7 @@ MonoBehaviour:
   TimeToConsume: 1
   type: 0
   Amount: 0
+  Respawnable: 0
   Healing: 0
   HealthGain: 0
   TimeToGainHealth: 2
@@ -80249,6 +80262,7 @@ MonoBehaviour:
   TimeToConsume: 1
   type: 0
   Amount: 0
+  Respawnable: 0
   Healing: 1
   HealthGain: 20
   TimeToGainHealth: 2
@@ -85423,6 +85437,50 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1350652377}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1364106182
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1364106183}
+  - component: {fileID: 1364106184}
+  m_Layer: 0
+  m_Name: ItemRespawning
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1364106183
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1364106182}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1097008661}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1364106184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1364106182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e9f94486925b904199b31f8b32faae3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1366030001
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -95433,6 +95491,7 @@ MonoBehaviour:
   TimeToConsume: 1
   type: 0
   Amount: 0
+  Respawnable: 0
   Healing: 0
   HealthGain: 0
   TimeToGainHealth: 2
@@ -101273,6 +101332,7 @@ MonoBehaviour:
   TimeToConsume: 1
   type: 0
   Amount: 0
+  Respawnable: 0
   Healing: 0
   HealthGain: 0
   TimeToGainHealth: 2
@@ -101446,6 +101506,7 @@ MonoBehaviour:
   TimeToConsume: 1
   type: 0
   Amount: 0
+  Respawnable: 0
   Healing: 0
   HealthGain: 0
   TimeToGainHealth: 2
@@ -110695,6 +110756,7 @@ MonoBehaviour:
   TimeToConsume: 1
   type: 0
   Amount: 0
+  Respawnable: 0
   Healing: 0
   HealthGain: 10
   TimeToGainHealth: 2
@@ -110836,6 +110898,7 @@ MonoBehaviour:
   TimeToConsume: 1
   type: 0
   Amount: 0
+  Respawnable: 0
   Healing: 0
   HealthGain: 0
   TimeToGainHealth: 2
@@ -124756,6 +124819,7 @@ MonoBehaviour:
   TimeToConsume: 2
   type: 1
   Amount: 20
+  Respawnable: 0
   Healing: 0
   HealthGain: 0
   TimeToGainHealth: 2
@@ -126939,6 +127003,7 @@ MonoBehaviour:
   TimeToConsume: 1
   type: 0
   Amount: 0
+  Respawnable: 0
   Healing: 0
   HealthGain: 0
   TimeToGainHealth: 2
@@ -129396,6 +129461,7 @@ MonoBehaviour:
   TimeToConsume: 1
   type: 0
   Amount: 0
+  Respawnable: 0
   Healing: 0
   HealthGain: 10
   TimeToGainHealth: 2
@@ -134672,24 +134738,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3a6e8c1128a9ed49a9a54a420a33691, type: 3}
---- !u!1 &5466203653872042678 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5123603869597155913, guid: b3a6e8c1128a9ed49a9a54a420a33691,
-    type: 3}
-  m_PrefabInstance: {fileID: 5466203653872042677}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5466203653872042679
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5466203653872042678}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 958d65b0b90f5fc40a79e7325e5bf905, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &5755752654319343189
 PrefabInstance:
   m_ObjectHideFlags: 0

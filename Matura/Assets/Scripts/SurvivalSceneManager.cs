@@ -11,10 +11,6 @@ public class SurvivalSceneManager : MonoBehaviour
     private float _survivedTime; 
     public TextMeshProUGUI survivalTimeText;
 
-    [Header("Item Timer")]
-    public float itemRespawnTimer;
-    private WaitForSeconds _itemRespawnTimer;
-
     [Header("Enemy")]
     private int _animationToStartWith; //Will start with "Walking"
 
@@ -37,11 +33,6 @@ public class SurvivalSceneManager : MonoBehaviour
         Application.targetFrameRate = 300; //CAP
 
         _animationToStartWith = Animator.StringToHash("Walking");
-    }
-
-    private void OnEnable()
-    {
-        _itemRespawnTimer = new WaitForSeconds(itemRespawnTimer);
     }
 
     private void Update()
@@ -79,16 +70,5 @@ public class SurvivalSceneManager : MonoBehaviour
         yield return timer; 
 
         gatherableItem.SetActive(true);
-    }
-
-    public void RespawnItem(GameObject item)
-    {
-        StartCoroutine(RespawnItemCoroutine(item));
-    }
-
-    private IEnumerator RespawnItemCoroutine(GameObject item)
-    {
-        yield return _itemRespawnTimer;
-        item.SetActive(true);
     }
 }

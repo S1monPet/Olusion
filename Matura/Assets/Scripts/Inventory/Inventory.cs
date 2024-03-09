@@ -67,6 +67,9 @@ public class Inventory : MonoBehaviour, IDataPersistance
     [Header("Save/Load")]
     public List<GameObject> allItemPrefabs = new List<GameObject>();
 
+    [Header("Respawning")]
+    public ItemRespawning itemRespawningScript; 
+
     public void LoadData(GameData data)
     {
         LoadInventoryData(data.inventoryData);
@@ -272,14 +275,13 @@ public class Inventory : MonoBehaviour, IDataPersistance
                         //Agent logic to stop moving and look towards item, could be added in future
                         //playerMovementScript.StopPlayerNotRotation(); 
 
-
+                        itemRespawningScript.CheckifItemIsRespawnable(newItem); 
                         AddItemToInventory(newItem);
                     }
                 } 
             }
         }
     }
-
 
     public void AddItemToInventory(Item itemToAdd, int overrideIndex = -1)
     {

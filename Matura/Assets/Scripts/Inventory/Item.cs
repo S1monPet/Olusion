@@ -40,13 +40,17 @@ public class Item : MonoBehaviour
     public ConsumableType type;
     public int Amount;
 
+    [Header("Respawning")]
+    public bool Respawnable = false;
+    public float RespawnTimer;
+
     [Header("Healing")]
     public bool Healing = false;
     public int HealthGain = 10;
     public float TimeToGainHealth = 2f;
     public HealingType healingType; 
 
-    [Header("Gear & Clotches")]
+    [Header("Gear & Clothes")]
     public bool Wearable = false;
     public ClothingType clothingType;
 
