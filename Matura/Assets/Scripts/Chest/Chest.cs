@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+public enum ChestType
+{
+    TreasureChest,
+    DroppedChest,
+    LootChest,
+}
+
+
 public class Chest : MonoBehaviour, IDataPersistance
 {
     [SerializeField] private GameObject _chestUIPrefab;
@@ -16,30 +24,41 @@ public class Chest : MonoBehaviour, IDataPersistance
     [SerializeField] private LootTable _lootTable;
 
     [Header("Save/Load")]
+    public ChestType chestType; 
     public Transform dropLocation; 
     public List<GameObject> _allChestItemPrefabs = new List<GameObject>();
 
     public void LoadData(GameData data)
     {
-        if (data.chestData.slotData.Count != 0)
+        if (data.allChestData.allChestDataList.Count != 0)
         {
             CreateChestSlots();
-            LoadSavedChestData(data.chestData);
+            LoadSavedChestData(data.allChestData);
+
+            //If object was disabled it wouldn't load data
+            if (chestType == ChestType.DroppedChest)
+                gameObject.SetActive(false);
+
             return;
         }
+
         CreateChestSlots();
-        SpawnRandomChestItems(); 
+        SpawnRandomChestItems();
+
+        //If object was disabled it wouldn't make data
+        if (chestType == ChestType.DroppedChest)
+            gameObject.SetActive(false);
+
     }
 
     public void SaveData(ref GameData data)
     {
-        data.chestData = SaveChestData();
+        SaveChestData(ref data); 
     }
 
-    private ChestData SaveChestData()
+    private void SaveChestData(ref GameData data)
     {
-        ChestData chestData = new ChestData();
-
+        ChestData chestData = new ChestData(); 
         foreach (Slot slot in allChestSlots)
         {
             Item item = slot.GetItem();
@@ -49,29 +68,34 @@ public class Chest : MonoBehaviour, IDataPersistance
                 chestData.slotData.Add(chestItemData);
             }
         }
-        return chestData; 
+        data.allChestData.allChestDataList.Add(chestData); //Adding chest
+
     }
 
-    private void LoadSavedChestData(ChestData chestData)
+    private void LoadSavedChestData(AllChestData chestData)
     {
         ClearChest();
 
-        foreach (ChestItemData chestItemData in chestData.slotData)
+        foreach (ChestData chest in chestData.allChestDataList)
         {
-            //Getting item by name 
-            GameObject itemPrefab = _allChestItemPrefabs.Find(prefab => prefab.GetComponent<Item>().name == chestItemData.itemName);
-
-            if (itemPrefab != null)
+            foreach (ChestItemData chestItemData in chest.slotData)
             {
-                GameObject createdItem = Instantiate(itemPrefab, dropLocation.position, Quaternion.identity);
-                Item item = createdItem.GetComponent<Item>();
+                //Getting item by name 
+                GameObject itemPrefab = _allChestItemPrefabs.Find(prefab => prefab.GetComponent<Item>().name == chestItemData.itemName);
 
-                item.currentQuantity = chestItemData.quantity;
+                if (itemPrefab != null)
+                {
+                    GameObject createdItem = Instantiate(itemPrefab, dropLocation.position, Quaternion.identity);
+                    Item item = createdItem.GetComponent<Item>();
 
-                Debug.Log(item + chestItemData.slotIndex.ToString());
-                AddItemToChest(item, chestItemData.slotIndex);
+                    item.currentQuantity = chestItemData.quantity;
+
+                    //Debug.Log(item + chestItemData.slotIndex.ToString());
+                    AddItemToChest(item, chestItemData.slotIndex);
+                }
             }
         }
+        
 
         foreach (Slot slot in allChestSlots)
         {

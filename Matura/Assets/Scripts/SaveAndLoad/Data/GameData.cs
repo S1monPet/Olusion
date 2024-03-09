@@ -12,7 +12,7 @@ public class GameData
     public Vector3 playerPosition; 
 
     public InventoryData inventoryData;
-    public ChestData chestData;
+    public AllChestData allChestData;
 
 
     public GameData()
@@ -23,7 +23,7 @@ public class GameData
         this.playerPosition = Vector3.zero; 
 
         this.inventoryData = new InventoryData();
-        this.chestData = new ChestData(); 
+        this.allChestData = new AllChestData(); 
     }
 }
 
@@ -71,4 +71,10 @@ public class ChestItemData
 public class ChestData
 {
     public List<ChestItemData> slotData = new List<ChestItemData>();
+}
+
+[System.Serializable]
+public class AllChestData
+{
+    public List<ChestData> allChestDataList = new List<ChestData>();
 }

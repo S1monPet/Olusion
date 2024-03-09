@@ -649,7 +649,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 5b0499a8f8e55114e9776cf279b811d4,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5b0499a8f8e55114e9776cf279b811d4,
         type: 3}
@@ -694,6 +694,7 @@ MonoBehaviour:
   chestInstantiatedParent: {fileID: 0}
   _randomLoot: 1
   _lootTable: {fileID: 11400000, guid: 754d54ede51acec47afa8617a20b13bc, type: 2}
+  chestType: 1
   dropLocation: {fileID: 705012280}
   _allChestItemPrefabs:
   - {fileID: 5511085432170092512, guid: 6186e37add19e9241bca57f6919c021d, type: 3}
@@ -10452,6 +10453,7 @@ MonoBehaviour:
   chestInstantiatedParent: {fileID: 0}
   _randomLoot: 1
   _lootTable: {fileID: 11400000, guid: 818e72b947222184688f6f2be174a4e1, type: 2}
+  chestType: 2
   dropLocation: {fileID: 705012280}
   _allChestItemPrefabs:
   - {fileID: 5511085432170092512, guid: 6186e37add19e9241bca57f6919c021d, type: 3}
@@ -15383,6 +15385,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: da9f6740e43c7ac4097137314b6a85fd, type: 2}
   allItemPrefabs:
   - {fileID: 8731429159240846695, guid: 91443dc4544e2794d913ae28bca3e3e7, type: 3}
+  - {fileID: 5511085432170092512, guid: 6186e37add19e9241bca57f6919c021d, type: 3}
 --- !u!114 &275844208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38684,6 +38687,7 @@ Transform:
   m_Children:
   - {fileID: 1173892803}
   - {fileID: 543450653424157327}
+  - {fileID: 1507420156}
   m_Father: {fileID: 1115709955}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -38775,6 +38779,7 @@ MonoBehaviour:
   playerAnimator: {fileID: 1003882415}
   playerAgent: {fileID: 275844204}
   droppingItem: {fileID: 1507420157}
+  toggleChestScript: {fileID: 275844212}
   agent: {fileID: 707541186}
   patrolPoints:
   - {fileID: 632012459}
@@ -52837,6 +52842,7 @@ MonoBehaviour:
   playerAnimator: {fileID: 1003882415}
   playerAgent: {fileID: 275844204}
   droppingItem: {fileID: 31973030}
+  toggleChestScript: {fileID: 275844212}
   agent: {fileID: 961610424}
   patrolPoints:
   - {fileID: 47398664}
@@ -61775,7 +61781,6 @@ Transform:
   m_Children:
   - {fileID: 707541184}
   - {fileID: 47502915}
-  - {fileID: 1507420156}
   m_Father: {fileID: 1641438000}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -95633,7 +95638,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1115709955}
+    m_TransformParent: {fileID: 707541184}
     m_Modifications:
     - target: {fileID: -9048784500334463732, guid: 5b0499a8f8e55114e9776cf279b811d4,
         type: 3}
@@ -95668,7 +95673,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 5b0499a8f8e55114e9776cf279b811d4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.4
+      value: 0.4000009
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5b0499a8f8e55114e9776cf279b811d4,
         type: 3}
@@ -95683,17 +95688,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 5b0499a8f8e55114e9776cf279b811d4,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5b0499a8f8e55114e9776cf279b811d4,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5b0499a8f8e55114e9776cf279b811d4,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5b0499a8f8e55114e9776cf279b811d4,
         type: 3}
@@ -95763,6 +95768,7 @@ MonoBehaviour:
   chestInstantiatedParent: {fileID: 0}
   _randomLoot: 1
   _lootTable: {fileID: 11400000, guid: 818e72b947222184688f6f2be174a4e1, type: 2}
+  chestType: 1
   dropLocation: {fileID: 705012280}
   _allChestItemPrefabs:
   - {fileID: 5511085432170092512, guid: 6186e37add19e9241bca57f6919c021d, type: 3}
@@ -111646,6 +111652,7 @@ MonoBehaviour:
   chestInstantiatedParent: {fileID: 0}
   _randomLoot: 1
   _lootTable: {fileID: 11400000, guid: 818e72b947222184688f6f2be174a4e1, type: 2}
+  chestType: 2
   dropLocation: {fileID: 705012280}
   _allChestItemPrefabs:
   - {fileID: 5511085432170092512, guid: 6186e37add19e9241bca57f6919c021d, type: 3}

@@ -40,7 +40,8 @@ public abstract class EnemyBase : MonoBehaviour
     public NavMeshAgent playerAgent;
 
     [Header("Enemy Drop")]
-    public GameObject droppingItem; 
+    public GameObject droppingItem;
+    public ToggleChest toggleChestScript;
     //For patrolling
     private int targetPoint = 0; 
     private bool _isOnCooldown;
@@ -176,6 +177,9 @@ public abstract class EnemyBase : MonoBehaviour
             //Have to Instantiate new dropping item
             GameObject droppedItem = Instantiate(droppingItem, droppingItem.transform.position, droppingItem.transform.rotation);
             droppedItem.SetActive(true);
+
+            //Adding dropped item to chest list, so we can toggle it on if close.
+            toggleChestScript.chestList.Add(droppedItem);   
 
             Init(currentNavMeshAgent, currentEnemy);
             survivalSceneManager.RespawnEnemy(EnemyStats.RespawnTimer, gameObject, enemyAnimator);
