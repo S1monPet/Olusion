@@ -305,7 +305,12 @@ public class Inventory : MonoBehaviour, IDataPersistance
                 if (freeSpaceInSlots >= leftoverQuantity)
                 {
                     heldItem.currentQuantity += leftoverQuantity;
-                    Destroy(itemToAdd.gameObject);
+
+                    if (!heldItem.Respawnable) 
+                        Destroy(itemToAdd.gameObject);
+                    else
+                        itemToAdd.gameObject.SetActive(false);
+
                     allInventorySlots[i].UpdateInventoryAmount(); 
                     return; 
                 } 

@@ -10172,6 +10172,7 @@ MonoBehaviour:
   type: 0
   Amount: 0
   Respawnable: 0
+  RespawnTimer: 0
   Healing: 0
   HealthGain: 0
   TimeToGainHealth: 2
@@ -10467,6 +10468,7 @@ MonoBehaviour:
   type: 0
   Amount: 0
   Respawnable: 0
+  RespawnTimer: 0
   Healing: 0
   HealthGain: 0
   TimeToGainHealth: 2
@@ -12404,6 +12406,7 @@ MonoBehaviour:
   type: 0
   Amount: 0
   Respawnable: 0
+  RespawnTimer: 0
   Healing: 0
   HealthGain: 0
   TimeToGainHealth: 2
@@ -12544,6 +12547,7 @@ MonoBehaviour:
   type: 0
   Amount: 0
   Respawnable: 0
+  RespawnTimer: 0
   Healing: 0
   HealthGain: 10
   TimeToGainHealth: 2
@@ -25933,6 +25937,106 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 491682302}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &494991169
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1641438000}
+    m_Modifications:
+    - target: {fileID: 5123603869597155913, guid: b3a6e8c1128a9ed49a9a54a420a33691,
+        type: 3}
+      propertyPath: m_Name
+      value: TreeApple (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5466203654311313156, guid: b3a6e8c1128a9ed49a9a54a420a33691,
+        type: 3}
+      propertyPath: axeScript
+      value: 
+      objectReference: {fileID: 1367367139}
+    - target: {fileID: 5466203654311313156, guid: b3a6e8c1128a9ed49a9a54a420a33691,
+        type: 3}
+      propertyPath: playerAnimator
+      value: 
+      objectReference: {fileID: 1003882415}
+    - target: {fileID: 5466203654311313156, guid: b3a6e8c1128a9ed49a9a54a420a33691,
+        type: 3}
+      propertyPath: inventoryScript
+      value: 
+      objectReference: {fileID: 275844207}
+    - target: {fileID: 5466203654311313156, guid: b3a6e8c1128a9ed49a9a54a420a33691,
+        type: 3}
+      propertyPath: playerMovementScript
+      value: 
+      objectReference: {fileID: 275844203}
+    - target: {fileID: 5466203654311313156, guid: b3a6e8c1128a9ed49a9a54a420a33691,
+        type: 3}
+      propertyPath: survivalSceneManager
+      value: 
+      objectReference: {fileID: 1097008660}
+    - target: {fileID: 5499284639826024691, guid: b3a6e8c1128a9ed49a9a54a420a33691,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5499284639826024691, guid: b3a6e8c1128a9ed49a9a54a420a33691,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 5499284639826024691, guid: b3a6e8c1128a9ed49a9a54a420a33691,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5499284639826024691, guid: b3a6e8c1128a9ed49a9a54a420a33691,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 5499284639826024691, guid: b3a6e8c1128a9ed49a9a54a420a33691,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9696804
+      objectReference: {fileID: 0}
+    - target: {fileID: 5499284639826024691, guid: b3a6e8c1128a9ed49a9a54a420a33691,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5499284639826024691, guid: b3a6e8c1128a9ed49a9a54a420a33691,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.24437667
+      objectReference: {fileID: 0}
+    - target: {fileID: 5499284639826024691, guid: b3a6e8c1128a9ed49a9a54a420a33691,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5499284639826024691, guid: b3a6e8c1128a9ed49a9a54a420a33691,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5499284639826024691, guid: b3a6e8c1128a9ed49a9a54a420a33691,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 28.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 5499284639826024691, guid: b3a6e8c1128a9ed49a9a54a420a33691,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b3a6e8c1128a9ed49a9a54a420a33691, type: 3}
+--- !u!4 &494991170 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5499284639826024691, guid: b3a6e8c1128a9ed49a9a54a420a33691,
+    type: 3}
+  m_PrefabInstance: {fileID: 494991169}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &496329125
 GameObject:
   m_ObjectHideFlags: 0
@@ -33547,6 +33651,7 @@ MonoBehaviour:
   type: 0
   Amount: 10
   Respawnable: 0
+  RespawnTimer: 0
   Healing: 0
   HealthGain: 0
   TimeToGainHealth: 2
@@ -34082,6 +34187,7 @@ MonoBehaviour:
   type: 0
   Amount: 0
   Respawnable: 0
+  RespawnTimer: 0
   Healing: 0
   HealthGain: 10
   TimeToGainHealth: 2
@@ -50162,6 +50268,7 @@ MonoBehaviour:
   type: 0
   Amount: 0
   Respawnable: 0
+  RespawnTimer: 0
   Healing: 0
   HealthGain: 0
   TimeToGainHealth: 2
@@ -50602,6 +50709,7 @@ MonoBehaviour:
   type: 0
   Amount: 0
   Respawnable: 0
+  RespawnTimer: 0
   Healing: 0
   HealthGain: 0
   TimeToGainHealth: 2
@@ -51328,6 +51436,7 @@ MonoBehaviour:
   type: 0
   Amount: 0
   Respawnable: 0
+  RespawnTimer: 0
   Healing: 0
   HealthGain: 0
   TimeToGainHealth: 2
@@ -56635,6 +56744,7 @@ MonoBehaviour:
   type: 0
   Amount: 0
   Respawnable: 0
+  RespawnTimer: 0
   Healing: 0
   HealthGain: 0
   TimeToGainHealth: 2
@@ -61294,6 +61404,7 @@ MonoBehaviour:
   type: 0
   Amount: 0
   Respawnable: 0
+  RespawnTimer: 0
   Healing: 0
   HealthGain: 10
   TimeToGainHealth: 2
@@ -80045,6 +80156,7 @@ MonoBehaviour:
   type: 0
   Amount: 0
   Respawnable: 0
+  RespawnTimer: 0
   Healing: 0
   HealthGain: 0
   TimeToGainHealth: 2
@@ -80263,6 +80375,7 @@ MonoBehaviour:
   type: 0
   Amount: 0
   Respawnable: 0
+  RespawnTimer: 0
   Healing: 1
   HealthGain: 20
   TimeToGainHealth: 2
@@ -85481,6 +85594,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e9f94486925b904199b31f8b32faae3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemSpawnerScript: {fileID: 543450652671203911}
 --- !u!1001 &1366030001
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -95492,6 +95606,7 @@ MonoBehaviour:
   type: 0
   Amount: 0
   Respawnable: 0
+  RespawnTimer: 0
   Healing: 0
   HealthGain: 0
   TimeToGainHealth: 2
@@ -99656,6 +99771,7 @@ Transform:
   - {fileID: 1115709955}
   - {fileID: 543450652114300289}
   - {fileID: 543450652671203910}
+  - {fileID: 494991170}
   m_Father: {fileID: 399265336}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -101333,6 +101449,7 @@ MonoBehaviour:
   type: 0
   Amount: 0
   Respawnable: 0
+  RespawnTimer: 0
   Healing: 0
   HealthGain: 0
   TimeToGainHealth: 2
@@ -101507,6 +101624,7 @@ MonoBehaviour:
   type: 0
   Amount: 0
   Respawnable: 0
+  RespawnTimer: 0
   Healing: 0
   HealthGain: 0
   TimeToGainHealth: 2
@@ -110757,6 +110875,7 @@ MonoBehaviour:
   type: 0
   Amount: 0
   Respawnable: 0
+  RespawnTimer: 0
   Healing: 0
   HealthGain: 10
   TimeToGainHealth: 2
@@ -110899,6 +111018,7 @@ MonoBehaviour:
   type: 0
   Amount: 0
   Respawnable: 0
+  RespawnTimer: 0
   Healing: 0
   HealthGain: 0
   TimeToGainHealth: 2
@@ -124820,6 +124940,7 @@ MonoBehaviour:
   type: 1
   Amount: 20
   Respawnable: 0
+  RespawnTimer: 0
   Healing: 0
   HealthGain: 0
   TimeToGainHealth: 2
@@ -127004,6 +127125,7 @@ MonoBehaviour:
   type: 0
   Amount: 0
   Respawnable: 0
+  RespawnTimer: 0
   Healing: 0
   HealthGain: 0
   TimeToGainHealth: 2
@@ -129462,6 +129584,7 @@ MonoBehaviour:
   type: 0
   Amount: 0
   Respawnable: 0
+  RespawnTimer: 0
   Healing: 0
   HealthGain: 10
   TimeToGainHealth: 2
@@ -134312,6 +134435,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5466203653872042677}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &543450652671203911 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5466203653872042679, guid: b3a6e8c1128a9ed49a9a54a420a33691,
+    type: 3}
+  m_PrefabInstance: {fileID: 5466203653872042677}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 958d65b0b90f5fc40a79e7325e5bf905, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &543450653288363102 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3489509527165823975, guid: 2da581bd6d8cec64298f90bb4c9dde34,

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class TreeItemSpawner : MonoBehaviour
+public class ItemSpawner : MonoBehaviour
 {
     public Transform spawningZone; 
     public List<Transform> spawningZones = new List<Transform>();
@@ -26,7 +26,7 @@ public class TreeItemSpawner : MonoBehaviour
         SpawnItemsRandomly(); 
     }
 
-    public void SpawnItemsRandomly()
+    private void SpawnItemsRandomly()
     {
         Transform currentSpawningZone = null;
         int numberOfSpawningZones = spawningZones.Count;
@@ -49,5 +49,21 @@ public class TreeItemSpawner : MonoBehaviour
             Item itemScript = spawnedItem.GetComponent<Item>();
             itemScript.Respawnable = true; 
         }
+    }
+
+    public void RespawnItem(GameObject item)
+    {
+        int currentSpawningZoneIndex = Random.Range(0, spawningZones.Count);
+        Transform currentSpawningZone = spawningZones[currentSpawningZoneIndex];
+
+        _spawnerSize = currentSpawningZone.localScale; // The scale of the parentTransform is used as the size of the box
+
+        float randomX = Random.Range(-_spawnerSize.x / 2, _spawnerSize.x / 2);
+        float randomY = Random.Range(-_spawnerSize.y / 2, _spawnerSize.y / 2);
+        float randomZ = Random.Range(-_spawnerSize.z / 2, _spawnerSize.z / 2);
+
+        Vector3 _randomSpawnPosition = currentSpawningZone.position + new Vector3(randomX, randomY, randomZ);
+
+        item.transform.position = _randomSpawnPosition; 
     }
 }

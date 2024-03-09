@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ItemRespawning : MonoBehaviour
 {
+    [SerializeField]
+    public ItemSpawner itemSpawnerScript; 
     public void CheckifItemIsRespawnable(Item currentItem)
     {
         if (!currentItem.Respawnable)
@@ -20,6 +22,7 @@ public class ItemRespawning : MonoBehaviour
     {
         yield return new WaitForSeconds(itemScript.RespawnTimer);
 
+        itemSpawnerScript.RespawnItem(itemScript.gameObject);
         itemScript.gameObject.SetActive(true);
     }
 }
