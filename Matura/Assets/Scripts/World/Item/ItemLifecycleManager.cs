@@ -26,6 +26,11 @@ public class ItemLifecycleManager : MonoBehaviour
         SpawnItemsRandomly(); 
     }
 
+    private void OnEnable()
+    {
+        SpawnItemsRandomly(); 
+    }
+
     private void SpawnItemsRandomly()
     {
         Transform currentSpawningZone = null;

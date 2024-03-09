@@ -33,7 +33,7 @@ public class DayAndNight : MonoBehaviour
         float sunPosition = Mathf.Repeat(currentTime + 0.25f, 1f);
         directionalLight.transform.rotation = Quaternion.Euler(sunPosition * 360f, 0f, 0f);
 
-        RenderSettings.fogColor = fogGradient.Evaluate(currentTime);
+        RenderSettings.fogColor = fogGradient.Evaluate(-currentTime);
         RenderSettings.ambientLight = ambientLight.Evaluate(currentTime);
 
         directionalLight.color = directionalLightGradient.Evaluate(currentTime);

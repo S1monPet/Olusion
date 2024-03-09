@@ -1,13 +1,15 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class ObjectPool : MonoBehaviour
 {
     public static ObjectPool SharedInstance;
     public List<GameObject> pooledObjects;
-    public GameObject objectToPool;
+    public List<GameObject> objectsToPool;
     public int amountToPool;
     private void Awake()
     {
@@ -19,10 +21,13 @@ public class ObjectPool : MonoBehaviour
         //Object pooling
         pooledObjects = new List<GameObject>();
         GameObject currentObject;
-        for (int i = 0; i < amountToPool; i++)
+        for (int i = 0; i < objectsToPool.Count; i++)
         {
-            currentObject = Instantiate(objectToPool);
-            SpawnEnemies(currentObject);
+            for (int j = 0; j < amountToPool; j++) 
+            {
+                currentObject = Instantiate(objectsToPool[i]);
+                SpawnEnemies(currentObject);
+            }
         }
     }
 
@@ -46,7 +51,22 @@ public class ObjectPool : MonoBehaviour
         }
 
     }
+    /*
+    private void SpawnTrees(GameObject tree)
+    {
+        Tree treeScript = tree.GetComponent<Tree>();
+        if (treeScript != null)
+        {
+            Vector3 spawnPosition = treeScript.SpawnTree();
 
+            tree.transform.position = spawnPosition;
+            tree.transform.rotation = Quaternion.identity;
+
+            tree.SetActive(true); 
+            pooledObjects.Add(tree); 
+        }
+    }
+    */
     public GameObject GetPooledObject()
     {
         for (int i = 0; i < amountToPool; i++)
