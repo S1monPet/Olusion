@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class ItemSpawner : MonoBehaviour
+public class ItemLifecycleManager : MonoBehaviour
 {
     public Transform spawningZone; 
     public List<Transform> spawningZones = new List<Transform>();
@@ -65,5 +65,22 @@ public class ItemSpawner : MonoBehaviour
         Vector3 _randomSpawnPosition = currentSpawningZone.position + new Vector3(randomX, randomY, randomZ);
 
         item.transform.position = _randomSpawnPosition; 
+    }
+
+    public void HandleItemRespawn(Item currentItem)
+    {
+        RespawnItem(currentItem);
+    }
+    private void RespawnItem(Item itemScript)
+    {
+        StartCoroutine(RespawnItemCoroutine(itemScript));
+    }
+
+    private IEnumerator RespawnItemCoroutine(Item itemScript)
+    {
+        yield return new WaitForSeconds(itemScript.RespawnTimer);
+
+        RespawnItem(itemScript.gameObject);
+        itemScript.gameObject.SetActive(true);
     }
 }

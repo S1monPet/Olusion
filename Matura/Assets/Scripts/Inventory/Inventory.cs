@@ -8,6 +8,7 @@ using UnityEngine.AI;
 using UnityEngine.EventSystems;
 using System.Threading;
 using JetBrains.Annotations;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 
 public class Inventory : MonoBehaviour, IDataPersistance
 {
@@ -66,9 +67,6 @@ public class Inventory : MonoBehaviour, IDataPersistance
 
     [Header("Save/Load")]
     public List<GameObject> allItemPrefabs = new List<GameObject>();
-
-    [Header("Respawning")]
-    public ItemRespawning itemRespawningScript; 
 
     public void LoadData(GameData data)
     {
@@ -275,11 +273,27 @@ public class Inventory : MonoBehaviour, IDataPersistance
                         //Agent logic to stop moving and look towards item, could be added in future
                         //playerMovementScript.StopPlayerNotRotation(); 
 
-                        itemRespawningScript.CheckifItemIsRespawnable(newItem); 
+                        if (ItemIsRespawnable(newItem)) //Getting spawning zone with parent)
+                            RespawnItem(newItem);
+
                         AddItemToInventory(newItem);
                     }
                 } 
             }
+        }
+    }
+
+    private bool ItemIsRespawnable(Item item)
+    {
+        return item.Respawnable;
+    }
+
+    private void RespawnItem(Item item)
+    {
+        ItemLifecycleManager itemLifecycleManager = item.gameObject.transform.parent.GetComponentInParent<ItemLifecycleManager>(); //Optimise
+        if (itemLifecycleManager != null)
+        {
+            itemLifecycleManager.HandleItemRespawn(item);
         }
     }
 

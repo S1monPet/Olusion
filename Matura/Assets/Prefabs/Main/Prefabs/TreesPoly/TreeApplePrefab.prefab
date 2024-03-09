@@ -914,15 +914,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 958d65b0b90f5fc40a79e7325e5bf905, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawningZone: {fileID: 1873806396}
-  spawningZones:
-  - {fileID: 593691268}
-  - {fileID: 1353563838}
-  - {fileID: 1159727134}
-  - {fileID: 1174249365}
-  item: {fileID: 5511085432170092512, guid: 6186e37add19e9241bca57f6919c021d, type: 3}
-  MaximumAmountOfItems: 4
-  MinimumAmountOfItems: 2
 --- !u!1 &6173099882407240290
 GameObject:
   m_ObjectHideFlags: 0
