@@ -39,6 +39,8 @@ public abstract class EnemyBase : MonoBehaviour
     public Animator playerAnimator;
     public NavMeshAgent playerAgent;
 
+    [Header("Enemy Drop")]
+    public GameObject droppingItem; 
     //For patrolling
     private int targetPoint = 0; 
     private bool _isOnCooldown;
@@ -171,6 +173,9 @@ public abstract class EnemyBase : MonoBehaviour
         if (enemyStats.EnemyHP <= 0)
         {
             gameObject.SetActive(false);
+            //Have to Instantiate new dropping item
+            GameObject droppedItem = Instantiate(droppingItem, droppingItem.transform.position, droppingItem.transform.rotation);
+            droppedItem.SetActive(true);
 
             Init(currentNavMeshAgent, currentEnemy);
             survivalSceneManager.RespawnEnemy(EnemyStats.RespawnTimer, gameObject, enemyAnimator);
