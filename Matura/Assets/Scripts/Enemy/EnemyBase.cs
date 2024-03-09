@@ -42,6 +42,7 @@ public abstract class EnemyBase : MonoBehaviour
     [Header("Enemy Drop")]
     public GameObject droppingItem;
     public ToggleChest toggleChestScript;
+    private int _droppedItemNumber; 
     //For patrolling
     private int targetPoint = 0; 
     private bool _isOnCooldown;
@@ -177,6 +178,12 @@ public abstract class EnemyBase : MonoBehaviour
             //Have to Instantiate new dropping item
             GameObject droppedItem = Instantiate(droppingItem, droppingItem.transform.position, droppingItem.transform.rotation);
             droppedItem.SetActive(true);
+
+
+            /* This is Really Expensive Check CreateChestSlots in Chest.cs */
+            Chest chest = droppedItem.GetComponent<Chest>();
+            chest.CreateChestSlots(); 
+            chest.SpawnRandomChestItems();
 
             //Adding dropped item to chest list, so we can toggle it on if close.
             toggleChestScript.chestList.Add(droppedItem);   

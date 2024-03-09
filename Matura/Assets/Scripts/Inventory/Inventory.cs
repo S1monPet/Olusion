@@ -82,7 +82,13 @@ public class Inventory : MonoBehaviour, IDataPersistance
     {
         InventoryData data = new InventoryData(); 
 
-        foreach (Slot slot in allInventorySlots)
+        //Because allInventorySlots is also shared with chest
+        List<Slot> allSlots = new List<Slot>();
+        allSlots.AddRange(hotbarSlots);
+        allSlots.AddRange(inventorySlots);
+
+
+        foreach (Slot slot in allSlots)
         {
             Item item = slot.GetItem(); 
             if (item != null)
@@ -299,7 +305,7 @@ public class Inventory : MonoBehaviour, IDataPersistance
 
     public void AddItemToInventory(Item itemToAdd, int overrideIndex = -1)
     {
-        if (overrideIndex != - 1)
+        if (overrideIndex != - 1) //If chest is oppened
         {
             allInventorySlots[overrideIndex].SetItem(itemToAdd);
             itemToAdd.gameObject.SetActive(false);

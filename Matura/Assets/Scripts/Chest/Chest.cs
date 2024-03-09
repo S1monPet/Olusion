@@ -53,10 +53,10 @@ public class Chest : MonoBehaviour, IDataPersistance
 
     public void SaveData(ref GameData data)
     {
-        SaveChestData(ref data); 
+        SaveChestData(data); 
     }
 
-    private void SaveChestData(ref GameData data)
+    private void SaveChestData(GameData data)
     {
         ChestData chestData = new ChestData(); 
         foreach (Slot slot in allChestSlots)
@@ -72,27 +72,27 @@ public class Chest : MonoBehaviour, IDataPersistance
 
     }
 
-    private void LoadSavedChestData(AllChestData chestData)
+    private void LoadSavedChestData(AllChestData allChestData)
     {
         ClearChest();
 
-        foreach (ChestData chest in chestData.allChestDataList)
+        ChestData chestData = allChestData.allChestDataList[0];
+        allChestData.allChestDataList.Remove(chestData);
+
+        foreach (ChestItemData chestItemData in chestData.slotData)
         {
-            foreach (ChestItemData chestItemData in chest.slotData)
+            //Getting item by name 
+            GameObject itemPrefab = _allChestItemPrefabs.Find(prefab => prefab.GetComponent<Item>().name == chestItemData.itemName);
+
+            if (itemPrefab != null)
             {
-                //Getting item by name 
-                GameObject itemPrefab = _allChestItemPrefabs.Find(prefab => prefab.GetComponent<Item>().name == chestItemData.itemName);
+                GameObject createdItem = Instantiate(itemPrefab, dropLocation.position, Quaternion.identity);
+                Item item = createdItem.GetComponent<Item>();
 
-                if (itemPrefab != null)
-                {
-                    GameObject createdItem = Instantiate(itemPrefab, dropLocation.position, Quaternion.identity);
-                    Item item = createdItem.GetComponent<Item>();
+                item.currentQuantity = chestItemData.quantity;
 
-                    item.currentQuantity = chestItemData.quantity;
-
-                    //Debug.Log(item + chestItemData.slotIndex.ToString());
-                    AddItemToChest(item, chestItemData.slotIndex);
-                }
+                //Debug.Log(item + chestItemData.slotIndex.ToString());
+                AddItemToChest(item, chestItemData.slotIndex);
             }
         }
         
@@ -123,7 +123,7 @@ public class Chest : MonoBehaviour, IDataPersistance
         }
     }
 
-    private void CreateChestSlots()
+    public void CreateChestSlots()
     {
         GameObject chestSlots = Instantiate(_chestUIPrefab, _chestUIParent.position, _chestUIParent.rotation, _chestUIParent);
 
@@ -139,7 +139,7 @@ public class Chest : MonoBehaviour, IDataPersistance
         chestInstantiatedParent.SetActive(false);
     }
 
-    private void SpawnRandomChestItems()
+    public void SpawnRandomChestItems()
     {
         //Loot table
 
