@@ -267,7 +267,7 @@ MonoBehaviour:
   clothingType: 0
   Damage: 30
   attackCooldown: 3
-  HitRange: 10
+  HitRange: 5
 --- !u!114 &8693991407406457616
 MonoBehaviour:
   m_ObjectHideFlags: 0

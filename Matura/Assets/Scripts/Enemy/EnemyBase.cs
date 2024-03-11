@@ -112,9 +112,10 @@ public abstract class EnemyBase : MonoBehaviour
             {
                 enemyAnimator.Play("Attack");
 
-                playerHealthScript.TakeDamage(EnemyStats.EnemyAttackDamage, gameObject); //Change HP on player
                 playerAnimator.Play("ReceiveHit");
-                playerMovementScript.StopMovingAndPlayAnimation(TimeToWaitToCancelHitAnimation); 
+                playerMovementScript.StopMovingAndPlayAnimation(TimeToWaitToCancelHitAnimation);
+
+                playerHealthScript.TakeDamage(EnemyStats.EnemyAttackDamage, gameObject); //Change HP on player
 
                 ResetAttack(); 
             }

@@ -21,6 +21,7 @@ public class Axe : MonoBehaviour
     public float GatheringRate;
     public WaitForSeconds GatheringRateTimer;
 
+    private TreeGathering _previousTreeGatheringScript;
     private TreeGathering _currentTreeGatheringScript;
     private CactusGathering _currentCactusGatheringScript;
 
@@ -37,6 +38,7 @@ public class Axe : MonoBehaviour
     private void Update()
     {
         DetectIfObjectIsGatherable();
+        Debug.Log(_currentTreeGatheringScript != null);
     }
 
     private void DetectIfObjectIsGatherable()
@@ -57,6 +59,8 @@ public class Axe : MonoBehaviour
                     //For Tree's
                     if (_hit.collider.CompareTag(TreeTag) && CanGather)
                     {
+                        Debug.Log("set");
+                        _previousTreeGatheringScript = _currentTreeGatheringScript;
                         _currentTreeGatheringScript = _hit.collider.GetComponent<TreeGathering>();
                         return; 
                     } 
@@ -82,19 +86,17 @@ public class Axe : MonoBehaviour
 
     public void OnGatherButtonPress()
     {
-        Debug.Log(_currentTreeGatheringScript != null);
-        if (_currentTreeGatheringScript != null)
+        Debug.Log((_previousTreeGatheringScript != null) + " mamamaamaamamm");
+        if (_previousTreeGatheringScript != null)
         {
-            _currentTreeGatheringScript.Gather(_axeDamage, transform.root.gameObject, GatheringTool, GatheringRateTimer);
+            Debug.Log("Gathering");
+            _previousTreeGatheringScript.Gather(_axeDamage, transform.root.gameObject, GatheringTool, GatheringRateTimer);
             return;
         } 
         else if (_currentCactusGatheringScript != null)
         {
-            if (_currentCactusGatheringScript != null)
-            {
-                _currentCactusGatheringScript.Gather(_axeDamage, transform.root.gameObject, GatheringTool, GatheringRateTimer);
-                return;
-            }
+            _currentCactusGatheringScript.Gather(_axeDamage, transform.root.gameObject, GatheringTool, GatheringRateTimer);
+            return;
         }
     }
 }

@@ -93,7 +93,7 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
                 animator.SetBool("isRunning", true); //Setting animation
 
                 //If animation is not idle
-                if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") && animator.GetCurrentAnimatorStateInfo(0).IsName("ReceiveHit"))
+                if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") || animator.GetCurrentAnimatorStateInfo(0).IsName("ReceiveHit"))
                     animator.Play("Running"); 
             } 
             else if (!agent.hasPath && agent.remainingDistance <= agent.stoppingDistance)

@@ -16,8 +16,8 @@ public abstract class GatheringBase : MonoBehaviour
     public float TimeToWaitToCancelAnimation = 0.3f;
 
     [Header("Buttons")]
-    public GameObject EnableAttack;
-    public GameObject DisableAttack;
+    public GameObject EnableGather;
+    public GameObject DisableGather;
 
 
     private void OnDisable()
@@ -32,7 +32,6 @@ public abstract class GatheringBase : MonoBehaviour
             if (itemToDrop.TotalAmountOfLogs == 0)
                 return;
 
-            playerMovementScript.StopMovingAndPlayAnimation(TimeToWaitToCancelAnimation);
             _gatheringCoroutine = StartCoroutine(GatheringCourotine(damage, gatheringRate, itemToDrop.TotalAmountOfLogs, itemToDrop, respawnTimer));
         }
     }
