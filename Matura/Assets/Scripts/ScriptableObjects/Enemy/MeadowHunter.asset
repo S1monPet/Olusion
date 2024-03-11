@@ -20,6 +20,6 @@ MonoBehaviour:
   EnemyAttackSpeed: 3
   EnemyMovingSpeed: 1
   EnemyPatrolingRange: 3
-  EnemyAttackingRange: 2
+  EnemyAttackingRange: 1.5
   EnemyRespawnTimer: 10
   EnemyAttackCooldown: 5

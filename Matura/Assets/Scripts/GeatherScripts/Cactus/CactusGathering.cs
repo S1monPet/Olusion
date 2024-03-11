@@ -32,6 +32,7 @@ public class CactusGathering : GatheringBase
     {
         for (int i = 0; i != amountOfItems; i++)
         {
+            playerMovementScript.WaitForAnimation(TimeToWaitToCancelAnimation); //To prevent animation-less gathering
             yield return timeToGather;
 
             cactus.CactusHealth -= damage; //Set tree health

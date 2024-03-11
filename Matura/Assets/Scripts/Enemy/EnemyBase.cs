@@ -24,6 +24,7 @@ public abstract class EnemyBase : MonoBehaviour
     public Sprite enemySprite;
     public Enemies currentEnemy; //Setting current enemy for getting out his name
     public PlayerHealth playerHealthScript; //Maybe some class will need it so it's protected
+    public PlayerMovement playerMovementScript;
 
     [Header("Bars")]
     public EnemyHealthBar enemyHealthBar; 
@@ -38,11 +39,11 @@ public abstract class EnemyBase : MonoBehaviour
     public Animator enemyAnimator;
     public Animator playerAnimator;
     public NavMeshAgent playerAgent;
+    public float TimeToWaitToCancelHitAnimation = 0.3f;
 
     [Header("Enemy Drop")]
     public GameObject droppingItem;
     public ToggleChest toggleChestScript;
-    private int _droppedItemNumber; 
     //For patrolling
     private int targetPoint = 0; 
     private bool _isOnCooldown;
@@ -110,7 +111,10 @@ public abstract class EnemyBase : MonoBehaviour
             if (playerHealthScript != null) 
             {
                 enemyAnimator.Play("Attack");
+
                 playerHealthScript.TakeDamage(EnemyStats.EnemyAttackDamage, gameObject); //Change HP on player
+                playerAnimator.Play("ReceiveHit");
+                playerMovementScript.StopMovingAndPlayAnimation(TimeToWaitToCancelHitAnimation); 
 
                 ResetAttack(); 
             }

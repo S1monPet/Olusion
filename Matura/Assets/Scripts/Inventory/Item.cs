@@ -57,6 +57,7 @@ public class Item : MonoBehaviour
     [Header("Attack")]
     public int Damage;
     public int attackCooldown;
+    public float HitRange; 
 
     [HideInInspector]
     public WaitForSeconds _attackCooldown;

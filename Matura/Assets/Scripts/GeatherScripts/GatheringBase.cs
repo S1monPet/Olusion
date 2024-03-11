@@ -13,6 +13,13 @@ public abstract class GatheringBase : MonoBehaviour
 
     private Coroutine _gatheringCoroutine; //For stopping coroutine
 
+    public float TimeToWaitToCancelAnimation = 0.3f;
+
+    [Header("Buttons")]
+    public GameObject EnableAttack;
+    public GameObject DisableAttack;
+
+
     private void OnDisable()
     {
         StopGatheringCoroutine(); //Stopping all
@@ -25,7 +32,7 @@ public abstract class GatheringBase : MonoBehaviour
             if (itemToDrop.TotalAmountOfLogs == 0)
                 return;
 
-            playerMovementScript.StopMoving();
+            playerMovementScript.StopMovingAndPlayAnimation(TimeToWaitToCancelAnimation);
             _gatheringCoroutine = StartCoroutine(GatheringCourotine(damage, gatheringRate, itemToDrop.TotalAmountOfLogs, itemToDrop, respawnTimer));
         }
     }
@@ -33,7 +40,7 @@ public abstract class GatheringBase : MonoBehaviour
     public virtual void StopGathering()
     {
         StopGatheringCoroutine();
-        //Animation is stopped by other script
+        //Animation get's handled in PlayerMovement Script
     }
 
     protected abstract IEnumerator GatheringCourotine(int damage, WaitForSeconds timeToGather, int amountOfItems, ItemDrop itemToDrop, WaitForSeconds respawnTimer);

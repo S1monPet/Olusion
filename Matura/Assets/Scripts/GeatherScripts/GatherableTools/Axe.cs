@@ -53,25 +53,18 @@ public class Axe : MonoBehaviour
 
                 if (Physics.Raycast(ray, out _hit, _maxRaycastDistance, layerMask))
                 {
+                    Debug.Log(_hit.collider.tag); 
                     //For Tree's
                     if (_hit.collider.CompareTag(TreeTag) && CanGather)
                     {
                         _currentTreeGatheringScript = _hit.collider.GetComponent<TreeGathering>();
-                        if (_currentTreeGatheringScript != null)
-                        {
-                            _currentTreeGatheringScript.Gather(_axeDamage, transform.root.gameObject, GatheringTool, GatheringRateTimer);
-                            return; 
-                        }
+                        return; 
                     } 
                     //For Cactuse's
                     else if (_hit.collider.CompareTag(CactusTag) && CanGather)
                     {
                         _currentCactusGatheringScript = _hit.collider.GetComponent<CactusGathering>();
-                        if (_currentCactusGatheringScript != null)
-                        {
-                            _currentCactusGatheringScript.Gather(_axeDamage, transform.root.gameObject, GatheringTool, GatheringRateTimer);
-                            return;
-                        } 
+                        return; 
                     }
                 }
 
@@ -83,6 +76,24 @@ public class Axe : MonoBehaviour
                     _currentCactusGatheringScript.StopGathering();
                     _currentCactusGatheringScript = null; 
                 }
+            }
+        }
+    }
+
+    public void OnGatherButtonPress()
+    {
+        Debug.Log(_currentTreeGatheringScript != null);
+        if (_currentTreeGatheringScript != null)
+        {
+            _currentTreeGatheringScript.Gather(_axeDamage, transform.root.gameObject, GatheringTool, GatheringRateTimer);
+            return;
+        } 
+        else if (_currentCactusGatheringScript != null)
+        {
+            if (_currentCactusGatheringScript != null)
+            {
+                _currentCactusGatheringScript.Gather(_axeDamage, transform.root.gameObject, GatheringTool, GatheringRateTimer);
+                return;
             }
         }
     }

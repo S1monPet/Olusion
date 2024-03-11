@@ -34,6 +34,8 @@ public class TreeGathering : GatheringBase
     {
         for (int i = 0; i != amountOfItems; i++)
         {
+
+            playerMovementScript.WaitForAnimation(TimeToWaitToCancelAnimation); //To prevent animation-less gathering
             playerAnimator.Play("Attack");
 
             yield return timeToGather;

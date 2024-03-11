@@ -257,6 +257,8 @@ MonoBehaviour:
   TimeToConsume: 1
   type: 0
   Amount: 0
+  Respawnable: 0
+  RespawnTimer: 0
   Healing: 0
   HealthGain: 0
   TimeToGainHealth: 2
@@ -265,6 +267,7 @@ MonoBehaviour:
   clothingType: 0
   Damage: 30
   attackCooldown: 3
+  HitRange: 10
 --- !u!114 &8693991407406457616
 MonoBehaviour:
   m_ObjectHideFlags: 0

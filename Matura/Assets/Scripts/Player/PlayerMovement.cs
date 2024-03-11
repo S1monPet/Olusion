@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
 
 public class PlayerMovement : MonoBehaviour, IDataPersistance
 {
@@ -23,6 +24,8 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
     private string groundTag = "Ground";
 
     public float lookRotationSpeed = 20f;
+
+    public bool _canMove = true; 
 
     public void LoadData(GameData data)
     {
@@ -58,7 +61,7 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
     private void Movement()
     {
         //Checks if inventory is active
-        if (!inventory.activeInHierarchy)
+        if (!inventory.activeInHierarchy && _canMove)
         {
             if (Input.touchCount > 0)
             {
@@ -88,6 +91,10 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
             {
                 SetAgentRotation();
                 animator.SetBool("isRunning", true); //Setting animation
+
+                //If animation is not idle
+                if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") && animator.GetCurrentAnimatorStateInfo(0).IsName("ReceiveHit"))
+                    animator.Play("Running"); 
             } 
             else if (!agent.hasPath && agent.remainingDistance <= agent.stoppingDistance)
             {
@@ -107,7 +114,7 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
     }
 
     //Agent logic to stop moving and look towards item
-    public void StopMoving()
+    public void StopMoving() //For MAP UI
     {
         if (!agent.isStopped)
         {
@@ -117,6 +124,42 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
 
         agent.ResetPath();
         animator.SetBool("isRunning", false);
+    }
+
+    public void StopMovingAndPlayAnimation(float timeToWaitToCancelAnimation)
+    {
+        _canMove = false; 
+        if (!agent.isStopped)
+        {
+            agent.isStopped = true;
+            agent.velocity = Vector3.zero;
+        }
+
+        agent.ResetPath();
+        animator.SetBool("isRunning", false);
+
+        WaitForAnimation(timeToWaitToCancelAnimation);
+    }
+
+    public void SetAgentRotationToTarget(GameObject target) //For fast rotation
+    {
+        Vector3 direction = (target.transform.position - playerTransform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+
+        while (lookRotation != Quaternion.identity && Quaternion.Angle(playerTransform.rotation, lookRotation) > 0.1f)
+            playerTransform.rotation = Quaternion.Slerp(playerTransform.rotation, lookRotation, Time.deltaTime * lookRotationSpeed); 
+    }
+
+
+    public void WaitForAnimation(float timeToWaitToCancelAnimation)
+    {
+        StartCoroutine(WaitForAnimationCoroutine(timeToWaitToCancelAnimation));
+    }
+
+    private IEnumerator WaitForAnimationCoroutine(float timeToWaitToCancelAnimation)
+    {
+        yield return new WaitForSeconds(timeToWaitToCancelAnimation);
+        _canMove = true; 
     }
 }
 
