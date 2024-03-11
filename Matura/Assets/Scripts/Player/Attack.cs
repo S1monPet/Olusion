@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
@@ -123,7 +124,7 @@ public class Attack : MonoBehaviour
 
         if (enemyBase != null)
         {
-            Item currentItem = HotbarSlots[0].GetItem();
+            Item currentItem = HotbarSlots.Select(slot => slot.GetItem()).FirstOrDefault(item => item != null && item.IsHeld);
             float attackingRange = _handRange;
 
             Transform enemyTransform = enemyBase.gameObject.transform;

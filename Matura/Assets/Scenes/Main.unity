@@ -734,6 +734,8 @@ MonoBehaviour:
   Damage: 5
   attackCooldown: 0
   HitRange: 0
+  GatherDamage: 0
+  GatheringRate: 0
 --- !u!208 &31973033
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -1645,7 +1647,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -2088,7 +2090,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -2219,7 +2221,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -2345,7 +2347,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -2471,7 +2473,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -2806,7 +2808,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -2937,7 +2939,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -4138,7 +4140,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -6514,7 +6516,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -10407,6 +10409,8 @@ MonoBehaviour:
   Damage: 0
   attackCooldown: 0
   HitRange: 0
+  GatherDamage: 0
+  GatheringRate: 0
 --- !u!65 &178146447
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10705,6 +10709,8 @@ MonoBehaviour:
   Damage: 0
   attackCooldown: 0
   HitRange: 0
+  GatherDamage: 0
+  GatheringRate: 0
 --- !u!208 &179373281
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -12107,7 +12113,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -12233,7 +12239,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -12455,7 +12461,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -12644,6 +12650,8 @@ MonoBehaviour:
   Damage: 5
   attackCooldown: 0
   HitRange: 0
+  GatherDamage: 0
+  GatheringRate: 0
 --- !u!1001 &224269719
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12786,6 +12794,8 @@ MonoBehaviour:
   Damage: 0
   attackCooldown: 0
   HitRange: 0
+  GatherDamage: 0
+  GatheringRate: 0
 --- !u!65 &224269724
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12891,7 +12901,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -14127,7 +14137,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -14403,7 +14413,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -14534,7 +14544,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -14790,7 +14800,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -15250,6 +15260,7 @@ GameObject:
   - component: {fileID: 275844203}
   - component: {fileID: 275844204}
   - component: {fileID: 275844212}
+  - component: {fileID: 275844213}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -15474,6 +15485,27 @@ MonoBehaviour:
   - {fileID: 211330046}
   - {fileID: 178146445}
   inventoryScript: {fileID: 275844207}
+--- !u!114 &275844213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275844202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10049b9527f62de4085627c7b7149bf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 275844210}
+  inventoryScript: {fileID: 275844207}
+  TreeTag: Tree
+  CactusTag: Cactus
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  EnableGather: {fileID: 677277848}
+  DisableGather: {fileID: 1233053920}
 --- !u!1 &281590190
 GameObject:
   m_ObjectHideFlags: 0
@@ -15647,7 +15679,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -16863,7 +16895,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -18214,7 +18246,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -18340,7 +18372,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -18547,7 +18579,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -18678,7 +18710,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -18794,7 +18826,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -18925,7 +18957,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -19194,7 +19226,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -19320,7 +19352,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -19522,7 +19554,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -20121,7 +20153,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -20338,7 +20370,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -20469,7 +20501,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -20735,7 +20767,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -22384,7 +22416,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -24857,7 +24889,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -24983,7 +25015,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -26264,7 +26296,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 5466203654311313156, guid: b3a6e8c1128a9ed49a9a54a420a33691,
         type: 3}
       propertyPath: EnableGather
@@ -26274,7 +26306,7 @@ PrefabInstance:
         type: 3}
       propertyPath: DisableGather
       value: 
-      objectReference: {fileID: 1422871668}
+      objectReference: {fileID: 1233053920}
     - target: {fileID: 5466203654311313156, guid: b3a6e8c1128a9ed49a9a54a420a33691,
         type: 3}
       propertyPath: playerAnimator
@@ -26285,6 +26317,11 @@ PrefabInstance:
       propertyPath: inventoryScript
       value: 
       objectReference: {fileID: 275844207}
+    - target: {fileID: 5466203654311313156, guid: b3a6e8c1128a9ed49a9a54a420a33691,
+        type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 275844210}
     - target: {fileID: 5466203654311313156, guid: b3a6e8c1128a9ed49a9a54a420a33691,
         type: 3}
       propertyPath: playerMovementScript
@@ -28836,7 +28873,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -28967,7 +29004,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -29098,7 +29135,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -31333,7 +31370,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -34233,6 +34270,8 @@ MonoBehaviour:
   Damage: 0
   attackCooldown: 0
   HitRange: 0
+  GatherDamage: 0
+  GatheringRate: 0
 --- !u!65 &620244273
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -34343,7 +34382,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -34770,6 +34809,8 @@ MonoBehaviour:
   Damage: 0
   attackCooldown: 0
   HitRange: 0
+  GatherDamage: 0
+  GatheringRate: 0
 --- !u!65 &645057414
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -37270,7 +37311,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -37615,7 +37656,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -37975,7 +38016,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &677277849
 RectTransform:
   m_ObjectHideFlags: 0
@@ -38094,7 +38135,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -38935,7 +38976,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -39235,7 +39276,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -39351,7 +39392,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -46883,7 +46924,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -48490,7 +48531,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -49798,7 +49839,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -50520,7 +50561,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -50771,7 +50812,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -50937,6 +50978,8 @@ MonoBehaviour:
   Damage: 0
   attackCooldown: 0
   HitRange: 0
+  GatherDamage: 0
+  GatheringRate: 0
 --- !u!65 &862378189
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -51032,7 +51075,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -51385,6 +51428,8 @@ MonoBehaviour:
   Damage: 0
   attackCooldown: 0
   HitRange: 0
+  GatherDamage: 0
+  GatheringRate: 0
 --- !u!65 &872908801
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -51790,7 +51835,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -51952,7 +51997,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -52113,6 +52158,8 @@ MonoBehaviour:
   Damage: 0
   attackCooldown: 0
   HitRange: 0
+  GatherDamage: 0
+  GatheringRate: 0
 --- !u!208 &915597858
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -52442,7 +52489,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -52573,7 +52620,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -52918,7 +52965,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -53049,7 +53096,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -53475,7 +53522,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -56838,7 +56885,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -57416,7 +57463,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -57586,6 +57633,8 @@ MonoBehaviour:
   Damage: 0
   attackCooldown: 0
   HitRange: 0
+  GatherDamage: 0
+  GatheringRate: 0
 --- !u!1001 &1051112644
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -57683,7 +57732,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -57799,7 +57848,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -58066,7 +58115,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -58197,7 +58246,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -60747,7 +60796,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -62253,6 +62302,8 @@ MonoBehaviour:
   Damage: 0
   attackCooldown: 0
   HitRange: 0
+  GatherDamage: 0
+  GatheringRate: 0
 --- !u!65 &1112289725
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -66079,7 +66130,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -66210,7 +66261,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -66341,7 +66392,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -68823,7 +68874,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -71317,7 +71368,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -73435,7 +73486,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -73484,7 +73535,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1233053921
 RectTransform:
   m_ObjectHideFlags: 0
@@ -74926,7 +74977,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -76137,7 +76188,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -81313,6 +81364,8 @@ MonoBehaviour:
   Damage: 0
   attackCooldown: 0
   HitRange: 0
+  GatherDamage: 0
+  GatheringRate: 0
 --- !u!65 &1264857150
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -81326,6 +81379,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1264857151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264857147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3e332e7724dabb4881d71d53760f6fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1265168210
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -81533,6 +81598,8 @@ MonoBehaviour:
   Damage: 0
   attackCooldown: 0
   HitRange: 0
+  GatherDamage: 0
+  GatheringRate: 0
 --- !u!1001 &1265702647
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -81615,7 +81682,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -81772,7 +81839,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -81903,7 +81970,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -82034,7 +82101,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -82309,9 +82376,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 8693991407406457616, guid: 833ae818f4621e643bde375dcad190d0,
-            type: 3}
-          m_TargetAssemblyTypeName: Axe, Assembly-CSharp
+        - m_Target: {fileID: 275844213}
+          m_TargetAssemblyTypeName: PlayerGather, Assembly-CSharp
           m_MethodName: OnGatherButtonPress
           m_Mode: 1
           m_Arguments:
@@ -82420,7 +82486,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -82706,7 +82772,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -83907,7 +83973,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -85357,7 +85423,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -85623,7 +85689,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -85739,7 +85805,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -87002,18 +87068,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1366030001}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1367367139 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8693991407406457616, guid: 833ae818f4621e643bde375dcad190d0,
-    type: 3}
-  m_PrefabInstance: {fileID: 422636967}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3e332e7724dabb4881d71d53760f6fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1370155794
 GameObject:
   m_ObjectHideFlags: 0
@@ -88403,7 +88457,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -88452,7 +88506,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1438894421
 Transform:
   m_ObjectHideFlags: 0
@@ -88562,7 +88616,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -96613,7 +96667,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -96822,6 +96876,8 @@ MonoBehaviour:
   Damage: 5
   attackCooldown: 0
   HitRange: 0
+  GatherDamage: 0
+  GatheringRate: 0
 --- !u!208 &1507420160
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -97192,6 +97248,8 @@ MonoBehaviour:
   Damage: 0
   attackCooldown: 0
   HitRange: 0
+  GatherDamage: 0
+  GatheringRate: 0
 --- !u!1 &1517644084
 GameObject:
   m_ObjectHideFlags: 0
@@ -97987,7 +98045,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -98118,7 +98176,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -98656,7 +98714,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -98900,7 +98958,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -99725,7 +99783,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -99841,7 +99899,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -101449,7 +101507,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -103036,6 +103094,8 @@ MonoBehaviour:
   Damage: 0
   attackCooldown: 0
   HitRange: 0
+  GatherDamage: 0
+  GatheringRate: 0
 --- !u!1001 &1659734536
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -103212,6 +103272,8 @@ MonoBehaviour:
   Damage: 0
   attackCooldown: 0
   HitRange: 0
+  GatherDamage: 0
+  GatheringRate: 0
 --- !u!1001 &1660429325
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -103309,7 +103371,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -103764,7 +103826,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -103895,7 +103957,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -104026,7 +104088,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -104157,7 +104219,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -105373,7 +105435,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -111672,7 +111734,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -111788,7 +111850,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -112073,7 +112135,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -112283,7 +112345,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -112464,6 +112526,8 @@ MonoBehaviour:
   Damage: 0
   attackCooldown: 0
   HitRange: 0
+  GatherDamage: 0
+  GatheringRate: 0
 --- !u!65 &1736428857
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -112608,6 +112672,8 @@ MonoBehaviour:
   Damage: 5
   attackCooldown: 0
   HitRange: 0
+  GatherDamage: 0
+  GatheringRate: 0
 --- !u!65 &1737429439
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -113064,7 +113130,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -114972,7 +115038,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -115088,7 +115154,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -115219,7 +115285,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -115381,7 +115447,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -116994,7 +117060,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -118705,7 +118771,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -118831,7 +118897,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -118962,7 +119028,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -119363,7 +119429,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -119743,7 +119809,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -120959,7 +121025,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -121085,7 +121151,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -121216,7 +121282,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -121332,7 +121398,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -122679,7 +122745,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -124489,7 +124555,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -124620,7 +124686,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -124785,7 +124851,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -124947,7 +125013,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -125073,7 +125139,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -125204,7 +125270,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -126719,6 +126785,8 @@ MonoBehaviour:
   Damage: 5
   attackCooldown: 0
   HitRange: 0
+  GatherDamage: 0
+  GatheringRate: 0
 --- !u!208 &1988464084
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -126861,7 +126929,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -126992,7 +127060,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -128305,7 +128373,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -128431,7 +128499,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -128562,7 +128630,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -129057,6 +129125,8 @@ MonoBehaviour:
   Damage: 0
   attackCooldown: 0
   HitRange: 0
+  GatherDamage: 0
+  GatheringRate: 0
 --- !u!1001 &2034082600
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -130455,7 +130525,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -131233,7 +131303,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -131517,6 +131587,8 @@ MonoBehaviour:
   Damage: 0
   attackCooldown: 0
   HitRange: 0
+  GatherDamage: 0
+  GatheringRate: 0
 --- !u!65 &2079816278
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -133021,7 +133093,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -133287,7 +133359,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -133494,7 +133566,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -133991,7 +134063,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -134122,7 +134194,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -134329,7 +134401,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -134460,7 +134532,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -134670,7 +134742,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -134801,7 +134873,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -136169,7 +136241,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -136295,7 +136367,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 4614449030838090060, guid: 48482f1aab022da4f8ad1bc3f92ff205,
         type: 3}
       propertyPath: gameManager
@@ -136753,7 +136825,7 @@ PrefabInstance:
         type: 3}
       propertyPath: axeScript
       value: 
-      objectReference: {fileID: 1367367139}
+      objectReference: {fileID: 0}
     - target: {fileID: 5466203654311313156, guid: b3a6e8c1128a9ed49a9a54a420a33691,
         type: 3}
       propertyPath: EnableAttack
@@ -136784,6 +136856,11 @@ PrefabInstance:
       propertyPath: inventoryScript
       value: 
       objectReference: {fileID: 275844207}
+    - target: {fileID: 5466203654311313156, guid: b3a6e8c1128a9ed49a9a54a420a33691,
+        type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 275844210}
     - target: {fileID: 5466203654311313156, guid: b3a6e8c1128a9ed49a9a54a420a33691,
         type: 3}
       propertyPath: playerMovementScript

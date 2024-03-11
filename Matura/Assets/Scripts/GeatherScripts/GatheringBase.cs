@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI; 
@@ -8,6 +9,7 @@ public abstract class GatheringBase : MonoBehaviour
 {
     public Inventory inventoryScript; 
     public PlayerMovement playerMovementScript;
+    public Transform playerTransform;
     public Animator playerAnimator; 
     public SurvivalSceneManager survivalSceneManager;
 
@@ -20,10 +22,9 @@ public abstract class GatheringBase : MonoBehaviour
     public GameObject DisableGather;
 
 
-    private void OnDisable()
-    {
-        StopGatheringCoroutine(); //Stopping all
-    }
+
+
+
 
     protected void Gather(int damage, GameObject player, int objectHealth, List<ItemDrop> itemDrops, WaitForSeconds gatheringRate, WaitForSeconds respawnTimer)
     {

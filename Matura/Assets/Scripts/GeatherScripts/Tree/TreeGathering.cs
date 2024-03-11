@@ -6,11 +6,10 @@ public class TreeGathering : GatheringBase
 {
     [SerializeField] private TreeSO tree;
     public TreeSO Tree => tree;
-    public Axe axeScript;
 
     private void OnEnable()
     {
-        axeScript.CanGather = true;
+        PlayerGather.CanGather = true;
         InitialiseTree(); 
     }
 
@@ -20,13 +19,10 @@ public class TreeGathering : GatheringBase
         Tree.TreeHealth = Tree.SpawningTreeHealth;
     }
 
-    public void Gather(int damage, GameObject player, string gatheringTool, WaitForSeconds gatheringRate)
+    public void Gather(int damage, GameObject player, WaitForSeconds gatheringRate)
     {
-        if (IsToolEquiped(gatheringTool))
-        {
-            axeScript.CanGather = false;
-            base.Gather(damage, player, Tree.TreeHealth, Tree.ItemDrops, gatheringRate, Tree.RespawnTimer);
-        }
+        PlayerGather.CanGather = false;
+        base.Gather(damage, player, Tree.TreeHealth, Tree.ItemDrops, gatheringRate, Tree.RespawnTimer);
 
     }
 
@@ -34,9 +30,13 @@ public class TreeGathering : GatheringBase
     {
         for (int i = 0; i != amountOfItems; i++)
         {
-
+            Debug.Log(amountOfItems);
+            Debug.Log(damage);
             playerMovementScript.StopMovingAndPlayAnimation(TimeToWaitToCancelAnimation);
+            playerMovementScript.SetAgentRotationToTarget(gameObject);
+
             playerAnimator.Play("Attack");
+            playerAnimator.SetBool("isAttacking", false);
 
             yield return timeToGather;
 
@@ -51,10 +51,13 @@ public class TreeGathering : GatheringBase
 
             inventoryScript.AddItemToInventory(droppedItem);
         }
+        //Finish last hit
+        playerAnimator.Play("Attack");
+        playerAnimator.SetBool("isAttacking", false);
+
         base.RespawnGatherableItem(respawnTimer); //Was destroyed before
         InitialiseTree();
 
-        playerAnimator.Play("Attack");
     }
 
 
@@ -62,10 +65,10 @@ public class TreeGathering : GatheringBase
     {
         base.StopGathering();
 
-        axeScript.CanGather = true; //Enable gathering another object again
+        PlayerGather.CanGather = true; //Enable gathering another object again
     }
 
-    private bool IsToolEquiped(string requiredTool)
+    /*private bool IsToolEquiped(string requiredTool)
     {
         //Because it has to be in the hotbar for you to hold it
         foreach (Slot hotbarSlot in inventoryScript.hotbarSlots)
@@ -79,5 +82,5 @@ public class TreeGathering : GatheringBase
             }
         }
         return false; 
-    }
+    }*/
 }

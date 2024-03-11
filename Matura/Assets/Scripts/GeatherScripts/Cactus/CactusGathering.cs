@@ -6,11 +6,10 @@ public class CactusGathering : GatheringBase
 {
     [SerializeField] private CactusSO cactus;
     public CactusSO Cactus => cactus;
-    public Axe axeScript;
 
     private void OnEnable()
     {
-        axeScript.CanGather = true;
+        PlayerGather.CanGather = true;
     }
 
     private void InitialiseCactus()
@@ -18,14 +17,10 @@ public class CactusGathering : GatheringBase
         Cactus.CactusHealth = cactus.SpawningCactusHealth;
     }
 
-    public void Gather(int damage, GameObject player, string gatheringTool, WaitForSeconds gatheringRate)
+    public void Gather(int damage, GameObject player, WaitForSeconds gatheringRate)
     {
-        if (IsToolEquiped(gatheringTool))
-        {
-            axeScript.CanGather = false;
-            base.Gather(damage, player, cactus.CactusHealth, cactus.ItemDrops, gatheringRate, cactus.RespawnTimer);
-        }
-
+        PlayerGather.CanGather = false;
+        base.Gather(damage, player, cactus.CactusHealth, cactus.ItemDrops, gatheringRate, cactus.RespawnTimer);
     }
 
     protected override IEnumerator GatheringCourotine(int damage, WaitForSeconds timeToGather, int amountOfItems, ItemDrop itemToDrop, WaitForSeconds respawnTimer)
@@ -33,6 +28,7 @@ public class CactusGathering : GatheringBase
         for (int i = 0; i != amountOfItems; i++)
         {
             playerMovementScript.StopMovingAndPlayAnimation(TimeToWaitToCancelAnimation);
+            playerMovementScript.SetAgentRotationToTarget(gameObject);
             playerAnimator.Play("Attack");
 
             yield return timeToGather;
@@ -57,9 +53,10 @@ public class CactusGathering : GatheringBase
     {
         base.StopGathering();
 
-        axeScript.CanGather = true; //Enable gathering another object again
+        PlayerGather.CanGather = true; //Enable gathering another object again
     }
 
+    /*
     private bool IsToolEquiped(string requiredTool)
     {
         //Because it has to be in the hotbar for you to hold it
@@ -75,4 +72,5 @@ public class CactusGathering : GatheringBase
         }
         return false;
     }
+    */
 }

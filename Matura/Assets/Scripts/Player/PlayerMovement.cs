@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
 
     public void SaveData(ref GameData data)
     {
-        data.playerPosition = playerTransform.position; 
+        data.playerPosition = playerTransform.position; //Not saving, because this is in Start
     }
 
     void Awake()
