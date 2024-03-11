@@ -62,6 +62,7 @@ public class Item : MonoBehaviour
     [Header("Gather")]
     public int GatherDamage;
     public float GatheringRate;
+    public float GatherRange; 
 
     [HideInInspector]
     public WaitForSeconds _attackCooldown;

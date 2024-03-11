@@ -102,9 +102,9 @@ public class PlayerGather : MonoBehaviour
 
         if (_currentItem != null)
             //Check if item's range is suitable for attack
-            if (_currentItem.HitRange != 0f)
+            if (_currentItem.GatherRange != 0f)
             {
-                if (distanceToEnemy < _currentItem.HitRange)
+                if (distanceToEnemy < _currentItem.GatherRange)
                     return true; 
                 else if (!objectTransform.gameObject.activeInHierarchy)
                     return false;
@@ -132,19 +132,26 @@ public class PlayerGather : MonoBehaviour
 
     public void OnGatherButtonPress()
     {
-        //Tree
+        // Tree
         if (_currentTreeGatheringScript != null)
         {
+            // To prevent faster gathering
+            _currentTreeGatheringScript.StopGathering();
+
             _currentTreeGatheringScript.Gather(_currentItem.GatherDamage, gameObject, _currentItem.GatheringRateTimer);
 
             _currentTreeGatheringScript = null;
             EnableGather.SetActive(false);
             DisableGather.SetActive(true);
         }
-        //Cactus
+        // Cactus
         else if (_currentCactusGatheringScript != null)
         {
+            // To prevent faster gathering
+            _currentCactusGatheringScript.StopGathering();
+
             _currentCactusGatheringScript.Gather(_currentItem.GatherDamage, gameObject, _currentItem.GatheringRateTimer);
+
             _currentCactusGatheringScript = null;
             EnableGather.SetActive(false);
             DisableGather.SetActive(true);

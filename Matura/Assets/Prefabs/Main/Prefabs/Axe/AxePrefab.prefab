@@ -266,6 +266,7 @@ MonoBehaviour:
   clothingType: 0
   Damage: 30
   attackCooldown: 3
-  HitRange: 5
+  HitRange: 4
   GatherDamage: 5
   GatheringRate: 3
+  GatherRange: 2
