@@ -736,6 +736,7 @@ MonoBehaviour:
   HitRange: 0
   GatherDamage: 0
   GatheringRate: 0
+  GatherRange: 0
 --- !u!208 &31973033
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -10411,6 +10412,7 @@ MonoBehaviour:
   HitRange: 0
   GatherDamage: 0
   GatheringRate: 0
+  GatherRange: 0
 --- !u!65 &178146447
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10711,6 +10713,7 @@ MonoBehaviour:
   HitRange: 0
   GatherDamage: 0
   GatheringRate: 0
+  GatherRange: 0
 --- !u!208 &179373281
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -12652,6 +12655,7 @@ MonoBehaviour:
   HitRange: 0
   GatherDamage: 0
   GatheringRate: 0
+  GatherRange: 0
 --- !u!1001 &224269719
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12796,6 +12800,7 @@ MonoBehaviour:
   HitRange: 0
   GatherDamage: 0
   GatheringRate: 0
+  GatherRange: 0
 --- !u!65 &224269724
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -34272,6 +34277,7 @@ MonoBehaviour:
   HitRange: 0
   GatherDamage: 0
   GatheringRate: 0
+  GatherRange: 0
 --- !u!65 &620244273
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -34811,6 +34817,7 @@ MonoBehaviour:
   HitRange: 0
   GatherDamage: 0
   GatheringRate: 0
+  GatherRange: 0
 --- !u!65 &645057414
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -37748,13 +37755,14 @@ GameObject:
   - component: {fileID: 668760366}
   - component: {fileID: 668760365}
   - component: {fileID: 668760364}
+  - component: {fileID: 668760367}
   m_Layer: 5
   m_Name: SettingsOpen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &668760363
 RectTransform:
   m_ObjectHideFlags: 0
@@ -37869,6 +37877,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 668760362}
   m_CullTransparentMesh: 1
+--- !u!114 &668760367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 668760362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 275844203}
+          m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+          m_MethodName: set_enabled
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &670788557
 GameObject:
   m_ObjectHideFlags: 0
@@ -49885,6 +49922,7 @@ GameObject:
   - component: {fileID: 833359019}
   - component: {fileID: 833359018}
   - component: {fileID: 833359017}
+  - component: {fileID: 833359020}
   m_Layer: 5
   m_Name: SettingsClose
   m_TagString: Untagged
@@ -50006,6 +50044,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 833359015}
   m_CullTransparentMesh: 1
+--- !u!114 &833359020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833359015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 275844203}
+          m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+          m_MethodName: set_enabled
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
 --- !u!1 &833368624
 GameObject:
   m_ObjectHideFlags: 0
@@ -50980,6 +51047,7 @@ MonoBehaviour:
   HitRange: 0
   GatherDamage: 0
   GatheringRate: 0
+  GatherRange: 0
 --- !u!65 &862378189
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -51430,6 +51498,7 @@ MonoBehaviour:
   HitRange: 0
   GatherDamage: 0
   GatheringRate: 0
+  GatherRange: 0
 --- !u!65 &872908801
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -52160,6 +52229,7 @@ MonoBehaviour:
   HitRange: 0
   GatherDamage: 0
   GatheringRate: 0
+  GatherRange: 0
 --- !u!208 &915597858
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -57635,6 +57705,7 @@ MonoBehaviour:
   HitRange: 0
   GatherDamage: 0
   GatheringRate: 0
+  GatherRange: 0
 --- !u!1001 &1051112644
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -62304,6 +62375,7 @@ MonoBehaviour:
   HitRange: 0
   GatherDamage: 0
   GatheringRate: 0
+  GatherRange: 0
 --- !u!65 &1112289725
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -81366,6 +81438,7 @@ MonoBehaviour:
   HitRange: 0
   GatherDamage: 0
   GatheringRate: 0
+  GatherRange: 0
 --- !u!65 &1264857150
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -81600,6 +81673,7 @@ MonoBehaviour:
   HitRange: 0
   GatherDamage: 0
   GatheringRate: 0
+  GatherRange: 0
 --- !u!1001 &1265702647
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -96878,6 +96952,7 @@ MonoBehaviour:
   HitRange: 0
   GatherDamage: 0
   GatheringRate: 0
+  GatherRange: 0
 --- !u!208 &1507420160
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -97250,6 +97325,7 @@ MonoBehaviour:
   HitRange: 0
   GatherDamage: 0
   GatheringRate: 0
+  GatherRange: 0
 --- !u!1 &1517644084
 GameObject:
   m_ObjectHideFlags: 0
@@ -103096,6 +103172,7 @@ MonoBehaviour:
   HitRange: 0
   GatherDamage: 0
   GatheringRate: 0
+  GatherRange: 0
 --- !u!1001 &1659734536
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -103274,6 +103351,7 @@ MonoBehaviour:
   HitRange: 0
   GatherDamage: 0
   GatheringRate: 0
+  GatherRange: 0
 --- !u!1001 &1660429325
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -112528,6 +112606,7 @@ MonoBehaviour:
   HitRange: 0
   GatherDamage: 0
   GatheringRate: 0
+  GatherRange: 0
 --- !u!65 &1736428857
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -112674,6 +112753,7 @@ MonoBehaviour:
   HitRange: 0
   GatherDamage: 0
   GatheringRate: 0
+  GatherRange: 0
 --- !u!65 &1737429439
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -126787,6 +126867,7 @@ MonoBehaviour:
   HitRange: 0
   GatherDamage: 0
   GatheringRate: 0
+  GatherRange: 0
 --- !u!208 &1988464084
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -129127,6 +129208,7 @@ MonoBehaviour:
   HitRange: 0
   GatherDamage: 0
   GatheringRate: 0
+  GatherRange: 0
 --- !u!1001 &2034082600
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -130364,7 +130446,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2037270990
 RectTransform:
   m_ObjectHideFlags: 0
@@ -131589,6 +131671,7 @@ MonoBehaviour:
   HitRange: 0
   GatherDamage: 0
   GatheringRate: 0
+  GatherRange: 0
 --- !u!65 &2079816278
 BoxCollider:
   m_ObjectHideFlags: 0
