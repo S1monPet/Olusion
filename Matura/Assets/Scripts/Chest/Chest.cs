@@ -54,7 +54,7 @@ public class Chest : MonoBehaviour, IDataPersistance
 
     private void SaveChestData(GameData data)
     {
-        ChestData chestData = new ChestData(_currentChestTransform.position, gameObject.activeInHierarchy); 
+        ChestData chestData = new ChestData(_currentChestTransform.position); 
         foreach (Slot slot in allChestSlots)
         {
             Item item = slot.GetItem();
@@ -76,9 +76,8 @@ public class Chest : MonoBehaviour, IDataPersistance
         ChestData chestData = allChestData.allChestDataList[0];
         allChestData.allChestDataList.Remove(chestData);
 
-        // Setting position and state
+        // Setting position
         _currentChestTransform.position = chestData.chestPosition; 
-        gameObject.SetActive(chestData.currentChestState);
 
         foreach (ChestItemData chestItemData in chestData.chestData)
         {

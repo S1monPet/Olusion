@@ -15000,6 +15000,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   inventory: {fileID: 1416109625}
+  inventoryScript: {fileID: 275844207}
   agent: {fileID: 275844204}
   animator: {fileID: 1003882415}
   lookRotationSpeed: 20
@@ -15106,6 +15107,7 @@ MonoBehaviour:
   - {fileID: 1112289719}
   - {fileID: 2079816276}
   - {fileID: 645057412}
+  playerAnimator: {fileID: 1003882415}
   FoodScript: {fileID: 931622440}
   WaterScript: {fileID: 268129703}
   HealthScript: {fileID: 275844211}

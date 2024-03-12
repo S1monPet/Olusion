@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
     //public Camera camera;
     public LayerMask layerMask;
     public GameObject inventory;
+    public Inventory inventoryScript; 
 
     private RaycastHit hit;
     public NavMeshAgent agent;
@@ -76,7 +77,12 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
                     {
                         if (hit.collider.CompareTag(groundTag))
                         {
-                            //If grounds is hit and item was not pressed, set hit.point and go towards location
+                            // Disable any running coroutine
+                            StopOnGoingProcesses();
+                            Debug.Log("fak");
+
+
+                            // If grounds is hit and item was not pressed, set hit.point and go towards location
                             if (agent.isStopped)
                                 agent.isStopped = false;
 
@@ -101,6 +107,11 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
                 animator.SetBool("isRunning", false); //Setting animation off
             }
         }
+    }
+
+    private void StopOnGoingProcesses()
+    {
+        inventoryScript.StopCurrentCoroutine();
     }
 
     public void SetAgentRotation() 
