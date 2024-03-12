@@ -23,9 +23,13 @@ public class Inventory : MonoBehaviour, IDataPersistance
     public ToggleChest toggleChestScript; 
     public Image crosshair;
     public TMP_Text itemHoverText;
-    
+
+    [Header("Collecting")]
+    public float CollectRange = 3f;
+    public Transform playerTransform;
+    private bool _canCollect = true; 
+
     [Header("Raycast")]
-    //Match the 
     private float raycastDistance = 15f; 
     public LayerMask itemLayer;
     public Transform dropLocation; //Where we are dropping our element
@@ -49,6 +53,7 @@ public class Inventory : MonoBehaviour, IDataPersistance
 
     [Header("Animator")]
     public Animator playerAnimator;
+    public float TimeToWaitForCollectingAnimation; 
     private Coroutine _currentCoroutine; 
 
     [Header("Edibles")] 
@@ -193,6 +198,8 @@ public class Inventory : MonoBehaviour, IDataPersistance
 
             //Reset Animator
             playerAnimator.Play("PlayerIdle");
+
+            _canCollect = true;
         }
     }
 
@@ -281,7 +288,7 @@ public class Inventory : MonoBehaviour, IDataPersistance
         RaycastHit hit;
 
         UnityEngine.Debug.DrawLine(ray.origin, ray.origin + ray.direction * raycastDistance, Color.red, 10);
-        if (Physics.Raycast(ray, out hit, raycastDistance, itemLayer) && !inventory.activeSelf) //Check if INVENTORY UI && HOTBAR are NOT HIT. 
+        if (Physics.Raycast(ray, out hit, raycastDistance, itemLayer) && !inventory.activeSelf && _canCollect) //Check if INVENTORY UI && HOTBAR are NOT HIT. 
         {
             if (hit.collider != null)
             {
@@ -297,12 +304,24 @@ public class Inventory : MonoBehaviour, IDataPersistance
 
                         if (ItemIsRespawnable(newItem)) //Getting spawning zone with parent)
                             RespawnItem(newItem);
-
-                        AddItemToInventory(newItem);
+                        
+                        if (CheckIfItemIsCloseEnough(hit.collider.gameObject))
+                            AddItemToInventory(newItem);
                     }
                 } 
             }
         }
+    }
+    //Check if player is close enough to collect item
+    private bool CheckIfItemIsCloseEnough(GameObject targetItem)
+    {
+        Transform objectTransform = targetItem.transform;
+        float distanceToEnemy = Vector3.Distance(playerTransform.position, objectTransform.position);
+
+        if (targetItem != null && distanceToEnemy < CollectRange)
+            return true; 
+
+        return false;
     }
 
     private bool ItemIsRespawnable(Item item)
@@ -319,6 +338,24 @@ public class Inventory : MonoBehaviour, IDataPersistance
         }
     }
 
+    private void StartCollectingAnimation(GameObject currentItem)
+    {
+        //Stopping raycasting for more items
+        _canCollect = false; 
+
+        agent.ResetPath();
+        playerMovementScript.SetAgentRotationToTarget(currentItem); 
+
+        playerAnimator.Play("Collect");
+        _currentCoroutine = StartCoroutine(DisablePlayerMoventForAnimation()); //Setting current coroutine so we can stop it later.
+    }
+
+    private IEnumerator DisablePlayerMoventForAnimation()
+    {
+        yield return new WaitForSeconds(TimeToWaitForCollectingAnimation);
+        _canCollect = true; 
+    }
+
     public void AddItemToInventory(Item itemToAdd, int overrideIndex = -1)
     {
         if (overrideIndex != - 1) //If chest is oppened
@@ -328,6 +365,8 @@ public class Inventory : MonoBehaviour, IDataPersistance
             allInventorySlots[overrideIndex].UpdateInventoryAmount();
             return; 
         }
+
+        StartCollectingAnimation(itemToAdd.gameObject); 
 
         int leftoverQuantity = itemToAdd.currentQuantity;
         Slot openSlot = null; 
@@ -706,7 +745,6 @@ public class Inventory : MonoBehaviour, IDataPersistance
 
     }
 
-
     //Hotbar
     public void EnableHotBarItem(int hotbarIndex) //Previously called in the script now in inspector
     {
@@ -786,8 +824,18 @@ public class Inventory : MonoBehaviour, IDataPersistance
                 _disableAnotherEventCall = true;
                 _fixedHeldItemIndexForCoroutine = _currentHeldItemIndex;
 
+                ConsumableType itemType = currentItem.type;
 
-                _currentCoroutine = StartCoroutine(ConsumingCoroutine(currentItem.TimeToConsume, currentItem));
+                if (itemType == ConsumableType.Water)
+                {
+                    playerAnimator.Play("Drink");
+                }
+                else if (itemType == ConsumableType.Food)
+                {
+                    playerAnimator.Play("Consume");
+                }
+
+                _currentCoroutine = StartCoroutine(ConsumingCoroutine(currentItem.TimeToConsume, currentItem, currentItem.type));
             }
         }
     }
@@ -797,7 +845,7 @@ public class Inventory : MonoBehaviour, IDataPersistance
         StopCoroutine(ConsumingCoroutine(0, null));
     }
     */
-    private IEnumerator ConsumingCoroutine(float timeToWait, Item currentItem)
+    private IEnumerator ConsumingCoroutine(float timeToWait, Item currentItem, ConsumableType itemType)
     { 
         yield return new WaitForSeconds(timeToWait);
 
@@ -805,8 +853,6 @@ public class Inventory : MonoBehaviour, IDataPersistance
         currentItem.currentQuantity--;
         hotbarSlots[_fixedHeldItemIndexForCoroutine].UpdateInventoryAmount(); 
         hotbarSlots[_fixedHeldItemIndexForCoroutine].CheckIfItemIsLessThanZero(currentItem, equaiappableItems);
-
-        ConsumableType itemType = currentItem.type; 
 
         if (itemType == ConsumableType.Water)
         {

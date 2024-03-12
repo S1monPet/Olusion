@@ -154,32 +154,32 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 9965037e329408c43bdf7f929db53644,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.035
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9965037e329408c43bdf7f929db53644,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.152
+      value: -0.036
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9965037e329408c43bdf7f929db53644,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.112
+      value: -0.182
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9965037e329408c43bdf7f929db53644,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.8589599
+      value: 0.98927236
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9965037e329408c43bdf7f929db53644,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.5120428
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9965037e329408c43bdf7f929db53644,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.14608307
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9965037e329408c43bdf7f929db53644,
         type: 3}
@@ -189,12 +189,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 9965037e329408c43bdf7f929db53644,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -61.6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9965037e329408c43bdf7f929db53644,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -16.8
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9965037e329408c43bdf7f929db53644,
         type: 3}
@@ -15087,6 +15087,8 @@ MonoBehaviour:
   toggleChestScript: {fileID: 275844212}
   crosshair: {fileID: 1613068172}
   itemHoverText: {fileID: 855062635}
+  CollectRange: 3
+  playerTransform: {fileID: 275844210}
   itemLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -15108,6 +15110,7 @@ MonoBehaviour:
   - {fileID: 2079816276}
   - {fileID: 645057412}
   playerAnimator: {fileID: 1003882415}
+  TimeToWaitForCollectingAnimation: 0.7
   FoodScript: {fileID: 931622440}
   WaterScript: {fileID: 268129703}
   HealthScript: {fileID: 275844211}
@@ -126365,7 +126368,7 @@ MonoBehaviour:
   equiappableArmorIndex: -1
   damageReduction: 0
   Consumable: 1
-  TimeToConsume: 2
+  TimeToConsume: 3.3
   type: 1
   Amount: 20
   Respawnable: 0

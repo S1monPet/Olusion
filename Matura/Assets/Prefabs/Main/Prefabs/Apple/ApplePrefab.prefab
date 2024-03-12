@@ -170,7 +170,7 @@ MonoBehaviour:
   equiappableArmorIndex: -1
   damageReduction: 0
   Consumable: 1
-  TimeToConsume: 2
+  TimeToConsume: 3.4
   type: 0
   Amount: 10
   Respawnable: 0
@@ -183,6 +183,10 @@ MonoBehaviour:
   clothingType: 0
   Damage: 0
   attackCooldown: 0
+  HitRange: 0
+  GatherDamage: 0
+  GatheringRate: 0
+  GatherRange: 0
 --- !u!1 &8470410166798739832
 GameObject:
   m_ObjectHideFlags: 0
