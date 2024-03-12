@@ -45,7 +45,11 @@ public class Inventory : MonoBehaviour, IDataPersistance
     public List<GameObject> equaiappableItems = new List<GameObject>();
     private int _currentHeldItemIndex = -1;
     private int _fixedHeldItemIndexForCoroutine = -1; 
-    private int _previousHeldItemIndex = -1; 
+    private int _previousHeldItemIndex = -1;
+
+    [Header("Animator")]
+    public Animator playerAnimator;
+    private Coroutine _currentCoroutine; 
 
     [Header("Edibles")] 
     public PlayerFood FoodScript;
@@ -178,6 +182,17 @@ public class Inventory : MonoBehaviour, IDataPersistance
 
             trigger.triggers.Add(entry);
 
+        }
+    }
+
+    public void StopCurrentCoroutine()
+    {
+        if (_currentCoroutine != null)
+        {
+            StopCoroutine(_currentCoroutine);
+
+            //Reset Animator
+            playerAnimator.Play("PlayerIdle");
         }
     }
 
@@ -716,7 +731,7 @@ public class Inventory : MonoBehaviour, IDataPersistance
                     ConsumeIfHeldAndConsumable();
                     RegenerateHealthIfHealing();
                 }
-                _previousHeldItemIndex = hotbarIndex;
+                _previousHeldItemIndex = hotbarIndex; 
             } 
             //We are also checking inventory here, because we equip item in hotbar not with inventory open, with inventory open we drop it
             else if (hotbarSlot.GetItem().equiappableArmorIndex != -1 && !inventory.activeInHierarchy) 
@@ -770,7 +785,9 @@ public class Inventory : MonoBehaviour, IDataPersistance
                 Item currentItem = hotbarSlots[_currentHeldItemIndex].GetItem();
                 _disableAnotherEventCall = true;
                 _fixedHeldItemIndexForCoroutine = _currentHeldItemIndex;
-                StartCoroutine(ConsumingCoroutine(currentItem.TimeToConsume, currentItem));
+
+
+                _currentCoroutine = StartCoroutine(ConsumingCoroutine(currentItem.TimeToConsume, currentItem));
             }
         }
     }
@@ -793,7 +810,7 @@ public class Inventory : MonoBehaviour, IDataPersistance
 
         if (itemType == ConsumableType.Water)
         {
-            WaterScript.AddWater(currentItem.Amount); 
+            WaterScript.AddWater(currentItem.Amount);
         } 
         else if (itemType == ConsumableType.Food) 
         { 
@@ -815,8 +832,10 @@ public class Inventory : MonoBehaviour, IDataPersistance
             {
                 Item currentItem = hotbarSlots[_currentHeldItemIndex].GetItem();
                 _disableAnotherEventCall = true;
-                _fixedHeldItemIndexForCoroutine = _currentHeldItemIndex; 
-                StartCoroutine(HealingCoroutine(currentItem.TimeToGainHealth, currentItem));
+                _fixedHeldItemIndexForCoroutine = _currentHeldItemIndex;
+
+                playerAnimator.Play("Heal");
+                _currentCoroutine = StartCoroutine(HealingCoroutine(currentItem.TimeToGainHealth, currentItem));
             } 
         }
     }
@@ -872,7 +891,7 @@ public class Inventory : MonoBehaviour, IDataPersistance
     */
     private void StopAgent() //Fix for better
     {
-        playerMovementScript.animator.SetBool("isRunning", false);
+        playerAnimator.SetBool("isRunning", false);
         agent.isStopped = false;
         agent.velocity = Vector3.zero;
         agent.ResetPath();

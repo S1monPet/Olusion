@@ -72,13 +72,11 @@ public class ChestItemData
 [System.Serializable]
 public class ChestData
 {
-    public Vector3 chestPosition;
-    public bool currentChestState;
     public List<ChestItemData> chestData = new List<ChestItemData>();
-    public ChestData(Vector3 chestPosition, bool currentChestState)
+    public Vector3 chestPosition;
+    public ChestData(Vector3 chestPosition)
     {
         this.chestPosition = chestPosition;
-        this.currentChestState = currentChestState;
     }
 }
 
