@@ -7,6 +7,11 @@ using UnityEngine.UI;
 
 public class SurvivalSceneManager : MonoBehaviour
 {
+    [Header("UI")]
+    public PlayerMovement playerMovementScript; 
+    public GameObject closeChestUI; 
+    public GameObject inventoryUI; 
+
     [Header("Survival Timer")]
     private float _survivedTime; 
     public TextMeshProUGUI survivalTimeText;
@@ -58,6 +63,22 @@ public class SurvivalSceneManager : MonoBehaviour
         }*/
         animator.Play(_animationToStartWith); 
         currentEnemy.SetActive(true);
+    }
+
+    public void EnemyChestDespawn(GameObject chest, float despawnTimer)
+    {
+        StartCoroutine(EnemyChestDespawnCoroutine(chest, despawnTimer));
+    }
+
+    private IEnumerator EnemyChestDespawnCoroutine(GameObject chest, float despawnTimer)
+    {
+        yield return new WaitForSeconds(despawnTimer);
+
+        inventoryUI.SetActive(false);
+        closeChestUI.SetActive(false);
+
+        playerMovementScript.enabled = true; 
+        chest.SetActive(false);
     }
 
     public void RespawnGatherableItem(GameObject gatherableItem, WaitForSeconds timer)

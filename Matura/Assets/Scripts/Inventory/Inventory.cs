@@ -20,6 +20,7 @@ public class Inventory : MonoBehaviour, IDataPersistance
     private List<Slot> allInventorySlots = new List<Slot>();
     public List<Slot> inventorySlots = new List<Slot>();
     public List<Slot> hotbarSlots = new List<Slot>();
+    public ToggleChest toggleChestScript; 
     public Image crosshair;
     public TMP_Text itemHoverText;
     
