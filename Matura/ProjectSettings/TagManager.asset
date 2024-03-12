@@ -16,6 +16,7 @@ TagManager:
   - Tree
   - Desert King
   - Cactus
+  - Chest
   layers:
   - Default
   - TransparentFX
@@ -28,7 +29,7 @@ TagManager:
   - Enemy
   - Tree
   - Gatherable
-  - 
+  - Chest
   - 
   - 
   - 

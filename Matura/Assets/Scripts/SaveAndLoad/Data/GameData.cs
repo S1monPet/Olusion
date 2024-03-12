@@ -11,6 +11,7 @@ public class GameData
     public int Water; 
     public Vector3 playerPosition; 
 
+    
     public InventoryData inventoryData;
     public AllChestData allChestData;
 
@@ -20,10 +21,10 @@ public class GameData
         this.Health = 100;
         this.Food = 60;
         this.Water = 40; 
-        this.playerPosition = Vector3.zero; 
+        this.playerPosition = Vector3.zero;
 
         this.inventoryData = new InventoryData();
-        this.allChestData = new AllChestData(); 
+        this.allChestData = new AllChestData();
     }
 }
 
@@ -55,6 +56,7 @@ public class InventoryData
 [System.Serializable]
 public class ChestItemData
 {
+    
     public string itemName;
     public int quantity;    
     public int slotIndex;
@@ -70,7 +72,14 @@ public class ChestItemData
 [System.Serializable]
 public class ChestData
 {
-    public List<ChestItemData> slotData = new List<ChestItemData>();
+    public Vector3 chestPosition;
+    public bool currentChestState;
+    public List<ChestItemData> chestData = new List<ChestItemData>();
+    public ChestData(Vector3 chestPosition, bool currentChestState)
+    {
+        this.chestPosition = chestPosition;
+        this.currentChestState = currentChestState;
+    }
 }
 
 [System.Serializable]

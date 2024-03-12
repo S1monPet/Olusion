@@ -1,3 +1,4 @@
+using NUnit.Framework.Constraints;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -194,9 +195,13 @@ public abstract class EnemyBase : MonoBehaviour
             toggleChestScript.chestList.Add(droppedItem);   
 
             Init(currentNavMeshAgent, currentEnemy);
+            //Start timer for chest despawning
+            survivalSceneManager.EnemyChestDespawn(droppedItem, EnemyStats.EnemyRespawnTimer / 2.0f);
             survivalSceneManager.RespawnEnemy(EnemyStats.RespawnTimer, gameObject, enemyAnimator);
         }
     }
+
+
 
     //Setting base for patrolling
     protected virtual void Patrol(Transform[] patrolPoints, NavMeshAgent agent)

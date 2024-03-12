@@ -26,7 +26,6 @@ public class Item : MonoBehaviour
     public int maxQuantity = 16;
     public bool IsHeld = false;
 
-
     [Header("Hotbar")]
     public int equiappableItemIndex = -1;
 

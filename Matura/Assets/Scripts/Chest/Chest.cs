@@ -25,8 +25,14 @@ public class Chest : MonoBehaviour, IDataPersistance
 
     [Header("Save/Load")]
     public ChestType chestType; 
-    public Transform dropLocation; 
+    public Transform dropLocation;
+    private Transform _currentChestTransform; 
     public List<GameObject> _allChestItemPrefabs = new List<GameObject>();
+
+    private void Awake()
+    {
+        _currentChestTransform = transform;
+    }
 
     public void LoadData(GameData data)
     {
@@ -34,21 +40,11 @@ public class Chest : MonoBehaviour, IDataPersistance
         {
             CreateChestSlots();
             LoadSavedChestData(data.allChestData);
-
-            //If object was disabled it wouldn't load data
-            if (chestType == ChestType.DroppedChest)
-                gameObject.SetActive(false);
-
             return;
         }
 
         CreateChestSlots();
         SpawnRandomChestItems();
-
-        //If object was disabled it wouldn't make data
-        if (chestType == ChestType.DroppedChest)
-            gameObject.SetActive(false);
-
     }
 
     public void SaveData(ref GameData data)
@@ -58,14 +54,15 @@ public class Chest : MonoBehaviour, IDataPersistance
 
     private void SaveChestData(GameData data)
     {
-        ChestData chestData = new ChestData(); 
+        ChestData chestData = new ChestData(_currentChestTransform.position, gameObject.activeInHierarchy); 
         foreach (Slot slot in allChestSlots)
         {
             Item item = slot.GetItem();
-            if (item != null)
+            // We only need information from Treasure chest and Loot chest
+            if (item != null && chestType != ChestType.DroppedChest)
             {
                 ChestItemData chestItemData = new ChestItemData(item.name, item.currentQuantity, allChestSlots.IndexOf(slot));
-                chestData.slotData.Add(chestItemData);
+                chestData.chestData.Add(chestItemData);
             }
         }
         data.allChestData.allChestDataList.Add(chestData); //Adding chest
@@ -79,7 +76,11 @@ public class Chest : MonoBehaviour, IDataPersistance
         ChestData chestData = allChestData.allChestDataList[0];
         allChestData.allChestDataList.Remove(chestData);
 
-        foreach (ChestItemData chestItemData in chestData.slotData)
+        // Setting position and state
+        _currentChestTransform.position = chestData.chestPosition; 
+        gameObject.SetActive(chestData.currentChestState);
+
+        foreach (ChestItemData chestItemData in chestData.chestData)
         {
             //Getting item by name 
             GameObject itemPrefab = _allChestItemPrefabs.Find(prefab => prefab.GetComponent<Item>().name == chestItemData.itemName);
