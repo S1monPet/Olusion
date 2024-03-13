@@ -44,6 +44,11 @@ public class CactusGathering : GatheringBase
 
             inventoryScript.AddItemToInventory(droppedItem);
         }
+
+        //Finish last hit
+        //playerAnimator.Play("Attack");
+        playerAnimator.SetBool("isAttacking", false);
+
         base.RespawnGatherableItem(respawnTimer); //Was destroyed before
         InitialiseCactus();
     }
