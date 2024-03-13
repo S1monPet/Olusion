@@ -201,8 +201,8 @@ public class Inventory : MonoBehaviour, IDataPersistance
             _currentCoroutine = null;
             _disableAnotherEventCall = false;
 
-            //Reset Animator
-            playerAnimator.SetBool("isCollecting", false);
+            // Reset Animator
+            playerAnimator.Play("PlayerIdle");
         }
     }
 
