@@ -6430,7 +6430,7 @@ MonoBehaviour:
   - {fileID: 2079816276}
   - {fileID: 645057412}
   playerAnimator: {fileID: 1003882415}
-  TimeToWaitForCollectingAnimation: 0.7
+  TimeToWaitForCollectingAnimation: 0.3
   FoodScript: {fileID: 931622440}
   WaterScript: {fileID: 268129703}
   HealthScript: {fileID: 275844211}
@@ -6444,7 +6444,7 @@ MonoBehaviour:
   allItemPrefabs:
   - {fileID: 8731429159240846695, guid: 91443dc4544e2794d913ae28bca3e3e7, type: 3}
   - {fileID: 5511085432170092512, guid: 6186e37add19e9241bca57f6919c021d, type: 3}
-  - {fileID: 1832506762}
+  - {fileID: 7620727668973377199, guid: 833ae818f4621e643bde375dcad190d0, type: 3}
 --- !u!114 &275844208
 MonoBehaviour:
   m_ObjectHideFlags: 0

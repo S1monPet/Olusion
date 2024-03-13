@@ -190,16 +190,19 @@ public class Inventory : MonoBehaviour, IDataPersistance
         }
     }
 
+    //If Player decides to start moving while animation is ongoing
     public void StopCurrentCoroutine()
     {
         if (_currentCoroutine != null)
         {
+            _canCollect = true; 
+
             StopCoroutine(_currentCoroutine);
+            _currentCoroutine = null;
+            _disableAnotherEventCall = false;
 
             //Reset Animator
             playerAnimator.Play("PlayerIdle");
-
-            _canCollect = true;
         }
     }
 
@@ -288,7 +291,7 @@ public class Inventory : MonoBehaviour, IDataPersistance
         RaycastHit hit;
 
         UnityEngine.Debug.DrawLine(ray.origin, ray.origin + ray.direction * raycastDistance, Color.red, 10);
-        if (Physics.Raycast(ray, out hit, raycastDistance, itemLayer) && !inventory.activeSelf && _canCollect) //Check if INVENTORY UI && HOTBAR are NOT HIT. 
+        if (Physics.Raycast(ray, out hit, raycastDistance, itemLayer) && !inventory.activeSelf) //Check if INVENTORY UI && HOTBAR are NOT HIT. 
         {
             if (hit.collider != null)
             {
@@ -340,19 +343,21 @@ public class Inventory : MonoBehaviour, IDataPersistance
 
     private void StartCollectingAnimation(GameObject currentItem)
     {
-        //Stopping raycasting for more items
-        _canCollect = false; 
-
         agent.ResetPath();
         playerMovementScript.SetAgentRotationToTarget(currentItem); 
 
         playerAnimator.Play("Collect");
         _currentCoroutine = StartCoroutine(DisablePlayerMoventForAnimation()); //Setting current coroutine so we can stop it later.
+
+        playerMovementScript.enabled = false; // Disabling Movement
+        _canCollect = false;
+
     }
 
     private IEnumerator DisablePlayerMoventForAnimation()
     {
         yield return new WaitForSeconds(TimeToWaitForCollectingAnimation);
+        playerMovementScript.enabled = true; // Enabling Movement
         _canCollect = true; 
     }
 
@@ -769,7 +774,7 @@ public class Inventory : MonoBehaviour, IDataPersistance
                     ConsumeIfHeldAndConsumable();
                     RegenerateHealthIfHealing();
                 }
-                _previousHeldItemIndex = hotbarIndex; 
+                _previousHeldItemIndex = hotbarIndex;
             } 
             //We are also checking inventory here, because we equip item in hotbar not with inventory open, with inventory open we drop it
             else if (hotbarSlot.GetItem().equiappableArmorIndex != -1 && !inventory.activeInHierarchy) 
@@ -819,7 +824,6 @@ public class Inventory : MonoBehaviour, IDataPersistance
                 hotbarSlots[_currentHeldItemIndex].GetItem().Consumable &&
                 !_disableAnotherEventCall)
             {
-
                 Item currentItem = hotbarSlots[_currentHeldItemIndex].GetItem();
                 _disableAnotherEventCall = true;
                 _fixedHeldItemIndexForCoroutine = _currentHeldItemIndex;
@@ -864,6 +868,7 @@ public class Inventory : MonoBehaviour, IDataPersistance
         }
 
         _disableAnotherEventCall = false;
+        playerAnimator.Play("PlayerIdle");
     }
 
     public void RegenerateHealthIfHealing()
@@ -908,6 +913,7 @@ public class Inventory : MonoBehaviour, IDataPersistance
         }
 
         _disableAnotherEventCall = false;
+        playerAnimator.Play("PlayerIdle");
     }
 
     /*

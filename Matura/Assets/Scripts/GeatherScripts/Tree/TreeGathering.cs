@@ -30,8 +30,6 @@ public class TreeGathering : GatheringBase
     {
         for (int i = 0; i != amountOfItems; i++)
         {
-            Debug.Log(amountOfItems);
-            Debug.Log(damage);
             playerMovementScript.StopMovingAndPlayAnimation(TimeToWaitToCancelAnimation);
             playerMovementScript.SetAgentRotationToTarget(gameObject);
 
