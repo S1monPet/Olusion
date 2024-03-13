@@ -195,14 +195,14 @@ public class Inventory : MonoBehaviour, IDataPersistance
     {
         if (_currentCoroutine != null)
         {
-            _canCollect = true; 
+            _canCollect = true;
 
             StopCoroutine(_currentCoroutine);
             _currentCoroutine = null;
             _disableAnotherEventCall = false;
 
             //Reset Animator
-            playerAnimator.Play("PlayerIdle");
+            playerAnimator.SetBool("isCollecting", false);
         }
     }
 
@@ -291,7 +291,7 @@ public class Inventory : MonoBehaviour, IDataPersistance
         RaycastHit hit;
 
         UnityEngine.Debug.DrawLine(ray.origin, ray.origin + ray.direction * raycastDistance, Color.red, 10);
-        if (Physics.Raycast(ray, out hit, raycastDistance, itemLayer) && !inventory.activeSelf) //Check if INVENTORY UI && HOTBAR are NOT HIT. 
+        if (Physics.Raycast(ray, out hit, raycastDistance, itemLayer) && !inventory.activeSelf && _canCollect) //Check if INVENTORY UI && HOTBAR are NOT HIT. 
         {
             if (hit.collider != null)
             {
@@ -343,6 +343,9 @@ public class Inventory : MonoBehaviour, IDataPersistance
 
     private void StartCollectingAnimation(GameObject currentItem)
     {
+        // Setting animation bool, so we can smoothly transition to running
+        // playerAnimator.SetBool("isCollecting", true);
+
         agent.ResetPath();
         playerMovementScript.SetAgentRotationToTarget(currentItem); 
 
@@ -357,8 +360,12 @@ public class Inventory : MonoBehaviour, IDataPersistance
     private IEnumerator DisablePlayerMoventForAnimation()
     {
         yield return new WaitForSeconds(TimeToWaitForCollectingAnimation);
+
         playerMovementScript.enabled = true; // Enabling Movement
-        _canCollect = true; 
+        _canCollect = true;
+
+        // Reset Animation
+        playerAnimator.SetBool("isCollecting", false);
     }
 
     public void AddItemToInventory(Item itemToAdd, int overrideIndex = -1)
