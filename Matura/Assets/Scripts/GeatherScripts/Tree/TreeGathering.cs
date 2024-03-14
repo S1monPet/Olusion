@@ -47,7 +47,7 @@ public class TreeGathering : GatheringBase
 
                 inventoryScript.AddItemToInventory(droppedItem);
 
-                break; // yield return new WaitForSeconds(timeToGather / 2.0f); // Faster last hit
+                break;// yield return new WaitForSeconds(timeToGather / 2.0f); // Faster last hit
             }
 
             yield return new WaitForSeconds(timeToGather); // Gathering
