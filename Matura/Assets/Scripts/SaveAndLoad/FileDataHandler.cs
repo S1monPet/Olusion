@@ -21,7 +21,7 @@ public class FileDataHandler
     public GameData Load()
     {
         string fullPath = Path.Combine(dataDirPath, dataFileName);
-        GameData loadedData = null; 
+        GameData loadedData = null;
 
         if (File.Exists(fullPath))
         {

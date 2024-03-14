@@ -378,6 +378,7 @@ public class Inventory : MonoBehaviour, IDataPersistance
             return; 
         }
 
+
         StartCollectingAnimation(itemToAdd.gameObject); // Playing animation when Item is collected
 
         int leftoverQuantity = itemToAdd.currentQuantity;
