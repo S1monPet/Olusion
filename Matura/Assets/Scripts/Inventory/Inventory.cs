@@ -8,7 +8,7 @@ using UnityEngine.AI;
 using UnityEngine.EventSystems;
 using System.Threading;
 using JetBrains.Annotations;
-using UnityEditorInternal.Profiling.Memory.Experimental;
+
 
 public class Inventory : MonoBehaviour, IDataPersistance
 {
@@ -846,6 +846,7 @@ public class Inventory : MonoBehaviour, IDataPersistance
                     playerAnimator.Play("Consume");
                 }
 
+                agent.ResetPath(); // Stopping agent
                 _currentCoroutine = StartCoroutine(ConsumingCoroutine(currentItem.TimeToConsume, currentItem, currentItem.type));
             }
         }
@@ -893,6 +894,8 @@ public class Inventory : MonoBehaviour, IDataPersistance
                 _fixedHeldItemIndexForCoroutine = _currentHeldItemIndex;
 
                 playerAnimator.Play("Heal");
+                
+                agent.ResetPath(); // Stopping agent
                 _currentCoroutine = StartCoroutine(HealingCoroutine(currentItem.TimeToGainHealth, currentItem));
             } 
         }
