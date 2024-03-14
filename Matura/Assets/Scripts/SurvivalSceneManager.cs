@@ -81,15 +81,16 @@ public class SurvivalSceneManager : MonoBehaviour
         chest.SetActive(false);
     }
 
-    public void RespawnGatherableItem(GameObject gatherableItem, WaitForSeconds timer)
+    public void RespawnGatherableItem(GameObject gatherableItem, ItemLifecycleManager itemLifecycleManager, WaitForSeconds timer)
     {
-        StartCoroutine(GatherableItemRespawnTimer(gatherableItem, timer));
+        StartCoroutine(GatherableItemRespawnTimer(gatherableItem, itemLifecycleManager, timer));
     }
 
-    private IEnumerator GatherableItemRespawnTimer(GameObject gatherableItem, WaitForSeconds timer)
+    private IEnumerator GatherableItemRespawnTimer(GameObject gatherableItem, ItemLifecycleManager itemLifecycleManager, WaitForSeconds timer)
     {
-        yield return timer; 
+        yield return timer;
 
+        itemLifecycleManager.SpawnItemsRandomly(); 
         gatherableItem.SetActive(true);
     }
 }

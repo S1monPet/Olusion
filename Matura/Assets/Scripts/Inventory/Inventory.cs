@@ -347,7 +347,7 @@ public class Inventory : MonoBehaviour, IDataPersistance
         // playerAnimator.SetBool("isCollecting", true);
 
         agent.ResetPath();
-        playerMovementScript.SetAgentRotationToTarget(currentItem); 
+        playerMovementScript.SetAgentRotationToTarget(currentItem);
 
         playerAnimator.Play("Collect");
         _currentCoroutine = StartCoroutine(DisablePlayerMoventForAnimation()); //Setting current coroutine so we can stop it later.
@@ -378,7 +378,7 @@ public class Inventory : MonoBehaviour, IDataPersistance
             return; 
         }
 
-        StartCollectingAnimation(itemToAdd.gameObject); 
+        StartCollectingAnimation(itemToAdd.gameObject); // Playing animation when Item is collected
 
         int leftoverQuantity = itemToAdd.currentQuantity;
         Slot openSlot = null; 

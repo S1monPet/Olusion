@@ -72,7 +72,7 @@ public class PlayerGather : MonoBehaviour
     private void CheckAndUpdateGatherButton()
     {
         // If there's a target, check distance and update buttons
-        if (_currentTarget != null)
+        if (_currentTarget != null && _currentTarget.activeInHierarchy)
         {
             if (CheckIfCurrentObjectIsCloseEnough(_currentTarget))
             {
@@ -138,7 +138,7 @@ public class PlayerGather : MonoBehaviour
             // To prevent faster gathering
             _currentTreeGatheringScript.StopGathering();
 
-            _currentTreeGatheringScript.Gather(_currentItem.GatherDamage, gameObject, _currentItem.GatheringRateTimer);
+            _currentTreeGatheringScript.Gather(_currentItem.GatherDamage, gameObject, _currentItem.GatheringRate);
 
             _currentTreeGatheringScript = null;
             EnableGather.SetActive(false);
@@ -150,7 +150,7 @@ public class PlayerGather : MonoBehaviour
             // To prevent faster gathering
             _currentCactusGatheringScript.StopGathering();
 
-            _currentCactusGatheringScript.Gather(_currentItem.GatherDamage, gameObject, _currentItem.GatheringRateTimer);
+            _currentCactusGatheringScript.Gather(_currentItem.GatherDamage, gameObject, _currentItem.GatheringRate);
 
             _currentCactusGatheringScript = null;
             EnableGather.SetActive(false);

@@ -10,6 +10,7 @@ public class ItemLifecycleManager : MonoBehaviour
     public Transform spawningZone; 
     public List<Transform> spawningZones = new List<Transform>();
     public GameObject item;
+    public GameObject appleTree; 
 
     public int MaximumAmountOfItems, MinimumAmountOfItems;
     private int _randomAmountOfItemsToSpawn; 
@@ -34,7 +35,7 @@ public class ItemLifecycleManager : MonoBehaviour
         SpawnItemsRandomly(); 
     }
 
-    private void SpawnItemsRandomly()
+    public void SpawnItemsRandomly()
     {
         Transform currentSpawningZone = null;
         int numberOfSpawningZones = spawningZones.Count;
@@ -51,7 +52,7 @@ public class ItemLifecycleManager : MonoBehaviour
 
             Vector3 _randomSpawnPosition = currentSpawningZone.position + new Vector3(randomX, randomY, randomZ);
 
-            GameObject spawnedItem = Instantiate(item, _randomSpawnPosition, Quaternion.identity, spawningZone.parent.parent); // Items will be spawned in SpawnPoint
+            GameObject spawnedItem = Instantiate(item, _randomSpawnPosition, Quaternion.identity, spawningZone.parent.parent); // Items will be spawned in Apple Tree
 
             //Setting respawnable mode 
             Item itemScript = spawnedItem.GetComponent<Item>();
@@ -75,7 +76,7 @@ public class ItemLifecycleManager : MonoBehaviour
 
         Vector3 _randomSpawnPosition = currentSpawningZone.position + new Vector3(randomX, randomY, randomZ);
 
-        GameObject spawnedItem = Instantiate(item, _randomSpawnPosition, Quaternion.identity, spawningZone.parent.parent); // Items will be spawned in SpawnPoint
+        GameObject spawnedItem = Instantiate(item, _randomSpawnPosition, Quaternion.identity, spawningZone.parent.parent); // Items will be spawned in Apple Tree
 
         //Setting respawnable mode 
         Item itemScript = spawnedItem.GetComponent<Item>();
@@ -83,7 +84,7 @@ public class ItemLifecycleManager : MonoBehaviour
         
     }
 
-    public void RespawnItem(GameObject item)
+    private void RespawnItem(GameObject item)
     {
         int currentSpawningZoneIndex = Random.Range(0, spawningZones.Count);
         Transform currentSpawningZone = spawningZones[currentSpawningZoneIndex];
@@ -101,7 +102,7 @@ public class ItemLifecycleManager : MonoBehaviour
 
     public void HandleItemRespawn(Item currentItem)
     {
-        if (!_currentRespawnCoroutines.ContainsKey(currentItem))
+        if (!_currentRespawnCoroutines.ContainsKey(currentItem) && appleTree.activeSelf)
             RespawnItem(currentItem);
 
     }

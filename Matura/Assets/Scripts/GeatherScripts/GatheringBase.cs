@@ -12,6 +12,7 @@ public abstract class GatheringBase : MonoBehaviour
     public Transform playerTransform;
     public Animator playerAnimator; 
     public SurvivalSceneManager survivalSceneManager;
+    public ItemLifecycleManager itemLifecycleManager; // For dropping items
 
     private Coroutine _gatheringCoroutine; //For stopping coroutine
 
@@ -26,7 +27,7 @@ public abstract class GatheringBase : MonoBehaviour
 
 
 
-    protected void Gather(int damage, GameObject player, int objectHealth, List<ItemDrop> itemDrops, WaitForSeconds gatheringRate, WaitForSeconds respawnTimer)
+    protected void Gather(int damage, GameObject player, int objectHealth, List<ItemDrop> itemDrops, float gatheringRate, WaitForSeconds respawnTimer)
     {
         foreach (ItemDrop itemToDrop in itemDrops)
         {
@@ -43,12 +44,12 @@ public abstract class GatheringBase : MonoBehaviour
         //Animation get's handled in PlayerMovement Script
     }
 
-    protected abstract IEnumerator GatheringCourotine(int damage, WaitForSeconds timeToGather, int amountOfItems, ItemDrop itemToDrop, WaitForSeconds respawnTimer);
+    protected abstract IEnumerator GatheringCourotine(int damage, float timeToGather, int amountOfItems, ItemDrop itemToDrop, WaitForSeconds respawnTimer);
 
     protected void RespawnGatherableItem(WaitForSeconds itemRespawnTimer)
     {
         gameObject.SetActive(false);
-        survivalSceneManager.RespawnGatherableItem(gameObject, itemRespawnTimer);
+        survivalSceneManager.RespawnGatherableItem(gameObject, itemLifecycleManager, itemRespawnTimer);
     }
 
     protected void StopGatheringCoroutine()
