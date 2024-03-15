@@ -19,14 +19,14 @@ public class TreeGathering : GatheringBase
         Tree.TreeHealth = Tree.SpawningTreeHealth;
     }
 
-    public void Gather(int damage, GameObject player, float gatheringRate)
+    public void Gather(int damage, GameObject player, WaitForSeconds gatheringRate)
     {
         PlayerGather.CanGather = false;
         base.Gather(damage, player, Tree.TreeHealth, Tree.ItemDrops, gatheringRate, Tree.RespawnTimer);
 
     }
 
-    protected override IEnumerator GatheringCourotine(int damage, float timeToGather, int amountOfItems, ItemDrop itemToDrop, WaitForSeconds respawnTimer)
+    protected override IEnumerator GatheringCourotine(int damage, WaitForSeconds timeToGather, int amountOfItems, ItemDrop itemToDrop, WaitForSeconds respawnTimer)
     {
         while (Tree.TreeHealth > 0)
         {
@@ -35,6 +35,7 @@ public class TreeGathering : GatheringBase
 
             playerAnimator.Play("Attack");
             playerAnimator.SetBool("isAttacking", false);
+
 
             Tree.TreeHealth -= damage; //Set tree health
 
@@ -45,12 +46,12 @@ public class TreeGathering : GatheringBase
                 Item droppedItem = Instantiate(itemToDrop.ItemToDrop, transform.position, Quaternion.identity).GetComponent<Item>();
                 droppedItem.currentQuantity = amountOfItems;
 
-                inventoryScript.AddItemToInventory(droppedItem);
+                inventoryScript.AddItemToInventory(droppedItem, collect: false); // We are not collecting it with animation
 
                 break;// yield return new WaitForSeconds(timeToGather / 2.0f); // Faster last hit
             }
 
-            yield return new WaitForSeconds(timeToGather); // Gathering
+            yield return (timeToGather); // Gathering
         }
 
 

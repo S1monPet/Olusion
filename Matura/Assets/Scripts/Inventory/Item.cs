@@ -65,9 +65,11 @@ public class Item : MonoBehaviour
 
     [HideInInspector]
     public WaitForSeconds _attackCooldown;
+    public WaitForSeconds TimeToGather;
 
     private void OnEnable()
     {
         _attackCooldown = new WaitForSeconds(attackCooldown);
+        TimeToGather = new WaitForSeconds(GatheringRate);
     }
 }

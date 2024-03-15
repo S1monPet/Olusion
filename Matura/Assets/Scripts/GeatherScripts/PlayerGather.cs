@@ -138,7 +138,7 @@ public class PlayerGather : MonoBehaviour
             // To prevent faster gathering
             _currentTreeGatheringScript.StopGathering();
 
-            _currentTreeGatheringScript.Gather(_currentItem.GatherDamage, gameObject, _currentItem.GatheringRate);
+            _currentTreeGatheringScript.Gather(_currentItem.GatherDamage, gameObject, _currentItem.TimeToGather);
 
             _currentTreeGatheringScript = null;
             EnableGather.SetActive(false);
@@ -150,7 +150,7 @@ public class PlayerGather : MonoBehaviour
             // To prevent faster gathering
             _currentCactusGatheringScript.StopGathering();
 
-            _currentCactusGatheringScript.Gather(_currentItem.GatherDamage, gameObject, _currentItem.GatheringRate);
+            _currentCactusGatheringScript.Gather(_currentItem.GatherDamage, gameObject, _currentItem.TimeToGather);
 
             _currentCactusGatheringScript = null;
             EnableGather.SetActive(false);
