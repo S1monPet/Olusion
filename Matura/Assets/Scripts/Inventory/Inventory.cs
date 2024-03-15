@@ -368,7 +368,7 @@ public class Inventory : MonoBehaviour, IDataPersistance
         playerAnimator.SetBool("isCollecting", false);
     }
 
-    public void AddItemToInventory(Item itemToAdd, int overrideIndex = -1)
+    public void AddItemToInventory(Item itemToAdd, int overrideIndex = -1, bool collect = true)
     {
         if (overrideIndex != - 1) //If chest is oppened
         {
@@ -378,8 +378,10 @@ public class Inventory : MonoBehaviour, IDataPersistance
             return; 
         }
 
-
-        StartCollectingAnimation(itemToAdd.gameObject); // Playing animation when Item is collected
+        if (collect) // Gathering is adding straight into inventory
+        {
+            StartCollectingAnimation(itemToAdd.gameObject); // Playing animation when Item is collected
+        }
 
         int leftoverQuantity = itemToAdd.currentQuantity;
         Slot openSlot = null; 

@@ -17,13 +17,13 @@ public class CactusGathering : GatheringBase
         Cactus.CactusHealth = cactus.SpawningCactusHealth;
     }
 
-    public void Gather(int damage, GameObject player, float gatheringRate)
+    public void Gather(int damage, GameObject player, WaitForSeconds gatheringRate)
     {
         PlayerGather.CanGather = false;
         base.Gather(damage, player, cactus.CactusHealth, cactus.ItemDrops, gatheringRate, cactus.RespawnTimer);
     }
 
-    protected override IEnumerator GatheringCourotine(int damage, float timeToGather, int amountOfItems, ItemDrop itemToDrop, WaitForSeconds respawnTimer)
+    protected override IEnumerator GatheringCourotine(int damage, WaitForSeconds timeToGather, int amountOfItems, ItemDrop itemToDrop, WaitForSeconds respawnTimer)
     {
         while (cactus.CactusHealth > 0)
         {
@@ -42,11 +42,11 @@ public class CactusGathering : GatheringBase
                 Item droppedItem = Instantiate(itemToDrop.ItemToDrop, transform.position, Quaternion.identity).GetComponent<Item>();
                 droppedItem.currentQuantity = amountOfItems;
 
-                inventoryScript.AddItemToInventory(droppedItem);
+                inventoryScript.AddItemToInventory(droppedItem, collect: false); // We are not collecting it with animation
 
                 break; // yield return new WaitForSeconds(timeToGather / 2.0f); // Faster last hit
             }
-            yield return new WaitForSeconds(timeToGather);
+            yield return timeToGather;
         }
 
         // Finish last hit
