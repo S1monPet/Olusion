@@ -68,7 +68,7 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
             {
                 Touch touch = Input.GetTouch(0);
 
-                if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
+                if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary || touch.phase == TouchPhase.Began)
                 {
                     Ray ray = Camera.main.ScreenPointToRay(touch.position);
                     UnityEngine.Debug.DrawLine(ray.origin, ray.origin + ray.direction * MaxRaycastDistance, Color.green, 3);
