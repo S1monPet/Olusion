@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,9 +10,10 @@ public class GameData
     public int Health;
     public int Food;
     public int Water; 
-    public Vector3 playerPosition; 
+    public Vector3 playerPosition;
 
-    
+    public AllItemData allItemData; 
+
     public InventoryData inventoryData;
     public AllChestData allChestData;
 
@@ -28,15 +30,34 @@ public class GameData
     }
 }
 
+// Item
+[System.Serializable] 
+public class ItemData
+{
+    public Vector3 currentItemPosition;
+    public Quaternion currentItemRotation; 
+    public ItemData(Vector3 currentItemPosition, Quaternion currentItemRotation)
+    {
+        this.currentItemPosition = currentItemPosition;
+        this.currentItemRotation = currentItemRotation;
+    }
+}
+
+[System.Serializable]
+public class AllItemData
+{
+    public List<ItemData> items = new List<ItemData>();    
+}
+
 //Inventory 
 [System.Serializable]
-public class ItemData
+public class InventoryItemData
 {
     public string itemName;
     public int quantity;
     public int slotIndex;
 
-    public ItemData(string itemName, int quantity, int slotIndex)
+    public InventoryItemData(string itemName, int quantity, int slotIndex)
     {
         this.itemName = itemName;
         this.quantity = quantity;
@@ -48,7 +69,7 @@ public class ItemData
 
 public class InventoryData
 {
-    public List<ItemData> slotData = new List<ItemData>(); 
+    public List<InventoryItemData> slotData = new List<InventoryItemData>(); 
 }
 
 

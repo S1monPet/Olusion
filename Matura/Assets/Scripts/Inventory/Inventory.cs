@@ -103,7 +103,7 @@ public class Inventory : MonoBehaviour, IDataPersistance
             Item item = slot.GetItem(); 
             if (item != null)
             {
-                ItemData itemData = new ItemData(item.name, item.currentQuantity, allInventorySlots.IndexOf(slot)); 
+                InventoryItemData itemData = new InventoryItemData(item.name, item.currentQuantity, allInventorySlots.IndexOf(slot)); 
                 data.slotData.Add(itemData);    
             }
         }
@@ -114,7 +114,7 @@ public class Inventory : MonoBehaviour, IDataPersistance
     {
         ClearInventory(); //Make sure nothing is taking our space
 
-        foreach (ItemData itemData in inventoryData.slotData)
+        foreach (InventoryItemData itemData in inventoryData.slotData)
         {
             //Getting item by name 
             GameObject itemPrefab = allItemPrefabs.Find(prefab => prefab.GetComponent<Item>().name == itemData.itemName); 
@@ -372,6 +372,7 @@ public class Inventory : MonoBehaviour, IDataPersistance
     {
         if (overrideIndex != - 1) //If chest is oppened
         {
+            Debug.Log(overrideIndex);
             allInventorySlots[overrideIndex].SetItem(itemToAdd);
             itemToAdd.gameObject.SetActive(false);
             allInventorySlots[overrideIndex].UpdateInventoryAmount();

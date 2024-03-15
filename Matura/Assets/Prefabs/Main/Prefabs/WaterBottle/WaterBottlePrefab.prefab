@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2724110272419337723
+--- !u!1 &2741149260250972461
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,49 +8,50 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3352414734912343873}
-  - component: {fileID: 1813245194556096740}
-  - component: {fileID: 4525281636599968814}
-  - component: {fileID: 2957899643977017526}
-  - component: {fileID: 2957899643977017513}
-  - component: {fileID: 2957899643977017527}
+  - component: {fileID: 3260980058778885015}
+  - component: {fileID: 1940646283340076082}
+  - component: {fileID: 4398460797932151032}
+  - component: {fileID: 3083819415722572916}
+  - component: {fileID: 3083819415722572921}
+  - component: {fileID: 3083819415722572920}
+  - component: {fileID: 3083819415722572927}
   m_Layer: 7
-  m_Name: StonePrefab
+  m_Name: WaterBottlePrefab
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3352414734912343873
+--- !u!4 &3260980058778885015
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2724110272419337723}
-  m_LocalRotation: {x: -0.7069834, y: 0, z: 0, w: 0.7072302}
-  m_LocalPosition: {x: -8.26, y: -0.34, z: 3}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_GameObject: {fileID: 2741149260250972461}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -5.94, y: -0.452, z: 7.302}
+  m_LocalScale: {x: 150, y: 149.99998, z: 150.00002}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -89.98, y: 0, z: 0}
---- !u!33 &1813245194556096740
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!33 &1940646283340076082
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2724110272419337723}
-  m_Mesh: {fileID: -5495902117074765545, guid: 6ad6353409020fc4ca29b36c8573e22f, type: 3}
---- !u!23 &4525281636599968814
+  m_GameObject: {fileID: 2741149260250972461}
+  m_Mesh: {fileID: -6948493338997521542, guid: 9965037e329408c43bdf7f929db53644, type: 3}
+--- !u!23 &4398460797932151032
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2724110272419337723}
+  m_GameObject: {fileID: 2741149260250972461}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -64,7 +65,9 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: aa3501b270fe5cc4f921f593296a7457, type: 2}
+  - {fileID: 2100000, guid: 89e1dfec1482acc4aa88129ae468e40b, type: 2}
+  - {fileID: 2100000, guid: bfcf0240b003e0e43916dfe751400f71, type: 2}
+  - {fileID: 2100000, guid: 0cd55daaa863f014aa7c2de31e9dbbd6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -86,13 +89,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!54 &2957899643977017526
+--- !u!54 &3083819415722572916
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2724110272419337723}
+  m_GameObject: {fileID: 2741149260250972461}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -102,53 +105,69 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &2957899643977017513
+--- !u!65 &3083819415722572921
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2724110272419337723}
+  m_GameObject: {fileID: 2741149260250972461}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.03091354, y: 0.029249163, z: 0.01817048}
-  m_Center: {x: -0.00082242815, y: -0.00036511014, z: 0.00022814791}
---- !u!114 &2957899643977017527
+  m_Size: {x: 0.004, y: 0.004, z: 0.004}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!208 &3083819415722572920
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2741149260250972461}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.001, y: 0.001, z: 0.0015}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0.0015}
+  m_TimeToStationary: 0.5
+--- !u!114 &3083819415722572927
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2724110272419337723}
+  m_GameObject: {fileID: 2741149260250972461}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 42e56ba6eb885a04c82a2bd042553a92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Stone
-  description: Stone for crafting an Exe
-  icon: {fileID: 21300000, guid: d251fe99cbcb8e14e896d9ce000be3ad, type: 3}
+  name: Water Bottle
+  description: Fill it and drink from it
+  icon: {fileID: 21300000, guid: 4e2c9d8a03ad1294eb97a29f8d6f07f0, type: 3}
   currentQuantity: 1
-  maxQuantity: 8
+  maxQuantity: 1
   IsHeld: 0
-  equiappableItemIndex: 12
+  equiappableItemIndex: 3
   equiappableArmorIndex: -1
   damageReduction: 0
-  Consumable: 0
-  TimeToConsume: 1
-  type: 0
-  Amount: 0
+  Consumable: 1
+  TimeToConsume: 3.3
+  type: 1
+  Amount: 20
   Respawnable: 0
   RespawnTimer: 0
   Healing: 0
-  HealthGain: 10
+  HealthGain: 0
   TimeToGainHealth: 2
   healingType: 0
   Wearable: 0
   clothingType: 0
-  Damage: 0
+  Damage: 5
   attackCooldown: 0
   HitRange: 0
   GatherDamage: 0

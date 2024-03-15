@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI; 
 public class AsyncLoader : MonoBehaviour
 {
-    //public static AsyncLoader Instance;
+    public static AsyncLoader Instance;
 
     [Header("Menu Screens")]
     [SerializeField] private GameObject loadingScreen;
@@ -13,9 +13,9 @@ public class AsyncLoader : MonoBehaviour
     [Header("Slider")]
     [SerializeField] private Slider loadingSlider;
 
-    public float postLoadDelay = 1.0f;
+    public float postLoadDelay = 2.0f;
 
-    /*
+    
     private void Awake()
     {
         if (Instance == null)
@@ -28,8 +28,8 @@ public class AsyncLoader : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    */
-    public void LoadLevelButton(string levelToLoad) //Button
+    
+    public void LoadLevel(string levelToLoad) //Button
     {
         loadingScreen.SetActive(true);
 
@@ -47,11 +47,15 @@ public class AsyncLoader : MonoBehaviour
             yield return null; 
         }
 
-        loadingSlider.value = 1f; 
-        yield return new WaitForSeconds(postLoadDelay);
+        loadingSlider.value = 1f;
 
         loadingOperation.allowSceneActivation = true;
 
-        //If it would be singleton we set loadingScreen.SetActive(false); 
+        yield return new WaitForSeconds(postLoadDelay);
+
+        DataPersistanceManager.Instance.LoadGame(); 
+
+        loadingScreen.SetActive(false); // Because it's a singleton, we set it to false
     }
+
 }

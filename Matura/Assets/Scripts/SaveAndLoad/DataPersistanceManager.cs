@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public class DataPersistanceManager : MonoBehaviour
 {
+    [Header("Debbugging")]
+    [SerializeField] private bool _initializeDataIfNull = false;
+
     [Header("File Storage Config")]
     [SerializeField] private string fileName;
     private FileDataHandler dataHandler; 
@@ -16,7 +20,16 @@ public class DataPersistanceManager : MonoBehaviour
     private List<IDataPersistance> dataPersitanceObjects;
 
     [SerializeField]
-    private bool useEncryption; 
+    private bool useEncryption;
+
+
+    private void Start()
+    {
+        if (!DataPersistanceManager.Instance.HasGameData()) 
+        {
+            // button.interactable = false; // Disable continue button 
+        }
+    }
 
     private void Awake()
     {
@@ -28,16 +41,38 @@ public class DataPersistanceManager : MonoBehaviour
         else
         {
             Destroy(gameObject); // Ensures that there are no duplicate GameManagers
+            return; 
         }
-    }
 
-    private void Start()
-    {
         this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, useEncryption); //Operating system standard directory 
         //Debug.Log(Path.Combine(Application.persistentDataPath, fileName));
+    }
 
-        this.dataPersitanceObjects = FindAllDataPersistanceObjects(); 
-        LoadGame(); 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.sceneUnloaded += OnSceneUnloaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneUnloaded -= OnSceneUnloaded;
+    }
+
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        this.dataPersitanceObjects = FindAllDataPersistanceObjects(); // Everytime the scene is loaded, we initialize it
+
+        // Waiting for Initialization
+        //LoadGame(); 
+    }
+
+
+
+    public void OnSceneUnloaded(Scene scene)
+    {
+        SaveGame(); 
     }
 
     public void NewGame()
@@ -49,9 +84,14 @@ public class DataPersistanceManager : MonoBehaviour
     {
         this.gameData = dataHandler.Load(); //If it's null we create a new game
 
-        if (this.gameData == null)
+        if (this.gameData == null && _initializeDataIfNull) // If we wan't to create a new file
         {
             NewGame(); 
+        }
+
+        if (this.gameData == null) // If we don't want to create a new file
+        {
+            return; //NewGame(); 
         }
 
         foreach (IDataPersistance dataPersistanceObject in dataPersitanceObjects)
@@ -63,6 +103,11 @@ public class DataPersistanceManager : MonoBehaviour
 
     public void SaveGame()
     {
+        if (this.gameData == null)
+        {
+            return; 
+        }
+
         foreach (IDataPersistance dataPersistanceObject in dataPersitanceObjects)
         {
             dataPersistanceObject.SaveData(ref gameData);
@@ -82,6 +127,11 @@ public class DataPersistanceManager : MonoBehaviour
         IEnumerable<IDataPersistance> dataPersistenceObjects = FindObjectsOfType<MonoBehaviour>()
             .OfType<IDataPersistance>();
         return new List<IDataPersistance>(dataPersistenceObjects);       
+    }
+
+    public bool HasGameData()
+    {
+        return gameData != null;
     }
 
 }

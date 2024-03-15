@@ -17,8 +17,22 @@ public enum ClothingType
     Armor, Shirt, Pants, FaceMask
 };
 
-public class Item : MonoBehaviour
+public class Item : MonoBehaviour, IDataPersistance
 {
+    public void LoadData(GameData gameData)
+    {
+        
+    }
+
+    public void SaveData(ref GameData gameData)
+    {
+        /*
+        ItemData currentItemData = new ItemData(gameObject.transform.position, gameObject.transform.rotation);
+        gameData.allItemData.items.Add(currentItemData);
+        */
+    }
+
+
     public new string name = "New item"; //Name of item; 
     public string description = "New Description";
     public Sprite icon;
