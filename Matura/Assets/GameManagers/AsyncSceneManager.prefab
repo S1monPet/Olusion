@@ -603,4 +603,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadingScreen: {fileID: 8963137392791850684}
   loadingSlider: {fileID: 8963137392591840725}
-  postLoadDelay: 1
+  postLoadDelay: 2
