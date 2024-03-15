@@ -372,7 +372,6 @@ public class Inventory : MonoBehaviour, IDataPersistance
     {
         if (overrideIndex != - 1) //If chest is oppened
         {
-            Debug.Log(overrideIndex);
             allInventorySlots[overrideIndex].SetItem(itemToAdd);
             itemToAdd.gameObject.SetActive(false);
             allInventorySlots[overrideIndex].UpdateInventoryAmount();
