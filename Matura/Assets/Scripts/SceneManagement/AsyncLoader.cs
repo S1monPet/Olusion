@@ -38,6 +38,12 @@ public class AsyncLoader : MonoBehaviour
 
     private IEnumerator LoadLevelAsync(string levelToLoad)
     {
+        if (levelToLoad == "Menu")
+        {
+            DataPersistanceManager.Instance.SaveGame();
+            yield return new WaitForSeconds(postLoadDelay);
+            yield return null; 
+        }
         var loadingOperation = SceneManager.LoadSceneAsync(levelToLoad); //AsyncOperation
         loadingOperation.allowSceneActivation = false; 
 
@@ -53,7 +59,7 @@ public class AsyncLoader : MonoBehaviour
 
         yield return new WaitForSeconds(postLoadDelay);
 
-        DataPersistanceManager.Instance.LoadGame(); 
+        DataPersistanceManager.Instance.LoadGame();
 
         loadingScreen.SetActive(false); // Because it's a singleton, we set it to false
     }

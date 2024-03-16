@@ -26111,6 +26111,8 @@ GameObject:
   - component: {fileID: 952051637}
   - component: {fileID: 952051636}
   - component: {fileID: 952051635}
+  - component: {fileID: 952051639}
+  - component: {fileID: 952051638}
   m_Layer: 5
   m_Name: Exit
   m_TagString: Untagged
@@ -26183,9 +26185,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2074572023}
-        m_TargetAssemblyTypeName: MainSettingsUI, Assembly-CSharp
-        m_MethodName: onClickExit
+      - m_Target: {fileID: 952051638}
+        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
+        m_MethodName: OnExitButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -26233,6 +26235,31 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 952051633}
   m_CullTransparentMesh: 1
+--- !u!114 &952051638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952051633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4714d434c01d5844490480c0b2d32cac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &952051639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952051633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
 --- !u!1001 &953387189
 PrefabInstance:
   m_ObjectHideFlags: 0

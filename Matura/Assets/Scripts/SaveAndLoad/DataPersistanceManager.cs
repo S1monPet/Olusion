@@ -72,7 +72,7 @@ public class DataPersistanceManager : MonoBehaviour
 
     public void OnSceneUnloaded(Scene scene)
     {
-        SaveGame(); 
+        // SaveGame(); 
     }
 
     public void NewGame()
@@ -83,6 +83,7 @@ public class DataPersistanceManager : MonoBehaviour
     public void LoadGame()
     {
         this.gameData = dataHandler.Load(); //If it's null we create a new game
+        Debug.Log("this game" + this.gameData);
 
         if (this.gameData == null && _initializeDataIfNull) // If we wan't to create a new file
         {
