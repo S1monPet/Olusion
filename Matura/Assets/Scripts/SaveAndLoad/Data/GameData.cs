@@ -11,6 +11,7 @@ public class GameData
     public int Food;
     public int Water; 
     public Vector3 playerPosition;
+    public Quaternion playerRotation;
 
     public AllItemData allItemData; 
 
@@ -24,6 +25,7 @@ public class GameData
         this.Food = 60;
         this.Water = 40; 
         this.playerPosition = Vector3.zero;
+        this.playerRotation = Quaternion.identity;
 
         this.inventoryData = new InventoryData();
         this.allChestData = new AllChestData();
@@ -35,7 +37,7 @@ public class GameData
 public class ItemData
 {
     public Vector3 currentItemPosition;
-    public Quaternion currentItemRotation; 
+    public Quaternion currentItemRotation;
     public ItemData(Vector3 currentItemPosition, Quaternion currentItemRotation)
     {
         this.currentItemPosition = currentItemPosition;

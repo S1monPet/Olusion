@@ -33,12 +33,16 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
         // On the first run, or if no save data exists, we skip setting the player's position to maintain the default start position.
         if (data.playerPosition == Vector3.zero) return; 
 
-        playerTransform.position = data.playerPosition; 
+        playerTransform.position = data.playerPosition;
+
+        if (data.playerRotation != Quaternion.identity)
+            playerTransform.rotation = data.playerRotation; 
     }
 
     public void SaveData(ref GameData data)
     {
         data.playerPosition = playerTransform.position; //Not saving, because this is in Start
+        data.playerRotation = playerTransform.rotation;
     }
 
     void Awake()
