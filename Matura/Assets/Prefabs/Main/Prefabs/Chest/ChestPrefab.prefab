@@ -150,8 +150,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Size: {x: 1, y: 0.8991696, z: 0.8310126}
+  m_Center: {x: -1.2108486e-10, y: 0.4495848, z: 0.016957281}
 --- !u!208 &7853555355325745111
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -186,7 +186,6 @@ MonoBehaviour:
   currentQuantity: 1
   maxQuantity: 1
   IsHeld: 0
-  ItemStorage: 1
   equiappableItemIndex: 4
   equiappableArmorIndex: -1
   damageReduction: 0

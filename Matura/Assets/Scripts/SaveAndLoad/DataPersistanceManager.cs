@@ -77,7 +77,8 @@ public class DataPersistanceManager : MonoBehaviour
 
     public void NewGame()
     {
-        this.gameData = new GameData();
+        // this.gameData = new GameData();
+        this.gameData = null; // Reseting it to null when creating new game
     }
 
     public void LoadGame()

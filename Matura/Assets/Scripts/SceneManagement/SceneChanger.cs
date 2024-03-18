@@ -8,4 +8,15 @@ public class SceneChanger : MonoBehaviour
     {
         AsyncLoader.Instance.LoadLevel("Menu");
     }
+
+    public void OnMenuButton()
+    {
+        AsyncLoader.Instance.LoadLevel("Menu");
+    }
+
+    public void OnRespawnButton()
+    {
+        DataPersistanceManager.Instance.NewGame(); 
+        AsyncLoader.Instance.LoadLevel("Main");
+    }
 }

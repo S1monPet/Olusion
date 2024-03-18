@@ -7,6 +7,9 @@ using UnityEngine.UI;
 public class PlayerDeathUI : MonoBehaviour
 {
     public GameObject canvas; //For disabling canvas
+    public GameObject miniMap;
+    public GameObject map; 
+
     public CanvasGroup deathScreenUIGroup;
 
     public SurvivalSceneManager survivalSceneManager;
@@ -17,7 +20,9 @@ public class PlayerDeathUI : MonoBehaviour
 
     public void ChangeScreen(Sprite enemySprite, string enemyName)
     {
-        canvas.SetActive(false); //Hide playing UI
+        canvas.SetActive(false); // Hide playing UI
+        miniMap.SetActive(false); 
+        map.SetActive(false); // If player is on map, while getting killed
 
         survivalSceneManager.UpdateSurvivedTimer();
         SetEnemySprite(enemySprite);

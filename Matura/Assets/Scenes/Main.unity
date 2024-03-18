@@ -5009,7 +5009,7 @@ PrefabInstance:
     - target: {fileID: 6934425419286575866, guid: bdb2c682b7553d54daa5feb3d36e7d8d,
         type: 3}
       propertyPath: m_Name
-      value: ChestPrefab (2)
+      value: PyramidChest (1)
       objectReference: {fileID: 0}
     - target: {fileID: 6934425419286575866, guid: bdb2c682b7553d54daa5feb3d36e7d8d,
         type: 3}
@@ -7187,6 +7187,10 @@ MonoBehaviour:
   chestList:
   - {fileID: 1832506762}
   - {fileID: 919132149332013530}
+  - {fileID: 1470227895}
+  - {fileID: 1689920357}
+  - {fileID: 1326908942}
+  - {fileID: 1959654378}
   inventoryScript: {fileID: 275844207}
 --- !u!114 &275844213
 MonoBehaviour:
@@ -13887,7 +13891,7 @@ PrefabInstance:
     - target: {fileID: 6934425419286575866, guid: bdb2c682b7553d54daa5feb3d36e7d8d,
         type: 3}
       propertyPath: m_Name
-      value: ChestPrefab (3)
+      value: PyramidChest (2)
       objectReference: {fileID: 0}
     - target: {fileID: 6934425419286575866, guid: bdb2c682b7553d54daa5feb3d36e7d8d,
         type: 3}
@@ -14328,7 +14332,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 632012458}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 18.66, y: 0, z: -0}
+  m_LocalPosition: {x: 16.06, y: 0, z: 6.03}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -22374,7 +22378,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 790133809}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.34, y: 0, z: 13.44}
+  m_LocalPosition: {x: 10.28, y: 0, z: 10.46}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -25460,7 +25464,7 @@ PrefabInstance:
     - target: {fileID: 6934425419286575866, guid: bdb2c682b7553d54daa5feb3d36e7d8d,
         type: 3}
       propertyPath: m_Name
-      value: ChestPrefab (5)
+      value: PyramidChest (3)
       objectReference: {fileID: 0}
     - target: {fileID: 6934425419286575866, guid: bdb2c682b7553d54daa5feb3d36e7d8d,
         type: 3}
@@ -26185,7 +26189,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 952051638}
+      - m_Target: {fileID: 1097008663}
         m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
         m_MethodName: OnExitButton
         m_Mode: 1
@@ -30206,6 +30210,7 @@ GameObject:
   - component: {fileID: 1097008661}
   - component: {fileID: 1097008660}
   - component: {fileID: 1097008662}
+  - component: {fileID: 1097008663}
   m_Layer: 0
   m_Name: SurvivalSceneManager
   m_TagString: Untagged
@@ -30261,6 +30266,18 @@ MonoBehaviour:
   pooledObjects: []
   objectsToPool: []
   amountToPool: 20
+--- !u!114 &1097008663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1097008659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4714d434c01d5844490480c0b2d32cac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1099248356
 GameObject:
   m_ObjectHideFlags: 0
@@ -33159,7 +33176,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1228843592}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.54, y: 0, z: 21.48}
+  m_LocalPosition: {x: -3.85, y: 0, z: 20.39}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -40721,6 +40738,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1322134887}
   m_CullTransparentMesh: 1
+--- !u!1 &1326908942 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6934425419286575866, guid: bdb2c682b7553d54daa5feb3d36e7d8d,
+    type: 3}
+  m_PrefabInstance: {fileID: 616587933}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1341965598
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -43124,6 +43147,12 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -5345760584941703707, guid: 386dddac1eda77a4e98d03c24ef57e46, type: 3}
+--- !u!1 &1470227895 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6934425419286575866, guid: bdb2c682b7553d54daa5feb3d36e7d8d,
+    type: 3}
+  m_PrefabInstance: {fileID: 2031887349}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1482980080
 GameObject:
   m_ObjectHideFlags: 0
@@ -44366,10 +44395,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: AsyncLoader, Assembly-CSharp
-        m_MethodName: LoadLevelButton
-        m_Mode: 5
+      - m_Target: {fileID: 1097008663}
+        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
+        m_MethodName: OnMenuButton
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -48221,10 +48250,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: AsyncLoader, Assembly-CSharp
-        m_MethodName: LoadLevelButton
-        m_Mode: 5
+      - m_Target: {fileID: 1097008663}
+        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
+        m_MethodName: OnRespawnButton
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -49061,6 +49090,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1681520511}
   m_CullTransparentMesh: 1
+--- !u!1 &1689920357 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6934425419286575866, guid: bdb2c682b7553d54daa5feb3d36e7d8d,
+    type: 3}
+  m_PrefabInstance: {fileID: 216613153}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1691676717
 GameObject:
   m_ObjectHideFlags: 0
@@ -61429,6 +61464,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1959006384}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1959654378 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6934425419286575866, guid: bdb2c682b7553d54daa5feb3d36e7d8d,
+    type: 3}
+  m_PrefabInstance: {fileID: 925534009}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1967444413
 GameObject:
   m_ObjectHideFlags: 0
@@ -62900,7 +62941,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2017193081}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.48, y: 0, z: 0.21}
+  m_LocalPosition: {x: -1.18, y: 0, z: 2.95}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -63213,7 +63254,7 @@ PrefabInstance:
     - target: {fileID: 6934425419286575866, guid: bdb2c682b7553d54daa5feb3d36e7d8d,
         type: 3}
       propertyPath: m_Name
-      value: ChestPrefab (1)
+      value: PyramidChest
       objectReference: {fileID: 0}
     - target: {fileID: 6934425419286575866, guid: bdb2c682b7553d54daa5feb3d36e7d8d,
         type: 3}
@@ -64109,7 +64150,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2067677111}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 15.81, y: 0, z: 25.72}
+  m_LocalPosition: {x: 13.7, y: 0, z: 22.98}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -66109,6 +66150,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 576868538}
+  miniMap: {fileID: 435791571}
+  map: {fileID: 1645383318}
   deathScreenUIGroup: {fileID: 2109778494}
   survivalSceneManager: {fileID: 1097008660}
   fadeDuration: 3
