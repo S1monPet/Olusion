@@ -31,10 +31,10 @@ public abstract class GatheringBase : MonoBehaviour
     {
         foreach (ItemDrop itemToDrop in itemDrops)
         {
-            if (itemToDrop.TotalAmountOfLogs == 0)
+            if (itemToDrop.TotalAmountOfIitems == 0)
                 return;
 
-            _gatheringCoroutine = StartCoroutine(GatheringCourotine(damage, gatheringRate, itemToDrop.TotalAmountOfLogs, itemToDrop, respawnTimer));
+            _gatheringCoroutine = StartCoroutine(GatheringCourotine(damage, gatheringRate, itemToDrop.TotalAmountOfIitems, itemToDrop, respawnTimer));
         }
     }
 

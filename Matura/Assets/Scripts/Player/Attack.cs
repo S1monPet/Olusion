@@ -11,10 +11,14 @@ using UnityEngine.UI;
 public class Attack : MonoBehaviour
 {
     private EnemyBase enemyBase;
+    private AnimalBase animalBase;
     private List<Slot> HotbarSlots = new List<Slot>();
 
     public bool playerBusy = false;
+
     public LayerMask enemyMask;
+    public LayerMask animalMask; 
+
     public Transform playerTransform; 
     public NavMeshAgent agent;
     public PlayerMovement playerMovement;
@@ -49,11 +53,11 @@ public class Attack : MonoBehaviour
 
     private void Update()
     {
-        CheckIfCurrentEnemyIsCloseEnough(); 
+        IsTargetNear(); 
     }
 
 
-    public void SingleTouchCheckForEnemy()
+    public void CheckTouched()
     {
         if (Input.touchCount > 0)
         {
@@ -61,6 +65,7 @@ public class Attack : MonoBehaviour
             if (touch.phase == TouchPhase.Began && !wasTouchedAlready && !_isOnCooldown)
             {
                 CheckIfTouchedWasEnemy(touch);
+                CheckIfTouchedWasAnimal(touch);
                 wasTouchedAlready = true;
             }
             else if (touch.phase == TouchPhase.Ended)
@@ -101,56 +106,113 @@ public class Attack : MonoBehaviour
 
     public void OnAttackButtonClick()
     {
-        //We've already captured enemy if it was clicked
-        if (enemyBase != null && CheckIfCurrentEnemyIsCloseEnough()) 
+        if (IsTargetNear())
         {
-            playerMovement.StopMovingAndPlayAnimation(TimeToWaitToCancelAnimation);
-            playerMovement.SetAgentRotationToTarget(enemyBase.gameObject);
-            playerAnimator.Play("Attack");
+            //We've already captured enemy if it was clicked
+            if (enemyBase != null)
+            {
+                playerMovement.StopMovingAndPlayAnimation(TimeToWaitToCancelAnimation);
+                playerMovement.SetAgentRotationToTarget(enemyBase.gameObject);
+                playerAnimator.Play("Attack");
 
-            enemyBase.EnemyTakeDamage(HoldingItemDamage());
-            StartCoroutine(AttackCooldown());
+                enemyBase.EnemyTakeDamage(HoldingItemDamage());
+                StartCoroutine(AttackCooldown());
 
-            enemyBase = null; //Reseting reference
-            EnableAttack.SetActive(false);
-            DisableAttack.SetActive(true);
+                enemyBase = null; //Reseting reference
+                EnableAttack.SetActive(false);
+                DisableAttack.SetActive(true);
+            }
+            // Check if we have animal
+
+            else if (animalBase != null)
+            {
+                playerMovement.StopMovingAndPlayAnimation(TimeToWaitToCancelAnimation);
+                playerMovement.SetAgentRotationToTarget(animalBase.gameObject);
+                playerAnimator.Play("Attack");
+
+                animalBase.ReceiveDamage(HoldingItemDamage());
+                StartCoroutine(AttackCooldown());
+
+                animalBase = null; //Reseting reference
+                EnableAttack.SetActive(false);
+                DisableAttack.SetActive(true);
+            }
         }
-
     }
 
-    private bool CheckIfCurrentEnemyIsCloseEnough()
+    private bool IsTargetNear()
     {
-        SingleTouchCheckForEnemy(); //Check for enemy
+        CheckTouched(); // Check touched
 
         if (enemyBase != null)
         {
-            Item currentItem = HotbarSlots.Select(slot => slot.GetItem()).FirstOrDefault(item => item != null && item.IsHeld);
-            float attackingRange = _handRange;
-
-            Transform enemyTransform = enemyBase.gameObject.transform;
-            float distanceToEnemy = Vector3.Distance(playerTransform.position, enemyTransform.position);
-
-            if (currentItem != null)
-                //Check if item's range is suitable for attack
-                if (currentItem.HitRange != 0f)
-                    attackingRange = currentItem.HitRange;
-
-            if (distanceToEnemy < attackingRange && !_isOnCooldown)
-            {
-                DisableAttack.SetActive(false);
-                EnableAttack.SetActive(true);
-                return true;
-            }
-            else if (distanceToEnemy > attackingRange || !enemyTransform.GetChild(0).gameObject.activeInHierarchy)
-            {
-                EnableAttack.SetActive(false);
-                DisableAttack.SetActive(true);
-
-                enemyBase = null; //Reseting Reference
-                return false; 
-            }
+            return IsEnemyInAttackingRange(); 
+        }
+        else if (animalBase != null)
+        {
+            return IsAnimalInAttackinRange(); 
         }
         return false; 
+    }
+
+    private bool IsEnemyInAttackingRange()
+    {
+        Item currentItem = HotbarSlots.Select(slot => slot.GetItem()).FirstOrDefault(item => item != null && item.IsHeld);
+        float attackingRange = _handRange;
+
+        Transform enemyTransform = enemyBase.gameObject.transform;
+        float distanceToEnemy = Vector3.Distance(playerTransform.position, enemyTransform.position);
+
+        if (currentItem != null)
+            //Check if item's range is suitable for attack
+            if (currentItem.HitRange != 0f)
+                attackingRange = currentItem.HitRange;
+
+        if (distanceToEnemy < attackingRange && !_isOnCooldown)
+        {
+            DisableAttack.SetActive(false);
+            EnableAttack.SetActive(true);
+            return true;
+        }
+        else if (distanceToEnemy > attackingRange || !enemyTransform.GetChild(0).gameObject.activeInHierarchy)
+        {
+            EnableAttack.SetActive(false);
+            DisableAttack.SetActive(true);
+
+            enemyBase = null; //Reseting Reference
+            return false;
+        }
+        return false; 
+    }
+
+    private bool IsAnimalInAttackinRange()
+    {
+        Item currentItem = HotbarSlots.Select(slot => slot.GetItem()).FirstOrDefault(item => item != null && item.IsHeld);
+        float attackingRange = _handRange;
+
+        Transform animalTransform = animalBase.gameObject.transform;
+        float distanceToAnimal = Vector3.Distance(playerTransform.position, animalTransform.position);
+
+        if (currentItem != null)
+            //Check if item's range is suitable for attack
+            if (currentItem.HitRange != 0f)
+                attackingRange = currentItem.HitRange;
+
+        if (distanceToAnimal < attackingRange && !_isOnCooldown)
+        {
+            DisableAttack.SetActive(false);
+            EnableAttack.SetActive(true);
+            return true;
+        }
+        else if (distanceToAnimal > attackingRange || !animalTransform.GetChild(0).gameObject.activeInHierarchy)
+        {
+            EnableAttack.SetActive(false);
+            DisableAttack.SetActive(true);
+
+            animalBase = null; //Reseting Reference
+            return false;
+        }
+        return false;
     }
 
     private void CheckIfTouchedWasEnemy(Touch touch)
@@ -158,7 +220,16 @@ public class Attack : MonoBehaviour
         if (Physics.Raycast(Camera.main.ScreenPointToRay(touch.position), out hit, raycastDistance, enemyMask))
         {
             enemyBase = hit.collider.gameObject.GetComponent<EnemyBase>();
-            Debug.Log("Set" + enemyBase);
+            // Debug.Log("Set" + enemyBase);
+        }
+    }
+
+    private void CheckIfTouchedWasAnimal(Touch touch)
+    {
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(touch.position), out hit, raycastDistance, animalMask))
+        {
+            animalBase = hit.collider.gameObject.GetComponent<AnimalBase>();
+            // Debug.Log("Set" + animalBase);
         }
     }
 

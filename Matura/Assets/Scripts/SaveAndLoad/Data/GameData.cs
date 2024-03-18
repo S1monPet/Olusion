@@ -27,6 +27,7 @@ public class GameData
         this.playerPosition = Vector3.zero;
         this.playerRotation = Quaternion.identity;
 
+        this.allItemData = new AllItemData();
         this.inventoryData = new InventoryData();
         this.allChestData = new AllChestData();
     }

@@ -26,10 +26,7 @@ public class Item : MonoBehaviour, IDataPersistance
 
     public void SaveData(ref GameData gameData)
     {
-        /*
-        ItemData currentItemData = new ItemData(gameObject.transform.position, gameObject.transform.rotation);
-        gameData.allItemData.items.Add(currentItemData);
-        */
+
     }
 
 

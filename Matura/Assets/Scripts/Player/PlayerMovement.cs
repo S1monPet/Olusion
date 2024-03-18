@@ -83,7 +83,6 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
                         {
                             // Disable any running coroutine
                             StopOnGoingProcesses();
-                            Debug.Log("fak");
 
 
                             // If grounds is hit and item was not pressed, set hit.point and go towards location

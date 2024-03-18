@@ -93,4 +93,16 @@ public class SurvivalSceneManager : MonoBehaviour
         itemLifecycleManager.SpawnItemsRandomly(); 
         gatherableItem.SetActive(true);
     }
+
+    public void RespawnAnimal(GameObject animal, WaitForSeconds respawnTimer)
+    {
+        StartCoroutine(AnimalRespawnCoroutine(animal, respawnTimer));
+    }
+
+    private IEnumerator AnimalRespawnCoroutine(GameObject animal, WaitForSeconds respawnTimer)
+    {
+        yield return respawnTimer;
+        animal.SetActive(true);
+    }
+
 }

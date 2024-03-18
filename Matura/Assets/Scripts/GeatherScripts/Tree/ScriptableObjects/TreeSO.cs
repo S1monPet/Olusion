@@ -26,5 +26,5 @@ public class TreeSO : ScriptableObject
 public class ItemDrop
 {
     public GameObject ItemToDrop; 
-    public int TotalAmountOfLogs;
+    public int TotalAmountOfIitems;
 }
