@@ -65,19 +65,21 @@ public class SurvivalSceneManager : MonoBehaviour
         currentEnemy.SetActive(true);
     }
 
-    public void EnemyChestDespawn(GameObject chest, float despawnTimer)
+    public void EnemyChestDespawn(GameObject chest, GameObject chestInstantiatedParent, float despawnTimer)
     {
-        StartCoroutine(EnemyChestDespawnCoroutine(chest, despawnTimer));
+        StartCoroutine(EnemyChestDespawnCoroutine(chest, chestInstantiatedParent, despawnTimer));
     }
 
-    private IEnumerator EnemyChestDespawnCoroutine(GameObject chest, float despawnTimer)
+    private IEnumerator EnemyChestDespawnCoroutine(GameObject chest, GameObject chestInstantiatedParent, float despawnTimer)
     {
         yield return new WaitForSeconds(despawnTimer);
 
         inventoryUI.SetActive(false);
         closeChestUI.SetActive(false);
 
-        playerMovementScript.enabled = true; 
+        playerMovementScript.enabled = true; // Why?
+
+        chestInstantiatedParent.SetActive(false); // Disabling chest UI
         chest.SetActive(false);
     }
 
