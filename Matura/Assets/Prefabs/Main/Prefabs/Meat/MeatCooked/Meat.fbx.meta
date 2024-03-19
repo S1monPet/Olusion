@@ -1,20 +1,9 @@
 fileFormatVersion: 2
-guid: b15c9aff7c409a84bb64780424bb7f69
+guid: 65d2d7f25e43d7348826e4daa78baca8
 ModelImporter:
   serializedVersion: 21300
-  internalIDToNameTable:
-  - first:
-      74: 4831342630144078157
-    second: metarig|EatAnimation
-  - first:
-      74: -2960026816192153919
-    second: metarig|Walk1
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: SheepMat
-    second: {fileID: 2100000, guid: 537b8c99586f3a149ba6138b9404e895, type: 2}
+  internalIDToNameTable: []
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
