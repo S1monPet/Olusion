@@ -13,8 +13,6 @@ public enum AnimalState
 [RequireComponent(typeof(NavMeshAgent))]
 public abstract class AnimalBase : MonoBehaviour
 {
-    [SerializeField] protected Animator animator;
-
     [Header("UI")]
     [SerializeField] protected AnimalHealthbar animalHealthbar; 
 
@@ -41,6 +39,7 @@ public abstract class AnimalBase : MonoBehaviour
     protected NavMeshAgent animalAgent;
     protected Transform animalTransform; 
     protected AnimalState currentState = AnimalState.Idle;
+    protected Animator animator;
 
     [Header("Respawn")]
     [SerializeField] protected SurvivalSceneManager survivalSceneManager;
@@ -55,9 +54,11 @@ public abstract class AnimalBase : MonoBehaviour
     private void Awake()
     {
         animalTransform = GetComponent<Transform>(); // External call otherwise
+        animator = animalTransform.GetChild(0).GetComponent<Animator>(); // Our animator is on model
         animalAgent = GetComponent<NavMeshAgent>();
+
         _animalSpawningPosition = animalTransform.position;
-        playerTransform = player.transform; 
+        playerTransform = player.transform;
     }
 
     private void Start()
@@ -110,7 +111,7 @@ public abstract class AnimalBase : MonoBehaviour
 
     }
 
-    /* Abstract voids */
+    /* Abstract void */
     protected abstract void ResetAnimalSettings();
 
     public abstract void ReceiveDamage(int damage);
@@ -118,14 +119,14 @@ public abstract class AnimalBase : MonoBehaviour
     protected void RunFromPlayer()
     {
         SetState(AnimalState.Chase);
+        SetRunningDestinationFromPlayer();
+
         StartCoroutine(RunAwayFromPlayer());
     }
 
     private IEnumerator RunAwayFromPlayer()
     {
-        SetRunningDestinationFromPlayer();
-
-        // Player out of range, run to our final location and go back to idle.
+        // While we are running we keep Chase state
         while (!animalAgent.pathPending && animalAgent.remainingDistance > animalAgent.stoppingDistance)
         {
             yield return null;
@@ -141,8 +142,20 @@ public abstract class AnimalBase : MonoBehaviour
             Vector3 runDirection = animalTransform.position - playerTransform.position;
             Vector3 escapeDestination = animalTransform.position + runDirection.normalized * (_escapeMaxDistance * 2);
             animalAgent.SetDestination(GetRandomNavMeshPosition(escapeDestination, _escapeMaxDistance));
+            // SetAgentRotationToTarget(escapeDestination); 
         }
     }
+
+    /*
+    public void SetAgentRotationToTarget(Vector3 targetDirection) //For fast rotation
+    {
+        Vector3 direction = (targetDirection - animalTransform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+
+        while (lookRotation != Quaternion.identity && Quaternion.Angle(animalTransform.rotation, lookRotation) > 0.1f)
+            animalTransform.rotation = Quaternion.Slerp(animalTransform.rotation, lookRotation, Time.deltaTime * 1f);
+    }
+    */
 
     protected virtual void HandleChaseState()
     {
@@ -162,6 +175,7 @@ public abstract class AnimalBase : MonoBehaviour
 
         Vector3 randomDestination = GetRandomNavMeshPosition(_animalSpawningPosition, wanderDistance); 
         animalAgent.SetDestination(randomDestination);
+        // SetAgentRotationToTarget(randomDestination);
 
         SetState(AnimalState.Moving); 
     }
@@ -202,6 +216,8 @@ public abstract class AnimalBase : MonoBehaviour
 
     protected virtual void OnStateChanged(AnimalState newState)
     {
+        animator?.CrossFadeInFixedTime(newState.ToString(), 0.3f); // Makes a transition
+
         if (newState == AnimalState.Moving)
             animalAgent.speed = walkSpeed;
 
