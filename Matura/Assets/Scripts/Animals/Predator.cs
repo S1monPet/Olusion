@@ -5,12 +5,24 @@ using UnityEngine;
 public class Predator : AnimalBase
 {
     [Header("Predator")]
-    [SerializeField] private float _detectionRange = 15f;
+    // [SerializeField] private float _detectionRange = 15f;
+    // [SerializeField] private float _escapeMaxDistance = 10f;
     [SerializeField] private float _maxChaseTime = 10f;
     [SerializeField] private int _attackDamage = 10;
     [SerializeField] private float _attackCooldown = 2f;
 
     private Prey _currentChaseTarget;
+
+    public override void ReceiveDamage(int damage)
+    {
+        base.RunFromPlayer(); 
+        throw new System.NotImplementedException();
+    }
+
+    protected override void ResetAnimalSettings()
+    {
+        throw new System.NotImplementedException();
+    }
 
     protected override void CheckChaseConditions()
     {
@@ -45,7 +57,7 @@ public class Predator : AnimalBase
         if (_currentChaseTarget != null)
         {
             _currentChaseTarget.AlertPrey(this);
-            _currentCoroutine = StartCoroutine(ChasePrey());
+            StartCoroutine(ChasePrey());
         }
         else
         {

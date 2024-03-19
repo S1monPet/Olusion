@@ -4,17 +4,54 @@ using UnityEngine;
 
 public class Prey : AnimalBase
 {
+    [SerializeField] private PreySO prey;
+
+    /*
     [Header("Prey Variables")]
     [SerializeField] private float _detectionRange = 10f; 
-    [SerializeField] private float _escapeMaxDistance = 80f;
-
+    [SerializeField] private float _escapeMaxDistance = 30f;
+    */
     private Predator currentPredator = null; 
 
+    // For predator animal
     public void AlertPrey(Predator predator)
     {
         SetState(AnimalState.Chase); 
         currentPredator = predator;
-        _currentCoroutine = StartCoroutine(RunFromPredator());
+        StartCoroutine(RunFromPredator());
+    }
+
+    public override void ReceiveDamage(int damage)
+    {
+        prey.PreyHealth -= damage;
+
+        if (prey.PreyHealth <= 0)
+        {
+            gameObject.SetActive(false);
+
+            Die();
+
+            // Spawning item
+            GameObject droppedItem = Instantiate(droppingItem, droppingItem.transform.position, droppingItem.transform.rotation);
+            droppedItem.SetActive(true);
+
+            ResetAnimalSettings();
+            survivalSceneManager.RespawnAnimal(gameObject, prey.RespawnTimer);
+            return; 
+        }
+
+        base.RunFromPlayer();
+        ChangeAnimalSliderHealth(prey.PreyHealth);
+    }
+
+    protected override void ResetAnimalSettings()
+    {
+        prey.PreyHealth = prey.PreySpawningHealth;
+
+        animalAgent.speed = walkSpeed;
+        currentState = AnimalState.Idle;
+
+        ChangeAnimalSliderHealth(prey.PreyHealth);
     }
 
 
@@ -57,7 +94,7 @@ public class Prey : AnimalBase
 
     protected override void Die()
     {
-        StopAllCoroutines(); 
+        // StopAllCoroutines(); 
         base.Die();
     }
 

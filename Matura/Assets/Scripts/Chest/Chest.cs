@@ -103,7 +103,7 @@ public class Chest : MonoBehaviour, IDataPersistance
         }
     }
 
-    private void ClearChest()
+    public void ClearChest()
     {
         foreach (Slot slot in allChestSlots)
         {

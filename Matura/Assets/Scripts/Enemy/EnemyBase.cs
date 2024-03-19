@@ -181,22 +181,32 @@ public abstract class EnemyBase : MonoBehaviour
         if (enemyStats.EnemyHP <= 0)
         {
             gameObject.SetActive(false);
-            //Have to Instantiate new dropping item
-            GameObject droppedItem = Instantiate(droppingItem, droppingItem.transform.position, droppingItem.transform.rotation);
-            droppedItem.SetActive(true);
 
+            droppingItem.transform.position = transform.position;
+            droppingItem.SetActive(true);
 
             /* This is Really Expensive Check CreateChestSlots in Chest.cs */
-            Chest chest = droppedItem.GetComponent<Chest>();
-            chest.CreateChestSlots(); 
+            Chest chest = droppingItem.GetComponent<Chest>();
+
+            // Checking if we have alredy Instantiated slots, otherwise we do
+            if (chest.chestInstantiatedParent != null)
+            {
+                chest.chestInstantiatedParent.SetActive(true);
+            }
+            else
+            {
+                chest.CreateChestSlots();
+            }
+
+            chest.ClearChest(); 
             chest.SpawnRandomChestItems();
 
             //Adding dropped item to chest list, so we can toggle it on if close.
-            toggleChestScript.chestList.Add(droppedItem);   
+            toggleChestScript.chestList.Add(droppingItem);   
 
             Init(currentNavMeshAgent, currentEnemy);
             //Start timer for chest despawning
-            survivalSceneManager.EnemyChestDespawn(droppedItem, EnemyStats.EnemyRespawnTimer / 2.0f);
+            survivalSceneManager.EnemyChestDespawn(droppingItem, chest.chestInstantiatedParent, EnemyStats.EnemyRespawnTimer / 2.0f);
             survivalSceneManager.RespawnEnemy(EnemyStats.RespawnTimer, gameObject, enemyAnimator);
         }
     }

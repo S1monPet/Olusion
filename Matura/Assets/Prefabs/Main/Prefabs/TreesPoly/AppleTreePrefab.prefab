@@ -53,8 +53,8 @@ MonoBehaviour:
   - {fileID: 4417273358315605905}
   item: {fileID: 5511085432170092512, guid: 6186e37add19e9241bca57f6919c021d, type: 3}
   appleTree: {fileID: 8815792034580828749}
-  MaximumAmountOfItems: 4
-  MinimumAmountOfItems: 2
+  MaximumAmountOfItems: 1
+  MinimumAmountOfItems: 0
 --- !u!1001 &4417273359349272580
 PrefabInstance:
   m_ObjectHideFlags: 0

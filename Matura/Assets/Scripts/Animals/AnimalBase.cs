@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.AI; 
@@ -12,8 +13,6 @@ public enum AnimalState
 [RequireComponent(typeof(NavMeshAgent))]
 public abstract class AnimalBase : MonoBehaviour
 {
-    [SerializeField] protected PreySO Prey;
-
     [SerializeField] protected Animator animator;
 
     [Header("UI")]
@@ -21,7 +20,7 @@ public abstract class AnimalBase : MonoBehaviour
 
     [Header("Wander")]
     [SerializeField] private float wanderDistance = 50f; // How far can animal move
-    [SerializeField] private float walkSpeed = 5f;
+    [SerializeField] protected float walkSpeed = 5f;
     [SerializeField] private float maxWalkTime = 6f; // Animal movement before taking a break
 
     [Header("Idle")]
@@ -33,12 +32,15 @@ public abstract class AnimalBase : MonoBehaviour
     [Header("Attributes")]
     [SerializeField] private int _maxRepathAmount = 5; 
     [SerializeField] private int _lookRotationSpeed = 1;
+    [SerializeField] private Vector3 _animalSpawningPosition;
+
+    [Header("Animal Variables")]
+    [SerializeField] protected float _detectionRange = 10f;
+    [SerializeField] protected float _escapeMaxDistance = 5f;
 
     protected NavMeshAgent animalAgent;
     protected Transform animalTransform; 
     protected AnimalState currentState = AnimalState.Idle;
-
-    protected Coroutine _currentCoroutine;
 
     [Header("Respawn")]
     [SerializeField] protected SurvivalSceneManager survivalSceneManager;
@@ -46,32 +48,32 @@ public abstract class AnimalBase : MonoBehaviour
     [Header("Enemy Drop")]
     public GameObject droppingItem;
 
-    private void Start()
+    [Header("Player")]
+    [SerializeField] protected GameObject player;
+    protected Transform playerTransform; 
+
+    private void Awake()
     {
         animalTransform = GetComponent<Transform>(); // External call otherwise
         animalAgent = GetComponent<NavMeshAgent>();
-
-        InitialiseAnimal();
+        _animalSpawningPosition = animalTransform.position;
+        playerTransform = player.transform; 
     }
 
-    private void OnEnable()
+    private void Start()
     {
-        InitialiseAnimal(); 
+        InitialiseAnimal();
     }
 
     protected virtual void InitialiseAnimal()
     {
-        Prey.PreyHealth = Prey.PreySpawningHealth; 
-
-        animalAgent.speed = walkSpeed;
-        currentState = AnimalState.Idle;
-
-        UpdateState();
+        ResetAnimalSettings(); // Reseting
+        UpdateState(); // Calling to start 
     }
 
     protected virtual void UpdateState()
     {
-        switch(currentState)
+        switch (currentState)
         {
             case AnimalState.Idle:
                 HandleIdleState();
@@ -108,6 +110,39 @@ public abstract class AnimalBase : MonoBehaviour
 
     }
 
+    /* Abstract voids */
+    protected abstract void ResetAnimalSettings();
+
+    public abstract void ReceiveDamage(int damage);
+
+    protected void RunFromPlayer()
+    {
+        SetState(AnimalState.Chase);
+        StartCoroutine(RunAwayFromPlayer());
+    }
+
+    private IEnumerator RunAwayFromPlayer()
+    {
+        SetRunningDestinationFromPlayer();
+
+        // Player out of range, run to our final location and go back to idle.
+        while (!animalAgent.pathPending && animalAgent.remainingDistance > animalAgent.stoppingDistance)
+        {
+            yield return null;
+        }
+
+        SetState(AnimalState.Idle);
+    }
+
+    private void SetRunningDestinationFromPlayer()
+    {
+        if (animalAgent != null)
+        {
+            Vector3 runDirection = animalTransform.position - playerTransform.position;
+            Vector3 escapeDestination = animalTransform.position + runDirection.normalized * (_escapeMaxDistance * 2);
+            animalAgent.SetDestination(GetRandomNavMeshPosition(escapeDestination, _escapeMaxDistance));
+        }
+    }
 
     protected virtual void HandleChaseState()
     {
@@ -125,7 +160,7 @@ public abstract class AnimalBase : MonoBehaviour
         float waitTime = Random.Range(idleTime / 2, idleTime * 2); // Different moving
         yield return new WaitForSeconds(waitTime);
 
-        Vector3 randomDestination = GetRandomNavMeshPosition(animalTransform.position, wanderDistance); 
+        Vector3 randomDestination = GetRandomNavMeshPosition(_animalSpawningPosition, wanderDistance); 
         animalAgent.SetDestination(randomDestination);
 
         SetState(AnimalState.Moving); 
@@ -149,7 +184,7 @@ public abstract class AnimalBase : MonoBehaviour
                 yield break; 
             }
 
-            CheckChaseConditions();
+            CheckChaseConditions(); // Checking if it's being chased
 
             yield return null; 
         }
@@ -176,30 +211,6 @@ public abstract class AnimalBase : MonoBehaviour
         UpdateState(); 
     }
 
-    protected void CheckForPlayer()
-    {
-
-    }
-
-    public virtual void ReceiveDamage(int damage)
-    {
-        Prey.PreyHealth -= damage;
-        ChangeAnimalSliderHealth(Prey.PreyHealth);
-
-        if (Prey.PreyHealth <= 0)
-        {
-            gameObject.SetActive(false);
-
-            Die();
-
-            // Spawning item
-            GameObject droppedItem = Instantiate(droppingItem, droppingItem.transform.position, droppingItem.transform.rotation);
-            droppedItem.SetActive(true);
-
-            InitialiseAnimal();
-            survivalSceneManager.RespawnAnimal(gameObject, Prey.RespawnTimer);
-        }
-    }
 
     protected virtual void ChangeAnimalSliderHealth(int animalHealth)
     {
