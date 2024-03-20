@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b15c9aff7c409a84bb64780424bb7f69
+guid: 2855328d993c598458c22d8c5bc4c089
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable:
@@ -7,14 +7,17 @@ ModelImporter:
       74: 4831342630144078157
     second: metarig|EatAnimation
   - first:
+      74: -8886876057350898493
+    second: metarig|Idle1
+  - first:
+      74: 3093889075820593387
+    second: metarig|Run2
+  - first:
       74: -2960026816192153919
     second: metarig|Walk1
   - first:
-      74: 2100190152778683834
-    second: metarig|metarig|metarig|EatAnimation
-  - first:
-      74: -2527344076179971557
-    second: metarig|metarig|metarig|Walk1
+      74: -3928512455932995935
+    second: metarig|Walk2
   externalObjects:
   - first:
       type: UnityEngine:Material
