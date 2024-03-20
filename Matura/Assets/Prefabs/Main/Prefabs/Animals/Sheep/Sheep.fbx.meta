@@ -9,6 +9,12 @@ ModelImporter:
   - first:
       74: -2960026816192153919
     second: metarig|Walk1
+  - first:
+      74: 2100190152778683834
+    second: metarig|metarig|metarig|EatAnimation
+  - first:
+      74: -2527344076179971557
+    second: metarig|metarig|metarig|Walk1
   externalObjects:
   - first:
       type: UnityEngine:Material
