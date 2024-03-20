@@ -132,7 +132,9 @@ public abstract class AnimalBase : MonoBehaviour
             yield return null;
         }
 
-        SetState(AnimalState.Idle);
+
+        // Debug.Log(animalAgent.remainingDistance.ToString() + " " + animalAgent.stoppingDistance.ToString() + animalAgent.pathPending.ToString());
+        // SetState(AnimalState.Idle);
     }
 
     private void SetRunningDestinationFromPlayer()
@@ -216,6 +218,7 @@ public abstract class AnimalBase : MonoBehaviour
 
     protected virtual void OnStateChanged(AnimalState newState)
     {
+        Debug.Log(currentState);
         animator?.CrossFadeInFixedTime(newState.ToString(), 0.3f); // Makes a transition
 
         if (newState == AnimalState.Moving)

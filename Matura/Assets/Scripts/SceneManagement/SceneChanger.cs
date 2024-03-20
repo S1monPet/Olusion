@@ -16,7 +16,7 @@ public class SceneChanger : MonoBehaviour
 
     public void OnRespawnButton()
     {
-        DataPersistanceManager.Instance.NewGame(); 
+        DataPersistanceManager.Instance.ResetGame(); 
         AsyncLoader.Instance.LoadLevel("Main");
     }
 }
