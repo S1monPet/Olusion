@@ -124,6 +124,12 @@ public class DataPersistanceManager : MonoBehaviour
         dataHandler.Save(gameData);
     }
 
+    public void ResetGame()
+    {
+        NewGame();
+        dataHandler.Save(gameData); // Saving empty object
+    }
+
     private void OnApplicationQuit()
     {
         SaveGame(); 
