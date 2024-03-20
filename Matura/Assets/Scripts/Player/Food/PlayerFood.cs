@@ -7,6 +7,7 @@ public class PlayerFood : MonoBehaviour, IDataPersistance
 {
     [Header("Player Food")]
     public int Food;
+    [SerializeField] private float foodDecreaseTimer = 5.0f;
     public PlayerFoodBar playerFoodBar;
 
     public PlayerHealth playerHealth;
@@ -34,7 +35,7 @@ public class PlayerFood : MonoBehaviour, IDataPersistance
         {
             while (Food > 0)
             {
-                yield return new WaitForSeconds(30);
+                yield return new WaitForSeconds(foodDecreaseTimer);
 
                 if (Food < 0)
                 {

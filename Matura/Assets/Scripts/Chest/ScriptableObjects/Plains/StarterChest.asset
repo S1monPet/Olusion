@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecdffaf2cef2a08499e53fbd4642a181, type: 3}
+  m_Name: StarterChest
+  m_EditorClassIdentifier: 
+  lootItems:
+  - ItemPrefab: {fileID: 4176705889951604994, guid: 9f80e5eee82a1fd48a513da3bd290f30,
+      type: 3}
+    MinSpawn: 1
+    MaxSpawn: 1
+    Name: Bandage
+    SpawnChance: 100
+  - ItemPrefab: {fileID: 2741149260250972461, guid: e2c1a5add612b3a4b9dabd94e2a240f9,
+      type: 3}
+    MinSpawn: 1
+    MaxSpawn: 1
+    Name: WaterBottle
+    SpawnChance: 100
+  - ItemPrefab: {fileID: 8731429159240846695, guid: 91443dc4544e2794d913ae28bca3e3e7,
+      type: 3}
+    MinSpawn: 1
+    MaxSpawn: 1
+    Name: Stick
+    SpawnChance: 100
+  - ItemPrefab: {fileID: 2724110272419337723, guid: 00d8d276411985b4e9484b05b5040e90,
+      type: 3}
+    MinSpawn: 1
+    MaxSpawn: 1
+    Name: Stone
+    SpawnChance: 100
+  SpawnChancePerSlot: 100

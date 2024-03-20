@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8731429159240846695
+--- !u!1 &8702641934196398669
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,49 +8,49 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8243720523934701533}
-  - component: {fileID: 5028356631200962680}
-  - component: {fileID: 7074232520529046706}
-  - component: {fileID: 8497497957124599858}
-  - component: {fileID: 8497497957124599857}
-  - component: {fileID: 8497497957124599859}
+  - component: {fileID: 8326643440016261367}
+  - component: {fileID: 4909475011188658002}
+  - component: {fileID: 7189155451900951448}
+  - component: {fileID: 8359973293641230176}
+  - component: {fileID: 8359973293641230111}
+  - component: {fileID: 8359973293641230179}
   m_Layer: 7
-  m_Name: StickPrefab
+  m_Name: MetalArmorPrefab
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8243720523934701533
+--- !u!4 &8326643440016261367
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8731429159240846695}
-  m_LocalRotation: {x: -0.7069834, y: 0, z: 0, w: 0.7072302}
-  m_LocalPosition: {x: -9.45, y: -0.37, z: 4.35}
-  m_LocalScale: {x: 3.7877707, y: 3.787771, z: 3.7877707}
+  m_GameObject: {fileID: 8702641934196398669}
+  m_LocalRotation: {x: -0.6943285, y: 0.1338206, z: 0.1338206, w: 0.6943285}
+  m_LocalPosition: {x: -9.706913, y: -0.12200074, z: 8.160833}
+  m_LocalScale: {x: 60, y: 70, z: 75}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -89.98, y: 0, z: 0}
---- !u!33 &5028356631200962680
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!33 &4909475011188658002
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8731429159240846695}
-  m_Mesh: {fileID: -5495902117074765545, guid: cbec95bdf4b79974b814ccf64dd1a772, type: 3}
---- !u!23 &7074232520529046706
+  m_GameObject: {fileID: 8702641934196398669}
+  m_Mesh: {fileID: -882385087631885259, guid: 4727aee272e7ea446abf9a90f702f82e, type: 3}
+--- !u!23 &7189155451900951448
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8731429159240846695}
+  m_GameObject: {fileID: 8702641934196398669}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9b56ca27646fb074b87b8b81ce5bb39e, type: 2}
+  - {fileID: 2100000, guid: 30702dd028d48c64c93976e8b6f756d7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -86,13 +86,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!54 &8497497957124599858
+--- !u!54 &8359973293641230176
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8731429159240846695}
+  m_GameObject: {fileID: 8702641934196398669}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -102,40 +102,40 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &8497497957124599857
+--- !u!65 &8359973293641230111
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8731429159240846695}
+  m_GameObject: {fileID: 8702641934196398669}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.05, y: 0.1757764, z: 0.023995154}
-  m_Center: {x: 0, y: -0.0061149034, z: -0.000046618745}
---- !u!114 &8497497957124599859
+  m_Size: {x: 0.015398933, y: 0.0075953496, z: 0.010999915}
+  m_Center: {x: 0.0000009537014, y: -0.00044651382, z: 0.00038473864}
+--- !u!114 &8359973293641230179
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8731429159240846695}
+  m_GameObject: {fileID: 8702641934196398669}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 42e56ba6eb885a04c82a2bd042553a92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Stick
-  description: Stick for crafting an Exe
-  icon: {fileID: 21300000, guid: febd4088ab0bce842ae662d045377ff1, type: 3}
+  name: Metal Armor
+  description: Gives you medium protection
+  icon: {fileID: 21300000, guid: 3d2484bff1e05b645904da4c4c73385a, type: 3}
   currentQuantity: 1
-  maxQuantity: 8
+  maxQuantity: 1
   IsHeld: 0
-  equiappableItemIndex: 11
-  equiappableArmorIndex: -1
-  damageReduction: 0
+  equiappableItemIndex: -1
+  equiappableArmorIndex: 1
+  damageReduction: 20
   Consumable: 0
   TimeToConsume: 1
   type: 0
@@ -143,10 +143,10 @@ MonoBehaviour:
   Respawnable: 0
   RespawnTimer: 0
   Healing: 0
-  HealthGain: 10
+  HealthGain: 0
   TimeToGainHealth: 2
   healingType: 0
-  Wearable: 0
+  Wearable: 1
   clothingType: 0
   Damage: 0
   attackCooldown: 0

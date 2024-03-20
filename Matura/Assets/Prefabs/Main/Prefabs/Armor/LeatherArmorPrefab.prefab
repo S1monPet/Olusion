@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8731429159240846695
+--- !u!1 &1946001125891468602
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,49 +8,49 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8243720523934701533}
-  - component: {fileID: 5028356631200962680}
-  - component: {fileID: 7074232520529046706}
-  - component: {fileID: 8497497957124599858}
-  - component: {fileID: 8497497957124599857}
-  - component: {fileID: 8497497957124599859}
+  - component: {fileID: 1173826631592392576}
+  - component: {fileID: 2874878276008556581}
+  - component: {fileID: 397776381463791}
+  - component: {fileID: 1711645379143422063}
+  - component: {fileID: 1711645379143422056}
+  - component: {fileID: 1711645379143422060}
   m_Layer: 7
-  m_Name: StickPrefab
+  m_Name: LeatherArmorPrefab
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8243720523934701533
+--- !u!4 &1173826631592392576
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8731429159240846695}
-  m_LocalRotation: {x: -0.7069834, y: 0, z: 0, w: 0.7072302}
-  m_LocalPosition: {x: -9.45, y: -0.37, z: 4.35}
-  m_LocalScale: {x: 3.7877707, y: 3.787771, z: 3.7877707}
+  m_GameObject: {fileID: 1946001125891468602}
+  m_LocalRotation: {x: -0.7071068, y: -0.000000059604638, z: -0.000000059604638, w: 0.7071068}
+  m_LocalPosition: {x: -8.656019, y: -0.16599946, z: 8.219986}
+  m_LocalScale: {x: 60, y: 70, z: 75}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -89.98, y: 0, z: 0}
---- !u!33 &5028356631200962680
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!33 &2874878276008556581
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8731429159240846695}
-  m_Mesh: {fileID: -5495902117074765545, guid: cbec95bdf4b79974b814ccf64dd1a772, type: 3}
---- !u!23 &7074232520529046706
+  m_GameObject: {fileID: 1946001125891468602}
+  m_Mesh: {fileID: 1569980142671447554, guid: 08ef8d0e77b40f747af85726a60a7e3a, type: 3}
+--- !u!23 &397776381463791
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8731429159240846695}
+  m_GameObject: {fileID: 1946001125891468602}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9b56ca27646fb074b87b8b81ce5bb39e, type: 2}
+  - {fileID: 2100000, guid: 7f38825f4c35f964ca231fbf214f7e4c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -86,13 +86,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!54 &8497497957124599858
+--- !u!54 &1711645379143422063
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8731429159240846695}
+  m_GameObject: {fileID: 1946001125891468602}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -102,40 +102,40 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &8497497957124599857
+--- !u!65 &1711645379143422056
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8731429159240846695}
+  m_GameObject: {fileID: 1946001125891468602}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.05, y: 0.1757764, z: 0.023995154}
-  m_Center: {x: 0, y: -0.0061149034, z: -0.000046618745}
---- !u!114 &8497497957124599859
+  m_Size: {x: 0.009754212, y: 0.0067042303, z: 0.008216288}
+  m_Center: {x: 1.3111667e-18, y: 0, z: -0.00017308937}
+--- !u!114 &1711645379143422060
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8731429159240846695}
+  m_GameObject: {fileID: 1946001125891468602}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 42e56ba6eb885a04c82a2bd042553a92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Stick
-  description: Stick for crafting an Exe
-  icon: {fileID: 21300000, guid: febd4088ab0bce842ae662d045377ff1, type: 3}
+  name: Leather Armor
+  description: Gives your protection
+  icon: {fileID: 21300000, guid: 7480ebc9755d442439e2b1b1843625bb, type: 3}
   currentQuantity: 1
-  maxQuantity: 8
+  maxQuantity: 1
   IsHeld: 0
-  equiappableItemIndex: 11
-  equiappableArmorIndex: -1
-  damageReduction: 0
+  equiappableItemIndex: -1
+  equiappableArmorIndex: 0
+  damageReduction: 10
   Consumable: 0
   TimeToConsume: 1
   type: 0
@@ -143,10 +143,10 @@ MonoBehaviour:
   Respawnable: 0
   RespawnTimer: 0
   Healing: 0
-  HealthGain: 10
+  HealthGain: 0
   TimeToGainHealth: 2
   healingType: 0
-  Wearable: 0
+  Wearable: 1
   clothingType: 0
   Damage: 0
   attackCooldown: 0

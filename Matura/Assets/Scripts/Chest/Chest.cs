@@ -6,6 +6,7 @@ using UnityEngine;
 public enum ChestType
 {
     TreasureChest,
+    StartingChest,
     DroppedChest,
     LootChest,
 }

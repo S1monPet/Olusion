@@ -61,15 +61,16 @@ public abstract class AnimalBase : MonoBehaviour
         playerTransform = player.transform;
     }
 
-    private void Start()
+    private void OnEnable()
     {
         InitialiseAnimal();
     }
 
-    protected virtual void InitialiseAnimal()
+
+    public virtual void InitialiseAnimal()
     {
         ResetAnimalSettings(); // Reseting
-        UpdateState(); // Calling to start 
+        UpdateState(); // Start lifecycle
     }
 
     protected virtual void UpdateState()
@@ -119,22 +120,23 @@ public abstract class AnimalBase : MonoBehaviour
     protected void RunFromPlayer()
     {
         SetState(AnimalState.Chase);
-        SetRunningDestinationFromPlayer();
-
-        StartCoroutine(RunAwayFromPlayer());
     }
 
     private IEnumerator RunAwayFromPlayer()
     {
-        // While we are running we keep Chase state
-        while (!animalAgent.pathPending && animalAgent.remainingDistance > animalAgent.stoppingDistance)
+        // Not sure about this, it works though
+        while (true)
         {
+            // Checking if agent has reached destination
+            if (!animalAgent.pathPending && animalAgent.remainingDistance <= animalAgent.stoppingDistance) // || animalAgent.remainingDistance == 0
+            {
+                SetState(AnimalState.Idle);
+                yield break;
+            }
+
+            // Debug.Log("Moving: " + animalAgent.remainingDistance.ToString() + " " + animalAgent.stoppingDistance.ToString() + " " + animalAgent.pathPending.ToString());
             yield return null;
         }
-
-
-        // Debug.Log(animalAgent.remainingDistance.ToString() + " " + animalAgent.stoppingDistance.ToString() + animalAgent.pathPending.ToString());
-        // SetState(AnimalState.Idle);
     }
 
     private void SetRunningDestinationFromPlayer()
@@ -161,12 +163,15 @@ public abstract class AnimalBase : MonoBehaviour
 
     protected virtual void HandleChaseState()
     {
-        StopAllCoroutines(); 
+        StopAllCoroutines();
+
+        SetRunningDestinationFromPlayer();
+        StartCoroutine(RunAwayFromPlayer());
     }
 
     protected virtual void HandleIdleState()
     {
-        StartCoroutine(WaitToMove()); 
+        StartCoroutine(WaitToMove());
     }
 
     // Animal wait timer

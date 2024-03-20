@@ -8,6 +8,7 @@ public class PlayerWater : MonoBehaviour, IDataPersistance
 {
     [Header("Player Water")]
     public int Water;
+    [SerializeField] private float waterDecreaseTimer = 10.0f; 
     public WaterBar waterBar;
    
     public PlayerHealth playerHealth;
@@ -35,7 +36,7 @@ public class PlayerWater : MonoBehaviour, IDataPersistance
         {
             while (Water > 0)
             {
-                yield return new WaitForSeconds(30);
+                yield return new WaitForSeconds(waterDecreaseTimer);
 
                 if (Water <= 0)
                 {
