@@ -98,7 +98,7 @@ public class Prey : AnimalBase
         base.Die();
     }
 
-
+    
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green; 
