@@ -15,6 +15,13 @@ public class CactusGathering : GatheringBase
     private void InitialiseCactus()
     {
         Cactus.CactusHealth = cactus.SpawningCactusHealth;
+
+        // Using foreach loop, because lambda's are used for querying or returing results from collections
+        foreach (ItemDrop itemDrop in Cactus.ItemDrops)
+        {
+            // Setting each item to it's max dropping amount
+            itemDrop.CurrentAmountOfItems = itemDrop.StartingAmountOfItems;
+        }
     }
 
     public void Gather(int damage, GameObject player, WaitForSeconds gatheringRate)
@@ -25,6 +32,7 @@ public class CactusGathering : GatheringBase
 
     protected override IEnumerator GatheringCourotine(int damage, WaitForSeconds timeToGather, int amountOfItems, ItemDrop itemToDrop, WaitForSeconds respawnTimer)
     {
+        Item droppedItem = null; 
         while (cactus.CactusHealth > 0)
         {
             playerMovementScript.StopMovingAndPlayAnimation(TimeToWaitToCancelAnimation);
@@ -34,18 +42,25 @@ public class CactusGathering : GatheringBase
 
             cactus.CactusHealth -= damage; //Set tree health
 
+            if (droppedItem == null)
+            {
+                droppedItem = Instantiate(itemToDrop.ItemToDrop, transform.position, Quaternion.identity).GetComponent<Item>();
+            }
+
             if (cactus.CactusHealth <= 0)
             {
-                base.RespawnGatherableItem(respawnTimer);
-
-                //Expensive
-                Item droppedItem = Instantiate(itemToDrop.ItemToDrop, transform.position, Quaternion.identity).GetComponent<Item>();
                 droppedItem.currentQuantity = amountOfItems;
-
                 inventoryScript.AddItemToInventory(droppedItem, collect: false); // We are not collecting it with animation
 
-                break; // yield return new WaitForSeconds(timeToGather / 2.0f); // Faster last hit
+                InitialiseCactus(); // Reseting
+                base.RespawnGatherableItem(respawnTimer);
+
+                break;// yield return new WaitForSeconds(timeToGather / 2.0f); // Faster last hit
             }
+            --amountOfItems;
+            inventoryScript.AddItemToInventory(droppedItem, collect: false);
+
+            SetCurrentAmountOfItems(amountOfItems);
             yield return timeToGather;
         }
 

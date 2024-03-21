@@ -222,7 +222,7 @@ public abstract class AnimalBase : MonoBehaviour
 
     protected virtual void OnStateChanged(AnimalState newState)
     {
-        Debug.Log(currentState);
+        // Debug.Log(currentState);
         animator?.CrossFadeInFixedTime(newState.ToString(), 0.3f); // Makes a transition
 
         if (newState == AnimalState.Moving)

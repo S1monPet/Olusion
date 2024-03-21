@@ -19,4 +19,5 @@ MonoBehaviour:
   ItemDrops:
   - ItemToDrop: {fileID: 8731429159240846695, guid: 91443dc4544e2794d913ae28bca3e3e7,
       type: 3}
-    TotalAmountOfLogs: 3
+    StartingAmountOfItems: 3
+    CurrentAmountOfItems: 3

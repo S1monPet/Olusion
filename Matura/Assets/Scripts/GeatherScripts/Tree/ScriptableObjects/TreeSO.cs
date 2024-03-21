@@ -25,6 +25,7 @@ public class TreeSO : ScriptableObject
 [System.Serializable]
 public class ItemDrop
 {
-    public GameObject ItemToDrop; 
-    public int TotalAmountOfIitems;
+    public GameObject ItemToDrop;
+    public int StartingAmountOfItems; // For reseting
+    public int CurrentAmountOfItems; // Keeping track of current items
 }

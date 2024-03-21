@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq; 
+using System.Linq;
+using Unity.VisualScripting;
 
 public class PlayerGather : MonoBehaviour
 {
@@ -52,6 +53,7 @@ public class PlayerGather : MonoBehaviour
                     {
                         _currentTarget = hit.collider.gameObject;
                     }
+                    // We hit something else
                 }
 
                 if (_currentTreeGatheringScript != null)
@@ -72,7 +74,7 @@ public class PlayerGather : MonoBehaviour
     private void CheckAndUpdateGatherButton()
     {
         // If there's a target, check distance and update buttons
-        if (_currentTarget != null && _currentTarget.activeInHierarchy)
+        if (_currentTarget != null && _currentTarget.activeInHierarchy && CanGather)
         {
             if (CheckIfCurrentObjectIsCloseEnough(_currentTarget))
             {
@@ -141,8 +143,10 @@ public class PlayerGather : MonoBehaviour
             _currentTreeGatheringScript.Gather(_currentItem.GatherDamage, gameObject, _currentItem.TimeToGather);
 
             _currentTreeGatheringScript = null;
+            /*
             EnableGather.SetActive(false);
             DisableGather.SetActive(true);
+            */
         }
         // Cactus
         else if (_currentCactusGatheringScript != null)
@@ -153,8 +157,10 @@ public class PlayerGather : MonoBehaviour
             _currentCactusGatheringScript.Gather(_currentItem.GatherDamage, gameObject, _currentItem.TimeToGather);
 
             _currentCactusGatheringScript = null;
+            /* 
             EnableGather.SetActive(false);
             DisableGather.SetActive(true);
+            */
         }
     }
 }

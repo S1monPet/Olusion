@@ -15,6 +15,7 @@ public abstract class GatheringBase : MonoBehaviour
     public ItemLifecycleManager itemLifecycleManager; // For dropping items
 
     private Coroutine _gatheringCoroutine; //For stopping coroutine
+    protected ItemDrop _currentItemDrop; 
 
     public float TimeToWaitToCancelAnimation = 0.3f;
 
@@ -23,19 +24,21 @@ public abstract class GatheringBase : MonoBehaviour
     public GameObject DisableGather;
 
 
-
-
-
-
     protected void Gather(int damage, GameObject player, int objectHealth, List<ItemDrop> itemDrops, WaitForSeconds gatheringRate, WaitForSeconds respawnTimer)
     {
         foreach (ItemDrop itemToDrop in itemDrops)
         {
-            if (itemToDrop.TotalAmountOfIitems == 0)
+            _currentItemDrop = itemToDrop; 
+            if (_currentItemDrop.CurrentAmountOfItems == 0)
                 return;
 
-            _gatheringCoroutine = StartCoroutine(GatheringCourotine(damage, gatheringRate, itemToDrop.TotalAmountOfIitems, itemToDrop, respawnTimer));
+             _gatheringCoroutine = StartCoroutine(GatheringCourotine(damage, gatheringRate, _currentItemDrop.CurrentAmountOfItems, itemToDrop, respawnTimer));
         }
+    }
+
+    protected void SetCurrentAmountOfItems(int currentAmountOfItems) // Keeping track of how many we dropped, if we stop coroutine
+    {
+        _currentItemDrop.CurrentAmountOfItems = currentAmountOfItems;
     }
 
     public virtual void StopGathering()
