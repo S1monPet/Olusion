@@ -35,7 +35,7 @@ public class TreeGathering : GatheringBase
     }
 
 
-    protected override IEnumerator GatheringCourotine(int damage, WaitForSeconds timeToGather, int amountOfItems, ItemDrop itemToDrop, WaitForSeconds respawnTimer)
+    protected override IEnumerator GatheringCourotine(int damage, WaitForSeconds timeToGather, int amountOfItems, int maxAmountOfItems, ItemDrop itemToDrop, WaitForSeconds respawnTimer)
     {
         Item droppedItem = null;
         while (Tree.TreeHealth > 0)
@@ -64,6 +64,7 @@ public class TreeGathering : GatheringBase
 
                 break;// yield return new WaitForSeconds(timeToGather / 2.0f); // Faster last hit
             }
+
             --amountOfItems;
             inventoryScript.AddItemToInventory(droppedItem, collect: false);
 

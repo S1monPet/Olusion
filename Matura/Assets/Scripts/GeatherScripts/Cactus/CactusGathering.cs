@@ -30,7 +30,7 @@ public class CactusGathering : GatheringBase
         base.Gather(damage, player, cactus.CactusHealth, cactus.ItemDrops, gatheringRate, cactus.RespawnTimer);
     }
 
-    protected override IEnumerator GatheringCourotine(int damage, WaitForSeconds timeToGather, int amountOfItems, ItemDrop itemToDrop, WaitForSeconds respawnTimer)
+    protected override IEnumerator GatheringCourotine(int damage, WaitForSeconds timeToGather, int amountOfItems, int maxAmoutOfItems, ItemDrop itemToDrop, WaitForSeconds respawnTimer)
     {
         Item droppedItem = null; 
         while (cactus.CactusHealth > 0)
