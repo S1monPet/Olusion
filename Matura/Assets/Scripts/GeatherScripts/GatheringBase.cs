@@ -32,7 +32,7 @@ public abstract class GatheringBase : MonoBehaviour
             if (_currentItemDrop.CurrentAmountOfItems == 0)
                 return;
 
-             _gatheringCoroutine = StartCoroutine(GatheringCourotine(damage, gatheringRate, _currentItemDrop.CurrentAmountOfItems, itemToDrop, respawnTimer));
+             _gatheringCoroutine = StartCoroutine(GatheringCourotine(damage, gatheringRate, _currentItemDrop.CurrentAmountOfItems, _currentItemDrop.StartingAmountOfItems, itemToDrop, respawnTimer));
         }
     }
 
@@ -41,13 +41,14 @@ public abstract class GatheringBase : MonoBehaviour
         _currentItemDrop.CurrentAmountOfItems = currentAmountOfItems;
     }
 
+
     public virtual void StopGathering()
     {
         StopGatheringCoroutine();
         //Animation get's handled in PlayerMovement Script
     }
 
-    protected abstract IEnumerator GatheringCourotine(int damage, WaitForSeconds timeToGather, int amountOfItems, ItemDrop itemToDrop, WaitForSeconds respawnTimer);
+    protected abstract IEnumerator GatheringCourotine(int damage, WaitForSeconds timeToGather, int amountOfItems, int maxAmountOfItems, ItemDrop itemToDrop, WaitForSeconds respawnTimer);
 
     protected void RespawnGatherableItem(WaitForSeconds itemRespawnTimer)
     {
