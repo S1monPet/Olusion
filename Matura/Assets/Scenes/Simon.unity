@@ -274,7 +274,7 @@ Transform:
   m_Children:
   - {fileID: 589962760}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &190200257
 PrefabInstance:
@@ -423,6 +423,9 @@ MonoBehaviour:
   Damage: 0
   attackCooldown: 0
   HitRange: 0
+  GatherDamage: 0
+  GatheringRate: 0
+  GatherRange: 0
 --- !u!65 &190200261
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -588,6 +591,9 @@ MonoBehaviour:
   Damage: 0
   attackCooldown: 0
   HitRange: 0
+  GatherDamage: 0
+  GatheringRate: 0
+  GatherRange: 0
 --- !u!23 &313300208
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5612,75 +5618,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!1001 &479726458
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 91a2d2f78181ed849ab1ed223d6f54e5,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 91a2d2f78181ed849ab1ed223d6f54e5,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 3.488872
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 91a2d2f78181ed849ab1ed223d6f54e5,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 91a2d2f78181ed849ab1ed223d6f54e5,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 3.8848014
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 91a2d2f78181ed849ab1ed223d6f54e5,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 91a2d2f78181ed849ab1ed223d6f54e5,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 91a2d2f78181ed849ab1ed223d6f54e5,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 91a2d2f78181ed849ab1ed223d6f54e5,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 91a2d2f78181ed849ab1ed223d6f54e5,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 91a2d2f78181ed849ab1ed223d6f54e5,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 91a2d2f78181ed849ab1ed223d6f54e5,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 91a2d2f78181ed849ab1ed223d6f54e5,
-        type: 3}
-      propertyPath: m_Name
-      value: Sheep
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 91a2d2f78181ed849ab1ed223d6f54e5, type: 3}
 --- !u!1 &479917493
 GameObject:
   m_ObjectHideFlags: 0
@@ -6038,6 +5975,9 @@ MonoBehaviour:
   Damage: 0
   attackCooldown: 0
   HitRange: 0
+  GatherDamage: 0
+  GatheringRate: 0
+  GatherRange: 0
 --- !u!65 &709501088
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6193,6 +6133,9 @@ MonoBehaviour:
   Damage: 5
   attackCooldown: 0
   HitRange: 0
+  GatherDamage: 0
+  GatheringRate: 0
+  GatherRange: 0
 --- !u!65 &718411291
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6742,6 +6685,9 @@ MonoBehaviour:
   Damage: 0
   attackCooldown: 0
   HitRange: 0
+  GatherDamage: 0
+  GatheringRate: 0
+  GatherRange: 0
 --- !u!1 &1024248586
 GameObject:
   m_ObjectHideFlags: 0
@@ -6897,7 +6843,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: b4733b9f4b8ab86498e1d96e69fc7d5a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b4733b9f4b8ab86498e1d96e69fc7d5a,
         type: 3}
@@ -7167,6 +7113,9 @@ MonoBehaviour:
   Damage: 0
   attackCooldown: 0
   HitRange: 0
+  GatherDamage: 0
+  GatheringRate: 0
+  GatherRange: 0
 --- !u!65 &1129839427
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7322,6 +7271,9 @@ MonoBehaviour:
   Damage: 0
   attackCooldown: 0
   HitRange: 0
+  GatherDamage: 0
+  GatheringRate: 0
+  GatherRange: 0
 --- !u!1 &1195594417
 GameObject:
   m_ObjectHideFlags: 0
@@ -7430,7 +7382,7 @@ RectTransform:
   - {fileID: 967581929}
   - {fileID: 1723686148}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -7781,6 +7733,9 @@ MonoBehaviour:
   Damage: 0
   attackCooldown: 0
   HitRange: 0
+  GatherDamage: 0
+  GatheringRate: 0
+  GatherRange: 0
 --- !u!65 &1375305049
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7936,6 +7891,9 @@ MonoBehaviour:
   Damage: 0
   attackCooldown: 0
   HitRange: 0
+  GatherDamage: 0
+  GatheringRate: 0
+  GatherRange: 0
 --- !u!65 &1382499493
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8106,6 +8064,9 @@ MonoBehaviour:
   Damage: 0
   attackCooldown: 0
   HitRange: 0
+  GatherDamage: 0
+  GatheringRate: 0
+  GatherRange: 0
 --- !u!65 &1598829020
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8481,6 +8442,9 @@ MonoBehaviour:
   Damage: 0
   attackCooldown: 0
   HitRange: 0
+  GatherDamage: 0
+  GatheringRate: 0
+  GatherRange: 0
 --- !u!65 &1771640711
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8839,6 +8803,9 @@ MonoBehaviour:
   Damage: 0
   attackCooldown: 0
   HitRange: 0
+  GatherDamage: 0
+  GatheringRate: 0
+  GatherRange: 0
 --- !u!65 &1938874229
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8984,6 +8951,9 @@ MonoBehaviour:
   Damage: 0
   attackCooldown: 0
   HitRange: 0
+  GatherDamage: 0
+  GatheringRate: 0
+  GatherRange: 0
 --- !u!65 &2039431152
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9154,6 +9124,9 @@ MonoBehaviour:
   Damage: 0
   attackCooldown: 0
   HitRange: 0
+  GatherDamage: 0
+  GatheringRate: 0
+  GatherRange: 0
 --- !u!65 &2100025271
 BoxCollider:
   m_ObjectHideFlags: 0
