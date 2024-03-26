@@ -60,7 +60,7 @@ public class Chest : MonoBehaviour, IDataPersistance
         {
             Item item = slot.GetItem();
             // We only need information from Treasure chest and Loot chest
-            if (item != null && chestType != ChestType.DroppedChest)
+            if (item != null && chestType != ChestType.DroppedChest && chestType != ChestType.TreasureChest)
             {
                 ChestItemData chestItemData = new ChestItemData(item.name, item.currentQuantity, allChestSlots.IndexOf(slot));
                 chestData.chestData.Add(chestItemData);

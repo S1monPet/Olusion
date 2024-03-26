@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecdffaf2cef2a08499e53fbd4642a181, type: 3}
+  m_Name: DefaultDesertChest
+  m_EditorClassIdentifier: 
+  lootItems:
+  - ItemPrefab: {fileID: 2741149260250972461, guid: e2c1a5add612b3a4b9dabd94e2a240f9,
+      type: 3}
+    MinSpawn: 1
+    MaxSpawn: 1
+    Name: WaterBottle
+    SpawnChance: 30
+  - ItemPrefab: {fileID: 2520636930946830015, guid: 2acd79766a0484c4bbd44b87365b23be,
+      type: 3}
+    MinSpawn: 1
+    MaxSpawn: 1
+    Name: BattleAxe
+    SpawnChance: 30
+  SpawnChancePerSlot: 40

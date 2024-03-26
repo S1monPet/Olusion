@@ -18,6 +18,9 @@ public class GameData
     public InventoryData inventoryData;
     public AllChestData allChestData;
 
+    // For clothes
+    public ActiveWear activeWear; 
+
 
     public GameData()
     {
@@ -108,4 +111,17 @@ public class ChestData
 public class AllChestData
 {
     public List<ChestData> allChestDataList = new List<ChestData>();
+}
+
+[System.Serializable]
+public class ClothingItem
+{
+
+}
+
+
+[System.Serializable]
+public class ActiveWear
+{
+    public List<ClothingItem> clothingItems = new List<ClothingItem>(); 
 }

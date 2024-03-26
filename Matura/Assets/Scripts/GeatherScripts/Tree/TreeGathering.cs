@@ -38,6 +38,8 @@ public class TreeGathering : GatheringBase
     protected override IEnumerator GatheringCourotine(int damage, WaitForSeconds timeToGather, int amountOfItems, int maxAmountOfItems, ItemDrop itemToDrop, WaitForSeconds respawnTimer)
     {
         Item droppedItem = null;
+        // int maxAmountOfItems = amountOfItems; // Initialised at start
+
         while (Tree.TreeHealth > 0)
         {
             playerMovementScript.StopMovingAndPlayAnimation(TimeToWaitToCancelAnimation);
@@ -56,8 +58,9 @@ public class TreeGathering : GatheringBase
 
             if (Tree.TreeHealth <= 0)
             {
-                droppedItem.currentQuantity = amountOfItems;
+                // droppedItem.currentQuantity = amountOfItems; // Setting value of current amount if we instantly finish cutting
                 inventoryScript.AddItemToInventory(droppedItem, collect: false); // We are not collecting it with animation
+                              
 
                 InitialiseTree(); // Reseting
                 base.RespawnGatherableItem(respawnTimer);

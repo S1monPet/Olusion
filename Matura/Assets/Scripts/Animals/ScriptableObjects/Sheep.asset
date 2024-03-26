@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc2726db89b328f4e85f0c7091080bcb, type: 3}
   m_Name: Sheep
   m_EditorClassIdentifier: 
-  PreyHealth: 15
-  PreySpawningHealth: 15
+  PreyHealth: 50
+  PreySpawningHealth: 50
   RespawnTime: 30
   _attackPlayer: 0
   ItemDrops: []

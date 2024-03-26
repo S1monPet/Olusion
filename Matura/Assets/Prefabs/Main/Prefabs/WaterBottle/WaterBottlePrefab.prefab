@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4398460797932151032}
   - component: {fileID: 3083819415722572916}
   - component: {fileID: 3083819415722572921}
-  - component: {fileID: 3083819415722572920}
   - component: {fileID: 3083819415722572927}
   m_Layer: 7
   m_Name: WaterBottlePrefab
@@ -116,24 +115,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.004, y: 0.004, z: 0.004}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!208 &3083819415722572920
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2741149260250972461}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.001, y: 0.001, z: 0.0015}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0.0015}
-  m_TimeToStationary: 0.5
+  m_Size: {x: 0.0019981547, y: 0.001982827, z: 0.003002975}
+  m_Center: {x: -0.000003682673, y: -0.0000032466655, z: 0.0014978483}
 --- !u!114 &3083819415722572927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,8 +142,10 @@ MonoBehaviour:
   TimeToConsume: 3.3
   type: 1
   Amount: 20
-  Respawnable: 0
-  RespawnTimer: 0
+  Respawnable: 1
+  MinTimeToRespawn: 10
+  MaxTimeToRespawn: 20
+  RespawnTimer: 5
   Healing: 0
   HealthGain: 0
   TimeToGainHealth: 2

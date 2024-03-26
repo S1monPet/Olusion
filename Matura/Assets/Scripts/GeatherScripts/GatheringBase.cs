@@ -53,11 +53,15 @@ public abstract class GatheringBase : MonoBehaviour
     protected void RespawnGatherableItem(WaitForSeconds itemRespawnTimer)
     {
         gameObject.SetActive(false);
+
+        itemLifecycleManager.StopAllCoroutines(); 
         survivalSceneManager.RespawnGatherableItem(gameObject, itemLifecycleManager, itemRespawnTimer);
     }
 
     protected void StopGatheringCoroutine()
     {
+        // StopAllCoroutines() - Could work as well
+
         if (_gatheringCoroutine != null)
         {
             StopCoroutine(_gatheringCoroutine);

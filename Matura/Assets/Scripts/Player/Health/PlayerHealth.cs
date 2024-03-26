@@ -70,7 +70,6 @@ public class PlayerHealth : MonoBehaviour, IDataPersistance
 
                     _enemyName = enemyBase.currentEnemy.ToString(); 
                 }
-
                 ActivateDeathScreen();
 
                 playerAnimator.Play("Death");

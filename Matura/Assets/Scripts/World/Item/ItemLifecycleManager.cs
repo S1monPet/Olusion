@@ -118,7 +118,7 @@ public class ItemLifecycleManager : MonoBehaviour
 
         if (itemScript != null)
         {
-            //RespawnItem(itemScript.gameObject); I don't know why I did that.
+            RespawnItem(itemScript.gameObject); // For spawning in random position
             itemScript.gameObject.SetActive(true);
         }
         else
@@ -127,7 +127,7 @@ public class ItemLifecycleManager : MonoBehaviour
             SpawnItemRandomly();
         }
 
-        if (!_currentRespawnCoroutines.ContainsKey(itemScript))
+        if (_currentRespawnCoroutines.ContainsKey(itemScript))
             _currentRespawnCoroutines.Remove(itemScript);
     }
 }

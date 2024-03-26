@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecdffaf2cef2a08499e53fbd4642a181, type: 3}
+  m_Name: PyramidTreasureChest
+  m_EditorClassIdentifier: 
+  lootItems:
+  - ItemPrefab: {fileID: 8702641934196398669, guid: bbf431e7ed79cda47845116a97b96253,
+      type: 3}
+    MinSpawn: 1
+    MaxSpawn: 1
+    Name: MetalArmor
+    SpawnChance: 40
+  - ItemPrefab: {fileID: 1946001125891468602, guid: e92f7877252f59042bfcf23d3fa72d68,
+      type: 3}
+    MinSpawn: 1
+    MaxSpawn: 1
+    Name: LeatherArmor
+    SpawnChance: 40
+  - ItemPrefab: {fileID: 2741149260250972461, guid: e2c1a5add612b3a4b9dabd94e2a240f9,
+      type: 3}
+    MinSpawn: 1
+    MaxSpawn: 1
+    Name: WaterBottle
+    SpawnChance: 40
+  - ItemPrefab: {fileID: 4206797354731785019, guid: 198080d73a97659408aa6f4fedeaf9ac,
+      type: 3}
+    MinSpawn: 1
+    MaxSpawn: 1
+    Name: BattleAxe
+    SpawnChance: 40
+  - ItemPrefab: {fileID: 6809391665473550386, guid: 32b333dde44d38a46b4f2b745e878dcd,
+      type: 3}
+    MinSpawn: 2
+    MaxSpawn: 3
+    Name: Meat
+    SpawnChance: 40
+  - ItemPrefab: {fileID: 4176705889951604994, guid: 9f80e5eee82a1fd48a513da3bd290f30,
+      type: 3}
+    MinSpawn: 2
+    MaxSpawn: 3
+    Name: Bandage
+    SpawnChance: 40
+  SpawnChancePerSlot: 40

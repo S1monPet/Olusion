@@ -19,12 +19,6 @@ MonoBehaviour:
     MaxSpawn: 1
     Name: Bandage
     SpawnChance: 100
-  - ItemPrefab: {fileID: 2741149260250972461, guid: e2c1a5add612b3a4b9dabd94e2a240f9,
-      type: 3}
-    MinSpawn: 1
-    MaxSpawn: 1
-    Name: WaterBottle
-    SpawnChance: 100
   - ItemPrefab: {fileID: 8731429159240846695, guid: 91443dc4544e2794d913ae28bca3e3e7,
       type: 3}
     MinSpawn: 1

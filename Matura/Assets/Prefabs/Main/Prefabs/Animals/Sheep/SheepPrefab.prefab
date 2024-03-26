@@ -815,9 +815,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 1
   m_MinValue: 0
-  m_MaxValue: 15
+  m_MaxValue: 50
   m_WholeNumbers: 1
-  m_Value: 10
+  m_Value: 50
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1071,6 +1071,8 @@ MonoBehaviour:
   type: 0
   Amount: 20
   Respawnable: 0
+  MinTimeToRespawn: 0
+  MaxTimeToRespawn: 0
   RespawnTimer: 0
   Healing: 0
   HealthGain: 10
@@ -1925,16 +1927,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animalHealthbar: {fileID: 4172002632049573529}
-  wanderDistance: 20
+  wanderDistance: 30
   walkSpeed: 2
   maxWalkTime: 4
   idleTime: 3
-  runSpeed: 4
+  runSpeed: 7
   _maxRepathAmount: 5
   _lookRotationSpeed: 20
   _animalSpawningPosition: {x: 0, y: 0, z: 0}
   _detectionRange: 10
-  _escapeMaxDistance: 5
+  _escapeMaxDistance: 10
   survivalSceneManager: {fileID: 0}
   droppingItem: {fileID: 4172002632227006707}
   player: {fileID: 0}

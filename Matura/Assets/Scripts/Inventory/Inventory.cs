@@ -304,12 +304,13 @@ public class Inventory : MonoBehaviour, IDataPersistance
                     {
                         //Agent logic to stop moving and look towards item, could be added in future
                         //playerMovementScript.StopPlayerNotRotation(); 
-
-                        if (ItemIsRespawnable(newItem)) //Getting spawning zone with parent)
-                            RespawnItem(newItem);
-                        
                         if (CheckIfItemIsCloseEnough(hit.collider.gameObject))
+                        {
+                            if (ItemIsRespawnable(newItem)) // Getting spawning zone with parent
+                                RespawnItem(newItem);
+
                             AddItemToInventory(newItem);
+                        }
                     }
                 } 
             }
@@ -332,12 +333,23 @@ public class Inventory : MonoBehaviour, IDataPersistance
         return item.Respawnable;
     }
 
+    // There is two, old method which is ItemLifecycleManager and new method ItemSpawner, which spawns items in sphear
     private void RespawnItem(Item item)
     {
         ItemLifecycleManager itemLifecycleManager = item.gameObject.transform.parent.GetComponentInParent<ItemLifecycleManager>(); //Optimise
         if (itemLifecycleManager != null)
         {
             itemLifecycleManager.HandleItemRespawn(item);
+            return; 
+        }
+
+        ItemRespawning itemRespawning = item.gameObject.transform.parent.GetComponentInParent<ItemRespawning>();
+        Debug.Log((itemRespawning != null).ToString());
+        if (itemRespawning != null)
+        {
+            itemRespawning.HandleItemRespawn(item);
+            Debug.Log("Spawned");
+            return;
         }
     }
 

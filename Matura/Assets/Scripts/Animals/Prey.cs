@@ -102,6 +102,6 @@ public class Prey : AnimalBase
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green; 
-        Gizmos.DrawWireSphere(animalTransform.position, _detectionRange);
+        Gizmos.DrawWireSphere(transform.position, _detectionRange);
     }
 }

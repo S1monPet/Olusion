@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 431440f9a30085a4d94012801d1f77b1, type: 3}
+  m_Name: DesertHunter
+  m_EditorClassIdentifier: 
+  <EnemyHP>k__BackingField: 100
+  EnemyArmor: 30
+  StartingHP: 100
+  StartingEnemyArmor: 30
+  EnemyAttackDamage: 20
+  EnemyAttackSpeed: 3
+  EnemyMovingSpeed: 2
+  EnemyPatrolingRange: 3
+  EnemyAttackingRange: 2
+  EnemyRespawnTimer: 60
+  EnemyAttackCooldown: 4

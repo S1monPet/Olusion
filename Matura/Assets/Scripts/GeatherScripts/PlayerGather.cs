@@ -55,12 +55,18 @@ public class PlayerGather : MonoBehaviour
                     }
                     // We hit something else
                 }
-
+                // We reset _currentTarget
+                /*
+                else
+                {
+                    _currentTarget = null;
+                }
+                */
+                // Stopping current gathering 
                 if (_currentTreeGatheringScript != null)
                 {
                     _currentTreeGatheringScript.StopGathering();
                     _currentTreeGatheringScript = null; //Reset the reference
-
                 }
                 else if (_currentCactusGatheringScript != null)
                 {
@@ -116,11 +122,11 @@ public class PlayerGather : MonoBehaviour
 
     private void DetectIfObjectIsGatherable()
     {
-        DetectTouchAndSetTarget(); 
+
+        DetectTouchAndSetTarget();
 
         if (_currentTarget != null)
         {
-
             if (_currentTarget.CompareTag(TreeTag))
             {
                 _currentTreeGatheringScript = _currentTarget.GetComponent<TreeGathering>();
@@ -134,6 +140,9 @@ public class PlayerGather : MonoBehaviour
 
     public void OnGatherButtonPress()
     {
+        // Reseting current target, while gathering it
+        _currentTarget = null;
+
         // Tree
         if (_currentTreeGatheringScript != null)
         {

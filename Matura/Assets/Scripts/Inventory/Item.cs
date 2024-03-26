@@ -52,6 +52,8 @@ public class Item : MonoBehaviour, IDataPersistance
 
     [Header("Respawning")]
     public bool Respawnable = false;
+    public float MinTimeToRespawn; 
+    public float MaxTimeToRespawn;  
     public float RespawnTimer;
 
     [Header("Healing")]
@@ -82,5 +84,8 @@ public class Item : MonoBehaviour, IDataPersistance
     {
         _attackCooldown = new WaitForSeconds(attackCooldown);
         TimeToGather = new WaitForSeconds(GatheringRate);
+
+        // Item respawn
+        RespawnTimer = Random.Range(MinTimeToRespawn, MaxTimeToRespawn);
     }
 }
