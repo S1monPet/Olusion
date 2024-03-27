@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: DarkForestTreasure
   m_EditorClassIdentifier: 
   lootItems: []
-  SpawnChancePerSlot: 40
+  SpawnChancePerSlot: 60

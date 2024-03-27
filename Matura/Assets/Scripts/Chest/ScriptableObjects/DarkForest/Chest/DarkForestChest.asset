@@ -23,7 +23,7 @@ MonoBehaviour:
       type: 3}
     MinSpawn: 1
     MaxSpawn: 1
-    Name: BattleAxe
+    Name: DoubleBattleAxe
     SpawnChance: 30
   - ItemPrefab: {fileID: 2520636930946830015, guid: 2acd79766a0484c4bbd44b87365b23be,
       type: 3}
@@ -49,4 +49,4 @@ MonoBehaviour:
     MaxSpawn: 1
     Name: MetalArmor
     SpawnChance: 40
-  SpawnChancePerSlot: 50
+  SpawnChancePerSlot: 60

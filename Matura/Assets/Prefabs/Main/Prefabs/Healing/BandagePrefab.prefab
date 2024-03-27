@@ -133,10 +133,12 @@ MonoBehaviour:
   type: 0
   Amount: 0
   Respawnable: 0
+  MinTimeToRespawn: 0
+  MaxTimeToRespawn: 0
   RespawnTimer: 0
   Healing: 1
   HealthGain: 20
-  TimeToGainHealth: 2
+  TimeToGainHealth: 4.6
   healingType: 1
   Wearable: 0
   clothingType: 0

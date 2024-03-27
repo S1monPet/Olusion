@@ -129,7 +129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: BattleAxe
   description: Faster Gathering And Killing
-  icon: {fileID: 21300000, guid: d4ce8af3a67a1dd4ebe98ea24de9146a, type: 3}
+  icon: {fileID: 21300000, guid: 38a42e4dce1241245affebf139690c86, type: 3}
   currentQuantity: 1
   maxQuantity: 1
   IsHeld: 0

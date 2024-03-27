@@ -25,4 +25,4 @@ MonoBehaviour:
     MaxSpawn: 1
     Name: BattleAxe
     SpawnChance: 30
-  SpawnChancePerSlot: 40
+  SpawnChancePerSlot: 60

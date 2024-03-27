@@ -513,7 +513,7 @@ public class Inventory : MonoBehaviour, IDataPersistance
                     if (itemToSwap.name == currentDraggedItem.name && itemToSwap.currentQuantity < itemToSwap.maxQuantity)
                     {
                         int combinedQuantity = currentDraggedItem.currentQuantity + itemToSwap.currentQuantity;
-                        if (combinedQuantity < itemToSwap.maxQuantity)
+                        if (combinedQuantity <= itemToSwap.maxQuantity)
                         {
                             SetItemQuantity(itemToSwap, combinedQuantity);
                             currSlot.UpdateInventoryAmount();
@@ -524,7 +524,6 @@ public class Inventory : MonoBehaviour, IDataPersistance
                         else
                         {
                             int maxQuantityToAdd = combinedQuantity - itemToSwap.maxQuantity;
-
                             //Setting quantity for item
                             SetItemQuantity(itemToSwap, itemToSwap.maxQuantity);
                             currSlot.UpdateInventoryAmount();

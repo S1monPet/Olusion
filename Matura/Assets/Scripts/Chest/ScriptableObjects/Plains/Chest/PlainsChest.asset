@@ -37,4 +37,4 @@ MonoBehaviour:
     MaxSpawn: 3
     Name: Bandage
     SpawnChance: 20
-  SpawnChancePerSlot: 30
+  SpawnChancePerSlot: 60

@@ -35,7 +35,7 @@ MonoBehaviour:
       type: 3}
     MinSpawn: 1
     MaxSpawn: 1
-    Name: BattleAxe
+    Name: DoubleBattleAxe
     SpawnChance: 40
   - ItemPrefab: {fileID: 6809391665473550386, guid: 32b333dde44d38a46b4f2b745e878dcd,
       type: 3}
@@ -49,4 +49,4 @@ MonoBehaviour:
     MaxSpawn: 3
     Name: Bandage
     SpawnChance: 40
-  SpawnChancePerSlot: 40
+  SpawnChancePerSlot: 80
