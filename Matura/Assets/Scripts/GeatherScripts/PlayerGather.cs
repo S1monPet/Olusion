@@ -141,7 +141,7 @@ public class PlayerGather : MonoBehaviour
     public void OnGatherButtonPress()
     {
         // Reseting current target, while gathering it
-        _currentTarget = null;
+        // _currentTarget = null;
 
         // Tree
         if (_currentTreeGatheringScript != null)
@@ -166,10 +166,12 @@ public class PlayerGather : MonoBehaviour
             _currentCactusGatheringScript.Gather(_currentItem.GatherDamage, gameObject, _currentItem.TimeToGather);
 
             _currentCactusGatheringScript = null;
-            /* 
+            /*
             EnableGather.SetActive(false);
             DisableGather.SetActive(true);
             */
         }
+
+        // _currentTarget = null; 
     }
 }

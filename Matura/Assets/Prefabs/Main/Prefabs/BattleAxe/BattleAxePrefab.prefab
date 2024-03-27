@@ -154,5 +154,6 @@ MonoBehaviour:
   attackCooldown: 3
   HitRange: 4
   GatherDamage: 10
-  GatheringRate: 2
+  DropRatePerHit: 2
+  GatheringRate: 3
   GatherRange: 3

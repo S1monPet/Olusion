@@ -73,6 +73,7 @@ public class Item : MonoBehaviour, IDataPersistance
 
     [Header("Gather")]
     public int GatherDamage;
+    public int DropRatePerHit; 
     public float GatheringRate;
     public float GatherRange; 
 

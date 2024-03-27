@@ -58,7 +58,7 @@ public class TreeGathering : GatheringBase
 
             if (Tree.TreeHealth <= 0)
             {
-                // droppedItem.currentQuantity = amountOfItems; // Setting value of current amount if we instantly finish cutting
+                //droppedItem.currentQuantity = amountOfItems; // Setting value of current amount if we instantly finish cutting
                 inventoryScript.AddItemToInventory(droppedItem, collect: false); // We are not collecting it with animation
                               
 
