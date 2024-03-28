@@ -129,19 +129,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Emerald
   description: Expensive
-  icon: {fileID: 21300000, guid: 23a3b49243f60874baa2dd5933826338, type: 3}
+  icon: {fileID: 21300000, guid: d2d6a1c022e65f7458a1d3d0fc43157b, type: 3}
   currentQuantity: 1
   maxQuantity: 8
-  Damage: 0
   IsHeld: 0
   equiappableItemIndex: 13
+  equiappableArmorIndex: -1
+  damageReduction: 0
   Consumable: 0
   TimeToConsume: 1
   type: 0
   Amount: 0
+  Respawnable: 0
+  MinTimeToRespawn: 0
+  MaxTimeToRespawn: 0
+  RespawnTimer: 0
   Healing: 0
   HealthGain: 10
   TimeToGainHealth: 2
   healingType: 0
   Wearable: 0
   clothingType: 0
+  Damage: 0
+  attackCooldown: 0
+  HitRange: 0
+  GatherDamage: 0
+  DropRatePerHit: 0
+  GatheringRate: 0
+  GatherRange: 0
