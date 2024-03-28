@@ -52,16 +52,19 @@ public class PlayerGather : MonoBehaviour
                     if (hit.collider.CompareTag(TreeTag) || hit.collider.CompareTag(CactusTag))
                     {
                         _currentTarget = hit.collider.gameObject;
+
+                        return; 
                     }
                     // We hit something else
                 }
                 // We reset _currentTarget
-                /*
+                
                 else
                 {
                     _currentTarget = null;
+                    CanGather = true; // Add cooldown
                 }
-                */
+                
                 // Stopping current gathering 
                 if (_currentTreeGatheringScript != null)
                 {
@@ -140,11 +143,8 @@ public class PlayerGather : MonoBehaviour
 
     public void OnGatherButtonPress()
     {
-        // Reseting current target, while gathering it
-        // _currentTarget = null;
-
         // Tree
-        if (_currentTreeGatheringScript != null)
+        if (_currentTreeGatheringScript != null && CanGather)
         {
             // To prevent faster gathering
             _currentTreeGatheringScript.StopGathering();
@@ -158,7 +158,7 @@ public class PlayerGather : MonoBehaviour
             */
         }
         // Cactus
-        else if (_currentCactusGatheringScript != null)
+        else if (_currentCactusGatheringScript != null && CanGather)
         {
             // To prevent faster gathering
             _currentCactusGatheringScript.StopGathering();
@@ -171,7 +171,17 @@ public class PlayerGather : MonoBehaviour
             DisableGather.SetActive(true);
             */
         }
+    }
 
-        // _currentTarget = null; 
+    private void StartGatherCooldownTimer(WaitForSeconds timeToWait)
+    {
+        StartCoroutine(GatherCooldownTimer(timeToWait));
+    }
+
+    private IEnumerator GatherCooldownTimer(WaitForSeconds timeToWait)
+    {
+        CanGather = false; 
+        yield return timeToWait;
+        CanGather = true; 
     }
 }

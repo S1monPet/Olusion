@@ -18,7 +18,7 @@ public class TreeGathering : GatheringBase
     private void InitialiseTree()
     {
         Tree.TreeHealth = Tree.SpawningTreeHealth;
-        
+
         // Using foreach loop, because lambda's are used for querying or returing results from collections
         foreach (ItemDrop itemDrop in Tree.ItemDrops)
         {
@@ -82,7 +82,7 @@ public class TreeGathering : GatheringBase
         playerAnimator.SetBool("isAttacking", false);
 
         base.RespawnGatherableItem(respawnTimer); //Was destroyed before
-        InitialiseTree();
+        InitialiseTree(); 
 
     }
 
@@ -90,7 +90,6 @@ public class TreeGathering : GatheringBase
     public override void StopGathering()
     {
         base.StopGathering();
-
         PlayerGather.CanGather = true; //Enable gathering another object again
     }
 

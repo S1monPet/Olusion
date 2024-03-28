@@ -31,4 +31,4 @@ MonoBehaviour:
     MaxSpawn: 3
     Name: Cloth
     SpawnChance: 50
-  SpawnChancePerSlot: 20
+  SpawnChancePerSlot: 40
