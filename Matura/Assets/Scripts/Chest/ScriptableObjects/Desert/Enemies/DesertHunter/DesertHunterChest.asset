@@ -31,4 +31,4 @@ MonoBehaviour:
     MaxSpawn: 1
     Name: MetalArmor
     SpawnChance: 10
-  SpawnChancePerSlot: 40
+  SpawnChancePerSlot: 50
