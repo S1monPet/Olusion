@@ -21,7 +21,7 @@ public class PlayerGather : MonoBehaviour
 
     private TreeGathering _currentTreeGatheringScript;
     private CactusGathering _currentCactusGatheringScript;
-    private GameObject _currentTarget; 
+    private GameObject _currentTarget;
 
     [Header("Buttons")]
     public GameObject EnableGather;
@@ -171,17 +171,5 @@ public class PlayerGather : MonoBehaviour
             DisableGather.SetActive(true);
             */
         }
-    }
-
-    private void StartGatherCooldownTimer(WaitForSeconds timeToWait)
-    {
-        StartCoroutine(GatherCooldownTimer(timeToWait));
-    }
-
-    private IEnumerator GatherCooldownTimer(WaitForSeconds timeToWait)
-    {
-        CanGather = false; 
-        yield return timeToWait;
-        CanGather = true; 
     }
 }
