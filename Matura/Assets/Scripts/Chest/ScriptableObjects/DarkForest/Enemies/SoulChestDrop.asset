@@ -10,25 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ecdffaf2cef2a08499e53fbd4642a181, type: 3}
-  m_Name: DesertBossChest
+  m_Name: SoulChestDrop
   m_EditorClassIdentifier: 
   lootItems:
-  - ItemPrefab: {fileID: 8702641934196398669, guid: bbf431e7ed79cda47845116a97b96253,
-      type: 3}
-    MinSpawn: 1
-    MaxSpawn: 1
-    Name: MetalArmor
-    SpawnChance: 60
-  - ItemPrefab: {fileID: 4206797354731785019, guid: 198080d73a97659408aa6f4fedeaf9ac,
-      type: 3}
-    MinSpawn: 1
-    MaxSpawn: 1
-    Name: DoubleBattleAxe
-    SpawnChance: 70
   - ItemPrefab: {fileID: 2282980360195922613, guid: eced1e70879573b4ba7b3abaaa2e5d33,
       type: 3}
-    MinSpawn: 1
-    MaxSpawn: 1
-    Name: Emerald
-    SpawnChance: 50
-  SpawnChancePerSlot: 70
+    MinSpawn: 2
+    MaxSpawn: 4
+    Name: 
+    SpawnChance: 100
+  SpawnChancePerSlot: 100

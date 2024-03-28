@@ -61,7 +61,6 @@ public abstract class GatheringBase : MonoBehaviour
     protected void StopGatheringCoroutine()
     {
         // StopAllCoroutines() - Could work as well
-
         if (_gatheringCoroutine != null)
         {
             StopCoroutine(_gatheringCoroutine);

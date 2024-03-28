@@ -26,6 +26,7 @@ public class TreeSO : ScriptableObject
 public class ItemDrop
 {
     public GameObject ItemToDrop;
+    public int MaxAmountOfItems; 
     public int StartingAmountOfItems; // For reseting
     public int CurrentAmountOfItems; // Keeping track of current items
 }
