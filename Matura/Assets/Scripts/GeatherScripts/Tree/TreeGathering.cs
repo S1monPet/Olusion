@@ -118,6 +118,7 @@ public class TreeGathering : GatheringBase
         SetCurrentAmountOfItems(amountOfItems);
         yield return (timeToGather); // Gathering
 
+        // PlayerGather.CanGather = true; // Reseting after we finish
 }
 
     public override void StopGathering()
