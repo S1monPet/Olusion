@@ -1639,6 +1639,8 @@ MonoBehaviour:
   type: 0
   Amount: 0
   Respawnable: 0
+  MinTimeToRespawn: 0
+  MaxTimeToRespawn: 0
   RespawnTimer: 0
   Healing: 0
   HealthGain: 10
@@ -1650,6 +1652,7 @@ MonoBehaviour:
   attackCooldown: 0
   HitRange: 0
   GatherDamage: 0
+  DropRatePerHit: 0
   GatheringRate: 0
   GatherRange: 0
 --- !u!54 &937741478

@@ -17,7 +17,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8549255268947947309
 Transform:
@@ -93,7 +93,7 @@ SphereCollider:
   m_GameObject: {fileID: 8549255268947947310}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -265,7 +265,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8549255269195991875
 Transform:
@@ -341,7 +341,7 @@ SphereCollider:
   m_GameObject: {fileID: 8549255269195991876}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -392,8 +392,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.8473133, z: 1}
-  m_Center: {x: 0, y: 0.9204554, z: 0}
+  m_Size: {x: 0.9193852, y: 1.8473133, z: 0.8642911}
+  m_Center: {x: -0.003872186, y: 0.9204554, z: -0.00017233194}
 --- !u!195 &8549255269429539612
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -405,12 +405,12 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 9999
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 0
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 1.84
   m_BaseOffset: 0
@@ -967,7 +967,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8549255270045755520
 Transform:
@@ -1043,7 +1043,7 @@ SphereCollider:
   m_GameObject: {fileID: 8549255270045755521}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -1064,7 +1064,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8549255270146189331
 Transform:
@@ -1140,7 +1140,7 @@ SphereCollider:
   m_GameObject: {fileID: 8549255270146189332}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -1161,7 +1161,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8549255270549871166
 Transform:
@@ -1237,7 +1237,7 @@ SphereCollider:
   m_GameObject: {fileID: 8549255270549871167}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -1331,8 +1331,8 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
 --- !u!4 &8549255270901424082
 Transform:
   m_ObjectHideFlags: 0
@@ -1436,6 +1436,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8549255269429539614}
     m_Modifications:
+    - target: {fileID: 5506613321873877194, guid: 4a0c2a14de6f9ce4b80d94710eafe9af,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.196
+      objectReference: {fileID: 0}
+    - target: {fileID: 5506613321873877194, guid: 4a0c2a14de6f9ce4b80d94710eafe9af,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.378
+      objectReference: {fileID: 0}
+    - target: {fileID: 5506613321873877194, guid: 4a0c2a14de6f9ce4b80d94710eafe9af,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.013
+      objectReference: {fileID: 0}
     - target: {fileID: 5967051775330827366, guid: 4a0c2a14de6f9ce4b80d94710eafe9af,
         type: 3}
       propertyPath: m_Name
@@ -1496,6 +1511,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6777442623930499380, guid: 4a0c2a14de6f9ce4b80d94710eafe9af,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2f5403ab6965afa4a899ed90d2b81c27, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a0c2a14de6f9ce4b80d94710eafe9af, type: 3}
 --- !u!4 &8155938808383334224 stripped
