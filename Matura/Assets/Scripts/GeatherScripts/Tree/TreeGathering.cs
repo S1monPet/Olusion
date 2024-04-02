@@ -18,7 +18,7 @@ public class TreeGathering : GatheringBase
     private void InitialiseTree()
     {
         Tree.TreeHealth = Tree.SpawningTreeHealth;
-        
+
         // Using foreach loop, because lambda's are used for querying or returing results from collections
         foreach (ItemDrop itemDrop in Tree.ItemDrops)
         {
@@ -35,6 +35,7 @@ public class TreeGathering : GatheringBase
     }
 
 
+    /*
     protected override IEnumerator GatheringCourotine(int damage, WaitForSeconds timeToGather, int amountOfItems, int maxAmountOfItems, ItemDrop itemToDrop, WaitForSeconds respawnTimer)
     {
         Item droppedItem = null;
@@ -58,7 +59,7 @@ public class TreeGathering : GatheringBase
 
             if (Tree.TreeHealth <= 0)
             {
-                // droppedItem.currentQuantity = amountOfItems; // Setting value of current amount if we instantly finish cutting
+                //droppedItem.currentQuantity = amountOfItems; // Setting value of current amount if we instantly finish cutting
                 inventoryScript.AddItemToInventory(droppedItem, collect: false); // We are not collecting it with animation
                               
 
@@ -82,15 +83,47 @@ public class TreeGathering : GatheringBase
         playerAnimator.SetBool("isAttacking", false);
 
         base.RespawnGatherableItem(respawnTimer); //Was destroyed before
-        InitialiseTree();
+        InitialiseTree(); 
 
     }
+    */
+    // For now quick fix
+    protected override IEnumerator GatheringCourotine(int damage, WaitForSeconds timeToGather, int amountOfItems, int maxAmountOfItems, ItemDrop itemToDrop, WaitForSeconds respawnTimer)
+    {
+        playerMovementScript.StopMovingAndPlayAnimation(TimeToWaitToCancelAnimation);
+        playerMovementScript.SetAgentRotationToTarget(gameObject);
 
+        playerAnimator.Play("Attack");
+        playerAnimator.SetBool("isAttacking", false);
+
+        Tree.TreeHealth -= damage; //Set tree health
+
+        Item droppedItem = Instantiate(itemToDrop.ItemToDrop, transform.position, Quaternion.identity).GetComponent<Item>();
+
+        if (Tree.TreeHealth <= 0)
+        {
+            droppedItem.currentQuantity = amountOfItems; // Setting value of current amount if we instantly finish cutting
+            inventoryScript.AddItemToInventory(droppedItem, collect: false); // We are not collecting it with animation
+
+
+            InitialiseTree(); // Reseting
+            base.RespawnGatherableItem(respawnTimer);
+
+            yield break;// yield return new WaitForSeconds(timeToGather / 2.0f); // Faster last hit
+        }
+
+        --amountOfItems;
+        inventoryScript.AddItemToInventory(droppedItem, collect: false);
+
+        SetCurrentAmountOfItems(amountOfItems);
+        yield return (timeToGather); // Gathering
+
+        // PlayerGather.CanGather = true; // Reseting after we finish
+}
 
     public override void StopGathering()
     {
         base.StopGathering();
-
         PlayerGather.CanGather = true; //Enable gathering another object again
     }
 

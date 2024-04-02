@@ -18,17 +18,17 @@ MonoBehaviour:
     MinSpawn: 1
     MaxSpawn: 1
     Name: Axe
-    SpawnChance: 50
+    SpawnChance: 33.333332
   - ItemPrefab: {fileID: 1946001125891468602, guid: e92f7877252f59042bfcf23d3fa72d68,
       type: 3}
     MinSpawn: 1
     MaxSpawn: 1
     Name: LeatherArmor
-    SpawnChance: 50
+    SpawnChance: 33.333332
   - ItemPrefab: {fileID: 5854989185445703254, guid: aec87550a2e03954eaecdd994278f2a5,
       type: 3}
     MinSpawn: 1
     MaxSpawn: 3
     Name: Cloth
-    SpawnChance: 50
-  SpawnChancePerSlot: 20
+    SpawnChance: 33.333332
+  SpawnChancePerSlot: 50

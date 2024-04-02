@@ -9,7 +9,7 @@ using UnityEngine.AI;
 
 public enum Enemies { MeadowHunter, 
                       ForestRunner,
-                      DarkForestHunter, DarkForestSoldiers, DarkForestKing, 
+                      DarkForestHunter, DarkForestSoldiers, Soul, 
                       DesertHunter, DesertSoldiers, DesertKing, 
                       SnowHunter, SnowSoldiers, SnowGuards, SnowHeavyGuards, SnowKing }
 

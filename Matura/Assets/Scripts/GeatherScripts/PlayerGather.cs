@@ -21,7 +21,7 @@ public class PlayerGather : MonoBehaviour
 
     private TreeGathering _currentTreeGatheringScript;
     private CactusGathering _currentCactusGatheringScript;
-    private GameObject _currentTarget; 
+    private GameObject _currentTarget;
 
     [Header("Buttons")]
     public GameObject EnableGather;
@@ -52,16 +52,19 @@ public class PlayerGather : MonoBehaviour
                     if (hit.collider.CompareTag(TreeTag) || hit.collider.CompareTag(CactusTag))
                     {
                         _currentTarget = hit.collider.gameObject;
+
+                        return; 
                     }
                     // We hit something else
                 }
                 // We reset _currentTarget
-                /*
+                
                 else
                 {
                     _currentTarget = null;
+                    CanGather = true; // Add cooldown
                 }
-                */
+                
                 // Stopping current gathering 
                 if (_currentTreeGatheringScript != null)
                 {
@@ -140,11 +143,8 @@ public class PlayerGather : MonoBehaviour
 
     public void OnGatherButtonPress()
     {
-        // Reseting current target, while gathering it
-        _currentTarget = null;
-
         // Tree
-        if (_currentTreeGatheringScript != null)
+        if (_currentTreeGatheringScript != null && CanGather)
         {
             // To prevent faster gathering
             _currentTreeGatheringScript.StopGathering();
@@ -158,7 +158,7 @@ public class PlayerGather : MonoBehaviour
             */
         }
         // Cactus
-        else if (_currentCactusGatheringScript != null)
+        else if (_currentCactusGatheringScript != null && CanGather)
         {
             // To prevent faster gathering
             _currentCactusGatheringScript.StopGathering();
@@ -166,7 +166,7 @@ public class PlayerGather : MonoBehaviour
             _currentCactusGatheringScript.Gather(_currentItem.GatherDamage, gameObject, _currentItem.TimeToGather);
 
             _currentCactusGatheringScript = null;
-            /* 
+            /*
             EnableGather.SetActive(false);
             DisableGather.SetActive(true);
             */

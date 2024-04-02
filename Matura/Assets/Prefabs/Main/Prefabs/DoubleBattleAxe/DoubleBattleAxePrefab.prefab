@@ -87,7 +87,8 @@ MonoBehaviour:
   attackCooldown: 2
   HitRange: 6
   GatherDamage: 20
-  GatheringRate: 4
+  DropRatePerHit: 4
+  GatheringRate: 2
   GatherRange: 4
 --- !u!54 &4206797354731785016
 Rigidbody:
