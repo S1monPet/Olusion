@@ -143,7 +143,7 @@ MonoBehaviour:
   chestInstantiatedParent: {fileID: 0}
   _randomLoot: 1
   _lootTable: {fileID: 11400000, guid: a8cd063696a14e442b678e035b2ff6fb, type: 2}
-  chestType: 0
+  chestType: 3
   dropLocation: {fileID: 0}
   _allChestItemPrefabs:
   - {fileID: 5511085432170092512, guid: 6186e37add19e9241bca57f6919c021d, type: 3}
