@@ -315271,6 +315271,11 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3255333399393629743, guid: 7eeecfc529ba45f449488271fa4dc023,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3255333399442896250, guid: 7eeecfc529ba45f449488271fa4dc023,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -359419,12 +359424,12 @@ Transform:
   - {fileID: 723536655}
   - {fileID: 72976310}
   - {fileID: 1124363261}
+  - {fileID: 1664952190}
   - {fileID: 443234490}
   - {fileID: 431201715}
   - {fileID: 247403726}
   - {fileID: 1917696022}
   - {fileID: 1257897020}
-  - {fileID: 1664952190}
   - {fileID: 1688236079}
   - {fileID: 1750856542}
   - {fileID: 1127591677}
@@ -505363,6 +505368,11 @@ PrefabInstance:
     - target: {fileID: 8549255269699255070, guid: ce8eeebd3fe36bf4e89c2ba4af2cd030,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549255270901424083, guid: ce8eeebd3fe36bf4e89c2ba4af2cd030,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
