@@ -92,7 +92,9 @@ public class SurvivalSceneManager : MonoBehaviour
     {
         yield return timer;
 
-        itemLifecycleManager.SpawnItemsRandomly(); 
+        if (itemLifecycleManager != null) // More readable than ?
+            itemLifecycleManager.SpawnItemsRandomly(); 
+            
         gatherableItem.SetActive(true);
     }
 

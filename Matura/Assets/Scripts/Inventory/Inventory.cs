@@ -337,22 +337,16 @@ public class Inventory : MonoBehaviour, IDataPersistance
     private void RespawnItem(Item item)
     {
         ItemLifecycleManager itemLifecycleManager = item.gameObject.transform.parent.GetComponentInParent<ItemLifecycleManager>(); //Optimise
-        if (itemLifecycleManager == null) // Object doesn't have itemLifecycleManager
-            return; 
-
-        if (itemLifecycleManager != null)
+        if (itemLifecycleManager != null) // Object doesn't have itemLifecycleManager
         {
-            itemLifecycleManager.HandleItemRespawn(item);
-            return; 
-        }
+            itemLifecycleManager.HandleItemRespawn(item); // Respawning items
 
-        ItemRespawning itemRespawning = item.gameObject.transform.parent.GetComponentInParent<ItemRespawning>();
-        Debug.Log((itemRespawning != null).ToString());
-        if (itemRespawning != null)
-        {
-            itemRespawning.HandleItemRespawn(item);
-            Debug.Log("Spawned");
-            return;
+            ItemRespawning itemRespawning = item.gameObject.transform.parent.GetComponentInParent<ItemRespawning>();
+            if (itemRespawning != null)
+            {
+                itemRespawning.HandleItemRespawn(item);
+                return;
+            }
         }
     }
 
