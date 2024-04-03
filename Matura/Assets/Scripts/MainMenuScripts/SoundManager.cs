@@ -78,7 +78,6 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // For FX sounds
     public void PlaySound(AudioClip audioClip, Transform spawnTransform, float volume) 
     {
         if (!SoundEnabled)
