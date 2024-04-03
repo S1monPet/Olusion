@@ -337,9 +337,6 @@ public class Inventory : MonoBehaviour, IDataPersistance
     private void RespawnItem(Item item)
     {
         ItemLifecycleManager itemLifecycleManager = item.gameObject.transform.parent.GetComponentInParent<ItemLifecycleManager>(); //Optimise
-        if (itemLifecycleManager == null) // Object doesn't have itemLifecycleManager
-            return; 
-
         if (itemLifecycleManager != null)
         {
             itemLifecycleManager.HandleItemRespawn(item);
@@ -347,11 +344,9 @@ public class Inventory : MonoBehaviour, IDataPersistance
         }
 
         ItemRespawning itemRespawning = item.gameObject.transform.parent.GetComponentInParent<ItemRespawning>();
-        Debug.Log((itemRespawning != null).ToString());
         if (itemRespawning != null)
         {
             itemRespawning.HandleItemRespawn(item);
-            Debug.Log("Spawned");
             return;
         }
     }
@@ -777,12 +772,20 @@ public class Inventory : MonoBehaviour, IDataPersistance
     //Hotbar
     public void EnableHotBarItem(int hotbarIndex) //Previously called in the script now in inspector
     {
+        // If we are operating with previous item we stop
+        if (_currentCoroutine != null)
+        {
+            StopCoroutine(_currentCoroutine);
+
+            _disableAnotherEventCall = false;
+            playerAnimator.Play("PlayerIdle");
+        }
 
         foreach (GameObject item in equaiappableItems)
         {
             item.SetActive(false);
         }
-        
+
         Slot hotbarSlot = hotbarSlots[hotbarIndex];
 
         if (hotbarSlot.HasItem())
@@ -793,6 +796,7 @@ public class Inventory : MonoBehaviour, IDataPersistance
                 equaiappableItems[currentItem.equiappableItemIndex].SetActive(true);
                 SetCurrentHeldItem(currentItem); //Set new or the same item's HeldItem variable
                 _currentHeldItemIndex = hotbarIndex;
+
                 if (_previousHeldItemIndex == _currentHeldItemIndex) //If item is the same consume/heal
                 {
                     ConsumeIfHeldAndConsumable();

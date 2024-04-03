@@ -22,6 +22,37 @@ public class DataPersistanceManager : MonoBehaviour
     [SerializeField]
     private bool useEncryption;
 
+    [Header("Application quit")]
+    static bool CanQuit = false;
+
+    [ContextMenu("Doesn't work on iOS or iPadOS")]
+
+    [RuntimeInitializeOnLoadMethod]
+    static void RunOnStart()
+    {
+        Application.wantsToQuit += WantsToQuit;
+    }
+
+    static bool WantsToQuit()
+    {
+        Instance.StartCoroutine(Instance.SaveAllData()); 
+        return CanQuit;
+    }
+
+    private IEnumerator SaveAllData()
+    {
+        yield return new WaitForSeconds(3);
+
+        CanQuit = true; 
+        Application.Quit();
+    }
+
+    /*
+    private void OnApplicationQuit()
+    {
+        SaveGame();
+    }
+    */
 
     private void Start()
     {
@@ -89,12 +120,6 @@ public class DataPersistanceManager : MonoBehaviour
 
     public void LoadGame()
     {
-        if (GameManager.Instance.CheckDeadState()) // If player was dead, we create NewGame and return
-        {
-            ResetGame(); 
-            return; 
-        }
-
         this.gameData = dataHandler.Load(); //If it's null we create a new game
         Debug.Log("this game" + this.gameData);
 
@@ -117,6 +142,13 @@ public class DataPersistanceManager : MonoBehaviour
 
     public void SaveGame()
     {
+        // Setting default GameData
+        if (GameManager.Instance.CheckDeadState()) // If player was dead, we create NewGame and return
+        {
+            ResetGame();
+            return;
+        }
+
         if (this.gameData == null)
         {
             return; 
@@ -127,7 +159,7 @@ public class DataPersistanceManager : MonoBehaviour
             dataPersistanceObject.SaveData(ref gameData);
         }
 
-        Debug.Log(gameData.Health);
+        // Debug.Log(gameData.Health);
         dataHandler.Save(gameData);
     }
 
@@ -135,11 +167,6 @@ public class DataPersistanceManager : MonoBehaviour
     {
         NewGame();
         dataHandler.Save(gameData); // Saving empty object
-    }
-
-    private void OnApplicationQuit()
-    {
-        SaveGame(); 
     }
 
     private List<IDataPersistance> FindAllDataPersistanceObjects()
