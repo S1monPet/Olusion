@@ -12,6 +12,22 @@ public class GameManager : MonoBehaviour
     private float fps;
     public TextMeshProUGUI FPSText;
 
+    [Header("Player")]
+    public PlayerState CurrentPlayerState = PlayerState.Alive; 
+    public enum PlayerState {
+        Alive, Dead
+    };
+
+    public void SetCurrentPlayerState(PlayerState currentPlayerState) 
+    {
+        CurrentPlayerState = currentPlayerState; 
+    }
+
+    public bool CheckDeadState() 
+    {
+        return CurrentPlayerState == PlayerState.Dead;
+    }
+
     private void Awake()
     {
         if (Instance == null)
