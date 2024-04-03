@@ -25,4 +25,22 @@ MonoBehaviour:
     MaxSpawn: 1
     Name: BattleAxe
     SpawnChance: 30
+  - ItemPrefab: {fileID: 5854989185445703254, guid: aec87550a2e03954eaecdd994278f2a5,
+      type: 3}
+    MinSpawn: 1
+    MaxSpawn: 1
+    Name: BattleAxe
+    SpawnChance: 30
+  - ItemPrefab: {fileID: 5854989185445703254, guid: aec87550a2e03954eaecdd994278f2a5,
+      type: 3}
+    MinSpawn: 1
+    MaxSpawn: 1
+    Name: BattleAxe
+    SpawnChance: 30
+  - ItemPrefab: {fileID: 8702641934196398669, guid: bbf431e7ed79cda47845116a97b96253,
+      type: 3}
+    MinSpawn: 1
+    MaxSpawn: 1
+    Name: BattleAxe
+    SpawnChance: 30
   SpawnChancePerSlot: 60
