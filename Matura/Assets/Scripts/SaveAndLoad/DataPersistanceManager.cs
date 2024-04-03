@@ -27,7 +27,7 @@ public class DataPersistanceManager : MonoBehaviour
 
     [ContextMenu("Doesn't work on iOS or iPadOS")]
 
-    [RuntimeInitializeOnLoadMethod]
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     static void RunOnStart()
     {
         Application.wantsToQuit += WantsToQuit;
