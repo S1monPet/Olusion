@@ -63,6 +63,8 @@ public class PlayerHealth : MonoBehaviour, IDataPersistance
                 //Play animation of dying, game over
                 logger.Log("Bravo", this);
 
+                GameManager.Instance.SetCurrentPlayerState(GameManager.PlayerState.Dead); // For Save/Load 
+
                 if (enemy != null)
                 {
                     EnemyBase enemyBase = enemy.GetComponent<EnemyBase>();

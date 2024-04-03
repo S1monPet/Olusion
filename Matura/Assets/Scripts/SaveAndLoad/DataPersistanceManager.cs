@@ -78,6 +78,7 @@ public class DataPersistanceManager : MonoBehaviour
     public void NewGame()
     {
         ResetGameData(); 
+        GameManager.Instance.SetCurrentPlayerState(GameManager.PlayerState.Alive);
         // this.gameData = null; // Reseting it to null when creating new game, didn't save
     }
 
@@ -88,6 +89,12 @@ public class DataPersistanceManager : MonoBehaviour
 
     public void LoadGame()
     {
+        if (GameManager.Instance.CheckDeadState()) // If player was dead, we create NewGame and return
+        {
+            ResetGame(); 
+            return; 
+        }
+
         this.gameData = dataHandler.Load(); //If it's null we create a new game
         Debug.Log("this game" + this.gameData);
 
