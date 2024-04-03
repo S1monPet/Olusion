@@ -4,7 +4,22 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-     public static void PlaySound()
+    public static SoundManager Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }  
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public static void PlaySound()
     {
         
     }
