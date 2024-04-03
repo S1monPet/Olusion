@@ -1664,6 +1664,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7891087138755330002, guid: f15a8128dfbb9794e8a82cd39c9a6f17,
         type: 3}
+      propertyPath: _lootTable
+      value: 
+      objectReference: {fileID: 11400000, guid: 227db71b402286d4bb837c19b971332b,
+        type: 2}
+    - target: {fileID: 7891087138755330002, guid: f15a8128dfbb9794e8a82cd39c9a6f17,
+        type: 3}
       propertyPath: dropLocation
       value: 
       objectReference: {fileID: 0}
