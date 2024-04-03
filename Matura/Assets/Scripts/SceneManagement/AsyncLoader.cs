@@ -33,6 +33,8 @@ public class AsyncLoader : MonoBehaviour
     {
         loadingScreen.SetActive(true);
 
+        SoundManager.Instance.PauseSound();
+
         StartCoroutine(LoadLevelAsync(levelToLoad));
     }
 
@@ -60,6 +62,8 @@ public class AsyncLoader : MonoBehaviour
         yield return new WaitForSeconds(postLoadDelay);
 
         DataPersistanceManager.Instance.LoadGame();
+
+        SoundManager.Instance.UnPauseSound(); 
 
         loadingScreen.SetActive(false); // Because it's a singleton, we set it to false
     }
