@@ -58381,7 +58381,7 @@ MonoBehaviour:
     m_Bits: 64
   inventory: {fileID: 1416109625}
   inventoryScript: {fileID: 275844207}
-  agent: {fileID: 1003882416}
+  agent: {fileID: 275844204}
   animator: {fileID: 1003882415}
   lookRotationSpeed: 20
   _canMove: 1
@@ -58392,7 +58392,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 275844202}
-  m_Enabled: 0
+  m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 5
@@ -213289,7 +213289,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 422201672}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 5
