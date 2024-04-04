@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundManager : MonoBehaviour
+public class SoundManager : MonoBehaviour, IDataPersistance
 {
     public static SoundManager Instance;
 
@@ -11,6 +11,17 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource _ambientSound;
 
     public static bool SoundEnabled = true; 
+
+    public void LoadData(Settings settings) 
+    {
+        SoundEnabled = settings.SoundEnabled; 
+    }
+
+    public void SaveData(ref Settings settings)
+    {
+        settings.SoundEnabled = SoundEnabled;
+    }
+
 
     private void Awake()
     {

@@ -12,7 +12,10 @@ public class DataPersistanceManager : MonoBehaviour
 
     [Header("File Storage Config")]
     [SerializeField] private string fileName;
+    [SerializeField] private string settingsFileName; 
+
     private FileDataHandler dataHandler; 
+    private FileDataHandler settingsDataHandler; 
 
     public static DataPersistanceManager Instance;
 
@@ -83,6 +86,8 @@ public class DataPersistanceManager : MonoBehaviour
         }
 
         this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, useEncryption); //Operating system standard directory 
+        this.settingsDataHandler = new FileDataHandler(Application.persistantDataPath, settingsFileName, useEncryption); // For settings
+        
         //Debug.Log(Path.Combine(Application.persistentDataPath, fileName));
     }
 
@@ -144,6 +149,7 @@ public class DataPersistanceManager : MonoBehaviour
         {
             dataPersistanceObject.LoadData(gameData);
         }
+
         Debug.Log(gameData.Health);
     }
 
@@ -167,6 +173,7 @@ public class DataPersistanceManager : MonoBehaviour
         }
 
         // Debug.Log(gameData.Health);
+        settingsDataHandler.SaveSettings(settings);
         dataHandler.Save(gameData);
     }
 
@@ -174,6 +181,7 @@ public class DataPersistanceManager : MonoBehaviour
     {
         NewGame();
         dataHandler.Save(gameData); // Saving empty object
+        settingsDataHandler.SaveSettings(settings); // Saving current settings
     }
 
     private List<IDataPersistance> FindAllDataPersistanceObjects()

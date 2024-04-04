@@ -18,6 +18,18 @@ public class FileDataHandler
         this._useEncryption = useEncryption; 
     }   
 
+    public Settings LoadSettings() 
+    {
+        Settings loadedSettings = null;
+
+        return loadedSettings; 
+    }
+
+    public void SaveSettings(ref Settings settings) 
+    {
+        
+    }
+
     public GameData Load()
     {
         string fullPath = Path.Combine(dataDirPath, dataFileName);
