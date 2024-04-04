@@ -60,9 +60,10 @@ public class UIAudio : MonoBehaviour
         }
         else
         {
+            SoundManager.Instance.EnableSounds(); 
+            
             // We only want to play the sound when we enable it
             SoundManager.Instance.PlaySound(_touchSound, transform, 0.105f);
-            SoundManager.Instance.EnableSounds(); 
         }
     }
 }

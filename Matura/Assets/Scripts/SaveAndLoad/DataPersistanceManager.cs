@@ -41,10 +41,17 @@ public class DataPersistanceManager : MonoBehaviour
 
     private IEnumerator SaveAllData()
     {
-        yield return new WaitForSeconds(3);
+        SaveGame(); 
+        yield return new WaitForSeconds(2);
 
         CanQuit = true; 
         Application.Quit();
+    }
+    
+    // WantsToQuit function did not work, we will Reset Game to the start
+    private void OnApplicationQuit() 
+    {
+        ResetGame(); 
     }
 
     /*
