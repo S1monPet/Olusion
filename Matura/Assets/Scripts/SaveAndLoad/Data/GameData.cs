@@ -3,17 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class Settings 
-{
-    // Settings
-    public bool SoundEnabled; 
-
-    public Settings() 
-    {
-        this.SoundEnabled = true; 
-    }
-}
 
 [System.Serializable]
 public class GameData
