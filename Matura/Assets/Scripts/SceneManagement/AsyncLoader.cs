@@ -33,7 +33,6 @@ public class AsyncLoader : MonoBehaviour
     {
         loadingScreen.SetActive(true);
 
-        DataPersistanceManager.Instance.SaveSettings();
         SoundManager.Instance.PauseSound();
 
 
@@ -65,7 +64,6 @@ public class AsyncLoader : MonoBehaviour
 
         DataPersistanceManager.Instance.LoadGame();
 
-        DataPersistanceManager.Instance.LoadSettings();
         SoundManager.Instance.UnPauseSound(); 
 
         loadingScreen.SetActive(false); // Because it's a singleton, we set it to false
