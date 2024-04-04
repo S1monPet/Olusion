@@ -19,7 +19,10 @@ public class DataPersistanceManager : MonoBehaviour
 
     public static DataPersistanceManager Instance;
 
-    private GameData gameData; 
+    private SettingsData settingsData;
+    private List<ISettingsData> settingsDataObjects;
+
+    private GameData gameData;
     private List<IDataPersistance> dataPersitanceObjects;
 
     [SerializeField]
@@ -86,7 +89,7 @@ public class DataPersistanceManager : MonoBehaviour
         }
 
         this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, useEncryption); //Operating system standard directory 
-        this.settingsDataHandler = new FileDataHandler(Application.persistantDataPath, settingsFileName, useEncryption); // For settings
+        this.settingsDataHandler = new FileDataHandler(Application.persistentDataPath, settingsFileName, useEncryption); // For settings
         
         //Debug.Log(Path.Combine(Application.persistentDataPath, fileName));
     }
@@ -106,7 +109,7 @@ public class DataPersistanceManager : MonoBehaviour
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         this.dataPersitanceObjects = FindAllDataPersistanceObjects(); // Everytime the scene is loaded, we initialize it
-
+        this.settingsDataObjects = FindAllSettingsDataObjects(); 
         // Waiting for Initialization
         //LoadGame(); 
     }
@@ -132,8 +135,9 @@ public class DataPersistanceManager : MonoBehaviour
 
     public void LoadGame()
     {
+        // LoadSettings(); 
+
         this.gameData = dataHandler.Load(); //If it's null we create a new game
-        Debug.Log("this game" + this.gameData);
 
         if (this.gameData == null && _initializeDataIfNull) // If we wan't to create a new file
         {
@@ -150,11 +154,50 @@ public class DataPersistanceManager : MonoBehaviour
             dataPersistanceObject.LoadData(gameData);
         }
 
-        Debug.Log(gameData.Health);
+        // Debug.Log(gameData.Health);
+    }
+
+    private void ResetSettings()
+    {
+        this.settingsData = new SettingsData(); 
+    }
+
+    public void LoadSettings()
+    {
+        // Loading settings
+        this.settingsData = settingsDataHandler.LoadSettings();
+
+        if (settingsData == null && _initializeDataIfNull)
+            ResetSettings();
+
+        if (settingsData == null)
+            return; 
+
+        foreach (ISettingsData settingsDataObject in settingsDataObjects)
+        {
+            settingsDataObject.LoadSettingsData(settingsData);
+        }
+    }
+
+    public void SaveSettings()
+    {
+        if (this.gameData == null)
+        {
+            return;
+        }
+
+        foreach (ISettingsData settingsDataObject in settingsDataObjects)
+        {
+            settingsDataObject.SaveSettingsData(ref settingsData);
+        }
+
+        settingsDataHandler.SaveSettings(settingsData);
     }
 
     public void SaveGame()
     {
+        // SaveSettings(); 
+
         // Setting default GameData
         if (GameManager.Instance.CheckDeadState()) // If player was dead, we create NewGame and return
         {
@@ -173,15 +216,14 @@ public class DataPersistanceManager : MonoBehaviour
         }
 
         // Debug.Log(gameData.Health);
-        settingsDataHandler.SaveSettings(settings);
         dataHandler.Save(gameData);
     }
 
     public void ResetGame()
     {
         NewGame();
+
         dataHandler.Save(gameData); // Saving empty object
-        settingsDataHandler.SaveSettings(settings); // Saving current settings
     }
 
     private List<IDataPersistance> FindAllDataPersistanceObjects()
@@ -191,9 +233,21 @@ public class DataPersistanceManager : MonoBehaviour
         return new List<IDataPersistance>(dataPersistenceObjects);       
     }
 
+    private List<ISettingsData> FindAllSettingsDataObjects()
+    {
+        IEnumerable<ISettingsData> settingsDataObjects = FindObjectsOfType<MonoBehaviour>()
+            .OfType<ISettingsData>(); 
+        return new List<ISettingsData>(settingsDataObjects);
+    }
+
     public bool HasGameData()
     {
         return gameData != null;
+    }
+
+    public bool HasSettingsData()
+    {
+        return settingsData != null;    
     }
 
 }

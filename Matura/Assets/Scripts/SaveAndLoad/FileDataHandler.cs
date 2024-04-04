@@ -18,16 +18,69 @@ public class FileDataHandler
         this._useEncryption = useEncryption; 
     }   
 
-    public Settings LoadSettings() 
+    public SettingsData LoadSettings() 
     {
-        Settings loadedSettings = null;
+        string fullPath = Path.Combine(dataDirPath, dataFileName);
+        SettingsData loadedSettingsData = null;
 
-        return loadedSettings; 
+        if (File.Exists(fullPath))
+        {
+            try
+            {
+                string dataToLoad = "";
+                using (FileStream stream = new FileStream(fullPath, FileMode.Open))
+                {
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+                        dataToLoad = reader.ReadToEnd();
+                    }
+                }
+                //XOR Encryption
+                if (_useEncryption)
+                {
+                    dataToLoad = EncryptDecrypt(dataToLoad);
+                }
+
+                //Desirializing
+                loadedSettingsData = JsonUtility.FromJson<SettingsData>(dataToLoad);
+
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(fullPath + "\n" + e);
+            }
+        }
+        return loadedSettingsData; 
     }
 
-    public void SaveSettings(ref Settings settings) 
+    public void SaveSettings(SettingsData data) 
     {
-        
+        string fullPath = Path.Combine(dataDirPath, dataFileName);
+        try
+        {
+            Directory.CreateDirectory(Path.GetDirectoryName(fullPath));
+
+            string dataToStore = JsonUtility.ToJson(data, true); //true = formating
+
+            //XOR Encryption
+            if (_useEncryption)
+            {
+                dataToStore = EncryptDecrypt(dataToStore);
+            }
+
+            using (FileStream stream = new FileStream(fullPath, FileMode.Create))
+            {
+                using (StreamWriter writer = new StreamWriter(stream))
+                {
+                    writer.Write(dataToStore);
+                }
+            }
+
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(fullPath + "\n" + e);
+        }
     }
 
     public GameData Load()
