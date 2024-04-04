@@ -31,6 +31,7 @@ public class DataPersistanceManager : MonoBehaviour
     [Header("Application quit")]
     static bool CanQuit = false;
 
+    
     [ContextMenu("Doesn't work on iOS or iPadOS")]
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
@@ -47,6 +48,7 @@ public class DataPersistanceManager : MonoBehaviour
 
     private IEnumerator SaveAllData()
     {
+        SaveSettings(); 
         SaveGame(); 
         yield return new WaitForSeconds(2);
 
@@ -54,10 +56,32 @@ public class DataPersistanceManager : MonoBehaviour
         Application.Quit();
     }
     
+    
     // WantsToQuit function did not work, we will Reset Game to the start
     private void OnApplicationQuit() 
     {
-        ResetGame(); 
+        SaveSettings();
+        SaveGame(); 
+        // ResetGame();
+
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.ExitPlaymode();
+        #else
+            Application.Quit();
+        #endif
+    }
+
+    // For Android we want to use OnApplicationPause()
+    private void OnApplicationPause()
+    {
+        SaveSettings();
+        SaveGame();
+
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.ExitPlaymode();
+        #else
+        Application.Quit();
+        #endif
     }
 
     /*
@@ -73,6 +97,9 @@ public class DataPersistanceManager : MonoBehaviour
         {
             // button.interactable = false; // Disable continue button 
         }
+
+        // Loading all Settings in the Start
+        LoadSettings();
     }
 
     private void Awake()
@@ -109,7 +136,7 @@ public class DataPersistanceManager : MonoBehaviour
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         this.dataPersitanceObjects = FindAllDataPersistanceObjects(); // Everytime the scene is loaded, we initialize it
-        this.settingsDataObjects = FindAllSettingsDataObjects(); 
+        this.settingsDataObjects = FindAllSettingsDataObjects();
         // Waiting for Initialization
         //LoadGame(); 
     }
@@ -181,7 +208,9 @@ public class DataPersistanceManager : MonoBehaviour
 
     public void SaveSettings()
     {
-        if (this.gameData == null)
+        // this.settingsDataObjects = FindAllSettingsDataObjects(); // We do that in OnSceneLoaded
+
+        if (this.settingsData == null)
         {
             return;
         }

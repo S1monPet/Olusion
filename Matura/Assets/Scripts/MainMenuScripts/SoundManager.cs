@@ -14,7 +14,8 @@ public class SoundManager : MonoBehaviour, ISettingsData
 
     public void LoadSettingsData(SettingsData data) 
     {
-        SoundEnabled = data.SoundEnabled; 
+        SoundEnabled = data.SoundEnabled;
+        UpdateSoundState(); 
     }
 
     public void SaveSettingsData(ref SettingsData data)
@@ -30,8 +31,8 @@ public class SoundManager : MonoBehaviour, ISettingsData
             Instance = this;
             DontDestroyOnLoad(gameObject);
 
+            // UpdateSoundState(); 
             // Check if we can play and play
-            UpdateSoundState(); 
         }  
         else
         {
@@ -39,6 +40,8 @@ public class SoundManager : MonoBehaviour, ISettingsData
         }
 
     }
+
+
     public void EnableSounds()
     {
         if (!SoundEnabled)
