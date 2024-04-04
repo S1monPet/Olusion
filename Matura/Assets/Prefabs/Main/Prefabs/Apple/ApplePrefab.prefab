@@ -146,8 +146,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5, z: 0.5}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.602417, y: 0.5, z: 0.6156006}
+  m_Center: {x: -0.012268066, y: 0, z: -0.012329102}
 --- !u!114 &4664083045389249202
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,6 +187,7 @@ MonoBehaviour:
   attackCooldown: 0
   HitRange: 0
   GatherDamage: 0
+  DropRatePerHit: 0
   GatheringRate: 0
   GatherRange: 0
 --- !u!1 &8470410166798739832

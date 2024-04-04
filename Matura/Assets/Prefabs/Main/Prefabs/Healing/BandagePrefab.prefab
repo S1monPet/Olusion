@@ -63,8 +63,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Size: {x: 1.166748, y: 1, z: 1.1662598}
+  m_Center: {x: 0.020629883, y: 1, z: -0.020751953}
 --- !u!23 &3834755920904445012
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -146,6 +146,7 @@ MonoBehaviour:
   attackCooldown: 0
   HitRange: 0
   GatherDamage: 0
+  DropRatePerHit: 0
   GatheringRate: 0
   GatherRange: 0
 --- !u!1 &4934652170155563483

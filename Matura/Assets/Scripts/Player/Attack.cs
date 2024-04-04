@@ -29,7 +29,7 @@ public class Attack : MonoBehaviour
     private float raycastDistance = 10f;
 
     private int handDamage = 10;
-    private float _handRange = 2f;
+    private float _handRange = 3f;
     public float punchCooldown;
     private WaitForSeconds _punchCooldown;
     private bool _isOnCooldown = false; 

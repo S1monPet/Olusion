@@ -5,7 +5,7 @@ using UnityEngine;
 
 
 [System.Serializable]
-public class GameData
+public sealed class GameData
 {
     public int Health;
     public int Food;
