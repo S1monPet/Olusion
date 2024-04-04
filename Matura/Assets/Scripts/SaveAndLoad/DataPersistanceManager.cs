@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using System.IO;
 using UnityEngine.SceneManagement;
+using UnityEditor;
 
 public class DataPersistanceManager : MonoBehaviour
 {
@@ -57,13 +58,12 @@ public class DataPersistanceManager : MonoBehaviour
         Application.Quit();
     }
     
-    
-    // WantsToQuit function did not work, we will Reset Game to the start
+    */
+    // Using this for UnityEditor
     private void OnApplicationQuit() 
     {
         SaveSettings();
         SaveGame(); 
-        // ResetGame();
 
         #if UNITY_EDITOR
         UnityEditor.EditorApplication.ExitPlaymode();
@@ -72,19 +72,14 @@ public class DataPersistanceManager : MonoBehaviour
         #endif
     }
 
-    */
+    
 
     // For Android we want to use OnApplicationPause()
+    
     private void OnApplicationPause()
     {
         SaveSettings();
         SaveGame();
-
-        #if UNITY_EDITOR
-        UnityEditor.EditorApplication.ExitPlaymode();
-        #else
-        Application.Quit();
-        #endif
     }
 
 

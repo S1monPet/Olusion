@@ -52,7 +52,7 @@ public class MenuMainScript : MonoBehaviour
     public void OnClickExit()
     {
         #if UNITY_EDITOR
-                UnityEditor.EditorApplication.ExitPlaymode();
+            UnityEditor.EditorApplication.ExitPlaymode();
         #else
             Application.Quit();
         #endif
