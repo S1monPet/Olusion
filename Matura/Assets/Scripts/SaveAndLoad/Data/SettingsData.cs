@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class SettingsData
+public sealed class SettingsData
 {
     // Settings
     public bool SoundEnabled;
