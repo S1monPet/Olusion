@@ -28,10 +28,11 @@ public class DataPersistanceManager : MonoBehaviour
     [SerializeField]
     private bool useEncryption;
 
+    /* Doesn't work for Android or iOS
+
     [Header("Application quit")]
     static bool CanQuit = false;
 
-    
     [ContextMenu("Doesn't work on iOS or iPadOS")]
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
@@ -71,6 +72,8 @@ public class DataPersistanceManager : MonoBehaviour
         #endif
     }
 
+    */
+
     // For Android we want to use OnApplicationPause()
     private void OnApplicationPause()
     {
@@ -84,12 +87,6 @@ public class DataPersistanceManager : MonoBehaviour
         #endif
     }
 
-    /*
-    private void OnApplicationQuit()
-    {
-        SaveGame();
-    }
-    */
 
     private void Start()
     {
