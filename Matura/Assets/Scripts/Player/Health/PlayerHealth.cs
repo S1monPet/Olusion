@@ -27,6 +27,7 @@ public class PlayerHealth : MonoBehaviour, IDataPersistance
     public void LoadData(GameData data)
     {
         Health = data.Health;
+        ChangePlayerSliderHealth();
     }
 
     public void SaveData(ref GameData data)
@@ -34,11 +35,6 @@ public class PlayerHealth : MonoBehaviour, IDataPersistance
         data.Health = Health;
     }
 
-
-    private void Start()
-    {
-        ChangePlayerSliderHealth();
-    }
 
     private int CheckForArmorReduction() //Get armor reduction
     {
@@ -49,6 +45,8 @@ public class PlayerHealth : MonoBehaviour, IDataPersistance
         }
         return 0; 
     }
+
+    #region Damage 
 
     public void TakeDamage(int damage, GameObject enemy)
     {
@@ -142,4 +140,5 @@ public class PlayerHealth : MonoBehaviour, IDataPersistance
         playerDeathUIScript.ChangeScreen(_enemySprite, _enemyName);
     }
 
+    #endregion
 }

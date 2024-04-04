@@ -1,6 +1,7 @@
 using NUnit.Framework.Internal;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ public class PlayerWater : MonoBehaviour, IDataPersistance
     [Header("Player Water")]
     public int Water;
     [SerializeField] private float waterDecreaseTimer = 10.0f; 
+    [SerializeField] private float waterHealthDecreaseTimer = 20.0f; 
     public WaterBar waterBar;
    
     public PlayerHealth playerHealth;
@@ -34,34 +36,46 @@ public class PlayerWater : MonoBehaviour, IDataPersistance
     {
         while (true)
         {
-            while (Water > 0)
+            if (Water > 0)
             {
                 yield return new WaitForSeconds(waterDecreaseTimer);
-
-                if (Water <= 0)
-                {
-                    break;
-                }
 
                 Water--;
                 Debug.Log("Water decreased by 1. Current water level: " + Water);
                 waterBar.SetPlayersWaterSlider(Water);
-
             }
-            if (Water <= 0)
+            else
             {
-                while (playerHealth.Health > 0)
-                {
-                    yield return new WaitForSeconds(20);
-
-                    if (Water > 0) 
-                    {
-                        break; 
-                    }
-
-                    playerHealth.TakeDamage(_damageToTakeIfOutOfWater, null);
-                }
+                // Start decreasing health if water is at or below 0
+                StartDecreasingHealth();
+                break; 
             }
+        }
+    }
+
+    private void StartDecreasingHealth()
+    {
+        StartCoroutine(StartDecreasingHealthCoroutine());
+    }
+
+    private IEnumerator StartDecreasingHealthCoroutine()
+    {
+        while (playerHealth.Health > 0 && Water <= 0)
+        {
+            yield return new WaitForSeconds(waterHealthDecreaseTimer);
+
+            // Stopping damage if water was replenished
+            if (Water > 0)
+            {
+                Debug.Log("Water replenished, stopping health decrease.");
+
+                StartCoroutine(WaterDecreaseTimer());
+                yield break;
+            }
+
+            playerHealth.TakeDamage(_damageToTakeIfOutOfWater, null);
+
+            yield return null;
         }
     }
 

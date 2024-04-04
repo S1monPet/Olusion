@@ -2,12 +2,14 @@ using NUnit.Framework.Internal;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayerFood : MonoBehaviour, IDataPersistance
 {
     [Header("Player Food")]
     public int Food;
     [SerializeField] private float foodDecreaseTimer = 5.0f;
+    [SerializeField] private float foodHealthDecreaseTimer = 30.0f;
     public PlayerFoodBar playerFoodBar;
 
     public PlayerHealth playerHealth;
@@ -33,34 +35,47 @@ public class PlayerFood : MonoBehaviour, IDataPersistance
     {
         while (true)
         {
-            while (Food > 0)
+            if (Food > 0)
             {
                 yield return new WaitForSeconds(foodDecreaseTimer);
-
-                if (Food < 0)
-                {
-                    break;
-                }
 
                 Food--;
                 Debug.Log("Food decreased by 1. Current food level: " + Food);
                 playerFoodBar.SetPlayersFoodSlider(Food);
 
             }
-            if (Food <= 0)
+            else 
             {
-                while (playerHealth.Health > 0)
-                {
-                    yield return new WaitForSeconds(20);
-
-                    if (Food > 0)
-                    {
-                        break;
-                    }
-
-                    playerHealth.TakeDamage(_damageToTakeIfOutOfFood, null);
-                }
+                // Start decreasing health if food is at or below 0
+                StartDecreasingHealth();
+                break; 
             }
+        }
+    }
+
+    private void StartDecreasingHealth()
+    {
+        StartCoroutine(StartDecreasingHealthCoroutine());
+    }
+
+    private IEnumerator StartDecreasingHealthCoroutine()
+    {
+        while (playerHealth.Health > 0 && Food <= 0)
+        {
+            yield return new WaitForSeconds(foodHealthDecreaseTimer);
+
+            // Stopping damage if water was replenished
+            if (Food > 0)
+            {
+                Debug.Log("Food replenished, stopping health decrease.");
+
+                StartCoroutine(FoodDecreaseTimer());
+                yield break;
+            }
+
+            playerHealth.TakeDamage(_damageToTakeIfOutOfFood, null);
+
+            yield return null; 
         }
     }
 
