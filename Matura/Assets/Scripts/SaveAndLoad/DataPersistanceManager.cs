@@ -71,6 +71,19 @@ public class DataPersistanceManager : MonoBehaviour
         #endif
     }
 
+    // For Android we want to use OnApplicationPause()
+    private void OnApplicationPause()
+    {
+        SaveSettings();
+        SaveGame();
+
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.ExitPlaymode();
+        #else
+        Application.Quit();
+        #endif
+    }
+
     /*
     private void OnApplicationQuit()
     {
