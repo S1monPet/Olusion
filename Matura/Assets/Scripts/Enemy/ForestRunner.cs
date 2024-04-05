@@ -37,11 +37,19 @@ public class ForestRunner : EnemyBase
         base.StartAttackCoolDown(cooldownDuration);
     }
 
-    private void Update()
+    // Optimising
+    protected override void Tick()
     {
         base.Patrol(patrolPoints, agent);
     }
 
+
+    /*
+    private void Update()
+    {
+        base.Patrol(patrolPoints, agent);
+    }
+    */
     public override Vector3 SpawnPosition()
     {
         Vector3 spawnPosition = new Vector3(Random.Range(MaxX, MinX), 0, Random.Range(MaxZ, MinZ));

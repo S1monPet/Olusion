@@ -37,10 +37,20 @@ public class Soul : EnemyBase
         base.StartAttackCoolDown(cooldownDuration);
     }
 
+    // Optimising
+    protected override void Tick()
+    {
+        base.Patrol(patrolPoints, agent);
+    }
+
+
+    /*
     private void Update()
     {
         base.Patrol(patrolPoints, agent);
     }
+    */
+
 
     public override Vector3 SpawnPosition()
     {

@@ -10,7 +10,8 @@ public class MeadowHunter : EnemyBase
 
     public Transform[] patrolPoints;
     public float MaxX, MinX; 
-    public float MaxZ, MinZ;    
+    public float MaxZ, MinZ;
+
 
     private void Awake()
     {
@@ -38,10 +39,20 @@ public class MeadowHunter : EnemyBase
         base.StartAttackCoolDown(cooldownDuration);
     }
 
+    // Optimising
+    protected override void Tick()
+    {
+        base.Patrol(patrolPoints, agent);
+    }
+
+
+    /*
     private void Update()
     {
         base.Patrol(patrolPoints, agent);
     }
+    */
+
 
     public override Vector3 SpawnPosition()
     {

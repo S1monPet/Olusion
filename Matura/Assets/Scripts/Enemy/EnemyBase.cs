@@ -27,11 +27,14 @@ public abstract class EnemyBase : MonoBehaviour
     public PlayerHealth playerHealthScript; //Maybe some class will need it so it's protected
     public PlayerMovement playerMovementScript;
 
+    private Coroutine _rotationCoroutine; 
+
     [Header("Bars")]
     public EnemyHealthBar enemyHealthBar; 
     public EnemyArmorBar enemyArmorBar;
     protected NavMeshAgent currentNavMeshAgent; 
-    protected float lookRotationSpeed = 20f;
+    // Rotation speed
+    protected float lookRotationSpeed = 5f;
 
     [Header("Game Manager")]
     public SurvivalSceneManager survivalSceneManager;
@@ -49,10 +52,22 @@ public abstract class EnemyBase : MonoBehaviour
     private int targetPoint = 0; 
     private bool _isOnCooldown;
 
+    private void OnEnable()
+    {
+        // Subscribing to optimization technique
+        Ticker.OnTickAction += Tick; 
+    }
+
     private void OnDisable()
     {
         _isOnCooldown = false; //Because courotines don't continue when you disable object
+
+        // Unsubscribing to optimization technique
+        Ticker.OnTickAction -= Tick;
+
     }
+
+    protected abstract void Tick();
 
     protected void Init(NavMeshAgent agent, Enemies enemyType) //Don't think this will ever be overriden
     {
@@ -72,37 +87,44 @@ public abstract class EnemyBase : MonoBehaviour
     public abstract Enemies TypeOfEnemy();
     protected virtual void EnemyAttack(NavMeshAgent agent)
     {
+
         //Checking if enemy is close enough to hit player
         if (Vector3.Distance(player.transform.position, agent.transform.position) <= EnemyStats.EnemyAttackingRange)
         {
             EnemyHit();
-            SetEnemyRotation(agent);
-
+            RotateEnemy(agent); 
         }
         else if (Vector3.Distance(player.transform.position, agent.transform.position) <= EnemyStats.EnemyPatrolingRange)
         {
             agent.SetDestination(player.transform.position);
             agent.speed = EnemyStats.EnemyAttackSpeed;
 
-            SetEnemyRotation(agent);
-            //enemyAnimator.SetBool("IsPlayerClose", true); //Start running after
+            RotateEnemy(agent);
         }
-        else
-        {
-            //if (!enemyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Walking")) //Check if is already walking
-                //enemyAnimator.SetBool("IsPlayerClose", false);
-        }
-
     }
 
-    protected void SetEnemyRotation(NavMeshAgent agent)
+    private void RotateEnemy(NavMeshAgent agent)
     {
+        if (_rotationCoroutine != null)
+        {
+            StopCoroutine(_rotationCoroutine);
+        }
+        _rotationCoroutine = StartCoroutine(SetEnemyRotation(agent));
+    }
+
+    protected IEnumerator SetEnemyRotation(NavMeshAgent agent)
+    {
+        Debug.Log("ata");
         Vector3 direction = (agent.destination - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
 
         //Small threshold to avoid constant micro-adjustments && check if rotation is deafault
-        if (lookRotation != Quaternion.identity && Quaternion.Angle(transform.rotation, lookRotation) > 0.1f)
+        while (lookRotation != Quaternion.identity && Quaternion.Angle(transform.rotation, lookRotation) > 0.1f)
+        {
+            Debug.Log("mama");
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * lookRotationSpeed);
+            yield return null; 
+        }
     }
 
     protected virtual void EnemyHit()
