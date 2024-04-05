@@ -392,7 +392,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyStats: {fileID: 11400000, guid: 8631ab278b08a994092382cebb8f914b, type: 2}
   player: {fileID: 0}
-  enemySprite: {fileID: 0}
+  enemySprite: {fileID: 21300000, guid: 655f5b0d281c9f047a5bb49676955fcb, type: 3}
   currentEnemy: 5
   playerHealthScript: {fileID: 0}
   playerMovementScript: {fileID: 0}
@@ -835,7 +835,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3255333399393629740
 Transform:
   m_ObjectHideFlags: 0

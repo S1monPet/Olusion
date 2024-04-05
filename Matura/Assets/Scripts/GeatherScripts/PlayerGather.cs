@@ -104,7 +104,7 @@ public class PlayerGather : MonoBehaviour
         }
     }
 
-    private bool CheckIfCurrentObjectIsCloseEnough(GameObject currentGameObject)
+    public bool CheckIfCurrentObjectIsCloseEnough(GameObject currentGameObject)
     {
         _currentItem = inventoryScript.hotbarSlots.Select(slot => slot.GetItem()).FirstOrDefault(item => item != null && item.IsHeld);
 
@@ -115,11 +115,23 @@ public class PlayerGather : MonoBehaviour
             //Check if item's range is suitable for attack
             if (_currentItem.GatherRange != 0f)
             {
+
                 if (distanceToEnemy < _currentItem.GatherRange)
-                    return true; 
+                {
+                    // We will interact with target stop moving
+                    if (!PlayerMovement.GetTargetInteractionState())
+                        PlayerMovement.SetTargetInteractionState(true);
+
+                    return true;
+                }
                 else if (!objectTransform.gameObject.activeInHierarchy)
                     return false;
             }
+
+        // Move past target
+        if (PlayerMovement.GetTargetInteractionState())
+            PlayerMovement.SetTargetInteractionState(false);
+
         return false;
     }
 

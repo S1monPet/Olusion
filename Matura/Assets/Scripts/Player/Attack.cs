@@ -170,6 +170,10 @@ public class Attack : MonoBehaviour
 
         if (distanceToEnemy < attackingRange && !_isOnCooldown)
         {
+            // We will interact with target stop moving
+            if (!PlayerMovement.GetTargetInteractionState())
+                PlayerMovement.SetTargetInteractionState(true);
+
             DisableAttack.SetActive(false);
             EnableAttack.SetActive(true);
             return true;
@@ -182,6 +186,11 @@ public class Attack : MonoBehaviour
             enemyBase = null; //Reseting Reference
             return false;
         }
+
+        // Move past target
+        if (PlayerMovement.GetTargetInteractionState())
+            PlayerMovement.SetTargetInteractionState(false);
+
         return false; 
     }
 

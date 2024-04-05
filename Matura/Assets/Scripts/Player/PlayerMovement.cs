@@ -2,6 +2,7 @@ using Cinemachine.Utility;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
@@ -12,9 +13,13 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
     public Transform playerTransform;
 
     //public Camera camera;
-    public LayerMask layerMask;
+    private LayerMask _combinedLayerMask;
+    public LayerMask GroundLayerMask;
+    public LayerMask EnemyLayerMask; 
+    public LayerMask GatherableLayerMask;
+
     public GameObject inventory;
-    public Inventory inventoryScript; 
+    public Inventory inventoryScript;
 
     private RaycastHit hit;
     public NavMeshAgent agent;
@@ -22,11 +27,17 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
 
     //Distance of player movement
     public static float MaxRaycastDistance = 20f; //Only one max
-    private string groundTag = "Ground";
+    public string GroundTag = "Ground";
+    public string TreeTag = "Tree";
+    public string CactusTag = "Cactus";
+    public string EnemyTag = "Enemy";
 
     public float lookRotationSpeed = 20f;
+    private Coroutine _rotationCoroutine = null; 
 
-    public bool _canMove = true; 
+    public bool _canMove = true;
+    // Is player in range and has appropriate item to hit Gatherable or Enemy
+    public static bool CanInteractWithTarget = false;
 
     public void LoadData(GameData data)
     {
@@ -50,6 +61,8 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
     void Awake()
     {
         agent.updateRotation = false;
+        // Setting all masks to check
+        _combinedLayerMask = GroundLayerMask | EnemyLayerMask | GatherableLayerMask; 
     }
 
 
@@ -58,12 +71,18 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
         Movement();
     }
 
-    //To make sure agent is still.
-    private void OnEnable()
+    #region Set player interaction state
+    public static void SetTargetInteractionState(bool canInteract)
     {
-        //agent.ResetPath(); if you want to stop the agent
+        CanInteractWithTarget = canInteract; 
     }
 
+    public static bool GetTargetInteractionState()
+    {
+        return CanInteractWithTarget; 
+    }
+
+    #endregion
 
     private void Movement()
     {
@@ -79,24 +98,38 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
                     Ray ray = Camera.main.ScreenPointToRay(touch.position);
                     UnityEngine.Debug.DrawLine(ray.origin, ray.origin + ray.direction * MaxRaycastDistance, Color.green, 3);
 
-                    if (Physics.Raycast(ray, out hit, MaxRaycastDistance, layerMask))
+                    if (Physics.Raycast(ray, out hit, MaxRaycastDistance, _combinedLayerMask)) 
                     {
-                        if (hit.collider.CompareTag(groundTag))
+                        // Checking Interactions
+                        if (!hit.collider.CompareTag(GroundTag))
                         {
-                            // Disable any running coroutine
-                            StopOnGoingProcesses();
+                            if (CanInteractWithTarget)
+                            {
+                                agent.destination = hit.point;
+                                SetAgentRotation();
 
-
-                            // If grounds is hit and item was not pressed, set hit.point and go towards location
-                            if (agent.isStopped)
-                                agent.isStopped = false;
-
-                            agent.destination = hit.point;
-
+                                StopMoving();
+                            }
+                            else
+                            {
+                                MovePlayer(hit.point);
+                            }
+                            return; 
                         }
+                        else 
+                        {
+                            MovePlayer(hit.point); 
+                        }
+
                     }
                 }
+            } 
+            // Auto run
+            else
+            {
+                AutoRun(); 
             }
+
             //Has path because we are resseting path in the other file if object is not clicked
             if (!agent.pathPending && agent.remainingDistance > agent.stoppingDistance)
             {
@@ -114,19 +147,49 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
         }
     }
 
+    private void AutoRun()
+    {
+
+    }
+
+    private void MovePlayer(Vector3 destination)
+    {
+        // Disable any running coroutine
+        StopOnGoingProcesses();
+
+
+        // If grounds is hit and item was not pressed, set hit.point and go towards location
+        if (agent.isStopped)
+            agent.isStopped = false;
+
+        agent.destination = destination;
+    }
+
     private void StopOnGoingProcesses()
     {
         inventoryScript.StopCurrentCoroutine();
     }
 
-    public void SetAgentRotation() 
+    public void SetAgentRotation()
+    {
+        if (_rotationCoroutine != null)
+        {
+            StopCoroutine(_rotationCoroutine);
+        }
+        _rotationCoroutine = StartCoroutine(SetAgentRotationCoroutine());
+    }
+
+    private IEnumerator SetAgentRotationCoroutine() 
     {
         Vector3 direction = (agent.destination - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
 
         //Small threshold to avoid constant micro-adjustments && check if rotation is deafault
-        if (lookRotation != Quaternion.identity && Quaternion.Angle(transform.rotation, lookRotation) > 0.1f) 
+        while (lookRotation != Quaternion.identity && Quaternion.Angle(transform.rotation, lookRotation) > 0.1f)
+        {
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * lookRotationSpeed);
+            yield return null; 
+        }
     }
 
     //Agent logic to stop moving and look towards item

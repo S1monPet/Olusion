@@ -114,14 +114,12 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected IEnumerator SetEnemyRotation(NavMeshAgent agent)
     {
-        Debug.Log("ata");
         Vector3 direction = (agent.destination - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
 
         //Small threshold to avoid constant micro-adjustments && check if rotation is deafault
         while (lookRotation != Quaternion.identity && Quaternion.Angle(transform.rotation, lookRotation) > 0.1f)
         {
-            Debug.Log("mama");
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * lookRotationSpeed);
             yield return null; 
         }

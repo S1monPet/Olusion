@@ -481,10 +481,10 @@ BoxCollider:
   m_GameObject: {fileID: 7008634699650630297}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 4, z: 3}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2, y: 3.0207086, z: 3.8274605}
+  m_Center: {x: 0.000000016396907, y: 0.4896474, z: 0.059506565}
 --- !u!114 &7891087138755329997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -511,6 +511,8 @@ MonoBehaviour:
   type: 0
   Amount: 0
   Respawnable: 0
+  MinTimeToRespawn: 0
+  MaxTimeToRespawn: 0
   RespawnTimer: 0
   Healing: 0
   HealthGain: 0
@@ -522,6 +524,7 @@ MonoBehaviour:
   attackCooldown: 0
   HitRange: 0
   GatherDamage: 0
+  DropRatePerHit: 0
   GatheringRate: 0
   GatherRange: 0
 --- !u!114 &7891087138755330002
