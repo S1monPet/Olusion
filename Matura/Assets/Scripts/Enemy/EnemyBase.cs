@@ -1,8 +1,11 @@
 using NUnit.Framework.Constraints;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Unity.IO.LowLevel.Unsafe;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -28,12 +31,13 @@ public abstract class EnemyBase : MonoBehaviour
     public PlayerHealth playerHealthScript; //Maybe some class will need it so it's protected
     public PlayerMovement playerMovementScript;
 
-    private Coroutine _rotationCoroutine; 
+    // Was used before rotating with threads
+    private Coroutine _rotationCoroutine;
 
     [Header("Bars")]
     public EnemyHealthBar enemyHealthBar; 
     public EnemyArmorBar enemyArmorBar;
-    protected NavMeshAgent currentNavMeshAgent; 
+    protected NavMeshAgent currentNavMeshAgent;
     // Rotation speed
     protected float lookRotationSpeed = 5f;
 
@@ -67,7 +71,6 @@ public abstract class EnemyBase : MonoBehaviour
         Ticker.OnTickAction -= Tick;
 
     }
-
     protected abstract void Tick();
 
     protected void Init(NavMeshAgent agent, Enemies enemyType) //Don't think this will ever be overriden
@@ -103,7 +106,27 @@ public abstract class EnemyBase : MonoBehaviour
             RotateEnemy(agent);
         }
     }
+    // Doesn't work on WebGL
+    /*
+    private async Task RotateEnemyAsync(NavMeshAgent agent)
+    {
+        Vector3 direction = (agent.destination - transform.position).normalized;
+        Quaternion targetRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
 
+        //Continue rotation 
+        while (Quaternion.Angle(transform.rotation, targetRotation) > 0.1f)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * lookRotationSpeed);
+            await Task.Yield(); 
+        }
+    }
+    
+    
+    private async void RotateEnemy(NavMeshAgent agent)
+    {
+        await RotateEnemyAsync(agent); 
+    }
+    */
     private void RotateEnemy(NavMeshAgent agent)
     {
         if (_rotationCoroutine != null)
@@ -112,7 +135,7 @@ public abstract class EnemyBase : MonoBehaviour
         }
         _rotationCoroutine = StartCoroutine(SetEnemyRotation(agent));
     }
-
+    
     protected IEnumerator SetEnemyRotation(NavMeshAgent agent)
     {
         Vector3 direction = (agent.destination - transform.position).normalized;
@@ -248,7 +271,7 @@ public abstract class EnemyBase : MonoBehaviour
             agent.SetDestination(patrolPoints[targetPoint].position);
             agent.speed = EnemyStats.EnemyMovingSpeed;
 
-            StartCoroutine(SetEnemyRotationCoroutine(agent));
+            RotateEnemy(agent); 
         }
     }
 
