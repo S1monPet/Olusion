@@ -30,12 +30,6 @@ public class PlayerGather : MonoBehaviour
     public GameObject EnableGather;
     public GameObject DisableGather;
 
-
-    private void Awake()
-    {
-
-    }
-
     private void Update()
     {
         DetectIfObjectIsGatherable();
@@ -84,7 +78,7 @@ public class PlayerGather : MonoBehaviour
         {
             if (GetHoldingItemAndCheckDistance(_currentTarget))
             {
-                DisableGather.SetActive(false);
+                // DisableGather.SetActive(false);
                 EnableGather.SetActive(true);
             }
             else
@@ -93,14 +87,14 @@ public class PlayerGather : MonoBehaviour
                 _currentTarget = null; 
                 ResetGatherableScripts();
 
-                DisableGather.SetActive(true);
+                // DisableGather.SetActive(true);
                 EnableGather.SetActive(false); 
             }
         }
         else
         {
             //Default state
-            DisableGather.SetActive(true);
+            // DisableGather.SetActive(true);
             EnableGather.SetActive(false);
         }
     }

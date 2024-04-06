@@ -33,12 +33,18 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
     public string EnemyTag = "Enemy";
 
     public float lookRotationSpeed = 20f;
-    private Coroutine _rotationCoroutine = null; 
+
+    private Coroutine _rotationCoroutine = null;
+    private Coroutine _autoMoveCoroutine = null; 
+
+    // Temporary 
+    public static bool AutoMoveEnabled = true; 
+    public GameObject AutoMoveButton;
+    private bool _isAutoMoving; 
 
     public bool _canMove = true;
     // Is player in range and has appropriate item to hit Gatherable or Enemy
     public static bool CanInteractWithTarget = false;
-
     public void LoadData(GameData data)
     {
         // On the first run, or if no save data exists, we skip setting the player's position to maintain the default start position.
@@ -124,11 +130,6 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
                     }
                 }
             } 
-            // Auto run
-            else
-            {
-                AutoRun(); 
-            }
 
             //Has path because we are resseting path in the other file if object is not clicked
             if (!agent.pathPending && agent.remainingDistance > agent.stoppingDistance)
@@ -138,18 +139,55 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
 
                 //If animation is not idle
                 if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") || animator.GetCurrentAnimatorStateInfo(0).IsName("ReceiveHit"))
-                    animator.Play("Running"); 
+                    animator.Play("Running");
+
+                ActivateAutoMoveButton();
             } 
             else if (!agent.hasPath && agent.remainingDistance <= agent.stoppingDistance)
             {
+                DeactivateAutoMoveButton();
+
                 animator.SetBool("isRunning", false); //Setting animation off
             }
         }
     }
 
-    private void AutoRun()
+    private void ActivateAutoMoveButton()
     {
+        if (AutoMoveEnabled && !AutoMoveButton.activeInHierarchy)
+        {
+            AutoMoveButton.SetActive(true);
+        }
+    }
 
+    private void DeactivateAutoMoveButton()
+    {
+        if (AutoMoveEnabled && AutoMoveButton.activeInHierarchy)
+        {
+            AutoMoveButton.SetActive(false);
+        }
+    }
+
+    // Button 
+    public void AutoMove()
+    {
+        _isAutoMoving = true; 
+        if (_autoMoveCoroutine != null)
+        {
+            StopCoroutine(_autoMoveCoroutine);
+        }
+        _autoMoveCoroutine = StartCoroutine(AutoRunCoroutine());
+
+    }
+
+    private IEnumerator AutoRunCoroutine()
+    {
+        while (true)
+        {
+            Vector3 nextDestination = transform.position + transform.forward * 2;
+            MovePlayer(nextDestination);
+            yield return null;
+        }
     }
 
     private void MovePlayer(Vector3 destination)
@@ -162,7 +200,7 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
         if (agent.isStopped)
             agent.isStopped = false;
 
-        agent.destination = destination;
+        agent.SetDestination(destination); // Returns bool
     }
 
     public void StopOnGoingProcesses()

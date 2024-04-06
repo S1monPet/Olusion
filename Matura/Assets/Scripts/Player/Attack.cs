@@ -120,7 +120,7 @@ public class Attack : MonoBehaviour
 
                 // enemyBase = null; //Reseting reference
                 EnableAttack.SetActive(false);
-                DisableAttack.SetActive(true);
+                // DisableAttack.SetActive(true);
             }
             // Check if we have animal
 
@@ -135,7 +135,7 @@ public class Attack : MonoBehaviour
 
                 // animalBase = null; //Reseting reference
                 EnableAttack.SetActive(false);
-                DisableAttack.SetActive(true);
+                // DisableAttack.SetActive(true);
             }
         }
     }
@@ -176,14 +176,14 @@ public class Attack : MonoBehaviour
                 PlayerMovement.SetTargetInteractionState(true);
             }
 
-            DisableAttack.SetActive(false);
+            // DisableAttack.SetActive(false);
             EnableAttack.SetActive(true);
             return true;
         }
         else if (distanceToEnemy > attackingRange || !enemyTransform.GetChild(0).gameObject.activeInHierarchy)
         {
             EnableAttack.SetActive(false);
-            DisableAttack.SetActive(true);
+            // DisableAttack.SetActive(true);
 
             enemyBase = null; //Reseting Reference
             return false;
@@ -213,14 +213,14 @@ public class Attack : MonoBehaviour
 
         if (distanceToAnimal < attackingRange && !_isOnCooldown)
         {
-            DisableAttack.SetActive(false);
+            // DisableAttack.SetActive(false);
             EnableAttack.SetActive(true);
             return true;
         }
         else if (distanceToAnimal > attackingRange || !animalTransform.GetChild(0).gameObject.activeInHierarchy)
         {
             EnableAttack.SetActive(false);
-            DisableAttack.SetActive(true);
+            // DisableAttack.SetActive(true);
 
             animalBase = null; //Reseting Reference
             return false;
