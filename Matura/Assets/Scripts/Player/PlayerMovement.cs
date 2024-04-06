@@ -165,9 +165,9 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
         agent.destination = destination;
     }
 
-    private void StopOnGoingProcesses()
+    public void StopOnGoingProcesses()
     {
-        inventoryScript.StopCurrentCoroutine();
+        inventoryScript.StopRestoration();
     }
 
     public void SetAgentRotation()

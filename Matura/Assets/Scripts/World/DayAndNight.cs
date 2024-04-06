@@ -13,7 +13,7 @@ public class DayAndNight : MonoBehaviour
 
     [Header("Variables")]
     [SerializeField] private float dayDurationInSeconds = 60f;
-    [SerializeField] private float rotationSpeed = 1f;
+    // [SerializeField] private float rotationSpeed = 1f;
     private float currentTime = 0f;
 
     private void Update()

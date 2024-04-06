@@ -21,9 +21,9 @@ public class Moving : MonoBehaviour
     float delaySpeed = 0.01f;
     float distance = 500;
 
-    int rot = 0;
+    // int rot = 0; Simon WTF are the names
 
-    int move = 100;
+    // int move = 100; Simon WTF are the names
 
     IEnumerator SlowSpin(){
     float count = 0;

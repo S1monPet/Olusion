@@ -9,73 +9,30 @@ public class CactusGathering : GatheringBase
 
     private void OnEnable()
     {
-        PlayerGather.CanGather = true;
+        // PlayerGather.CanGather = true;
+        InitialiseCactus(); 
     }
 
     private void InitialiseCactus()
     {
-        Cactus.CactusHealth = cactus.SpawningCactusHealth;
+        gatherableHealth = cactus.SpawningCactusHealth;
 
         // Using foreach loop, because lambda's are used for querying or returing results from collections
         foreach (ItemDrop itemDrop in Cactus.ItemDrops)
         {
             // Setting each item to it's max dropping amount
-            itemDrop.CurrentAmountOfItems = itemDrop.StartingAmountOfItems;
+            currentAmountOfItems = itemDrop.MaxAmountOfItems;
         }
     }
 
-    public void Gather(int damage, GameObject player, WaitForSeconds gatheringRate)
+    public bool GatherCactus(int damage, GameObject player)
     {
-        PlayerGather.CanGather = false;
-        base.Gather(damage, player, cactus.CactusHealth, cactus.ItemDrops, gatheringRate, cactus.RespawnTimer);
+        // Reseting CanGather in ResetGather
+        // PlayerGather.CanGather = false;
+        return base.GatherBase(damage, player, gatherableHealth, cactus.ItemDrops, cactus.RespawnTimer);
     }
 
-    /*
-    protected override IEnumerator GatheringCourotine(int damage, WaitForSeconds timeToGather, int amountOfItems, int maxAmoutOfItems, ItemDrop itemToDrop, WaitForSeconds respawnTimer)
-    {
-        Item droppedItem = null; 
-        while (cactus.CactusHealth > 0)
-        {
-            playerMovementScript.StopMovingAndPlayAnimation(TimeToWaitToCancelAnimation);
-            playerMovementScript.SetAgentRotationToTarget(gameObject);
-            playerAnimator.Play("Attack");
-            playerAnimator.SetBool("isAttacking", false);
-
-            cactus.CactusHealth -= damage; //Set tree health
-
-            if (droppedItem == null)
-            {
-                droppedItem = Instantiate(itemToDrop.ItemToDrop, transform.position, Quaternion.identity).GetComponent<Item>();
-            }
-
-            if (cactus.CactusHealth <= 0)
-            {
-                droppedItem.currentQuantity = amountOfItems;
-                inventoryScript.AddItemToInventory(droppedItem, collect: false); // We are not collecting it with animation
-
-                InitialiseCactus(); // Reseting
-                base.RespawnGatherableItem(respawnTimer);
-
-                break;// yield return new WaitForSeconds(timeToGather / 2.0f); // Faster last hit
-            }
-            --amountOfItems;
-            inventoryScript.AddItemToInventory(droppedItem, collect: false);
-
-            SetCurrentAmountOfItems(amountOfItems);
-            yield return timeToGather;
-        }
-
-        // Finish last hit
-        playerAnimator.Play("Attack");
-        playerAnimator.SetBool("isAttacking", false);
-
-        base.RespawnGatherableItem(respawnTimer); //Was destroyed before
-        InitialiseCactus();
-    }
-    */
-
-    // For now quick fix
-    protected override IEnumerator GatheringCourotine(int damage, WaitForSeconds timeToGather, int amountOfItems, int maxAmountOfItems, ItemDrop itemToDrop, WaitForSeconds respawnTimer)
+    protected override bool Gather(int damage, ItemDrop itemToDrop, WaitForSeconds respawnTimer)
     {
         playerMovementScript.StopMovingAndPlayAnimation(TimeToWaitToCancelAnimation);
         playerMovementScript.SetAgentRotationToTarget(gameObject);
@@ -83,52 +40,26 @@ public class CactusGathering : GatheringBase
         playerAnimator.Play("Attack");
         playerAnimator.SetBool("isAttacking", false);
 
-        Cactus.CactusHealth -= damage; //Set tree health
+        gatherableHealth -= damage; //Set tree health
 
         Item droppedItem = Instantiate(itemToDrop.ItemToDrop, transform.position, Quaternion.identity).GetComponent<Item>();
 
-        if (Cactus.CactusHealth <= 0)
+        if (gatherableHealth <= 0)
         {
-            droppedItem.currentQuantity = amountOfItems; // Setting value of current amount if we instantly finish cutting
+            droppedItem.currentQuantity = currentAmountOfItems; // Setting value of current amount if we instantly finish cutting
             inventoryScript.AddItemToInventory(droppedItem, collect: false); // We are not collecting it with animation
 
 
             InitialiseCactus(); // Reseting
             base.RespawnGatherableItem(respawnTimer);
 
-            yield break;// yield return new WaitForSeconds(timeToGather / 2.0f); // Faster last hit
+            return true; 
         }
 
-        --amountOfItems;
+        --currentAmountOfItems;
         inventoryScript.AddItemToInventory(droppedItem, collect: false);
 
-        SetCurrentAmountOfItems(amountOfItems);
-        yield return (timeToGather); // Gathering
+        return false; 
 
     }
-
-    public override void StopGathering()
-    {
-        base.StopGathering();
-
-        PlayerGather.CanGather = true; //Enable gathering another object again
-    }
-
-    /*
-    private bool IsToolEquiped(string requiredTool)
-    {
-        //Because it has to be in the hotbar for you to hold it
-        foreach (Slot hotbarSlot in inventoryScript.hotbarSlots)
-        {
-            //Let's check if harvestable item is equal to, item that we need
-            if (hotbarSlot.HasItem() && hotbarSlot.GetItem() != null)
-            {
-                Item currentItem = hotbarSlot.GetItem();
-                if (currentItem.IsHeld && currentItem.name == requiredTool)
-                    return true;
-            }
-        }
-        return false;
-    }
-    */
 }
