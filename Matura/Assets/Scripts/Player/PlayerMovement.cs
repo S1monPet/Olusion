@@ -172,12 +172,13 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
     public void AutoMove()
     {
         _isAutoMoving = true; 
+        /*
         if (_autoMoveCoroutine != null)
         {
             StopCoroutine(_autoMoveCoroutine);
         }
         _autoMoveCoroutine = StartCoroutine(AutoRunCoroutine());
-
+        */
     }
 
     private IEnumerator AutoRunCoroutine()
