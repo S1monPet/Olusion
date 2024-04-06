@@ -123,7 +123,23 @@ public class PlayerGather : MonoBehaviour
 
         _objectTransform = currentGameObject.transform;
 
-        return IsWithinGatheringDistance();
+        if (IsWithinGatheringDistance())
+        {
+            // We will interact with target stop moving
+            if (!PlayerMovement.GetTargetInteractionState())
+            {
+                PlayerMovement.SetTargetInteractionState(true);
+            }
+            return true; 
+        }
+
+        // Move past target
+        if (PlayerMovement.GetTargetInteractionState())
+        {
+            PlayerMovement.SetTargetInteractionState(false);
+        }
+
+        return false;
     }
 
     public bool IsWithinGatheringDistance()
@@ -138,12 +154,6 @@ public class PlayerGather : MonoBehaviour
 
                 if (distanceToEnemy < _currentItem.GatherRange)
                 {
-                    // We will interact with target stop moving
-                    if (!PlayerMovement.GetTargetInteractionState())
-                    {
-                        PlayerMovement.SetTargetInteractionState(true);
-                    }
-
                     return true;
                 }
                 else if (!_objectTransform.gameObject.activeInHierarchy)
@@ -152,12 +162,6 @@ public class PlayerGather : MonoBehaviour
                     return false;
                 }
             }
-        }
-
-        // Move past target
-        if (PlayerMovement.GetTargetInteractionState())
-        {
-            PlayerMovement.SetTargetInteractionState(false);
         }
         return false; 
     }

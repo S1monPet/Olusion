@@ -23,20 +23,6 @@ public class FileDataHandler
         this._useEncryption = useEncryption; 
     }   
 
-    private async void Awake()
-    {
-        _cancellationTokenSource = new CancellationTokenSource();
-
-        try
-        {
-            await LongRunningTask(_cancellationTokenSource.Token); 
-        } 
-        catch (OperationCanceledException)
-        {
-
-        }
-    }
-
     public SettingsData LoadSettings() 
     {
         string fullPath = Path.Combine(dataDirPath, dataFileName);
@@ -175,14 +161,5 @@ public class FileDataHandler
             modifiedData += (char)(data[i] ^ _encryptionCodeWord[i % _encryptionCodeWord.Length]);
         }
         return modifiedData;
-    }
-
-    private async Task LongRunningTask(CancellationToken token)
-    {
-        while (!token.IsCancellationRequested)
-        {
-            await Task.Delay(1000);
-            // await Awaitable.WaitForSecondsAsync(1, token);  2023.1
-        }
     }
 }

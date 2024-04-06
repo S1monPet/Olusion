@@ -420,10 +420,9 @@ public class Inventory : MonoBehaviour, IDataPersistance
                     leftoverQuantity -= freeSpaceInSlots;
                 }
             }
-            else if (heldItem == null)
+            else if (heldItem == null && !openSlot)
             {
-                if (!openSlot) 
-                    openSlot = allInventorySlots[i];
+                openSlot = allInventorySlots[i];
             }
 
             allInventorySlots[i].UpdateInventoryAmount();
@@ -431,8 +430,15 @@ public class Inventory : MonoBehaviour, IDataPersistance
 
         if (leftoverQuantity > 0 && openSlot)
         {
+            // Before set item but never updated it
+            /* 
             openSlot.SetItem(itemToAdd);
             itemToAdd.currentQuantity = leftoverQuantity;
+            itemToAdd.gameObject.SetActive(false);
+            */
+
+            itemToAdd.currentQuantity = leftoverQuantity;
+            openSlot.SetItem(itemToAdd);
             itemToAdd.gameObject.SetActive(false);
         } 
         /*
