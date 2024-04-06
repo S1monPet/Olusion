@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
 public class FileDataHandler
 {
+    private CancellationTokenSource _cancellationTokenSource;
+
     private string dataDirPath = "";
     private string dataFileName = "";
 
@@ -17,6 +22,20 @@ public class FileDataHandler
         this.dataFileName = dataFileName;
         this._useEncryption = useEncryption; 
     }   
+
+    private async void Awake()
+    {
+        _cancellationTokenSource = new CancellationTokenSource();
+
+        try
+        {
+            await LongRunningTask(_cancellationTokenSource.Token); 
+        } 
+        catch (OperationCanceledException)
+        {
+
+        }
+    }
 
     public SettingsData LoadSettings() 
     {
@@ -156,5 +175,14 @@ public class FileDataHandler
             modifiedData += (char)(data[i] ^ _encryptionCodeWord[i % _encryptionCodeWord.Length]);
         }
         return modifiedData;
+    }
+
+    private async Task LongRunningTask(CancellationToken token)
+    {
+        while (!token.IsCancellationRequested)
+        {
+            await Task.Delay(1000);
+            // await Awaitable.WaitForSecondsAsync(1, token);  2023.1
+        }
     }
 }
