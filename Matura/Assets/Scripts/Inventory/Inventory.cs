@@ -191,7 +191,7 @@ public class Inventory : MonoBehaviour, IDataPersistance
     }
 
     //If Player decides to start moving while animation is ongoing
-    public void StopCurrentCoroutine()
+    public void StopRestoration()
     {
         if (_currentCoroutine != null)
         {
@@ -411,7 +411,7 @@ public class Inventory : MonoBehaviour, IDataPersistance
                     else
                         itemToAdd.gameObject.SetActive(false);
 
-                    allInventorySlots[i].UpdateInventoryAmount(); 
+                    allInventorySlots[i].UpdateInventoryAmount();
                     return; 
                 } 
                 else
@@ -1064,7 +1064,7 @@ public class Inventory : MonoBehaviour, IDataPersistance
             {
                 if (item.currentQuantity >= remainingQuantity)
                 {
-                    item.currentQuantity -= remainingQuantity; 
+                    item.currentQuantity -= remainingQuantity;
 
                     if (item.currentQuantity == 0)
                     {

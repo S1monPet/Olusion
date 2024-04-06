@@ -28,7 +28,7 @@ public abstract class AnimalBase : MonoBehaviour
 
     [Header("Attributes")]
     [SerializeField] private int _maxRepathAmount = 5; 
-    [SerializeField] private int _lookRotationSpeed = 1;
+    // [SerializeField] private int _lookRotationSpeed = 1;
     [SerializeField] private Vector3 _animalSpawningPosition;
 
     [Header("Animal Variables")]

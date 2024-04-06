@@ -8,7 +8,7 @@ using UnityEngine;
 public class TreeSO : ScriptableObject
 {
     [field: SerializeField] public string Tag; //Name of item; 
-    [field: SerializeField] public int TreeHealth;
+    // [field: SerializeField] public int TreeHealth;
     [field: SerializeField] public int SpawningTreeHealth;
     [field: SerializeField] public float RespawnTime;
 
@@ -27,6 +27,4 @@ public class ItemDrop
 {
     public GameObject ItemToDrop;
     public int MaxAmountOfItems; 
-    public int StartingAmountOfItems; // For reseting
-    public int CurrentAmountOfItems; // Keeping track of current items
 }

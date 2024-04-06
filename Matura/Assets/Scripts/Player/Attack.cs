@@ -118,7 +118,7 @@ public class Attack : MonoBehaviour
                 enemyBase.EnemyTakeDamage(HoldingItemDamage());
                 StartCoroutine(AttackCooldown());
 
-                enemyBase = null; //Reseting reference
+                // enemyBase = null; //Reseting reference
                 EnableAttack.SetActive(false);
                 DisableAttack.SetActive(true);
             }
@@ -133,7 +133,7 @@ public class Attack : MonoBehaviour
                 animalBase.ReceiveDamage(HoldingItemDamage());
                 StartCoroutine(AttackCooldown());
 
-                animalBase = null; //Reseting reference
+                // animalBase = null; //Reseting reference
                 EnableAttack.SetActive(false);
                 DisableAttack.SetActive(true);
             }
@@ -172,7 +172,9 @@ public class Attack : MonoBehaviour
         {
             // We will interact with target stop moving
             if (!PlayerMovement.GetTargetInteractionState())
+            {
                 PlayerMovement.SetTargetInteractionState(true);
+            }
 
             DisableAttack.SetActive(false);
             EnableAttack.SetActive(true);
@@ -189,7 +191,9 @@ public class Attack : MonoBehaviour
 
         // Move past target
         if (PlayerMovement.GetTargetInteractionState())
+        {
             PlayerMovement.SetTargetInteractionState(false);
+        }
 
         return false; 
     }

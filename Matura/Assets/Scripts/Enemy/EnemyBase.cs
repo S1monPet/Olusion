@@ -24,6 +24,7 @@ public abstract class EnemyBase : MonoBehaviour
     public GameObject Player => player;
     public Sprite enemySprite;
     public Enemies currentEnemy; //Setting current enemy for getting out his name
+    public Inventory inventoryScript; 
     public PlayerHealth playerHealthScript; //Maybe some class will need it so it's protected
     public PlayerMovement playerMovementScript;
 
@@ -132,6 +133,8 @@ public abstract class EnemyBase : MonoBehaviour
             if (playerHealthScript != null) 
             {
                 enemyAnimator.Play("Attack");
+
+                playerMovementScript.StopOnGoingProcesses();
 
                 playerAnimator.Play("ReceiveHit");
                 playerMovementScript.StopMovingAndPlayAnimation(TimeToWaitToCancelHitAnimation);
