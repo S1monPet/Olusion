@@ -141,56 +141,15 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
                 if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") || animator.GetCurrentAnimatorStateInfo(0).IsName("ReceiveHit"))
                     animator.Play("Running");
 
-                ActivateAutoMoveButton();
             } 
             else if (!agent.hasPath && agent.remainingDistance <= agent.stoppingDistance)
             {
-                DeactivateAutoMoveButton();
-
                 animator.SetBool("isRunning", false); //Setting animation off
             }
         }
     }
 
-    private void ActivateAutoMoveButton()
-    {
-        if (AutoMoveEnabled && !AutoMoveButton.activeInHierarchy)
-        {
-            AutoMoveButton.SetActive(true);
-        }
-    }
-
-    private void DeactivateAutoMoveButton()
-    {
-        if (AutoMoveEnabled && AutoMoveButton.activeInHierarchy)
-        {
-            AutoMoveButton.SetActive(false);
-        }
-    }
-
     // Button 
-    public void AutoMove()
-    {
-        _isAutoMoving = true; 
-        /*
-        if (_autoMoveCoroutine != null)
-        {
-            StopCoroutine(_autoMoveCoroutine);
-        }
-        _autoMoveCoroutine = StartCoroutine(AutoRunCoroutine());
-        */
-    }
-
-    private IEnumerator AutoRunCoroutine()
-    {
-        while (true)
-        {
-            Vector3 nextDestination = transform.position + transform.forward * 2;
-            MovePlayer(nextDestination);
-            yield return null;
-        }
-    }
-
     private void MovePlayer(Vector3 destination)
     {
         // Disable any running coroutine
