@@ -36,6 +36,7 @@ public class PlayerGather : MonoBehaviour
         CheckAndUpdateGatherButton();
     }
 
+
     private void DetectTouchAndSetTarget()
     {
         if (Input.touchCount > 0)
