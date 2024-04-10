@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IGathering
+public interface IDamagable
 {
-    bool GatherGatherable(int damage);
+    public void ReceiveDamage(int damage);
 }

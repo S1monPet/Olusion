@@ -2,15 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI; 
 
-public abstract class GatheringBase : MonoBehaviour, IGathering
+public abstract class GatheringBase : MonoBehaviour, IGatherable
 {
     [Header("Gatherable Variables")]
     protected int gatherableHealth;
-    protected int currentAmountOfItems; 
+    protected int currentAmountOfItems;
+    protected GameObject itemDrop; 
+    protected WaitForSeconds respawnTimer; 
 
     public Inventory inventoryScript; 
     public PlayerMovement playerMovementScript;
@@ -19,32 +22,54 @@ public abstract class GatheringBase : MonoBehaviour, IGathering
     public SurvivalSceneManager survivalSceneManager;
     public ItemLifecycleManager itemLifecycleManager; // For dropping items
 
-
     public float TimeToWaitToCancelAnimation = 0.3f;
 
     [Header("Buttons")]
     public GameObject EnableGather;
     public GameObject DisableGather;
 
-    public bool GatherGatherable(int damage) 
+    private void OnEnable()
     {
-        UnityEngine.Debug.Log("Gathering"); 
-        return true; 
+        InitialiseGatherable(); 
     }
 
-    protected bool GatherBase(int damage, int objectHealth, List<ItemDrop> itemDrops, WaitForSeconds respawnTimer)
-    {
-        foreach (ItemDrop itemToDrop in itemDrops)
-        {
-            if (itemToDrop.MaxAmountOfItems == 0)
-                continue; // Continue to the next drop
+    protected abstract void InitialiseGatherable();
 
-            return Gather(damage, itemToDrop, respawnTimer);
+    public bool Gather(int damage)
+    {
+        // Returning true if gatherable was gathered
+        return BaseGather(damage, itemDrop, respawnTimer);
+    }
+
+    protected bool BaseGather(int damage, GameObject itemDrop, WaitForSeconds respawnTimer)
+    {
+        playerMovementScript.StopMovingAndPlayAnimation(TimeToWaitToCancelAnimation);
+        playerMovementScript.SetAgentRotationToTarget(gameObject);
+
+        playerAnimator.Play("Attack");
+        playerAnimator.SetBool("isAttacking", false);
+
+        gatherableHealth -= damage; //Set tree health
+
+        Item droppedItem = Instantiate(itemDrop, transform.position, Quaternion.identity).GetComponent<Item>();
+
+        if (gatherableHealth <= 0)
+        {
+            droppedItem.currentQuantity = currentAmountOfItems; // Setting value of current amount if we instantly finish cutting
+            inventoryScript.AddItemToInventory(droppedItem, collect: false); // We are not collecting it with animation
+
+
+            InitialiseGatherable(); // Reseting
+            RespawnGatherableItem(respawnTimer);
+
+            return true;
         }
+
+        --currentAmountOfItems;
+        inventoryScript.AddItemToInventory(droppedItem, collect: false);
+
         return false; 
     }
-
-    protected abstract bool Gather(int damage, ItemDrop itemToDrop, WaitForSeconds respawnTimer);
 
     protected void RespawnGatherableItem(WaitForSeconds itemRespawnTimer)
     {

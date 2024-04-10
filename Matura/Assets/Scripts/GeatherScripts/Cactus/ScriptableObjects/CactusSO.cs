@@ -11,7 +11,8 @@ public class CactusSO : ScriptableObject
     [field: SerializeField] public int SpawningCactusHealth;
     [field: SerializeField] public float RespawnTime;
 
-    public List<ItemDrop> ItemDrops = new List<ItemDrop>();
+    // public List<ItemDrop> ItemDrops = new List<ItemDrop>();
+    public ItemDrop itemDrop; 
     public WaitForSeconds RespawnTimer { get; private set; }
 
     private void OnEnable()
