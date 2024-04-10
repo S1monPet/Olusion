@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CactusGathering : GatheringBase
+public sealed class CactusGathering : GatheringBase
 {
     [SerializeField] private CactusSO cactus;
     public CactusSO Cactus => cactus;
@@ -25,11 +25,11 @@ public class CactusGathering : GatheringBase
         }
     }
 
-    public bool GatherCactus(int damage, GameObject player)
+    public bool GatherCactus(int damage)
     {
         // Reseting CanGather in ResetGather
         // PlayerGather.CanGather = false;
-        return base.GatherBase(damage, player, gatherableHealth, cactus.ItemDrops, cactus.RespawnTimer);
+        return base.GatherBase(damage, gatherableHealth, cactus.ItemDrops, cactus.RespawnTimer);
     }
 
     protected override bool Gather(int damage, ItemDrop itemToDrop, WaitForSeconds respawnTimer)

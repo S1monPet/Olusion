@@ -10,7 +10,7 @@ public class PlayerGather : MonoBehaviour
     public Inventory inventoryScript; 
 
     public static bool CanGather = true;
-    public static bool AutoFarm = true; 
+    public static bool AutoFarm = false; 
 
     private Item _currentItem; 
 
@@ -21,6 +21,7 @@ public class PlayerGather : MonoBehaviour
     public string CactusTag;
     public LayerMask layerMask; //For gatherable items Gatherable
 
+    private IGathering _currentGatheringScript; 
     private TreeGathering _currentTreeGatheringScript;
     private CactusGathering _currentCactusGatheringScript;
     private GameObject _currentTarget;
@@ -168,6 +169,12 @@ public class PlayerGather : MonoBehaviour
 
         if (_currentTarget != null)
         {
+            _currentGatheringScript = GetComponent<IGathering>(); 
+            if (_currentGatheringScript != null) 
+            {
+                _currentGatheringScript.GatherGatherable(5); 
+            }
+
             if (_currentTarget.CompareTag(TreeTag))
             {
                 _currentTreeGatheringScript = _currentTarget.GetComponent<TreeGathering>();
@@ -192,7 +199,7 @@ public class PlayerGather : MonoBehaviour
             else
             {
                 // Returns true if cut down
-                if (_currentTreeGatheringScript.GatherTree(_currentItem.GatherDamage, gameObject))
+                if (_currentTreeGatheringScript.GatherTree(_currentItem.GatherDamage))
                 {
                     CanGather = true;
 
@@ -217,7 +224,7 @@ public class PlayerGather : MonoBehaviour
             // Touch farming
             else
             {
-                if (_currentCactusGatheringScript.GatherCactus(_currentItem.GatherDamage, gameObject))
+                if (_currentCactusGatheringScript.GatherCactus(_currentItem.GatherDamage))
                 {
                     CanGather = true;
 
@@ -245,7 +252,7 @@ public class PlayerGather : MonoBehaviour
         {
             if (_currentTreeGatheringScript != null)
             {
-                if (_currentTreeGatheringScript.GatherTree(_currentItem.GatherDamage, gameObject))
+                if (_currentTreeGatheringScript.GatherTree(_currentItem.GatherDamage))
                 {
                     CanGather = true;
 
@@ -258,7 +265,7 @@ public class PlayerGather : MonoBehaviour
             }
             else if (_currentCactusGatheringScript != null)
             {
-                if (_currentCactusGatheringScript.GatherCactus(_currentItem.GatherDamage, gameObject)) 
+                if (_currentCactusGatheringScript.GatherCactus(_currentItem.GatherDamage)) 
                 {
                     CanGather = true;
 

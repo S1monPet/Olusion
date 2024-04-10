@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI; 
 
-public abstract class GatheringBase : MonoBehaviour
+public abstract class GatheringBase : MonoBehaviour, IGathering
 {
     [Header("Gatherable Variables")]
     protected int gatherableHealth;
@@ -26,7 +26,13 @@ public abstract class GatheringBase : MonoBehaviour
     public GameObject EnableGather;
     public GameObject DisableGather;
 
-    protected bool GatherBase(int damage, GameObject player, int objectHealth, List<ItemDrop> itemDrops, WaitForSeconds respawnTimer)
+    public bool GatherGatherable(int damage) 
+    {
+        UnityEngine.Debug.Log("Gathering"); 
+        return true; 
+    }
+
+    protected bool GatherBase(int damage, int objectHealth, List<ItemDrop> itemDrops, WaitForSeconds respawnTimer)
     {
         foreach (ItemDrop itemToDrop in itemDrops)
         {
@@ -39,7 +45,7 @@ public abstract class GatheringBase : MonoBehaviour
     }
 
     protected abstract bool Gather(int damage, ItemDrop itemToDrop, WaitForSeconds respawnTimer);
-    
+
     protected void RespawnGatherableItem(WaitForSeconds itemRespawnTimer)
     {
         gameObject.SetActive(false);

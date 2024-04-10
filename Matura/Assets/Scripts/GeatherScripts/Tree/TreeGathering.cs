@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class TreeGathering : GatheringBase
+public sealed class TreeGathering : GatheringBase
 {
     [SerializeField] private TreeSO tree;
     public TreeSO Tree => tree;
@@ -27,11 +27,11 @@ public class TreeGathering : GatheringBase
         }
     }
 
-    public bool GatherTree(int damage, GameObject player)
+    public bool GatherTree(int damage)
     {
         // Reseting Gather button in ResetGather
         // PlayerGather.CanGather = false;
-        return base.GatherBase(damage, player, gatherableHealth, Tree.ItemDrops, Tree.RespawnTimer);
+        return base.GatherBase(damage, gatherableHealth, Tree.ItemDrops, Tree.RespawnTimer);
 
     }
 
