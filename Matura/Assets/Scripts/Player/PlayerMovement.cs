@@ -9,6 +9,13 @@ using UnityEngine.EventSystems;
 
 public class PlayerMovement : MonoBehaviour, IDataPersistance
 {
+    [Header("JoyStick")]
+    [SerializeField] private FixedJoystick _fixedMovementJoyStick; 
+    [SerializeField] private FixedJoystick _fixedRotationJoyStick;
+
+    [SerializeField] private GameObject _interactions; 
+
+
     [Header("Player Position")]
     public Transform playerTransform;
 
@@ -35,7 +42,7 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
     public float lookRotationSpeed = 20f;
 
     private Coroutine _rotationCoroutine = null;
-    private Coroutine _autoMoveCoroutine = null; 
+    private Coroutine _targetRotationCoroutine = null; 
 
     public bool _canMove = true;
     // Is player in range and has appropriate item to hit Gatherable or Enemy
@@ -66,25 +73,109 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
         _combinedLayerMask = GroundLayerMask | EnemyLayerMask | GatherableLayerMask; 
     }
 
-
-    void Update()
-    {
-        Movement();
-    }
-
     #region Set player interaction state
     public static void SetTargetInteractionState(bool canInteract)
     {
-        CanInteractWithTarget = canInteract; 
+        CanInteractWithTarget = canInteract;
     }
 
     public static bool GetTargetInteractionState()
     {
-        return CanInteractWithTarget; 
+        return CanInteractWithTarget;
     }
 
     #endregion
 
+
+    void Update()
+    {
+        // Movement();
+        if (Input.touchCount > 0)
+        {
+            if (!inventory.activeInHierarchy)
+            {
+                JoyStickMovement();
+                JoyStickRotation();
+            }
+        }
+    }
+
+    public void EnableInteractions()
+    {
+        if (!_interactions.activeInHierarchy)
+        {
+            _interactions.SetActive(true);
+        }
+    }
+
+    public void DisableInteractions()
+    {
+        if (_interactions.activeInHierarchy)
+        {
+            _interactions.SetActive(false);
+        }
+    }
+
+    private void JoyStickMovement()
+    {
+        Vector3 movementDirection = new Vector3(_fixedMovementJoyStick.Horizontal, 0f, _fixedMovementJoyStick.Vertical).normalized;
+
+        if (movementDirection.magnitude >= 0.1f)
+        {
+            // Setting movement where Joy stick are pointing
+            Vector3 destination = playerTransform.position + movementDirection;
+
+            RotatePlayer(movementDirection);
+
+            MovePlayer(destination);
+        }
+        // We stop
+        else
+        {
+            StopMoving();
+        }
+
+        ManagePlayerAnimations(); 
+    }
+
+    private void JoyStickRotation()
+    {
+        Vector3 movementDirection = new Vector3(_fixedRotationJoyStick.Horizontal, 0f, _fixedRotationJoyStick.Vertical).normalized;
+        RotatePlayer(movementDirection); 
+    }
+
+    private void RotatePlayer(Vector3 movementDirection)
+    {
+        if (movementDirection.magnitude >= 0.1f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
+            if (targetRotation != Quaternion.identity)
+            {
+                playerTransform.rotation = Quaternion.Slerp(playerTransform.rotation, targetRotation, lookRotationSpeed * Time.deltaTime);
+            }
+        }
+    }
+
+    private void ManagePlayerAnimations()
+    {
+        //Has path because we are resseting path in the other file if object is not clicked
+        if (!agent.pathPending && agent.remainingDistance > agent.stoppingDistance)
+        {
+            // SetAgentRotation();
+            animator.SetBool("isRunning", true); //Setting animation
+
+            //If animation is not idle
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") || animator.GetCurrentAnimatorStateInfo(0).IsName("ReceiveHit"))
+                animator.Play("Running");
+
+        }
+        else if (!agent.hasPath && agent.remainingDistance <= agent.stoppingDistance)
+        {
+            animator.SetBool("isRunning", false); //Setting animation off
+        }
+    }
+
+    /*
     private void Movement()
     {
         //Checks if inventory is active
@@ -143,6 +234,7 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
             }
         }
     }
+    */
 
     // Button 
     private void MovePlayer(Vector3 destination)
@@ -216,11 +308,23 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
 
     public void SetAgentRotationToTarget(GameObject target) //For fast rotation
     {
+        if (_targetRotationCoroutine != null)
+        {
+            StopCoroutine(_targetRotationCoroutine);
+        }
+        StartCoroutine(SetAgentRotationToTargetCoroutine(target));
+    }
+
+    private IEnumerator SetAgentRotationToTargetCoroutine(GameObject target)
+    {
         Vector3 direction = (target.transform.position - playerTransform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
 
         while (lookRotation != Quaternion.identity && Quaternion.Angle(playerTransform.rotation, lookRotation) > 0.1f)
-            playerTransform.rotation = Quaternion.Slerp(playerTransform.rotation, lookRotation, Time.deltaTime * lookRotationSpeed); 
+        {
+            playerTransform.rotation = Quaternion.Slerp(playerTransform.rotation, lookRotation, Time.deltaTime * lookRotationSpeed);
+            yield return null; 
+        }
     }
 
 

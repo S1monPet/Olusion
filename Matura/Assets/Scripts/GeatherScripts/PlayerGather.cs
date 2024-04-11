@@ -7,7 +7,10 @@ using Unity.VisualScripting;
 public class PlayerGather : MonoBehaviour
 {
     public Transform playerTransform;
-    public Inventory inventoryScript; 
+    public PlayerMovement playerMovementScript; 
+
+    public Inventory inventoryScript;
+    public GameObject inventory; 
 
     public static bool CanGather = true;
     public static bool AutoFarm = false; 
@@ -39,15 +42,21 @@ public class PlayerGather : MonoBehaviour
     {
         if (Input.touchCount > 0)
         {
-            Touch touch = Input.GetTouch(0);
-            if (touch.phase == TouchPhase.Began)
+            if (!inventory.activeInHierarchy)
             {
-                Ray ray = Camera.main.ScreenPointToRay(touch.position);
-                if (Physics.Raycast(ray, out RaycastHit hit, _maxRaycastDistance, layerMask))
+                Touch touch = Input.GetTouch(0);
+                if (touch.phase == TouchPhase.Began)
                 {
-                    // Setting current hitting target
-                    _currentTarget = hit.collider.gameObject;
-                    return; 
+                    Ray ray = Camera.main.ScreenPointToRay(touch.position);
+                    if (Physics.Raycast(ray, out RaycastHit hit, _maxRaycastDistance, layerMask))
+                    {
+                        // Rotating towards current target
+                        playerMovementScript.SetAgentRotationToTarget(hit.collider.gameObject);
+
+                        // Setting current hitting target
+                        _currentTarget = hit.collider.gameObject;
+                        return;
+                    }
                 }
             }
         }
