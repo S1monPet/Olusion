@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IGatherable
 {
-    // Returns true if gatherable was gathered
+    // Returns true if the gatherable was harvested and no longer exists.
     public bool Gather(int damage);
 }
