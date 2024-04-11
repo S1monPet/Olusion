@@ -12,7 +12,9 @@ public class TreeSO : ScriptableObject
     [field: SerializeField] public int SpawningTreeHealth;
     [field: SerializeField] public float RespawnTime;
 
-    public List<ItemDrop> ItemDrops = new List<ItemDrop>();    
+    // public List<ItemDrop> ItemDrops = new List<ItemDrop>();
+    // We don't need more than one item to drop
+    public ItemDrop itemDrop;
     public WaitForSeconds RespawnTimer { get; private set; }
 
     private void OnEnable()

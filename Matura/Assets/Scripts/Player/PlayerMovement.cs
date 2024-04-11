@@ -37,11 +37,6 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
     private Coroutine _rotationCoroutine = null;
     private Coroutine _autoMoveCoroutine = null; 
 
-    // Temporary 
-    public static bool AutoMoveEnabled = true; 
-    public GameObject AutoMoveButton;
-    private bool _isAutoMoving; 
-
     public bool _canMove = true;
     // Is player in range and has appropriate item to hit Gatherable or Enemy
     public static bool CanInteractWithTarget = false;
@@ -155,7 +150,6 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
         // Disable any running coroutine
         StopOnGoingProcesses();
 
-
         // If grounds is hit and item was not pressed, set hit.point and go towards location
         if (agent.isStopped)
             agent.isStopped = false;
@@ -167,6 +161,8 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
     {
         inventoryScript.StopRestoration();
     }
+
+    
 
     public void SetAgentRotation()
     {

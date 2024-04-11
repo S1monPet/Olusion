@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI; 
@@ -41,6 +42,9 @@ public class AsyncLoader : MonoBehaviour
 
     private IEnumerator LoadLevelAsync(string levelToLoad)
     {
+        var watch = new Stopwatch();
+        watch.Start();
+
         if (levelToLoad == "Menu")
         {
             DataPersistanceManager.Instance.SaveGame();
@@ -60,6 +64,8 @@ public class AsyncLoader : MonoBehaviour
 
         loadingOperation.allowSceneActivation = true;
 
+        watch.Stop();
+        UnityEngine.Debug.Log(watch.ElapsedMilliseconds);
         yield return new WaitForSeconds(postLoadDelay);
 
         DataPersistanceManager.Instance.LoadGame();

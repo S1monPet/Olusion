@@ -10,7 +10,7 @@ public class PlayerGather : MonoBehaviour
     public Inventory inventoryScript; 
 
     public static bool CanGather = true;
-    public static bool AutoFarm = true; 
+    public static bool AutoFarm = false; 
 
     private Item _currentItem; 
 
@@ -21,8 +21,6 @@ public class PlayerGather : MonoBehaviour
     public string CactusTag;
     public LayerMask layerMask; //For gatherable items Gatherable
 
-    private TreeGathering _currentTreeGatheringScript;
-    private CactusGathering _currentCactusGatheringScript;
     private GameObject _currentTarget;
     private Transform _objectTransform;
 
@@ -32,9 +30,10 @@ public class PlayerGather : MonoBehaviour
 
     private void Update()
     {
-        DetectIfObjectIsGatherable();
+        DetectTouchAndSetTarget();
         CheckAndUpdateGatherButton();
     }
+
 
     private void DetectTouchAndSetTarget()
     {
@@ -46,31 +45,13 @@ public class PlayerGather : MonoBehaviour
                 Ray ray = Camera.main.ScreenPointToRay(touch.position);
                 if (Physics.Raycast(ray, out RaycastHit hit, _maxRaycastDistance, layerMask))
                 {
-                    if (hit.collider.CompareTag(TreeTag) || hit.collider.CompareTag(CactusTag))
-                    {
-                        ResetGatherableScripts();
-                        _currentTarget = hit.collider.gameObject;
-
-                        return; 
-                    }
+                    // Setting current hitting target
+                    _currentTarget = hit.collider.gameObject;
+                    return; 
                 }
             }
         }
     }
-
-    private void ResetGatherableScripts()
-    {
-        // Stopping current gathering 
-        if (_currentTreeGatheringScript != null)
-        {
-            _currentTreeGatheringScript = null; //Reset the reference
-        }
-        else if (_currentCactusGatheringScript != null)
-        {
-            _currentCactusGatheringScript = null;
-        }
-    }
-
     private void CheckAndUpdateGatherButton()
     {
         // If there's a target, check distance and update buttons
@@ -83,9 +64,8 @@ public class PlayerGather : MonoBehaviour
             }
             else
             {
-                // Too far away, reseting scripts
+                // Too far away, reseting
                 _currentTarget = null; 
-                ResetGatherableScripts();
 
                 // DisableGather.SetActive(true);
                 EnableGather.SetActive(false); 
@@ -99,13 +79,13 @@ public class PlayerGather : MonoBehaviour
         }
     }
 
-    private void ResetGather(WaitForSeconds timeToGather)
+    private void StartGatherCooldown(WaitForSeconds timeToGather)
     {
         CanGather = false; 
-        StartCoroutine(ResetGatherCoroutine(timeToGather));
+        StartCoroutine(StartGatherCooldownCoroutine(timeToGather));
     }
 
-    private IEnumerator ResetGatherCoroutine(WaitForSeconds timeToGather)
+    private IEnumerator StartGatherCooldownCoroutine(WaitForSeconds timeToGather)
     {
         yield return timeToGather;
         CanGather = true; 
@@ -152,7 +132,6 @@ public class PlayerGather : MonoBehaviour
                 }
                 else if (!_objectTransform.gameObject.activeInHierarchy)
                 {
-                    ResetGatherableScripts();
                     return false;
                 }
             }
@@ -160,128 +139,64 @@ public class PlayerGather : MonoBehaviour
         return false; 
     }
 
-    private void DetectIfObjectIsGatherable()
-    {
-
-        DetectTouchAndSetTarget();
-
-        if (_currentTarget != null)
-        {
-            if (_currentTarget.CompareTag(TreeTag))
-            {
-                _currentTreeGatheringScript = _currentTarget.GetComponent<TreeGathering>();
-            }
-            else if (_currentTarget.CompareTag(CactusTag))
-            {
-                _currentCactusGatheringScript = _currentTarget.GetComponent<CactusGathering>();
-            }
-        }
-    }
-
     public void OnGatherButtonPress()
     {
-        #region Tree
-        if (_currentTreeGatheringScript != null && CanGather)
+        if (_currentTarget == null)
+            return;
+
+        // Gathering
+        IGatherable gatherableComponent = _currentTarget.GetComponent<IGatherable>();
+        if (gatherableComponent != null && CanGather)
         {
             if (AutoFarm)
             {
-                AutoFarming(); 
+                AutoFarming(gatherableComponent); 
             }
-            // Touch farming
             else
             {
-                // Returns true if cut down
-                if (_currentTreeGatheringScript.GatherTree(_currentItem.GatherDamage, gameObject))
+                if (gatherableComponent.Gather(_currentItem.GatherDamage))
                 {
-                    CanGather = true;
-
-                    _currentTarget = null;
-                    _currentTreeGatheringScript = null;
+                    ResetGather();
+                    StartGatherCooldown(_currentItem.TimeToGather);
                 }
                 else
                 {
-                    ResetGather(_currentItem.TimeToGather);
+                    // StartGatherCooldown
+                    StartGatherCooldown(_currentItem.TimeToGather);
                 }
             }
         }
-        #endregion
-
-        #region Cactus
-        else if (_currentCactusGatheringScript != null && CanGather)
-        {
-            if (AutoFarm)
-            {
-                AutoFarming();
-            }
-            // Touch farming
-            else
-            {
-                if (_currentCactusGatheringScript.GatherCactus(_currentItem.GatherDamage, gameObject))
-                {
-                    CanGather = true;
-
-                    _currentTarget = null;
-                    _currentCactusGatheringScript = null;
-                }
-                else
-                {
-                    ResetGather(_currentItem.TimeToGather);
-                }
-            }
-        }
-        #endregion
     }
 
-    private void AutoFarming()
+    private void AutoFarming(IGatherable gatherableComponent)
     {
         CanGather = false; 
-        StartCoroutine(AutoFarmingCoroutine());
+        StartCoroutine(AutoFarmingCoroutine(gatherableComponent));
     }
 
-    private IEnumerator AutoFarmingCoroutine()
+    private IEnumerator AutoFarmingCoroutine(IGatherable gatherableComponent)
     {
         while (IsWithinGatheringDistance())
         {
-            if (_currentTreeGatheringScript != null)
+            if (gatherableComponent != null)
             {
-                if (_currentTreeGatheringScript.GatherTree(_currentItem.GatherDamage, gameObject))
+                if (gatherableComponent.Gather(_currentItem.GatherDamage))
                 {
-                    CanGather = true;
-
-                    _currentTarget = null;
-                    _currentTreeGatheringScript = null;
-
-                    yield break; 
-                }
-
-            }
-            else if (_currentCactusGatheringScript != null)
-            {
-                if (_currentCactusGatheringScript.GatherCactus(_currentItem.GatherDamage, gameObject)) 
-                {
-                    CanGather = true;
-
-                    _currentTarget = null;
-                    _currentTreeGatheringScript = null;
-
+                    ResetGather();
                     yield break;
                 }
             }
 
-             yield return _currentItem.TimeToGather;
+            yield return _currentItem.TimeToGather;
         }
 
-        // Reset variables
-        ResetAutoFarming();
-
+        ResetGather();
         yield return null; 
     }
 
-    private void ResetAutoFarming()
+    private void ResetGather()
     {
         CanGather = true;
-
         _currentTarget = null;
-        ResetGatherableScripts();
     }
 }

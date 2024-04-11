@@ -10,7 +10,7 @@ using System.Threading;
 using JetBrains.Annotations;
 
 
-public class Inventory : MonoBehaviour, IDataPersistance
+public sealed class Inventory : MonoBehaviour, IDataPersistance
 {
     private CancellationTokenSource _tokenSource;
 
@@ -108,7 +108,7 @@ public class Inventory : MonoBehaviour, IDataPersistance
             }
         }
         return data; 
-    }
+    } 
 
     private void LoadInventoryData(InventoryData inventoryData)
     {
@@ -182,6 +182,7 @@ public class Inventory : MonoBehaviour, IDataPersistance
             entry.callback.AddListener((data) => {
 
                 //To stop moving and disable script
+                playerMovementScript.StopMoving();
                 playerMovementScript.enabled = false;
                 EnableHotBarItem(currentSlotIndex); });
 
@@ -843,8 +844,10 @@ public class Inventory : MonoBehaviour, IDataPersistance
             SetCurrentHeldItem(null); //For attacking set it to null so, previous item is not held anymore
         }
 
+        
         //Re-enable the script
         playerMovementScript.enabled = true; 
+        
 
     }
 
