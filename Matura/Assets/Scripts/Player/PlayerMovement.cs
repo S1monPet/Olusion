@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
     private Coroutine _rotationCoroutine = null;
     private Coroutine _targetRotationCoroutine = null; 
 
-    public bool _canMove = true;
+    private bool _movementEnabled = true;
     public void LoadData(GameData data)
     {
         // On the first run, or if no save data exists, we skip setting the player's position to maintain the default start position.
@@ -76,7 +76,7 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
 
     private void Update()
     {
-        if (Input.touchCount > 0 && !inventory.activeInHierarchy)
+        if (Input.touchCount > 0 && !inventory.activeInHierarchy && _movementEnabled)
         {
             // Functions won't be reused so I am will be checking here for better performance
             if (MovementJoystickActive)
@@ -112,8 +112,9 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
     public void JoyStickMovement()
     {
         Vector3 movementDirection = new Vector3(_fixedMovementJoystick.Horizontal, 0f, _fixedMovementJoystick.Vertical).normalized;
-
-        if (movementDirection.magnitude >= 0.1f)
+        
+        // Checking if we are in dead zone
+        if (movementDirection.magnitude > _fixedMovementJoystick.DeadZone)
         {
             // Setting movement where Joy stick are pointing
             Vector3 destination = playerTransform.position + movementDirection;
@@ -139,7 +140,7 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
 
     private void RotatePlayer(Vector3 movementDirection)
     {
-        if (movementDirection.magnitude >= 0.1f)
+        if (movementDirection.magnitude >= _fixedRotationJoystick.DeadZone)
         {
             Quaternion targetRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
             if (targetRotation != Quaternion.identity)
@@ -172,7 +173,7 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
     private void Movement()
     {
         //Checks if inventory is active
-        if (!inventory.activeInHierarchy && _canMove)
+        if (!inventory.activeInHierarchy && _movementEnabled)
         {
             if (Input.touchCount > 0)
             {
@@ -286,7 +287,9 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
 
     public void StopMovingAndPlayAnimation(float timeToWaitToCancelAnimation)
     {
-        _canMove = false; 
+        // Disablig movement
+        _movementEnabled = false;
+
         if (!agent.isStopped)
         {
             agent.isStopped = true;
@@ -329,7 +332,10 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
     private IEnumerator WaitForAnimationCoroutine(float timeToWaitToCancelAnimation)
     {
         yield return new WaitForSeconds(timeToWaitToCancelAnimation);
-        _canMove = true; 
+
+        // Re-enabling movement
+        Debug.Log("Nevem kak");
+        _movementEnabled = true; 
     }
 }
 

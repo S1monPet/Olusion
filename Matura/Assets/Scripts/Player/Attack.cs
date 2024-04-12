@@ -23,7 +23,7 @@ public class Attack : MonoBehaviour
     public NavMeshAgent agent;
     public PlayerMovement playerMovement;
     public Animator playerAnimator;
-    public float TimeToWaitToCancelAnimation = .3f;
+    public float TimeToWaitToCancelAnimation = .8f;
 
     private RaycastHit hit;
     private float raycastDistance = 10f;
@@ -38,6 +38,9 @@ public class Attack : MonoBehaviour
     [Header("Buttons")]
     public GameObject EnableAttack; 
     public GameObject DisableAttack;
+
+    [Header("Multiple Touch Input")]
+    private HashSet<int> _activeTouches = new HashSet<int>();
 
 
     private void OnEnable()
@@ -61,17 +64,24 @@ public class Attack : MonoBehaviour
     {
         if (Input.touchCount > 0)
         {
-            Touch touch = Input.GetTouch(0);
-            if (touch.phase == TouchPhase.Began && !wasTouchedAlready && !_isOnCooldown)
+            // Checking multiple touches
+            for (int i = 0; i != Input.touchCount; i++)
             {
-                CheckIfTouchedWasEnemy(touch);
-                CheckIfTouchedWasAnimal(touch);
-                wasTouchedAlready = true;
-            }
-            else if (touch.phase == TouchPhase.Ended)
-            {
-                wasTouchedAlready = false; 
+                Touch touch = Input.GetTouch(i);
+                if (touch.phase == TouchPhase.Began && !wasTouchedAlready && !_isOnCooldown)
+                {
+                    CheckIfTouchedWasEnemy(touch);
+                    CheckIfTouchedWasAnimal(touch);
+                    wasTouchedAlready = true;
 
+                    _activeTouches.Add(touch.fingerId);
+                }
+                else if (touch.phase == TouchPhase.Ended)
+                {
+                    _activeTouches.Remove(touch.fingerId);
+                    wasTouchedAlready = false;
+
+                }
             }
         }
     }
@@ -230,7 +240,7 @@ public class Attack : MonoBehaviour
         if (Physics.Raycast(Camera.main.ScreenPointToRay(touch.position), out hit, raycastDistance, animalMask))
         {
             animalBase = hit.collider.gameObject.GetComponent<AnimalBase>();
-            // Debug.Log("Set" + animalBase);
+            Debug.Log("Set" + animalBase);
         }
     }
 

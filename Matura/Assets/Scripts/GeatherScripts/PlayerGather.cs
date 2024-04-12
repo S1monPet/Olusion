@@ -31,6 +31,9 @@ public class PlayerGather : MonoBehaviour
     public GameObject EnableGather;
     public GameObject DisableGather;
 
+    [Header("Multiple Touch Input")]
+    private HashSet<int> _activeTouches = new HashSet<int>();
+
     private void Update()
     {
         DetectTouchAndSetTarget();
@@ -44,18 +47,28 @@ public class PlayerGather : MonoBehaviour
         {
             if (!inventory.activeInHierarchy)
             {
-                Touch touch = Input.GetTouch(0);
-                if (touch.phase == TouchPhase.Began)
+                // Checking multiple touches
+                for (int i = 0; i != Input.touchCount; i++)
                 {
-                    Ray ray = Camera.main.ScreenPointToRay(touch.position);
-                    if (Physics.Raycast(ray, out RaycastHit hit, _maxRaycastDistance, layerMask))
+                    Touch touch = Input.GetTouch(i);
+                    if (touch.phase == TouchPhase.Began)
                     {
-                        // Rotating towards current target
-                        playerMovementScript.SetAgentRotationToTarget(hit.collider.gameObject);
+                        _activeTouches.Add(i);
 
-                        // Setting current hitting target
-                        _currentTarget = hit.collider.gameObject;
-                        return;
+                        Ray ray = Camera.main.ScreenPointToRay(touch.position);
+                        if (Physics.Raycast(ray, out RaycastHit hit, _maxRaycastDistance, layerMask))
+                        {
+                            // Rotating towards current target
+                            playerMovementScript.SetAgentRotationToTarget(hit.collider.gameObject);
+
+                            // Setting current hitting target
+                            _currentTarget = hit.collider.gameObject;
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        _activeTouches.Remove(i);
                     }
                 }
             }

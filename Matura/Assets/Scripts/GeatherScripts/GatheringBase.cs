@@ -22,7 +22,7 @@ public abstract class GatheringBase : MonoBehaviour, IGatherable
     public SurvivalSceneManager survivalSceneManager;
     public ItemLifecycleManager itemLifecycleManager; // For dropping items
 
-    public float TimeToWaitToCancelAnimation = 0.3f;
+    public float TimeToWaitToCancelAnimation = 2f;
 
     [Header("Buttons")]
     public GameObject EnableGather;
