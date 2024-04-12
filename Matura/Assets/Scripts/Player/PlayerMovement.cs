@@ -85,6 +85,7 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
             }
             else if (RotationJoystickActive)
             {
+                StopMoving();
                 JoyStickRotation(); 
             }
         }
