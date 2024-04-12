@@ -134,7 +134,7 @@ MonoBehaviour:
   playerAnimator: {fileID: 0}
   survivalSceneManager: {fileID: 0}
   itemLifecycleManager: {fileID: 0}
-  TimeToWaitToCancelAnimation: 0.3
+  TimeToWaitToCancelAnimation: 0.8
   EnableGather: {fileID: 0}
   DisableGather: {fileID: 0}
   cactus: {fileID: 11400000, guid: 90646588438407b46ae2eaaa0e06e260, type: 2}
