@@ -108,18 +108,7 @@ public class PlayerGather : MonoBehaviour
 
         if (IsWithinGatheringDistance())
         {
-            // We will interact with target stop moving
-            if (!PlayerMovement.GetTargetInteractionState())
-            {
-                PlayerMovement.SetTargetInteractionState(true);
-            }
             return true; 
-        }
-
-        // Move past target
-        if (PlayerMovement.GetTargetInteractionState())
-        {
-            PlayerMovement.SetTargetInteractionState(false);
         }
 
         return false;

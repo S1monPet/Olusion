@@ -10,11 +10,14 @@ using UnityEngine.EventSystems;
 public class PlayerMovement : MonoBehaviour, IDataPersistance
 {
     [Header("JoyStick")]
-    [SerializeField] private FixedJoystick _fixedMovementJoyStick; 
-    [SerializeField] private FixedJoystick _fixedRotationJoyStick;
+    [SerializeField] private FixedJoystick _fixedMovementJoystick; 
+    [SerializeField] private FixedJoystick _fixedRotationJoystick;
 
-    [SerializeField] private GameObject _interactions; 
+    public GameObject _gameplayInteractions;
 
+    // Event on Joysticks
+    public bool MovementJoystickActive { get; set; }
+    public bool RotationJoystickActive { get; set; }
 
     [Header("Player Position")]
     public Transform playerTransform;
@@ -45,8 +48,6 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
     private Coroutine _targetRotationCoroutine = null; 
 
     public bool _canMove = true;
-    // Is player in range and has appropriate item to hit Gatherable or Enemy
-    public static bool CanInteractWithTarget = false;
     public void LoadData(GameData data)
     {
         // On the first run, or if no save data exists, we skip setting the player's position to maintain the default start position.
@@ -73,52 +74,44 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
         _combinedLayerMask = GroundLayerMask | EnemyLayerMask | GatherableLayerMask; 
     }
 
-    #region Set player interaction state
-    public static void SetTargetInteractionState(bool canInteract)
+    private void Update()
     {
-        CanInteractWithTarget = canInteract;
-    }
-
-    public static bool GetTargetInteractionState()
-    {
-        return CanInteractWithTarget;
-    }
-
-    #endregion
-
-
-    void Update()
-    {
-        // Movement();
-        if (Input.touchCount > 0)
+        if (Input.touchCount > 0 && !inventory.activeInHierarchy)
         {
-            if (!inventory.activeInHierarchy)
+            // Functions won't be reused so I am will be checking here for better performance
+            if (MovementJoystickActive)
             {
-                JoyStickMovement();
-                JoyStickRotation();
+                JoyStickMovement(); 
+            }
+            else if (RotationJoystickActive)
+            {
+                JoyStickRotation(); 
             }
         }
     }
 
+
+    // Even on chest and button UI
     public void EnableInteractions()
     {
-        if (!_interactions.activeInHierarchy)
+        if (!_gameplayInteractions.activeInHierarchy)
         {
-            _interactions.SetActive(true);
+            _gameplayInteractions.SetActive(true);
         }
     }
 
+    // Even on chest and button UI
     public void DisableInteractions()
     {
-        if (_interactions.activeInHierarchy)
+        if (_gameplayInteractions.activeInHierarchy)
         {
-            _interactions.SetActive(false);
+            _gameplayInteractions.SetActive(false);
         }
     }
 
-    private void JoyStickMovement()
+    public void JoyStickMovement()
     {
-        Vector3 movementDirection = new Vector3(_fixedMovementJoyStick.Horizontal, 0f, _fixedMovementJoyStick.Vertical).normalized;
+        Vector3 movementDirection = new Vector3(_fixedMovementJoystick.Horizontal, 0f, _fixedMovementJoystick.Vertical).normalized;
 
         if (movementDirection.magnitude >= 0.1f)
         {
@@ -138,9 +131,9 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
         ManagePlayerAnimations(); 
     }
 
-    private void JoyStickRotation()
+    public void JoyStickRotation()
     {
-        Vector3 movementDirection = new Vector3(_fixedRotationJoyStick.Horizontal, 0f, _fixedRotationJoyStick.Vertical).normalized;
+        Vector3 movementDirection = new Vector3(_fixedRotationJoystick.Horizontal, 0f, _fixedRotationJoystick.Vertical).normalized;
         RotatePlayer(movementDirection); 
     }
 
