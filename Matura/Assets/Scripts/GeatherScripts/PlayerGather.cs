@@ -58,9 +58,6 @@ public class PlayerGather : MonoBehaviour
                         Ray ray = Camera.main.ScreenPointToRay(touch.position);
                         if (Physics.Raycast(ray, out RaycastHit hit, _maxRaycastDistance, layerMask))
                         {
-                            // Rotating towards current target
-                            playerMovementScript.SetAgentRotationToTarget(hit.collider.gameObject);
-
                             // Setting current hitting target
                             _currentTarget = hit.collider.gameObject;
                             return;
