@@ -474,9 +474,10 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
         }
 
         inventory.SetActive(enable);
+        /*
         Cursor.lockState = enable ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = enable;
-
+        */
         //Disable the rotation of the camera; 
         //Camera.main.GetComponent<FirstPersonLook>().sensitivity = enable = 0 : 2; 
     }

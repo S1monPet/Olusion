@@ -30,6 +30,11 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        // Disable vSync, mobile devices ignore it
+        QualitySettings.vSyncCount = 0; 
+
+        Application.targetFrameRate = 100;
+
         if (Instance == null)
         {
             Instance = this;
@@ -43,8 +48,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        InvokeRepeating(nameof(UpdateFPSDisplay), 1, 1);
-        Application.targetFrameRate = 300;
+        // InvokeRepeating(nameof(UpdateFPSDisplay), 1, 1);
     }
 
     public void UpdateGameState(GameState newState)

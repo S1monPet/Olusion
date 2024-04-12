@@ -7,7 +7,10 @@ using Unity.VisualScripting;
 public class PlayerGather : MonoBehaviour
 {
     public Transform playerTransform;
-    public Inventory inventoryScript; 
+    public PlayerMovement playerMovementScript; 
+
+    public Inventory inventoryScript;
+    public GameObject inventory; 
 
     public static bool CanGather = true;
     public static bool AutoFarm = false; 
@@ -28,6 +31,9 @@ public class PlayerGather : MonoBehaviour
     public GameObject EnableGather;
     public GameObject DisableGather;
 
+    [Header("Multiple Touch Input")]
+    private HashSet<int> _activeTouches = new HashSet<int>();
+
     private void Update()
     {
         DetectTouchAndSetTarget();
@@ -39,15 +45,28 @@ public class PlayerGather : MonoBehaviour
     {
         if (Input.touchCount > 0)
         {
-            Touch touch = Input.GetTouch(0);
-            if (touch.phase == TouchPhase.Began)
+            if (!inventory.activeInHierarchy)
             {
-                Ray ray = Camera.main.ScreenPointToRay(touch.position);
-                if (Physics.Raycast(ray, out RaycastHit hit, _maxRaycastDistance, layerMask))
+                // Checking multiple touches
+                for (int i = 0; i != Input.touchCount; i++)
                 {
-                    // Setting current hitting target
-                    _currentTarget = hit.collider.gameObject;
-                    return; 
+                    Touch touch = Input.GetTouch(i);
+                    if (touch.phase == TouchPhase.Began)
+                    {
+                        _activeTouches.Add(i);
+
+                        Ray ray = Camera.main.ScreenPointToRay(touch.position);
+                        if (Physics.Raycast(ray, out RaycastHit hit, _maxRaycastDistance, layerMask))
+                        {
+                            // Setting current hitting target
+                            _currentTarget = hit.collider.gameObject;
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        _activeTouches.Remove(i);
+                    }
                 }
             }
         }
@@ -99,18 +118,7 @@ public class PlayerGather : MonoBehaviour
 
         if (IsWithinGatheringDistance())
         {
-            // We will interact with target stop moving
-            if (!PlayerMovement.GetTargetInteractionState())
-            {
-                PlayerMovement.SetTargetInteractionState(true);
-            }
             return true; 
-        }
-
-        // Move past target
-        if (PlayerMovement.GetTargetInteractionState())
-        {
-            PlayerMovement.SetTargetInteractionState(false);
         }
 
         return false;

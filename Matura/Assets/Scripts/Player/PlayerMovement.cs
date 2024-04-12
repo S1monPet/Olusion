@@ -9,6 +9,16 @@ using UnityEngine.EventSystems;
 
 public class PlayerMovement : MonoBehaviour, IDataPersistance
 {
+    [Header("JoyStick")]
+    [SerializeField] private FixedJoystick _fixedMovementJoystick; 
+    [SerializeField] private FixedJoystick _fixedRotationJoystick;
+
+    public GameObject _gameplayInteractions;
+
+    // Event on Joysticks
+    public bool MovementJoystickActive { get; set; }
+    public bool RotationJoystickActive { get; set; }
+
     [Header("Player Position")]
     public Transform playerTransform;
 
@@ -35,11 +45,9 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
     public float lookRotationSpeed = 20f;
 
     private Coroutine _rotationCoroutine = null;
-    private Coroutine _autoMoveCoroutine = null; 
+    private Coroutine _targetRotationCoroutine = null; 
 
-    public bool _canMove = true;
-    // Is player in range and has appropriate item to hit Gatherable or Enemy
-    public static bool CanInteractWithTarget = false;
+    private bool _movementEnabled = true;
     public void LoadData(GameData data)
     {
         // On the first run, or if no save data exists, we skip setting the player's position to maintain the default start position.
@@ -66,29 +74,106 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
         _combinedLayerMask = GroundLayerMask | EnemyLayerMask | GatherableLayerMask; 
     }
 
-
-    void Update()
+    private void Update()
     {
-        Movement();
+        if (Input.touchCount > 0 && !inventory.activeInHierarchy && _movementEnabled)
+        {
+            // Functions won't be reused so I am will be checking here for better performance
+            if (MovementJoystickActive)
+            {
+                JoyStickMovement(); 
+            }
+            else if (RotationJoystickActive)
+            {
+                JoyStickRotation(); 
+            }
+        }
     }
 
-    #region Set player interaction state
-    public static void SetTargetInteractionState(bool canInteract)
+
+    // Even on chest and button UI
+    public void EnableInteractions()
     {
-        CanInteractWithTarget = canInteract; 
+        if (!_gameplayInteractions.activeInHierarchy)
+        {
+            _gameplayInteractions.SetActive(true);
+        }
     }
 
-    public static bool GetTargetInteractionState()
+    // Even on chest and button UI
+    public void DisableInteractions()
     {
-        return CanInteractWithTarget; 
+        if (_gameplayInteractions.activeInHierarchy)
+        {
+            _gameplayInteractions.SetActive(false);
+        }
     }
 
-    #endregion
+    public void JoyStickMovement()
+    {
+        Vector3 movementDirection = new Vector3(_fixedMovementJoystick.Horizontal, 0f, _fixedMovementJoystick.Vertical).normalized;
+        
+        // Checking if we are in dead zone
+        if (movementDirection.magnitude > _fixedMovementJoystick.DeadZone)
+        {
+            // Setting movement where Joy stick are pointing
+            Vector3 destination = playerTransform.position + movementDirection;
 
+            RotatePlayer(movementDirection);
+
+            MovePlayer(destination);
+        }
+        // We stop
+        else
+        {
+            StopMoving();
+        }
+
+        ManagePlayerAnimations(); 
+    }
+
+    public void JoyStickRotation()
+    {
+        Vector3 movementDirection = new Vector3(_fixedRotationJoystick.Horizontal, 0f, _fixedRotationJoystick.Vertical).normalized;
+        RotatePlayer(movementDirection); 
+    }
+
+    private void RotatePlayer(Vector3 movementDirection)
+    {
+        if (movementDirection.magnitude >= _fixedRotationJoystick.DeadZone)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
+            if (targetRotation != Quaternion.identity)
+            {
+                playerTransform.rotation = Quaternion.Slerp(playerTransform.rotation, targetRotation, lookRotationSpeed * Time.deltaTime);
+            }
+        }
+    }
+
+    private void ManagePlayerAnimations()
+    {
+        //Has path because we are resseting path in the other file if object is not clicked
+        if (!agent.pathPending && agent.remainingDistance > agent.stoppingDistance)
+        {
+            // SetAgentRotation();
+            animator.SetBool("isRunning", true); //Setting animation
+
+            //If animation is not idle
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") || animator.GetCurrentAnimatorStateInfo(0).IsName("ReceiveHit"))
+                animator.Play("Running");
+
+        }
+        else if (!agent.hasPath && agent.remainingDistance <= agent.stoppingDistance)
+        {
+            animator.SetBool("isRunning", false); //Setting animation off
+        }
+    }
+
+    /*
     private void Movement()
     {
         //Checks if inventory is active
-        if (!inventory.activeInHierarchy && _canMove)
+        if (!inventory.activeInHierarchy && _movementEnabled)
         {
             if (Input.touchCount > 0)
             {
@@ -143,6 +228,7 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
             }
         }
     }
+    */
 
     // Button 
     private void MovePlayer(Vector3 destination)
@@ -201,7 +287,9 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
 
     public void StopMovingAndPlayAnimation(float timeToWaitToCancelAnimation)
     {
-        _canMove = false; 
+        // Disablig movement
+        _movementEnabled = false;
+
         if (!agent.isStopped)
         {
             agent.isStopped = true;
@@ -216,11 +304,23 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
 
     public void SetAgentRotationToTarget(GameObject target) //For fast rotation
     {
+        if (_targetRotationCoroutine != null)
+        {
+            StopCoroutine(_targetRotationCoroutine);
+        }
+        StartCoroutine(SetAgentRotationToTargetCoroutine(target));
+    }
+
+    private IEnumerator SetAgentRotationToTargetCoroutine(GameObject target)
+    {
         Vector3 direction = (target.transform.position - playerTransform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
 
         while (lookRotation != Quaternion.identity && Quaternion.Angle(playerTransform.rotation, lookRotation) > 0.1f)
-            playerTransform.rotation = Quaternion.Slerp(playerTransform.rotation, lookRotation, Time.deltaTime * lookRotationSpeed); 
+        {
+            playerTransform.rotation = Quaternion.Slerp(playerTransform.rotation, lookRotation, Time.deltaTime * lookRotationSpeed);
+            yield return null; 
+        }
     }
 
 
@@ -232,7 +332,10 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
     private IEnumerator WaitForAnimationCoroutine(float timeToWaitToCancelAnimation)
     {
         yield return new WaitForSeconds(timeToWaitToCancelAnimation);
-        _canMove = true; 
+
+        // Re-enabling movement
+        Debug.Log("Nevem kak");
+        _movementEnabled = true; 
     }
 }
 
