@@ -78,6 +78,7 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
     {
         if (Input.touchCount > 0 && !inventory.activeInHierarchy && _movementEnabled)
         {
+
             // Functions won't be reused so I am will be checking here for better performance
             if (MovementJoystickActive)
             {
