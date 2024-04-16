@@ -18,6 +18,13 @@ public class Slot : MonoBehaviour//, IPointerDownHandler
 
     private Image thisSlotImage;
 
+    private Image thisSlotBackgroundImage;
+
+    /*
+    [Header("Hotbar")]
+    [SerializeField] private Sprite _defaultHotbarSprite;
+    [SerializeField] private Sprite _highlightedHotbarSprite;
+    */
     public TMP_Text thisSlotQuantityText;
 
     public Collider objectCollider; 

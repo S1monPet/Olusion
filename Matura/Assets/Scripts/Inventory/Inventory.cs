@@ -35,6 +35,9 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
     public Transform dropLocation; //Where we are dropping our element
     public NavMeshAgent agent;
 
+    [Header("Multiple Touch Input")]
+    private HashSet<int> _activeTouches = new HashSet<int>();
+
     [Header("Drag and drop")]
     public Image dragIconImage;
     private Item currentDraggedItem;
@@ -212,9 +215,9 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
         //Instantly picks it up right now
         //ItemRaycast(Input.GetMouseButtonDown(0));
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.touchCount > 0)
         {
-            ItemRaycast(true);
+            ItemRaycast(Input.touchCount, hasClicked: true);
         }
 
         InventoryOpened(); 
@@ -285,37 +288,52 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
     }
 
 
-    private void ItemRaycast(bool hasClicked = false)
+    private void ItemRaycast(int touches, bool hasClicked = false)
     {
-        itemHoverText.text = "";
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-
-        UnityEngine.Debug.DrawLine(ray.origin, ray.origin + ray.direction * raycastDistance, Color.red, 10);
-        if (Physics.Raycast(ray, out hit, raycastDistance, itemLayer) && !inventory.activeSelf && _canCollect) //Check if INVENTORY UI && HOTBAR are NOT HIT. 
+        for (int i = 0; i != touches; i++)
         {
-            if (hit.collider != null)
+            Touch touch = Input.GetTouch(i);
+            if (touch.phase == TouchPhase.Began)
             {
-                Debug.Log(hit.collider.ToString());
-                if (hasClicked) //Pick up
+                _activeTouches.Add(touch.fingerId);
+
+                itemHoverText.text = "";
+                Ray ray = Camera.main.ScreenPointToRay(touch.position);
+                RaycastHit hit;
+
+                UnityEngine.Debug.DrawLine(ray.origin, ray.origin + ray.direction * raycastDistance, Color.red, 10);
+                if (Physics.Raycast(ray, out hit, raycastDistance, itemLayer) && !inventory.activeSelf && _canCollect) //Check if INVENTORY UI && HOTBAR are NOT HIT. 
                 {
-                    Item newItem = hit.collider.GetComponent<Item>();
-
-                    if (newItem)
+                    if (hit.collider != null)
                     {
-                        //Agent logic to stop moving and look towards item, could be added in future
-                        //playerMovementScript.StopPlayerNotRotation(); 
-                        if (CheckIfItemIsCloseEnough(hit.collider.gameObject))
+                        Debug.Log(hit.collider.ToString());
+                        if (hasClicked) //Pick up
                         {
-                            if (ItemIsRespawnable(newItem)) // Getting spawning zone with parent
-                                RespawnItem(newItem);
+                            Item newItem = hit.collider.GetComponent<Item>();
 
-                            AddItemToInventory(newItem);
+                            if (newItem)
+                            {
+                                //Agent logic to stop moving and look towards item, could be added in future
+                                //playerMovementScript.StopPlayerNotRotation(); 
+                                if (CheckIfItemIsCloseEnough(hit.collider.gameObject))
+                                {
+                                    if (ItemIsRespawnable(newItem)) // Getting spawning zone with parent
+                                        RespawnItem(newItem);
+
+                                    AddItemToInventory(newItem);
+                                }
+                            }
                         }
                     }
-                } 
+                }
             }
+            else
+            {
+                _activeTouches.Remove(touch.fingerId);
+            }
+
         }
+            
     }
     //Check if player is close enough to collect item
     private bool CheckIfItemIsCloseEnough(GameObject targetItem)
