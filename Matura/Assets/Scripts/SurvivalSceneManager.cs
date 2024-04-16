@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
 using TMPro;
+using UnityEditor.AI;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class SurvivalSceneManager : MonoBehaviour
 {
+    [SerializeField] private NavMeshSurface m_navMeshSurface;
+
     [Header("UI")]
     public PlayerMovement playerMovementScript; 
     public GameObject closeChestUI; 
@@ -40,11 +44,7 @@ public class SurvivalSceneManager : MonoBehaviour
         _animationToStartWith = Animator.StringToHash("Walking");
     }
 
-    private void Update()
-    {
-        //Will be for keeping trees, when they despawn to respawn, enemies over time, etc.
 
-    }
     //Is started when Enemy dies. 
     public void RespawnEnemy(WaitForSeconds timer, GameObject enemy, Animator animator)
     {
@@ -85,6 +85,7 @@ public class SurvivalSceneManager : MonoBehaviour
 
     public void RespawnGatherableItem(GameObject gatherableItem, ItemLifecycleManager itemLifecycleManager, WaitForSeconds timer)
     {
+        // m_navMeshSurface.UpdateNavMesh(m_navMeshSurface.navMeshData);
         StartCoroutine(GatherableItemRespawnTimer(gatherableItem, itemLifecycleManager, timer));
     }
 
