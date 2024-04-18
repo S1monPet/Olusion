@@ -44,6 +44,10 @@ public class Item : MonoBehaviour, IDataPersistance
     public int equiappableArmorIndex = -1;
     public int damageReduction;
 
+    [Header("Building")]
+    public bool buildingItem = false;
+    public int buildingItemIndex;
+
     [Header("Consumable")]
     public bool Consumable = false;
     public float TimeToConsume = 1;

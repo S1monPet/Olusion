@@ -81,6 +81,9 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
     [Header("Save/Load")]
     public List<GameObject> allItemPrefabs = new List<GameObject>();
 
+    [Header("Building")]
+    public List<GameObject> buildingItems = new List<GameObject>();
+
     public void LoadData(GameData data)
     {
         LoadInventoryData(data.inventoryData);
@@ -731,8 +734,7 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
         for (int i = 0; i < allInventorySlots.Count; i++)
         {
             Slot currSlot = allInventorySlots[i];
-            if (currSlot._canDropThisItem && currentDraggedItem != null && currentDraggedItem.equiappableItemIndex != -1)  
-            {
+            if (currSlot._canDropThisItem && currentDraggedItem != null && currentDraggedItem.equiappableItemIndex != -1) { 
                 //Get's item into currSlot && resets currentDragedItem
                 currSlot.SetItem(currentDraggedItem);
 
@@ -749,7 +751,7 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
 
                 break;
             }
-            else if (currSlot._canDropThisItem && currentDraggedItem != null && currentDraggedItem.equiappableArmorIndex != -1)
+            else if (currSlot._canDropThisItem && currentDraggedItem != null && currentDraggedItem.equiappableArmorIndex != -1) 
             {
                 //Get's item into currSlot && resets currentDragedItem
                 currSlot.SetItem(currentDraggedItem);
@@ -766,7 +768,23 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
 
                 break;
             }
+            else if (currSlot._canDropThisItem && currentDraggedItem != null && currentDraggedItem.buildingItem)
+            {
+                //Get's item into currSlot && resets currentDragedItem
+                currSlot.SetItem(currentDraggedItem);
 
+                Item currentItem = currSlot.GetItem();
+                ResetDragVariables();
+
+                currSlot.DropAllItems(currentItem);
+                currentItem.gameObject.SetActive(true);
+                currentItem.transform.position = dropLocation.position;
+
+                buildingItems[currentItem.buildingItemIndex].SetActive(false);
+            }
+
+            // Reset held item
+            // SetCurrentHeldItem(null);
         }
     }
 
@@ -807,18 +825,15 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
             playerAnimator.Play("PlayerIdle");
         }
 
-        foreach (GameObject item in equaiappableItems)
-        {
-            item.SetActive(false);
-        }
+        ResetActiveItems(); 
 
         Slot hotbarSlot = hotbarSlots[hotbarIndex];
 
         if (hotbarSlot.HasItem())
         {
-            if (hotbarSlot.GetItem().equiappableItemIndex != -1)
+            Item currentItem = hotbarSlot.GetItem();
+            if (currentItem.equiappableItemIndex != -1)
             {
-                Item currentItem = hotbarSlot.GetItem();
                 equaiappableItems[currentItem.equiappableItemIndex].SetActive(true);
                 SetCurrentHeldItem(currentItem); //Set new or the same item's HeldItem variable
                 _currentHeldItemIndex = hotbarIndex;
@@ -831,31 +846,35 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
                 _previousHeldItemIndex = hotbarIndex;
             } 
             //We are also checking inventory here, because we equip item in hotbar not with inventory open, with inventory open we drop it
-            else if (hotbarSlot.GetItem().equiappableArmorIndex != -1 && !inventory.activeInHierarchy) 
+            else if (currentItem.equiappableArmorIndex != -1 && !inventory.activeInHierarchy) 
             {
                 bool doubleTap = DoubleTapEquipArmor();
                 if (doubleTap)
                 {
-                    Item currentArmor = hotbarSlot.GetItem();
-                    equaiappableArmor[currentArmor.equiappableArmorIndex].SetActive(true);
+                    equaiappableArmor[currentItem.equiappableArmorIndex].SetActive(true);
 
-                    if (currentArmor != _currentEquiappedArmor && _currentEquiappedArmor != null)
+                    if (currentItem != _currentEquiappedArmor)
                     {
                         equaiappableArmor[_currentEquiappedArmor.equiappableArmorIndex].SetActive(false);
                         hotbarSlot.SetItem(_currentEquiappedArmor);
-                        equaiappableArmor[currentArmor.equiappableArmorIndex].SetActive(true);
-                        _currentEquiappedArmor = currentArmor;
+                        equaiappableArmor[currentItem.equiappableArmorIndex].SetActive(true);
+                        _currentEquiappedArmor = currentItem;
 
-                        ResetDragVariables(); 
                     }
                     else
                     {
-                        _currentEquiappedArmor = currentArmor;
+                        _currentEquiappedArmor = currentItem;
                         hotbarSlot.SetItem(null);
 
-                        ResetDragVariables(); 
                     }
+                    ResetDragVariables();
                 }
+            } 
+            // Activating building item
+            else if (currentItem.buildingItem && currentItem.buildingItemIndex != -1)
+            {
+                SetCurrentHeldItem(currentItem);
+                buildingItems[currentItem.buildingItemIndex].SetActive(true);
             }
         } 
         else
@@ -866,8 +885,20 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
         
         //Re-enable the script
         playerMovementScript.enabled = true; 
-        
+    }
 
+    private void ResetActiveItems()
+    {
+        // Reset items
+        foreach (GameObject item in equaiappableItems)
+        {
+            item.SetActive(false);
+        }
+
+        foreach (GameObject buildingItem in buildingItems)
+        {
+            buildingItem.SetActive(false);
+        }
     }
 
     public void ConsumeIfHeldAndConsumable() //Event
@@ -1027,7 +1058,6 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
     {
         foreach (Recipe recipe in itemRecipes)
         {
-
             if (recipe.createdItemPrefab.GetComponent<Item>().name == itemName) //Could be optimised
             {
                 bool haveAllIngredients = true;
