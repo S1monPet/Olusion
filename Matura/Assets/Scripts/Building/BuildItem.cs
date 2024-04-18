@@ -7,8 +7,11 @@ public sealed class BuildItem : MonoBehaviour
 {
     [Header("Buttons")]
     [SerializeField] private GameObject _enableBuilding;
-    [SerializeField] private Transform buildingLocation; // Where we will be building
+
+    [Header("Scripts")]
     [SerializeField] private Inventory inventoryScript;
+
+    [SerializeField] private Transform buildingLocation; // Where we will be building
 
     private Item _currentHeldItem; 
 
