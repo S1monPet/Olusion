@@ -91,16 +91,22 @@ public class Slot : MonoBehaviour//, IPointerDownHandler
         } 
     }
     //For inventory
-    public void CheckIfItemIsLessThanZero(Item item, List<GameObject> equaiappableItems)
+    public void CheckIfItemIsLessThanZero(Item item, List<GameObject> items)
     {
         if (item.currentQuantity < 1)
         {
             SetItem(null);
-            equaiappableItems[item.equiappableItemIndex].SetActive(false);
+            if (item.buildingItem) 
+            {
+                items[item.buildingItemIndex].SetActive(false);
+            }
+            else 
+            {
+                items[item.equiappableItemIndex].SetActive(false);
+            }
 
             item.currentQuantity = 1;
         }
-
     }
 
     public void DropAllItems(Item item)

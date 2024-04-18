@@ -136,6 +136,8 @@ MonoBehaviour:
   equiappableItemIndex: 15
   equiappableArmorIndex: -1
   damageReduction: 0
+  buildingItem: 0
+  buildingItemIndex: 0
   Consumable: 0
   TimeToConsume: 1
   type: 0
@@ -156,4 +158,4 @@ MonoBehaviour:
   GatherDamage: 10
   DropRatePerHit: 2
   GatheringRate: 3
-  GatherRange: 3
+  GatherRange: 4

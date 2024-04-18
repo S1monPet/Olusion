@@ -69,6 +69,8 @@ MonoBehaviour:
   equiappableItemIndex: 13
   equiappableArmorIndex: -1
   damageReduction: 0
+  buildingItem: 0
+  buildingItemIndex: 0
   Consumable: 0
   TimeToConsume: 1
   type: 0
@@ -85,7 +87,7 @@ MonoBehaviour:
   clothingType: 0
   Damage: 90
   attackCooldown: 2
-  HitRange: 6
+  HitRange: 4
   GatherDamage: 20
   DropRatePerHit: 4
   GatheringRate: 2

@@ -729,7 +729,8 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
         }
     }
 
-    public void BuildItem(Vector3 buildLocation, Quaternion buildRotation) 
+    // Building item
+    public void BuildItem(Transform buildTransform) 
     {
         foreach (Slot itemSlot in hotbarSlots) 
         {
@@ -739,8 +740,11 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
                 //For setting item's counter
                 itemSlot.DropItem(currentItem); 
 
-                GameObject currentBuiltItem = Instantiate(currentItem.gameObject, buildLocation, buildRotation); 
+                // Fix 
+                GameObject currentBuiltItem = Instantiate(currentItem.gameObject, buildTransform.position, Quaternion.identity); 
+                currentBuiltItem.gameObject.SetActive(true);
 
+                itemSlot.CheckIfItemIsLessThanZero(currentItem, buildingItems);
                 //Setting it back to false since Click event doesn't do that.
                 itemSlot._canDropThisItem = false;
 
