@@ -4,6 +4,7 @@ using System.Net.NetworkInformation;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AI; 
 
 public class SurvivalSceneManager : MonoBehaviour
 {
