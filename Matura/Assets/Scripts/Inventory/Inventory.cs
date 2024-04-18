@@ -729,6 +729,26 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
         }
     }
 
+    public void BuildItem(Vector3 buildLocation, Quaternion buildRotation) 
+    {
+        foreach (Slot itemSlot in hotbarSlots) 
+        {
+            Item currentItem = itemSlot.GetItem(); 
+            if (currentItem.IsHeld && currentItem.buildingItem) 
+            {
+                //For setting item's counter
+                itemSlot.DropItem(currentItem); 
+
+                GameObject currentBuiltItem = Instantiate(currentItem.gameObject, buildLocation, buildRotation); 
+
+                //Setting it back to false since Click event doesn't do that.
+                itemSlot._canDropThisItem = false;
+
+                break; 
+            }
+        }
+    }
+
     private void DropAllItems()
     {
         for (int i = 0; i < allInventorySlots.Count; i++)

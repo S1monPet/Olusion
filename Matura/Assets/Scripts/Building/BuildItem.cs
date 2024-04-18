@@ -37,9 +37,11 @@ public sealed class BuildItem : MonoBehaviour
 
     public void OnBuildButtonPress()
     {
+        
         _currentHeldItem.transform.position = buildingLocation.position; 
         _currentHeldItem.transform.rotation = buildingLocation.rotation;
-
+        
+        // inventoryScript.BuildItem(buildingLocation.position, buildingLocation.rotation);
         _currentHeldItem.gameObject.SetActive(true);
     }
 }
