@@ -742,13 +742,19 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
             Item currentItem = itemSlot.GetItem(); 
             if (currentItem != null && currentItem.IsHeld && currentItem.buildingItem) 
             {
-                //For setting item's counter
+                // Decreasing currentItem by 1 from slot
                 itemSlot.DropItem(currentItem);
 
+                // If null reseting slot, and setting item default value
                 itemSlot.CheckIfItemIsLessThanZero(currentItem, buildingItems);
 
                 // Checking item object for rotation
                 GameObject currentBuiltItem = Instantiate(currentItem.gameObject, buildTransform.position, buildTransform.rotation);
+
+                // Setting droppedItem quantity
+                Item droppedItem = currentBuiltItem.GetComponent<Item>();
+                droppedItem.currentQuantity = 1; 
+
                 currentBuiltItem.gameObject.SetActive(true);
 
                 //Setting it back to false since Click event doesn't do that.
