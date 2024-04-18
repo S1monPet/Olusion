@@ -309,7 +309,6 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
                 {
                     if (hit.collider != null)
                     {
-                        Debug.Log(hit.collider.ToString());
                         if (hasClicked) //Pick up
                         {
                             Item newItem = hit.collider.GetComponent<Item>();
@@ -416,6 +415,7 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
         }
 
         int leftoverQuantity = itemToAdd.currentQuantity;
+        Debug.Log(leftoverQuantity + itemToAdd.ToString());
         Slot openSlot = null; 
 
         for (int i = 0; i < allInventorySlots.Count; i++)
@@ -458,7 +458,6 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
             itemToAdd.currentQuantity = leftoverQuantity;
             itemToAdd.gameObject.SetActive(false);
             */
-
             itemToAdd.currentQuantity = leftoverQuantity;
             openSlot.SetItem(itemToAdd);
             itemToAdd.gameObject.SetActive(false);
@@ -622,6 +621,12 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
             currentItem.IsHeld = false;
             equaiappableArmor[currentItem.equiappableArmorIndex].SetActive(false);
         }
+        // Not really sure what I did here
+        else if (inventoryIndex > 6 && currentItem.buildingItemIndex != -1)
+        {
+            currentItem.IsHeld = false;
+            buildingItems[currentItem.buildingItemIndex].SetActive(false);
+        }
 
         /* Subject to change get item instantly in hand, probably not the best
         else if (inventoryIndex <= 6)
@@ -735,16 +740,17 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
         foreach (Slot itemSlot in hotbarSlots) 
         {
             Item currentItem = itemSlot.GetItem(); 
-            if (currentItem.IsHeld && currentItem.buildingItem) 
+            if (currentItem != null && currentItem.IsHeld && currentItem.buildingItem) 
             {
                 //For setting item's counter
-                itemSlot.DropItem(currentItem); 
-
-                // Fix 
-                GameObject currentBuiltItem = Instantiate(currentItem.gameObject, buildTransform.position, Quaternion.identity); 
-                currentBuiltItem.gameObject.SetActive(true);
+                itemSlot.DropItem(currentItem);
 
                 itemSlot.CheckIfItemIsLessThanZero(currentItem, buildingItems);
+
+                // Checking item object for rotation
+                GameObject currentBuiltItem = Instantiate(currentItem.gameObject, buildTransform.position, buildTransform.rotation);
+                currentBuiltItem.gameObject.SetActive(true);
+
                 //Setting it back to false since Click event doesn't do that.
                 itemSlot._canDropThisItem = false;
 
@@ -771,7 +777,6 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
 
                 //Sets item off the hand
                 equaiappableItems[currentItem.equiappableItemIndex].SetActive(false);
-                Debug.Log("Debil");
 
                 break;
             }
@@ -899,6 +904,9 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
             {
                 SetCurrentHeldItem(currentItem);
                 buildingItems[currentItem.buildingItemIndex].SetActive(true);
+
+                _currentHeldItemIndex = hotbarIndex;
+                _previousHeldItemIndex = hotbarIndex;
             }
         } 
         else
@@ -1103,8 +1111,8 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
                     GameObject craftedItem = Instantiate(recipe.createdItemPrefab, dropLocation.position, Quaternion.identity);
                     craftedItem.GetComponent<Item>().currentQuantity = recipe.quantityProduced;
 
-                    //We don't want this to be put in the inventory
-                    AddItemToInventory(craftedItem.GetComponent<Item>());
+                    // Putting craftedItem in inventory, without triggering anymation
+                    AddItemToInventory(craftedItem.GetComponent<Item>(), collect: false);
                 }
                 break;
             }

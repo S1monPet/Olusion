@@ -105,6 +105,7 @@ public class Slot : MonoBehaviour//, IPointerDownHandler
                 items[item.equiappableItemIndex].SetActive(false);
             }
 
+            item.IsHeld = false; 
             item.currentQuantity = 1;
         }
     }
