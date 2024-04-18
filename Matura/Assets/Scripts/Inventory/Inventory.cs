@@ -1120,6 +1120,7 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
 
             if (item != null && item.name == itemName)
             {
+                
                 if (item.currentQuantity >= remainingQuantity)
                 {
                     item.currentQuantity -= remainingQuantity;
@@ -1127,10 +1128,12 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
                     if (item.currentQuantity == 0)
                     {
                         currSlot.SetItem(null);
-                        currSlot.UpdateInventoryAmount();
                     }
+
+                    currSlot.UpdateInventoryAmount();
                     return; 
                 }
+                
             }
         }
     }
