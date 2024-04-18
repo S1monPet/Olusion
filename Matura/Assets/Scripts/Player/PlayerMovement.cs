@@ -80,13 +80,13 @@ public class PlayerMovement : MonoBehaviour, IDataPersistance
         {
 
             // Functions won't be reused so I am will be checking here for better performance
-            if (MovementJoystickActive)
-            {
-                JoyStickMovement(); 
-            }
-            else if (RotationJoystickActive)
+            if (RotationJoystickActive && !MovementJoystickActive)
             {
                 JoyStickRotation(); 
+            }
+            else if (MovementJoystickActive && !RotationJoystickActive)
+            {
+                JoyStickMovement(); 
             }
         }
     }

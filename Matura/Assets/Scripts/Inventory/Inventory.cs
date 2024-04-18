@@ -81,6 +81,9 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
     [Header("Save/Load")]
     public List<GameObject> allItemPrefabs = new List<GameObject>();
 
+    [Header("Building")]
+    public List<GameObject> buildingItems = new List<GameObject>();
+
     public void LoadData(GameData data)
     {
         LoadInventoryData(data.inventoryData);
@@ -306,7 +309,6 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
                 {
                     if (hit.collider != null)
                     {
-                        Debug.Log(hit.collider.ToString());
                         if (hasClicked) //Pick up
                         {
                             Item newItem = hit.collider.GetComponent<Item>();
@@ -413,6 +415,7 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
         }
 
         int leftoverQuantity = itemToAdd.currentQuantity;
+        Debug.Log(leftoverQuantity + itemToAdd.ToString());
         Slot openSlot = null; 
 
         for (int i = 0; i < allInventorySlots.Count; i++)
@@ -455,7 +458,6 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
             itemToAdd.currentQuantity = leftoverQuantity;
             itemToAdd.gameObject.SetActive(false);
             */
-
             itemToAdd.currentQuantity = leftoverQuantity;
             openSlot.SetItem(itemToAdd);
             itemToAdd.gameObject.SetActive(false);
@@ -619,6 +621,12 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
             currentItem.IsHeld = false;
             equaiappableArmor[currentItem.equiappableArmorIndex].SetActive(false);
         }
+        // Not really sure what I did here
+        else if (inventoryIndex > 6 && currentItem.buildingItemIndex != -1)
+        {
+            currentItem.IsHeld = false;
+            buildingItems[currentItem.buildingItemIndex].SetActive(false);
+        }
 
         /* Subject to change get item instantly in hand, probably not the best
         else if (inventoryIndex <= 6)
@@ -726,13 +734,43 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
         }
     }
 
+    // Building item
+    public void BuildItem(Transform buildTransform) 
+    {
+        foreach (Slot itemSlot in hotbarSlots) 
+        {
+            Item currentItem = itemSlot.GetItem(); 
+            if (currentItem != null && currentItem.IsHeld && currentItem.buildingItem) 
+            {
+                // Decreasing currentItem by 1 from slot
+                itemSlot.DropItem(currentItem);
+
+                // If null reseting slot, and setting item default value
+                itemSlot.CheckIfItemIsLessThanZero(currentItem, buildingItems);
+
+                // Checking item object for rotation
+                GameObject currentBuiltItem = Instantiate(currentItem.gameObject, buildTransform.position, buildTransform.rotation);
+
+                // Setting droppedItem quantity
+                Item droppedItem = currentBuiltItem.GetComponent<Item>();
+                droppedItem.currentQuantity = 1; 
+
+                currentBuiltItem.gameObject.SetActive(true);
+
+                //Setting it back to false since Click event doesn't do that.
+                itemSlot._canDropThisItem = false;
+
+                break; 
+            }
+        }
+    }
+
     private void DropAllItems()
     {
         for (int i = 0; i < allInventorySlots.Count; i++)
         {
             Slot currSlot = allInventorySlots[i];
-            if (currSlot._canDropThisItem && currentDraggedItem != null && currentDraggedItem.equiappableItemIndex != -1)  
-            {
+            if (currSlot._canDropThisItem && currentDraggedItem != null && currentDraggedItem.equiappableItemIndex != -1) { 
                 //Get's item into currSlot && resets currentDragedItem
                 currSlot.SetItem(currentDraggedItem);
 
@@ -745,11 +783,10 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
 
                 //Sets item off the hand
                 equaiappableItems[currentItem.equiappableItemIndex].SetActive(false);
-                Debug.Log("Debil");
 
                 break;
             }
-            else if (currSlot._canDropThisItem && currentDraggedItem != null && currentDraggedItem.equiappableArmorIndex != -1)
+            else if (currSlot._canDropThisItem && currentDraggedItem != null && currentDraggedItem.equiappableArmorIndex != -1) 
             {
                 //Get's item into currSlot && resets currentDragedItem
                 currSlot.SetItem(currentDraggedItem);
@@ -766,7 +803,23 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
 
                 break;
             }
+            else if (currSlot._canDropThisItem && currentDraggedItem != null && currentDraggedItem.buildingItem)
+            {
+                //Get's item into currSlot && resets currentDragedItem
+                currSlot.SetItem(currentDraggedItem);
 
+                Item currentItem = currSlot.GetItem();
+                ResetDragVariables();
+
+                currSlot.DropAllItems(currentItem);
+                currentItem.gameObject.SetActive(true);
+                currentItem.transform.position = dropLocation.position;
+
+                buildingItems[currentItem.buildingItemIndex].SetActive(false);
+            }
+
+            // Reset held item
+            // SetCurrentHeldItem(null);
         }
     }
 
@@ -807,18 +860,15 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
             playerAnimator.Play("PlayerIdle");
         }
 
-        foreach (GameObject item in equaiappableItems)
-        {
-            item.SetActive(false);
-        }
+        ResetActiveItems(); 
 
         Slot hotbarSlot = hotbarSlots[hotbarIndex];
 
         if (hotbarSlot.HasItem())
         {
-            if (hotbarSlot.GetItem().equiappableItemIndex != -1)
+            Item currentItem = hotbarSlot.GetItem();
+            if (currentItem.equiappableItemIndex != -1)
             {
-                Item currentItem = hotbarSlot.GetItem();
                 equaiappableItems[currentItem.equiappableItemIndex].SetActive(true);
                 SetCurrentHeldItem(currentItem); //Set new or the same item's HeldItem variable
                 _currentHeldItemIndex = hotbarIndex;
@@ -831,31 +881,38 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
                 _previousHeldItemIndex = hotbarIndex;
             } 
             //We are also checking inventory here, because we equip item in hotbar not with inventory open, with inventory open we drop it
-            else if (hotbarSlot.GetItem().equiappableArmorIndex != -1 && !inventory.activeInHierarchy) 
+            else if (currentItem.equiappableArmorIndex != -1 && !inventory.activeInHierarchy) 
             {
                 bool doubleTap = DoubleTapEquipArmor();
                 if (doubleTap)
                 {
-                    Item currentArmor = hotbarSlot.GetItem();
-                    equaiappableArmor[currentArmor.equiappableArmorIndex].SetActive(true);
+                    equaiappableArmor[currentItem.equiappableArmorIndex].SetActive(true);
 
-                    if (currentArmor != _currentEquiappedArmor && _currentEquiappedArmor != null)
+                    if (currentItem != _currentEquiappedArmor)
                     {
                         equaiappableArmor[_currentEquiappedArmor.equiappableArmorIndex].SetActive(false);
                         hotbarSlot.SetItem(_currentEquiappedArmor);
-                        equaiappableArmor[currentArmor.equiappableArmorIndex].SetActive(true);
-                        _currentEquiappedArmor = currentArmor;
+                        equaiappableArmor[currentItem.equiappableArmorIndex].SetActive(true);
+                        _currentEquiappedArmor = currentItem;
 
-                        ResetDragVariables(); 
                     }
                     else
                     {
-                        _currentEquiappedArmor = currentArmor;
+                        _currentEquiappedArmor = currentItem;
                         hotbarSlot.SetItem(null);
 
-                        ResetDragVariables(); 
                     }
+                    ResetDragVariables();
                 }
+            } 
+            // Activating building item
+            else if (currentItem.buildingItem && currentItem.buildingItemIndex != -1)
+            {
+                SetCurrentHeldItem(currentItem);
+                buildingItems[currentItem.buildingItemIndex].SetActive(true);
+
+                _currentHeldItemIndex = hotbarIndex;
+                _previousHeldItemIndex = hotbarIndex;
             }
         } 
         else
@@ -866,8 +923,20 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
         
         //Re-enable the script
         playerMovementScript.enabled = true; 
-        
+    }
 
+    private void ResetActiveItems()
+    {
+        // Reset items
+        foreach (GameObject item in equaiappableItems)
+        {
+            item.SetActive(false);
+        }
+
+        foreach (GameObject buildingItem in buildingItems)
+        {
+            buildingItem.SetActive(false);
+        }
     }
 
     public void ConsumeIfHeldAndConsumable() //Event
@@ -1027,7 +1096,6 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
     {
         foreach (Recipe recipe in itemRecipes)
         {
-
             if (recipe.createdItemPrefab.GetComponent<Item>().name == itemName) //Could be optimised
             {
                 bool haveAllIngredients = true;
@@ -1049,8 +1117,8 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
                     GameObject craftedItem = Instantiate(recipe.createdItemPrefab, dropLocation.position, Quaternion.identity);
                     craftedItem.GetComponent<Item>().currentQuantity = recipe.quantityProduced;
 
-                    //We don't want this to be put in the inventory
-                    AddItemToInventory(craftedItem.GetComponent<Item>());
+                    // Putting craftedItem in inventory, without triggering anymation
+                    AddItemToInventory(craftedItem.GetComponent<Item>(), collect: false);
                 }
                 break;
             }
@@ -1090,6 +1158,7 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
 
             if (item != null && item.name == itemName)
             {
+                
                 if (item.currentQuantity >= remainingQuantity)
                 {
                     item.currentQuantity -= remainingQuantity;
@@ -1097,10 +1166,12 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
                     if (item.currentQuantity == 0)
                     {
                         currSlot.SetItem(null);
-                        currSlot.UpdateInventoryAmount();
                     }
+
+                    currSlot.UpdateInventoryAmount();
                     return; 
                 }
+                
             }
         }
     }

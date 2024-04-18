@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
 using TMPro;
-using UnityEditor.AI;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.UI;
+using UnityEngine.AI; 
 
 public class SurvivalSceneManager : MonoBehaviour
 {
