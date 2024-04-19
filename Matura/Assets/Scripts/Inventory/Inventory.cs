@@ -888,7 +888,7 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
                 {
                     equaiappableArmor[currentItem.equiappableArmorIndex].SetActive(true);
 
-                    if (currentItem != _currentEquiappedArmor)
+                    if (currentItem != _currentEquiappedArmor && _currentEquiappedArmor)
                     {
                         equaiappableArmor[_currentEquiappedArmor.equiappableArmorIndex].SetActive(false);
                         hotbarSlot.SetItem(_currentEquiappedArmor);
@@ -904,6 +904,11 @@ public sealed class Inventory : MonoBehaviour, IDataPersistance
                     }
                     ResetDragVariables();
                 }
+
+                /*
+                _currentHeldItemIndex = hotbarIndex;
+                _previousHeldItemIndex = hotbarIndex;
+                */
             } 
             // Activating building item
             else if (currentItem.buildingItem && currentItem.buildingItemIndex != -1)
