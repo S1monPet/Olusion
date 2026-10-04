@@ -69,7 +69,7 @@ You must not forget about your hunger and thirst, just like in real life.
   - Click the gather button **to gather**
   - Resources respawn at **random** and **static** spots over time
 
-<table align="center">~~~~
+<table align="center">
   <tr>
     <td align="center"><b>Gathering</b><br><img src="docs/gifs/gathering.gif" alt="Gathering" width="400"></td>
   </tr>
