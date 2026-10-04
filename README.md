@@ -76,11 +76,11 @@ You must not forget about your hunger and thirst, just like in real life.
   </tr>
 </table>
 
-- 🎒 **Inventory, crafting & building**
+- 🎒 **Inventory, crafting and building**
   - Drag and drop items between inventory and hotbar
   - Double-tap to drop an item or equip armour
   - To craft, open inventory (backpack image)
-  - Crafting recipes are pre-made, tap recipe to craft it
+  - Crafting recipes are pre-made, tap on the item in the crafting menu to craft it
   - Crafting recipes:
     - **Axe** – 1 Stone + 1 Stick
     - **Cloth** – 2 Hemp
