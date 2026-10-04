@@ -65,7 +65,7 @@ You must not forget about your hunger and thirst, just like in real life.
 </table>
 
 - 🪓 **Gathering**
-  - Chop trees, harvest cacti, pick up sticks, stones, hemp and more
+  - Chop trees, harvest cacti
   - Click the gather button **to gather**
   - Resources respawn at **random** and **static** spots over time
 
