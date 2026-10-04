@@ -197,21 +197,21 @@ The project folders and files organisation:
 ```
 Matura/Assets/Scripts
 ├── Animals/          - Wildlife AI (prey, predator)
-├── Building/         - Placing buildable items
+├── Building/         - Buildables
 ├── Canvas/           - Minimap, death screen and chest UI
 ├── Chest/            - Chests and loot tables
 ├── Crafting/         - Recipes
-├── Enemy/            - Enemy AI and bosses
-├── FruitCutter/      - Fruit Cutter mini-game (first idea for high school graduation)
+├── Enemy/            - Enemy AI
+├── FruitCutter/      - Fruit Cutter mini-game (initial idea for the graduation project)
 ├── GeatherScripts/   - Trees, cacti and gathering
 ├── Inventory/        - Inventory, slots and items
 ├── MainMenuScripts/  - Main menu and sound
 ├── ObjectPooling/    - Object pooling
 ├── Optimization/     - Tick system for AI updates
 ├── Player/           - Movement, attack, health food and water
-├── SaveAndLoad/      - Save system
+├── SaveAndLoad/      - Save and load system
 ├── SceneManagement/  - Async scene loading
-└── World/            - Day/night cycle, spawners and wells
+└── World/            - Day and night cycle, spawners and wells
 ```
 
 ### ⚡ Optimizations
