@@ -120,7 +120,7 @@ You must not forget about your hunger and thirst, just like in real life.
 </table>
 
 - 💾 **Save system**
-  - Auto-saves when you leave or pause the app
+  - Auto-saves when you exit the game
   - Saves your position, stats, inventory, armour, chests and items dropped in the world
   - Settings get saved
 
