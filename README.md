@@ -23,7 +23,7 @@
 ## 📖 About
 A 3D survival game for Android, built in Unity with C#.
 
-🎓 Made with as a **high school graduation project** in Slovene - **Matura** (folder name) and scored **99%**.
+🎓 Made as a **high school graduation project** in Slovene - **Matura** (folder name) and scored **99%**.
 
 You start with nothing in an open world with 4 different biomes. 
 Gather resources, craft tools and weapons, build walls, loot chests and fight enemies. 
