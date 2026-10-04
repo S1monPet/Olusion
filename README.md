@@ -176,7 +176,7 @@ You must not forget about your hunger and thirst, just like in real life.
 
 ### 🛠️ To build and develop
 - **Unity 2021.3.7f1** (install it with Unity Hub)
-- Android Build Support module (with Android SDK & NDK and OpenJDK), add them in Unity Hub
+- In Unity Hub, add Android Build Support module (with Android SDK & NDK and OpenJDK)
 
 ## 🚀 Install & Run
 
