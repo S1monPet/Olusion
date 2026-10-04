@@ -166,7 +166,7 @@ You must not forget about your hunger and thirst, just like in real life.
 ## 💻 Tech Stack
 
 - 🎮 Unity 2021.3.7f1 with C#
-- 💾 JSON save files with optional **XOR encryption**
+- 💾 Custom save and load system using JSON, with optional XOR encryption
 
 ## 📋 Requirements
 
@@ -180,18 +180,19 @@ You must not forget about your hunger and thirst, just like in real life.
 
 ## 🚀 Install & Run
 
+
 1. Clone the project
    ```bash
    git clone https://github.com/S1monPet/Olusion.git
    ```
 2. Open Unity Hub → **Add** → select the `Matura` folder
-3. Open it with Unity **2021.3.7f1**
+3. Unity Hub will ask to install Unity 2021.3.7f1. Accept it and also tick the Android Build Support module (with Android SDK & NDK and OpenJDK)
 4. Open `Assets/Scenes/Menu.unity` and press **Play**
 5. To build for Android: **File → Build Settings → Android → Switch Platform → Build**
 
 ## 📁 Project Structure
 
-The gameplay code is organised by system:
+The project folders and files organisation:
 
 ```
 Matura/Assets/Scripts
